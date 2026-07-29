@@ -1,0 +1,1202 @@
+[
+  {
+    "title": "VPN access keeps dropping",
+    "description": "Hey, my VPN keeps dropping every 15 minutes today and it's super disruptive. I'm on Windows 11 using Cisco AnyConnect\u2014any chance someone could take a look? Thanks!",
+    "priority": "High",
+    "resolution": "Identified conflicting MTU settings on the user's home ISP router; adjusted client-side VPN adapter settings to accommodate packet fragmentation.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "VPN connection failing",
+    "description": "I am formally reporting a persistent technical issue regarding connectivity to the corporate network via the GlobalProtect VPN client. Despite successfully authorizing the Duo push notification, the application consistently returns an \"Authentication Failed\" error message, preventing any network access. This issue is occurring on a device running macOS Sonoma 14.2. Please investigate this authentication failure as a matter of priority.",
+    "priority": "Medium",
+    "resolution": "Updated the GlobalProtect client certificate on the user's device and cleared the cached SAML assertion in the browser.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Salesforce login loop on Chrome",
+    "description": "I am losing my mind because Salesforce is trapped in a non-stop redirect loop every single time I try to log in. I\u2019ve already wasted my time clearing the cache and cookies on Chrome v120.0, but it\u2019s still doing the exact same thing\u2014just refreshing the login page over and over again. Fix this immediately.",
+    "priority": "High",
+    "resolution": "Cleared corrupted browser cache files and updated Salesforce security certificates in the user's profile.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Unauthorized Device Alert",
+    "description": "Hey, the NAC just blocked a device on port 24 (MAC: 00:1A:2B:3C:4D:5E) because it's trying to hit the prod network. Could you take a look?",
+    "priority": "High",
+    "resolution": "Investigated the device and confirmed it was a personal laptop; moved the port to the restricted VLAN.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "System slow after suspected malware",
+    "description": "I am formally reporting a significant degradation in workstation performance following the inadvertent activation of a suspicious hyperlink. The 'System' process is currently exhibiting sustained CPU utilization at 100%. Given the nature of the symptoms, I am concerned that the machine has been compromised by malicious software, potentially a crypto-mining utility, and I request an immediate security assessment.",
+    "priority": "High",
+    "resolution": "Ran a full malware scan, removed a malicious browser extension, and restored system performance.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Guest Wi-Fi is down",
+    "description": "Our visitors are completely unable to connect to the Guest network. They\u2019re stuck staring at the splash page, and the authentication fails every single time they try to log in. This is becoming a major issue, so please get it fixed immediately.",
+    "priority": "Low",
+    "resolution": "Restarted the WLC authentication service which had stopped responding; guest portal is now successfully issuing tokens.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Network slow, help?",
+    "description": "Hey, is the internet acting up for anyone else? Everything's running super slow and I can\u2019t seem to load any files from the server. Anything going on?",
+    "priority": "Low",
+    "resolution": "Investigated bandwidth utilization and discovered a large unauthorized backup process running on a workstation; throttled the process and optimized local QoS settings.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "SSD wear level alert",
+    "description": "I am writing to formally report that our server monitoring system has issued an alert indicating that the solid-state drives (SSDs) within our cache tier have reached a 92% wear level. Although the system currently remains operational, I am concerned regarding the long-term stability of this hardware. Please provide a formal assessment of the urgency of this issue and advise on the required timeframe for scheduling a proactive replacement to prevent potential service disruption.",
+    "priority": "Low",
+    "resolution": "Analyzed the S.M.A.R.T. data and confirmed the drives are still within operational spec; scheduled a proactive replacement for the next quarterly maintenance cycle.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Adobe Acrobat crashes on startup",
+    "description": "I am beyond fed up with Adobe Acrobat Pro DC. Every single time I try to open a PDF, the application crashes immediately. I\u2019ve already wasted my time doing a full reinstallation of the entire Creative Cloud suite, and it didn't do a damn thing. I'm running Windows 11 Pro 22H2, and the Event Viewer is clearly pointing to the faulting module name: Acrobat.dll, version: 23.8.20470.0. Get this fixed, I have actual work to do.",
+    "priority": "Medium",
+    "resolution": "Performed a clean registry scrub using the Adobe Removal Tool and reinstalled the application using the enterprise MSI installer.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Help! Table dropped by accident",
+    "description": "Hey, total disaster here\u2014I accidentally ran a DROP TABLE instead of TRUNCATE on the customer_audit_logs table in staging. Could you please help me restore it ASAP?",
+    "priority": "Critical",
+    "resolution": "Restored the table from the latest Point-in-Time Recovery (PITR) snapshot taken at 02:00 AM.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Lost my YubiKey",
+    "description": "I am writing to formally report the loss of my assigned hardware security key. Please provide instructions on the procurement process for a replacement device and the necessary procedures to revoke the credentials of the lost key from my account. As this device is essential for accessing internal systems, I request that this matter be prioritized to restore my ability to perform my professional duties.",
+    "priority": "High",
+    "resolution": "Deactivated the lost hardware key in Okta and provided the user with a temporary bypass code until a replacement arrives.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Locked out of AD account",
+    "description": "I am beyond frustrated. I\u2019m locked out of my account yet again. I tried my password three times, and now it\u2019s giving me the \"Account is locked due to multiple failed attempts\" error. This is the third time this week this has happened\u2014can someone please actually fix this?",
+    "priority": "Medium",
+    "resolution": "Unlocked the AD account and cleared cached credentials on the user's workstation that were causing repeated lockout triggers.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Duplicate records in production",
+    "description": "Hey, looks like we\u2019ve got thousands of duplicate entries in the audit_logs table\u2014seems like the batch job is running twice. Can we get that cleaned up?",
+    "priority": "Medium",
+    "resolution": "Used a Common Table Expression (CTE) to identify and delete duplicate rows while retaining the earliest record.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "SSH timeout to dev server",
+    "description": "I am formally reporting a persistent connectivity failure when attempting to initiate an SSH session with the staging server (10.0.50.22) from my local macOS Monterey environment. This issue, characterized by a 'Connection timed out' error, represents a regression from the previous day's successful access. Please investigate whether any recent modifications to firewall configurations have been implemented that would restrict this connection.",
+    "priority": "Medium",
+    "resolution": "Added the user's current dynamic IP range to the whitelist on the perimeter firewall.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Can't connect to VPN",
+    "description": "I am losing my mind here. My Cisco AnyConnect VPN was working perfectly fine yesterday morning, and now all of a sudden, it refuses to connect on macOS Monterey, constantly throwing an \"invalid server certificate\" error. I have work to do and this is completely blocking me\u2014fix this immediately.",
+    "priority": "Medium",
+    "resolution": "Updated the root CA certificate on the user's machine as the previous one had expired.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Intermittent packet loss on main server uplink",
+    "description": "Hey, heads up\u2014we\u2019re seeing about 15% packet loss on the SFP+ uplink between the server rack and the distribution switch. It looks like it started right after that fiber patch cable got moved during the site audit. The latency spikes are causing SQL timeouts, so we might need to take a look at that connection.",
+    "priority": "Critical",
+    "resolution": "Replaced the damaged OM4 fiber patch cable which showed high insertion loss during testing.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Adobe Creative Cloud License missing",
+    "description": "Following the recent update to the Adobe Creative Cloud application on my macOS workstation, the software incorrectly indicates that my trial period has expired. This is in direct conflict with my active, company-provisioned enterprise subscription. Please investigate this authentication error and restore access to my licensed applications as a matter of urgency.",
+    "priority": "Medium",
+    "resolution": "Re-assigned Adobe CC license in the Admin Console and forced a sign-out/sign-in refresh on the local client.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Website blocked by firewall",
+    "description": "I am completely unable to access the essential research portal I need for my project because the firewall is falsely flagging it as 'Malware/Phishing.' This site is clearly safe and I am being prevented from doing my actual work. Please fix this immediately.",
+    "priority": "Medium",
+    "resolution": "Whitelisted the specific URL in the web filter policy after verifying the site's reputation and security certificate.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "SQL Server connection timeout on App-Prod-01",
+    "description": "Hey, we're having some trouble with the frontend connecting to the main SQL Server 2019 instance. It\u2019s hitting intermittent \"Login timeout expired\" errors exactly every 15 minutes, which is preventing users from saving changes in the portal. Any ideas?",
+    "priority": "High",
+    "resolution": "Adjusted the connection pool settings in the web.config and increased the server-side query timeout threshold to resolve locking conflicts.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Switch port 12 down",
+    "description": "I am formally reporting a persistent service disruption affecting the lobby wireless access point. Port 12 on the switch stack located in IDF-02 has entered an err-disabled state, resulting in a total loss of uplink connectivity. Please initiate a formal investigation into this failure and restore network access as a matter of priority.",
+    "priority": "High",
+    "resolution": "Identified a flapping issue caused by a faulty patch cable; replaced the Cat6 cable and re-enabled the interface.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Cannot reach external website",
+    "description": "I\u2019m trying to access our cloud accounting software and keep getting a connection timeout error, which is completely blocking my workflow. My internet is clearly working fine since I can load Google without any issues, so this is obviously an issue with this specific site. I need this fixed immediately because I can't get any of my work done.",
+    "priority": "Low",
+    "resolution": "White-listed the cloud provider's new IP range on the edge firewall.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Ethernet port dead on workstation 402",
+    "description": "Hey, my HP EliteDesk isn't getting any link lights on the NIC. I've already tried swapping in a known-good Cat6 cable and testing a different wall jack, but still nothing. Any ideas?",
+    "priority": "High",
+    "resolution": "Traced the wall jack to a faulty port on the Cisco Catalyst switch; moved the patch cable to a different, active switch port.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Office lights are flickering",
+    "description": "Persistent flickering of the lighting fixtures in the west wing has recurred. I am concerned that these electrical fluctuations may pose a stability risk to the adjacent server infrastructure. Please dispatch a technician to investigate and resolve this issue as a matter of urgency.",
+    "priority": "Medium",
+    "resolution": "Electrical contractor tightened a loose neutral wire in the main circuit breaker panel.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Unable to access VPN client",
+    "description": "I am beyond frustrated at this point. My Cisco AnyConnect client is just hanging on \"Connecting\" indefinitely and refuses to actually log me in. I\u2019ve already wasted time restarting my laptop twice and verifying my internet is working perfectly fine, but absolutely nothing has changed. I need access to the internal server to do my job\u2014can someone please fix this immediately?",
+    "priority": "Critical",
+    "resolution": "Flushed the local DNS cache and updated the Cisco AnyConnect Secure Mobility Client to the latest version compatible with the current network firmware.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Blocked website access",
+    "description": "Hey, quick question\u2014I\u2019m getting an \"Access Denied: Malicious Sites\" error when trying to check some project docs. I know the site is safe, but it looks like the firewall is blocking me. Could you help me get through so I can finish this research?",
+    "priority": "Low",
+    "resolution": "Reviewed the site's reputation, whitelisted the URL in the Zscaler policy, and cleared the user's browser cache.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Access to Jira board denied",
+    "description": "I am writing to formally report an access issue regarding the 'Q3 Infrastructure Project' board in Jira. Despite my team members maintaining full visibility of the board, I am consistently receiving an 'Insufficient Permissions' error message when attempting to access it. I request a thorough review of my user profile and account permissions to rectify this discrepancy and restore my access to the project board.",
+    "priority": "Low",
+    "resolution": "Added user to the 'Jira_Infrastructure_Project' permission scheme.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Zoom audio sync lag",
+    "description": "I am beyond frustrated that the audio is constantly lagging behind the video during every single all-hands meeting. My network latency is perfectly fine, yet the Zoom desktop client insists on spiking my CPU usage to 90% every time I\u2019m in a call. This is completely unacceptable and making it impossible to work.",
+    "priority": "Medium",
+    "resolution": "Updated Zoom client to the latest version and adjusted audio device buffer settings in the application.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "VPN connection failure",
+    "description": "Hey, is anyone else having trouble with the VPN after the Cisco AnyConnect 4.10 update? It was working fine yesterday, but now it\u2019s just throwing an \"Unable to establish connection to the remote gateway\" error whenever I try to connect.",
+    "priority": "Medium",
+    "resolution": "Updated the root certificate store on the local client machine and re-authenticated the user against the RADIUS server.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Printer on 2nd floor is unreachable",
+    "description": "This formal notification serves to report a persistent connectivity failure regarding the LaserJet Pro M402n located on the 2nd floor. The device is currently inaccessible via the network, resulting in consistent \"Host Unreachable\" error messages for all users attempting to submit print jobs. Physical inspection confirms that the Ethernet cable is securely connected; however, the printer's status indicator is displaying a solid amber light, indicating a critical hardware or configuration fault that requires immediate technical intervention.",
+    "priority": "Low",
+    "resolution": "Reset the static IP configuration on the printer interface and assigned it a new reserved address via DHCP.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Unable to run PowerShell scripts as admin",
+    "description": "My machine (WS-DESK-99) is completely blocked because of these ridiculous execution policy restrictions. I\u2019ve already tried running 'Set-ExecutionPolicy RemoteSigned' myself, but surprise, surprise\u2014it\u2019s throwing an \"access denied\" error. I have actual work to do and I\u2019m currently dead in the water; I need this fixed immediately so I can finally finish my testing.",
+    "priority": "Low",
+    "resolution": "Granted temporary local administrator rights to user to update the execution policy for their development environment.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Unable to reach external website",
+    "description": "Hey, we're trying to get into the vendor portal at www.vendor-secure.com, but our firewall is blocking it. We're getting an \"Access Denied: Category Restricted\" error page\u2014could you help us get that unblocked?",
+    "priority": "Low",
+    "resolution": "Added the vendor domain to the corporate firewall whitelist as an exception for the relevant department.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "URGENT: Database corruption error",
+    "description": "This communication serves as a formal report regarding a critical service interruption affecting the CRM production instance. The system has generated a \"Database page corruption detected\" error, resulting in a total inability to access or retrieve client records. Given the severe impact on business operations and the resulting disruption to the sales department, I request that this matter be treated with the highest priority and resolved immediately.",
+    "priority": "Critical",
+    "resolution": "Restored the database from the last successful hourly snapshot and performed a checksum validation to ensure data integrity.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Cannot access shared drive",
+    "description": "I am once again unable to access the \\\\FileServer01\\Marketing drive and keep getting hit with the \"Network path not found\" error (0x80070035). I\u2019m running Windows 10 Pro and this is completely blocking my workflow. Please fix this.",
+    "priority": "High",
+    "resolution": "Flushed DNS cache and re-mapped the network drive using the server's static IP address instead of the hostname.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Adobe Creative Cloud installation failure",
+    "description": "Hey, having some trouble installing Photoshop on my M2 MacBook Pro (running Sonoma 14.2). The installer keeps crashing at 42% with error code 191. I\u2019ve already tried clearing the OOBE folder cache and restarted the machine twice, but it\u2019s still hitting the same wall. Any ideas?",
+    "priority": "Medium",
+    "resolution": "Resolved by running the Adobe Creative Cloud Cleaner Tool to remove corrupted registry artifacts and reinstalling the app from the enterprise portal.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Static IP conflict",
+    "description": "Our network management system is consistently triggering alerts indicating an IP address conflict involving 192.168.1.50. It appears that two distinct devices are contending for this singular address, resulting in network instability. I request that your team investigate these alerts immediately to identify the conflicting hardware and resolve the addressing issue.",
+    "priority": "Medium",
+    "resolution": "Identified a rogue wireless router plugged into a wall jack by a user; disabled the port and confiscated the device.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Permission issue",
+    "description": "I need read access to the marketing database ASAP. My manager already approved this request, but I still can't connect with my credentials. I keep getting an 'Access denied for user' error and I'm tired of wasting time on this. Fix it.",
+    "priority": "Low",
+    "resolution": "Granted SELECT permissions on the 'marketing_prod' schema to the user's AD group.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Stuck in a loop, need help!",
+    "description": "Hey, having some trouble with my local dev DB\u2014tried running a simple update script and now it\u2019s just hanging indefinitely. It\u2019s MySQL 8.0 on Ubuntu 22.04. Every time I try to run a SELECT query now, it just spins and never returns anything. Any ideas?",
+    "priority": "Medium",
+    "resolution": "Identified a deadlocked transaction caused by an uncommitted update. Killed the process ID and advised the user to implement explicit transaction handling.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Unable to export reports from PowerBI",
+    "description": "I am writing to formally report an issue regarding the dashboard export functionality. Despite utilizing the desktop application and confirming that my user permissions remain unchanged, the export button is currently disabled and unresponsive. I request an immediate investigation into this technical impediment to restore the expected functionality.",
+    "priority": "Medium",
+    "resolution": "Updated PowerBI Desktop to the latest monthly release; the issue was caused by an expired local authentication token.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Intermittent connectivity on VLAN 20",
+    "description": "We\u2019re dealing with constant, intermittent network drops on the accounting subnet (VLAN 20) and it's completely killing productivity. My users are losing their connection to the file server every 15-20 minutes, and while it reconnects on its own after 30 seconds, this cycle is unacceptable. I\u2019ve already wasted time checking the uplink port on the core switch and there are zero CRC errors, so the issue is clearly somewhere else. Fix this already.",
+    "priority": "High",
+    "resolution": "Replaced faulty SFP+ module on the distribution switch stack.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Core Switch Uplink Flapping",
+    "description": "Hey, heads up\u2014we're getting intermittent drops on the main uplink (Te1/0/1) for the 9300 dist switch. It\u2019s hitting ERR_DISABLE every 15-20 mins due to link flapping, which is causing latency spikes across the entire 3rd-floor VLAN.",
+    "priority": "High",
+    "resolution": "Replaced the SFP+ transceiver and patched the fiber cable; port stability restored.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Database performance extremely slow after patch",
+    "description": "Following the deployment of OS patches to the Oracle 19c database server on RHEL 8 during the maintenance window last night, the application has experienced a 400% increase in latency. Preliminary analysis indicates a critical degradation in performance characterized by abnormally high IO wait times. This issue is currently impacting all users within the EMEA region, and we require an immediate investigation and resolution to restore standard service levels.",
+    "priority": "Critical",
+    "resolution": "Identified a misconfiguration in the transparent huge pages settings post-patch; reverted to optimal kernel parameters.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Guest Wi-Fi portal not loading",
+    "description": "People are complaining that they can connect to the Guest_WiFi just fine, but the splash page never actually loads. Everyone is stuck with a \"No Internet\" error and the connection just times out. This is completely broken and needs to be fixed immediately.",
+    "priority": "Low",
+    "resolution": "Restarted the WLC (Wireless LAN Controller) service and cleared stale sessions from the guest VLAN.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Suspicious phishing email reporting",
+    "description": "Hey team, just a heads-up that I got a phishy email from an external address posing as HR asking for payroll info. It\u2019s got a sketchy link to a non-company domain, so I haven't clicked anything\u2014just wanted to flag it for you guys to check out.",
+    "priority": "High",
+    "resolution": "Verified the email as a phishing attempt, blocked the sender domain on the mail gateway, and purged the message from the user's inbox.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Latency spikes in VLAN 20",
+    "description": "This correspondence serves to formally document persistent performance degradation affecting Finance department personnel while accessing cloud-based ERP resources. Network diagnostic analysis, specifically traceroute data, isolates the source of these latency spikes to the Distribution Layer switch, identified as DIST-SW-02. Furthermore, current monitoring confirms that CPU utilization on the switch backplane is exhibiting critical fluctuations between 85% and 95%, indicating a severe hardware or configuration deficiency that requires immediate remediation.",
+    "priority": "High",
+    "resolution": "Identified a broadcast storm caused by a loop on an unmanaged switch in the Finance office; removed the rogue device and implemented port security.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Rack A-02 Power Outage",
+    "description": "The entire rack in A-02 is completely dead and the PDU is showing a 0A load. This is ridiculous\u2014I\u2019m almost certain the breaker in the facility room tripped. Fix this immediately.",
+    "priority": "Critical",
+    "resolution": "Reset the tripped circuit breaker in the PDU and load-balanced hardware to prevent recurrence.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "SAML SSO error on Chrome",
+    "description": "Hey, I'm running into an \"Error 403: app_not_configured_for_user\" when trying to launch Salesforce through Okta. I'm on Chrome v118 and Windows 11, and it seems like everyone else on the team is getting in fine. Any idea what's up?",
+    "priority": "High",
+    "resolution": "Assigned the user to the Salesforce application integration in Okta Admin Console.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Adobe Acrobat Pro crashing on startup",
+    "description": "I am writing to formally report a persistent functional failure regarding Adobe Acrobat. Upon attempting to open any PDF document, the application terminates immediately, consistently displaying error code 0xc0000005. I am currently operating on the latest version of macOS Sonoma. This recurring technical issue has become a significant impediment to my professional responsibilities, specifically hindering my ability to perform required contract reviews. Please prioritize the resolution of this matter.",
+    "priority": "Medium",
+    "resolution": "Performed a clean re-installation of Adobe Acrobat using the Adobe Cleaner Tool to remove residual registry entries.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "MFA device lost",
+    "description": "I\u2019ve managed to lose my phone, which\u2014of course\u2014had the Microsoft Authenticator app on it. Now I\u2019m completely locked out of my email and can\u2019t get any work done. How am I supposed to regain access to my account when the security setup is preventing me from logging in? I need this fixed immediately.",
+    "priority": "High",
+    "resolution": "Verified user identity via manager, reset the MFA requirement for the account, and assisted the user in setting up a new device.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Guest Wi-Fi portal not loading",
+    "description": "Hey! Heads up that the guest Wi-Fi captive portal isn't popping up for mobile users\u2014everyone is getting stuck on \"Connected, No Internet.\" We really need this squared away before the conference tomorrow. Thanks!",
+    "priority": "Medium",
+    "resolution": "Restarted the WLC controller service and flushed the DNS entries for the portal redirect URL.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Unable to run sudo commands",
+    "description": "I am writing to formally report an issue regarding my Ubuntu 22.04 workstation. As of today, I have lost administrative privileges, and any attempt to execute commands requiring elevated access results in a \"User is not in the sudoers file\" error. This is a regression in service, as I possessed the necessary permissions to execute these commands successfully as of yesterday. Please investigate this sudden revocation of my sudo access as a matter of urgency.",
+    "priority": "High",
+    "resolution": "Added the user back to the 'sudo' group and verified the integrity of the /etc/sudoers file.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Slow internet speeds",
+    "description": "The internet is basically unusable for the entire accounting team today. Pages are taking an eternity to load and our cloud software keeps timing out constantly. Is someone throttling our connection or is there some ridiculous bandwidth cap active that nobody bothered to tell us about?",
+    "priority": "High",
+    "resolution": "Identified a massive background OS update consuming 90% of the circuit bandwidth; implemented QoS policy to throttle Windows Update traffic.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Office printer offline",
+    "description": "Hey, the big 3rd-floor Xerox is acting up and showing a \"Network Error\" again. I already tried restarting it, but it's still offline. Could someone take a look?",
+    "priority": "Medium",
+    "resolution": "Corrected an IP address conflict; assigned a static reservation in the DHCP scope to prevent the printer from grabbing an existing address.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Forgotten MFA device",
+    "description": "I am writing to formally report an issue regarding my inability to access company systems from the office. Due to the inadvertent omission of my company-issued Yubikey, I am currently unable to authenticate via the required Okta prompt. I request an urgent temporary bypass of this authentication protocol to facilitate my work requirements for today.",
+    "priority": "High",
+    "resolution": "Verified identity via manager and issued a one-time bypass code valid for 4 hours.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Wireless card driver issue",
+    "description": "My laptop is absolutely useless because the Wi-Fi keeps dropping every five minutes. I've already restarted the machine twice and nothing changes. I checked the device manager and it's throwing a Code 10 error for the \"Intel Wi-Fi 6 AX200,\" which clearly shows the driver is failing. Can someone actually fix this so I can get back to work?",
+    "priority": "Medium",
+    "resolution": "Performed a clean uninstall of the wireless driver and installed the latest manufacturer version.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Forgotten MFA device",
+    "description": "Hey, I\u2019m traveling for a conference and realized I left my security key back at the office. I\u2019m currently locked out of my email\u2014any chance you can help me get access? Really need to check my inbox before tomorrow\u2019s meeting.",
+    "priority": "Medium",
+    "resolution": "Verified identity via manager approval and issued a temporary bypass code valid for 4 hours.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Unauthorized device detected on secure port",
+    "description": "This correspondence serves as a formal notification regarding a security breach detected by the Intrusion Detection System. An unauthorized device, currently identified as \"unknown,\" has been detected connected to port 48 within the server room. The device is actively engaging in unauthorized reconnaissance by attempting to probe internal subnets, necessitating an immediate investigation and containment.",
+    "priority": "Critical",
+    "resolution": "Identified device as an unmanaged switch brought in by a contractor; port was shut down and contractor notified.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Notion desktop app black screen",
+    "description": "My Notion app is completely useless\u2014it\u2019s just a blank black screen every time I open it. I\u2019ve already wasted my time reinstalling the damn thing twice and it\u2019s still broken. I have a meeting in 20 minutes and I need my notes immediately; fix this now.",
+    "priority": "Medium",
+    "resolution": "Cleared the Notion cache directory located in %AppData% and performed a clean re-installation.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "VPN connection drops after Windows 11 update",
+    "description": "Hey, is anyone else having issues with AnyConnect since the 23H2 update? Mine keeps dropping every 10 minutes. I\u2019ve already tried flushing the DNS and resetting the adapter, but it\u2019s still super unstable and I can\u2019t get into the shared drive to get any work done.",
+    "priority": "High",
+    "resolution": "Updated the Cisco AnyConnect Secure Mobility Client to the latest version and re-installed the virtual miniport adapter driver.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Switch port flapping",
+    "description": "I am formally reporting a persistent technical failure regarding Port 24 on Switch-Floor-3, which is currently experiencing intermittent connectivity instability. System logs confirm a recurring error, specifically: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/24, changed state to down. This ongoing instability is resulting in significant service disruptions for multiple users within the front office and requires immediate investigation and resolution.",
+    "priority": "High",
+    "resolution": "Replaced the damaged Cat6 cabling run between the wall jack and the desk.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Performance degradation after migration",
+    "description": "Ever since you forced this migration from SQL Server 2016 to 2022, the report generation service has become completely unusable. We\u2019re constantly hitting timeouts on the report_gen_sp procedure, and it\u2019s unacceptable that everything was working perfectly fine just yesterday before this upgrade. Fix this now.",
+    "priority": "High",
+    "resolution": "Updated statistics on the affected tables and forced a plan recompile for the stored procedure to utilize the new Cardinality Estimator.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Salesforce desktop app crashes on startup",
+    "description": "Hey, having some trouble with the Salesforce desktop app on my MacBook Pro (macOS Sonoma 14.2). It keeps crashing right when I try to open it. I\u2019ve already tried a reinstall and clearing the cache, but no luck\u2014the logs are showing a SIGABRT error. Could someone take a look? Thanks!",
+    "priority": "Medium",
+    "resolution": "Updated the Salesforce CLI and cleared the ~/Library/Application Support/Salesforce directory to resolve the corrupted configuration files.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Disk space full on File Server",
+    "description": "I am writing to formally report that the E: drive on server FS01 has reached 98% capacity, resulting in the continuous generation of Event ID 2013 alerts. Please advise whether an expansion of the LUN size can be facilitated to remediate this issue, or if immediate manual intervention is required to purge system logs to restore adequate storage space.",
+    "priority": "Medium",
+    "resolution": "Expanded the underlying LUN by 500GB via the SAN console and extended the volume in Disk Management.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "BitLocker recovery screen on boot",
+    "description": "My Dell Latitude 5420 is completely useless right now because it's stuck on a BitLocker recovery screen immediately after the BIOS post. It\u2019s demanding a 48-digit recovery key that I don't have and was never provided. I need this resolved immediately; I cannot afford to be locked out of my machine any longer.",
+    "priority": "High",
+    "resolution": "Retrieved recovery key from Azure AD portal and successfully unlocked the drive. Performed a 'manage-bde -protectors -adbackup' to ensure future recovery keys are synced.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Cannot access shared drive",
+    "description": "Hey, I\u2019ve lost access to the \\\\FILESERVER\\Finance folder and am getting an 'Access Denied' error. I haven't changed anything on my end, could you take a look at my permissions?",
+    "priority": "Low",
+    "resolution": "User was accidentally removed from the 'Finance-Read-Only' security group. Re-added user to the group and verified permission propagation.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Network latency spike",
+    "description": "We are currently encountering persistent packet loss affecting our VoIP telephony services, which has resulted in frequent reports of audio clipping by end users. A technical investigation into the relevant system logs is currently underway to determine the root cause of this performance degradation.",
+    "priority": "Critical",
+    "resolution": "Reconfigured QoS tags on the core switch to prioritize VoIP traffic over general web browsing.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "SaaS Application Login Loop",
+    "description": "I am beyond frustrated\u2014I cannot get into Salesforce at all because I\u2019m stuck in a constant, infinite redirect loop. I\u2019ve tried both Chrome v124 and Edge, but it\u2019s the same broken mess on both. It\u2019s painfully obvious that my session token isn't being parsed correctly by the IDP, and I need this fixed immediately so I can actually get back to work.",
+    "priority": "High",
+    "resolution": "Cleared the browser cookies and cache, then performed a forced sync between Okta and the Salesforce integration app.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Application Deployment failure",
+    "description": "Hey, having some trouble installing the new accounting software. It keeps hanging at 84% during configuration and throwing error 1603. I\u2019ve already got admin rights, so not sure what's up\u2014any ideas?",
+    "priority": "High",
+    "resolution": "Removed leftover registry keys from a failed previous installation and ran the installer with full elevated privileges.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Compromised machine suspected",
+    "description": "I am formally reporting a significant performance degradation on my workstation, characterized by persistent CPU utilization at 99% attributed to the svchost.exe process. Furthermore, I observed an unauthorized prompt indicating a remote connection attempt. Consequently, as a precautionary measure to preserve system integrity, I have disconnected the machine from the network and require an immediate security investigation.",
+    "priority": "Critical",
+    "resolution": "Isolated machine from VLAN. Ran full scan with CrowdStrike Falcon; identified and quarantined a malicious trojan payload. Re-imaged device to ensure complete remediation.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Account locked out again!",
+    "description": "For the third time today, my domain account is locking me out again the second I try to sign into WS-IT-042. I am doing exactly what I do every other day, so I have no idea why this is suddenly a problem. I have a client demo in 20 minutes, so get this fixed right now\u2014I cannot afford any more downtime.",
+    "priority": "Critical",
+    "resolution": "Identified a stale credential in Windows Credential Manager related to a mapped drive; cleared stored credentials and reset AD account.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Password reset keeps failing",
+    "description": "Hey, I\u2019ve tried using the self-service portal to reset my domain password three times now, but I keep getting an \"Error updating password: Policy violation\" message. I\u2019m just trying to set it to my name and a number\u2014any idea what's going on?",
+    "priority": "Low",
+    "resolution": "Educated user on password complexity requirements; reset password manually as a one-time courtesy.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Slow read/write speeds on shared network drive",
+    "description": "I am writing to formally report persistent performance degradation affecting the Z: drive, which has resulted in significant latency and operational inefficiencies for end users. Accessing even small Microsoft Excel files requires an unacceptable amount of time, indicating a critical service impairment. Our internal diagnostics confirm that the infrastructure is running on Windows Server 2019, and there is a direct correlation between these latency spikes and the execution of the scheduled daily incremental backup task. Please investigate this matter with urgency, as the current state of the shared drive is impeding standard workflow.",
+    "priority": "Medium",
+    "resolution": "Adjusted the QoS policy on the network switch and rescheduled the backup window to off-peak hours to reduce I/O contention.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Need access to the Marketing shared drive",
+    "description": "I\u2019ve been waiting forever for access to the 'Marketing_Assets' folder. My team lead already approved this, so I don't understand why I\u2019m still blocked. Can you please just add me already?",
+    "priority": "Low",
+    "resolution": "Added user to the AD security group 'GRP_Marketing_Read_Access' as requested.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Salesforce login loop",
+    "description": "Hey, I\u2019m running into a loop with Salesforce where it keeps kicking me back to the login page right after I enter my MFA code. I already tried clearing my Chrome cache and cookies, but that didn't help. I'm on macOS Sonoma 14.2 if that helps\u2014any ideas?",
+    "priority": "Medium",
+    "resolution": "Detected an expired session token in the user's browser profile; cleared site data specifically for the Salesforce domain.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Account locked again!",
+    "description": "I am writing to formally report a recurring technical issue regarding my user account, which has experienced unauthorized lockouts on three separate occasions this week. These incidents have repeatedly interrupted critical client meetings and significantly hindered my professional productivity. I request an immediate investigation into the root cause of these lockouts and a permanent resolution to ensure consistent system access moving forward.",
+    "priority": "Critical",
+    "resolution": "Identified an old iPad still trying to sync email with an expired password; removed the device from the ActiveSync list.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Ethernet port dead",
+    "description": "I am completely unable to get a network connection in room 204. I\u2019ve wasted enough time troubleshooting this myself by testing multiple cables and even a different laptop, but the wall jack is clearly dead. This is preventing me from getting any work done, so please fix this immediately.",
+    "priority": "Low",
+    "resolution": "Traced the wall jack to a disconnected patch cable in the server room; re-patched and tested for signal.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Cloud storage bucket permissions",
+    "description": "Hey team, we\u2019re running into 403 Forbidden errors when trying to push logs to the prod-logs-storage S3 bucket. We\u2019ve already double-checked and the IAM role definitely has s3:PutObject permissions, so not sure why it's still acting up. Any ideas?",
+    "priority": "High",
+    "resolution": "Corrected the bucket policy which was inadvertently blocking access from the VPC endpoint.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "MFA prompt not appearing",
+    "description": "I am writing to formally report an ongoing technical issue regarding the ERP system authentication process. Despite maintaining a stable network connection and ensuring that the Duo mobile application is updated to the latest available version, I am failing to receive the required push notifications necessary to complete the login procedure. This persistent failure in the authentication workflow is preventing me from accessing the system and is effectively obstructing my ability to perform my professional responsibilities for the day. I request an immediate investigation into this matter to restore my access.",
+    "priority": "Medium",
+    "resolution": "Resynchronized the user's Duo token in the admin dashboard and cleared the local cache on the mobile device.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "BitLocker recovery screen",
+    "description": "My Dell Latitude 5420 is completely useless again. It\u2019s stuck on the BitLocker recovery screen for the millionth time and is demanding a 48-digit key that I don't have and was never given. I have a critical meeting in 10 minutes and this constant hardware failure is a total disaster\u2014fix this immediately!",
+    "priority": "High",
+    "resolution": "Retrieved the recovery key from Azure AD device management and provided it to the user. Suggested a firmware update to prevent future boot loops.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Browser certificate warning",
+    "description": "Hey, is anyone else getting \"Your connection is not private\" errors (NET::ERR_CERT_AUTHORITY_INVALID) on every site in Chrome? Looks like my machine is missing the company root CA. Any tips on how to get that re-added?",
+    "priority": "Medium",
+    "resolution": "Re-pushed the Root CA certificate via Group Policy Object to the local certificate store.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Wi-Fi is super slow today",
+    "description": "I am writing to formally report persistent connectivity issues regarding the Guest_WiFi network within the breakroom. Despite maintaining a successful connection to the specified SSID, data throughput is severely throttled, rendering it impossible to load standard webpages. I request that this matter be investigated and resolved as a priority.",
+    "priority": "Low",
+    "resolution": "Identified a rogue access point causing co-channel interference on channel 6. Power-cycled the AP and set it to a static non-overlapping frequency.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Slack not showing new notifications",
+    "description": "I am beyond fed up with Slack on my M2 MacBook Pro. I am getting zero push notifications for DMs despite my settings being configured correctly. I have already wasted time restarting the app three times and it is still completely broken. Fix this immediately.",
+    "priority": "Low",
+    "resolution": "Reset Slack notification preferences and verified that macOS Focus mode was not blocking the app.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Need access to the Marketing Share Drive",
+    "description": "Hey! Just moved over from Sales and need access to the M:\\Marketing folder. I can see the drive, but I'm getting an \"Access Denied\" error when I try to open it. Could you help me get that sorted?",
+    "priority": "Low",
+    "resolution": "Added user to the 'Marketing-Read-Write' Active Directory security group and requested a log-off/log-on.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "SSD failure on workstation",
+    "description": "I am writing to formally report a critical hardware failure involving my workstation. The system experienced an unexpected termination resulting in a Blue Screen of Death, specifically citing the error code CRITICAL_PROCESS_DIED. Subsequent to a mandatory reboot, the system BIOS failed to detect the Samsung 980 Pro NVMe drive. This drive contains sensitive client documentation that has not been backed up; therefore, I request an immediate escalation to address this data integrity concern and restore access to these files.",
+    "priority": "Critical",
+    "resolution": "SSD controller failed. Replaced drive under warranty and performed data recovery on the damaged NAND flash.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Request to whitelist a new software tool",
+    "description": "I am trying to run a simple automation script for my project on Ubuntu 22.04, but your ridiculous security software is blocking it again. This is preventing me from getting any actual work done. Can you please just whitelist the damn tool so I can stop wasting my time on this?",
+    "priority": "Low",
+    "resolution": "Reviewed the binary's hash and source origin. Added an exclusion rule for the specific file path in the endpoint security console.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Can't access printer",
+    "description": "Hey, the hallway printer is acting up again and showing a \"Network Error\" on the screen. Could someone take a look when you have a sec? Thanks!",
+    "priority": "Low",
+    "resolution": "Static IP address conflict found; assigned a new reserved IP to the printer via DHCP.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Phishing email reported",
+    "description": "I am formally reporting a suspicious email received this morning, which appears to be a phishing attempt masquerading as an IT department communication. The message explicitly requests that I \"validate my mailbox\" by accessing an external hyperlink. Please be advised that I have refrained from interacting with the link, but I am submitting this incident for your immediate investigation and security review.",
+    "priority": "Low",
+    "resolution": "Confirmed email as malicious phishing attempt; added sender domain to the O365 blocklist and purged the email from all user mailboxes.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "External drive not mounting",
+    "description": "My 2TB Seagate drive is completely invisible on my MacBook Pro running Sonoma and I am beyond frustrated. I\u2019ve wasted time swapping out every USB-C cable and testing every single port on this machine, and the drive still won't show up in Finder. I have a critical meeting this afternoon and I absolutely need the files on that drive. Fix this now.",
+    "priority": "Medium",
+    "resolution": "Used Disk Utility to identify the partition map corruption and ran 'fsck_exfat' in Terminal to repair the file system structure.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "SQL Server Management Studio connection timeout",
+    "description": "Hey, I\u2019m having some trouble connecting to the staging DB via SSMS 19.1\u2014it keeps hitting a \"Connection Timeout Expired\" error. I've already checked and my VPN is solid, plus I can ping the server IP just fine. Could someone look into this and see if my credentials might have expired in the AD group?",
+    "priority": "Critical",
+    "resolution": "Reset the user's domain password which had reached the mandatory 90-day expiration threshold.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Why is the internet so bad?",
+    "description": "I am writing to formally report a persistent and severe degradation in system performance across all applications, including email services and web browsers. This issue is significantly impeding my ability to work. Please investigate whether there is an ongoing server outage or infrastructure instability contributing to this widespread latency.",
+    "priority": "Medium",
+    "resolution": "Identified high bandwidth usage from a user running a P2P application and blocked the port.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "VPN Authentication Failure - Error 691",
+    "description": "I am beyond frustrated. I am trying to connect to the corporate VPN using Cisco AnyConnect v4.10 from home, and it keeps throwing Error 691, claiming my username and password aren't recognized. I have already confirmed my credentials work perfectly fine when I log into the web portal, so clearly the issue is on your end. My account must be locked on the RADIUS server or something, so please just fix it already.",
+    "priority": "High",
+    "resolution": "Reset user's Active Directory account password and cleared stuck VPN session on the ASA firewall.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Printer connectivity issues",
+    "description": "Hey, the printer in the Marketing area is acting up and showing an \"IP Address Conflict\" error on the screen. It\u2019s totally offline, so nobody can get their reports printed. Could someone take a look when they have a sec?",
+    "priority": "Low",
+    "resolution": "Updated the printer to a static IP address outside of the DHCP range and flushed the ARP cache on the local gateway.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Possible unauthorized login",
+    "description": "I am formally reporting a suspicious sign-in event involving my Microsoft 365 account, originating from an IP address located in a region I am not currently visiting. Although I have proactively updated my account credentials, I remain concerned regarding the potential persistence of unauthorized active sessions and request a comprehensive review to ensure my account security has been fully restored.",
+    "priority": "Critical",
+    "resolution": "Revoked all active OAuth tokens and forced a global logout across all devices.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Guest WiFi login page not appearing",
+    "description": "The guest WiFi is completely broken on mobile devices. Instead of the redirect page actually appearing, users are just hit with a \"connection not private\" error every single time they try to log in. This is incredibly frustrating and needs to be fixed immediately.",
+    "priority": "Medium",
+    "resolution": "Updated the SSL certificate on the captive portal gateway which had expired.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Corrupt virtual disk file",
+    "description": "Hey, SRV-APPS-01 isn't booting up. It\u2019s throwing a 0x80070005 error when trying to hit the .vmdk on the datastore. Pretty sure the VMFS volume has some file system corruption.",
+    "priority": "Critical",
+    "resolution": "Ran an 'fsck' equivalent check on the datastore and repaired the corrupted metadata header on the vmdk file.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Salesforce login loop",
+    "description": "I am writing to formally report a persistent technical issue preventing access to Salesforce. When attempting to log in via the Google Chrome browser on Windows 11, the application enters an infinite refresh loop, rendering the login page inaccessible. Despite performing standard troubleshooting procedures, including clearing the browser cache and cookies, the issue remains unresolved. This technical failure is currently preventing me from fulfilling my professional responsibilities, specifically regarding the mandatory updating of lead records. Please prioritize this request as it is significantly impacting my workflow.",
+    "priority": "High",
+    "resolution": "Identified as a conflict with a recently pushed browser extension. Disabled the extension and forced a browser refresh.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Disk space alert on DB-Cluster-04",
+    "description": "My monitoring is absolutely blowing up every 5 minutes because the /var/lib/mysql partition on DB-Cluster-04 is sitting at 98% capacity. I\u2019ve already flagged this, and if you don't do something immediately before it hits 100%, the entire cluster is going to crash. Fix this now.",
+    "priority": "Critical",
+    "resolution": "Purged archived transaction logs older than 30 days and extended the LVM volume on the host server.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "VPN gateway timeout",
+    "description": "Hey, is the VPN down? I\u2019m having trouble getting onto the network\u2014Cisco AnyConnect on my Mac just keeps timing out with a 404 error. Any ideas?",
+    "priority": "Medium",
+    "resolution": "Reset the VPN authentication service on the perimeter firewall.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Drive failure in RAID array",
+    "description": "This is to formally report a critical hardware failure regarding server SRV-PROD-04. The storage controller is currently emitting an audible alert, and the management console indicates that Disk 3 within the RAID 5 array has transitioned to a \"Failed\" status. Please initiate an urgent onsite service request to replace the defective drive immediately to prevent potential data loss or further array instability.",
+    "priority": "High",
+    "resolution": "Physically swapped the faulty drive and initiated a RAID rebuild which completed successfully after 4 hours.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Slow file access speeds",
+    "description": "Is the SAN completely broken today? It is taking 30 seconds just to open basic PDF files from the shared drive, and it\u2019s grinding my entire workflow to a halt. Fix this already.",
+    "priority": "Medium",
+    "resolution": "Identified a misconfigured VLAN tag on the storage switch causing latency; corrected port settings and restored normal throughput.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Requesting sudo access",
+    "description": "Hey, any chance you can hook me up with sudo access on server-app-04? I need to install some dependencies for the new patch release and I'm currently hitting a permissions wall.",
+    "priority": "Medium",
+    "resolution": "Denied. Directed user to submit a formal change request via the security policy portal.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Office network totally down",
+    "description": "We are currently experiencing a complete network outage, resulting in a total loss of internet connectivity and server access. This critical failure is preventing all operations, which is unacceptable given that we have a project deadline in two hours. Please treat this matter with the utmost urgency and restore services immediately.",
+    "priority": "Critical",
+    "resolution": "Replaced the failed redundant power supply on the primary core router and rebooted the gateway.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Antivirus alert on server SRV-04",
+    "description": "I\u2019m losing my mind here\u2014CrowdStrike just triggered an alert for some garbage process running out of the Temp folders on SRV-04, and it\u2019s clearly trying to execute an encoded PowerShell script. I\u2019ve already had to isolate the server from the network just to stop it from moving laterally, because apparently, we can't have a secure environment for five minutes. This needs immediate attention before everything else goes down.",
+    "priority": "Critical",
+    "resolution": "Identified malicious script as a false positive from a legitimate internal deployment tool and restored service.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Need access to production",
+    "description": "Hey! Could you grant me read-only access to the production Postgres DB? Need it for some audit reports. My username is j.doe. Thanks!",
+    "priority": "Low",
+    "resolution": "Granted the 'reporting_role' to user j.doe and confirmed they can access the required views.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Unable to ping default gateway",
+    "description": "I am writing to formally report a persistent network connectivity failure affecting my workstation. Upon technical inspection, it has been confirmed that I am unable to reach the default gateway. Diagnostic output from the ipconfig command reveals that the workstation has been assigned an APIPA address in the 169.254.x.x range, which indicates a critical failure in the DHCP assignment process. Despite the physical ethernet connection to the Cisco Catalyst 2960 switch being verified, the device remains unable to obtain a valid network configuration. Please address this infrastructure issue as a priority.",
+    "priority": "High",
+    "resolution": "Identified a misconfigured VLAN on the switch port; reassigned port to the correct Data VLAN and refreshed the DHCP lease.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Login failed",
+    "description": "I am completely blocked from the database and keep getting an account locked error. I have a critical deadline in an hour, so I need this fixed immediately\u2014I cannot afford to sit around waiting while I fall behind on my work.",
+    "priority": "Medium",
+    "resolution": "Unlocked the user account and verified the password expiration policy settings.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "LUN masking visibility issue",
+    "description": "Hey, we just added a new Linux host to the fabric, but it\u2019s not picking up its LUNs. The zoning looks solid on the Brocade switches, but the storage array isn't seeing the HBA's WWN as logged in. Any ideas?",
+    "priority": "High",
+    "resolution": "Corrected the zoning configuration by adding the missing WWN alias to the specific fabric zone.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Outlook search not returning results",
+    "description": "I am writing to formally report a persistent malfunction regarding the search functionality within Outlook 365. When performing a search query, the application consistently returns a \"No results found\" error, failing to retrieve emails that are confirmed to be present in the inbox. Please note that I have already attempted to resolve this issue by rebuilding the Windows Search index, yet the problem remains unresolved. I request that this matter be escalated for immediate technical investigation and rectification.",
+    "priority": "Medium",
+    "resolution": "Created a new Outlook profile and re-synced the OST file to resolve a corrupted indexing database.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Physical Security System Offline",
+    "description": "Our NVR is completely failing again and showing a \"Disk Error\" on RAID array 0. The server logs clearly point to a dead Disk 2, and as a result, we aren't recording a single second of footage from the main lobby. This is unacceptable and needs to be fixed immediately.",
+    "priority": "Critical",
+    "resolution": "Hot-swapped the failed 4TB WD Purple drive; RAID array is currently rebuilding successfully.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Connection refused in Java app",
+    "description": "Hey, having some trouble with the Java app on node-04\u2014it\u2019s throwing java.net.ConnectException: Connection Refused. We checked the DB server and the firewall ports are definitely open, but netstat shows nothing listening on 3306. Any ideas?",
+    "priority": "High",
+    "resolution": "Restarted the database service which had hung after a kernel update.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Salesforce page unresponsive",
+    "description": "I am writing to formally report a persistent technical failure regarding the Salesforce platform. The application consistently freezes during the generation of quarterly reports, rendering the feature unusable. An inspection of the browser console confirms a \"Script timeout\" error originating at line 442. This issue is reproducible and is currently affecting operations on Chrome version 122.0 running on macOS Sonoma. Please address this performance deficiency as a matter of priority.",
+    "priority": "High",
+    "resolution": "Identified a malformed custom report filter; updated the filter logic and cleared browser cache.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "BitLocker recovery screen loop",
+    "description": "My Latitude 5420 is completely bricked on the BitLocker recovery screen after your mandatory firmware update. I don\u2019t have the 48-digit key, and I have a presentation in exactly 20 minutes. I need someone to fix this immediately so I can actually get into my machine.",
+    "priority": "High",
+    "resolution": "Retrieved recovery key from Active Directory and assisted user in bypassing the boot loop to restore access.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Issue with MFA prompt",
+    "description": "Hey, I\u2019m having some trouble with the Authenticator app on my iPhone 15\u2014it\u2019s not popping up with the push notifications for M365 logins. I\u2019ve already tried restarting my phone and reinstalling the app, but still no luck. Any ideas?",
+    "priority": "Medium",
+    "resolution": "Removed the device from the user's MFA settings in Azure AD and prompted for a re-enrollment flow.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "URGENT: Production DB down",
+    "description": "The database system is currently experiencing a total service outage. Users are reporting persistent authentication failures and a complete inability to load the dashboard interface. Given that the system was fully operational ten minutes ago, please investigate this critical degradation immediately and restore service as a matter of priority.",
+    "priority": "Critical",
+    "resolution": "Identified a memory leak in a stored procedure that caused the SQL process to hit the max server memory limit; restarted the SQL Server service and purged the procedure cache.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Account lockout after failed MFA",
+    "description": "This is the third time today my account has been locked and I am beyond fed up. I keep getting \"Access Denied: Error 0x80048823\" every single time I try to approve the push notification on my iPhone 14. Fix my lockout status immediately; I have actual work to do.",
+    "priority": "High",
+    "resolution": "Reset AD account lockout and synchronized Azure MFA service principal.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Absolute disaster - server room AC off",
+    "description": "Heads up, the CRAC unit is down and the server room is hitting 95 degrees! We\u2019re at risk of hardware failure if this isn\u2019t sorted ASAP\u2014can someone head over there right away?",
+    "priority": "Critical",
+    "resolution": "Escalated to HVAC vendor; failed control board replaced. Temperature returned to standard 68 degrees within 45 minutes.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Critical vulnerability patch needed",
+    "description": "My workstation has been flagged by the security department for utilizing an outdated version of Java. Due to current system restrictions, I lack the requisite local administrative privileges to perform the necessary update independently. I request that the IT department proceed with the mandatory update at your earliest convenience to ensure compliance with organizational security protocols.",
+    "priority": "Critical",
+    "resolution": "Pushed the Java 8 update 401 via SCCM to the user's workstation.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Guest Wi-Fi showing 'Connected, no internet'",
+    "description": "We have constant complaints from visitors who can connect to the Guest network but never get the splash page. They are just stuck on \"Connected, no internet\" indefinitely. This is completely unacceptable and makes us look like amateurs. Please fix this immediately.",
+    "priority": "High",
+    "resolution": "The Captive Portal service had stalled on the firewall appliance; restarted the service and cleared the active session table.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Missing Excel Add-in",
+    "description": "Hey, looks like the custom financial add-in went missing after the Office update this morning. Could you take a look and see if it got disabled? Really need it to wrap up the quarterly budget!",
+    "priority": "Low",
+    "resolution": "Re-enabled the COM Add-in via the Excel Options menu and updated the registry keys for Trusted Locations.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Rack fan failure",
+    "description": "I am formally reporting a critical hardware malfunction regarding Server-Rack-1. The cooling fan located at the base of the unit is emitting an abnormal high-pitched whistling noise and has ceased operation. Consequently, the ambient temperature within the rack is escalating rapidly, posing an immediate risk to the hosted equipment. I request an urgent inspection and resolution of this cooling failure to prevent potential system damage or downtime.",
+    "priority": "Medium",
+    "resolution": "Replaced the failed 120mm exhaust fan assembly with a spare unit from inventory.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "UPS Battery Warning",
+    "description": "The APC Smart-UPS 3000 in the server room is throwing a \"Battery Replacement Required\" error on the LCD again. The input voltage is perfectly stable at 120V, yet the unit is incessantly beeping and driving everyone crazy. I need this dealt with immediately.",
+    "priority": "High",
+    "resolution": "Scheduled maintenance window and replaced the hot-swappable battery cartridge; unit self-test passed.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "VPN Authentication Failure - Error 691",
+    "description": "Hey, I\u2019m having some trouble getting onto the corporate VPN on my MacBook (running macOS Sonoma). I keep getting an \"Error 691\" saying my credentials aren't recognized. I know my AD password is correct because I can log into the Outlook web portal with the same ones, so I\u2019m not sure what's up. Could someone take a look?",
+    "priority": "High",
+    "resolution": "Reset the user's AD password sync in the Identity Provider portal and cleared the cached VPN credentials in the Keychain Access utility.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Lost password",
+    "description": "I am currently unable to access the network due to a forgotten password. Please facilitate a formal reset of my credentials to restore my access immediately.",
+    "priority": "Medium",
+    "resolution": "Verified identity via manager and performed a forced password reset on the domain controller.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Firewall Rule Request",
+    "description": "I need port 443 opened from our internal subnet 192.168.10.0/24 to the external vendor API at 203.0.113.45 immediately. We have a software deployment this Friday and this should have been handled already. Stop stalling and get this done before it causes us a major delay.",
+    "priority": "Low",
+    "resolution": "Applied new firewall policy rule ID 405 on the Palo Alto firewall and verified connectivity.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Need sudo access for software installation",
+    "description": "Hey! I\u2019m working on a project that needs Wireshark and some specific network drivers, but my current user profile on this M2 MacBook doesn't have the admin permissions to install them. Could you hook me up with sudo access for this session?",
+    "priority": "Low",
+    "resolution": "Denied direct sudo access per security policy. Provided elevated access via self-service portal for approved software packages only.",
+    "category": "Security",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Printer connectivity",
+    "description": "The printing hardware is currently experiencing a total service failure, rendering it entirely inoperable and requiring immediate technical intervention.",
+    "priority": "Low",
+    "resolution": "Reconnected loose Ethernet cable at the wall jack.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Guest Wi-Fi Down",
+    "description": "The Guest_Wifi is completely dead in the lobby again. I\u2019ve already checked the WAP-Lobby-01 unit and the status light is just blinking amber, so it\u2019s clearly failing. I tried restarting it through the controller, but that didn't do a single thing to fix it. Can someone please actually get this working?",
+    "priority": "Low",
+    "resolution": "Factory reset the WAP and re-provisioned via the WLAN controller; firmware updated to v8.4.2.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Esxi host disconnected from vCenter",
+    "description": "Hey team, heads up that esxi-prod-04 has dropped out of vCenter and is showing as \"not responding.\" The host has power, but I can't reach the management IP over SSH.",
+    "priority": "Critical",
+    "resolution": "Physically reseated the management NIC; restarted the management agents (services.sh) on the host.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Database connection denied",
+    "description": "We are reporting a persistent authentication failure regarding the service account 'svc_app_db' when attempting to establish a connection to the Oracle 19c database. Despite rigorous verification confirming that the credentials stored within the vault are accurate and synchronized, the database consistently returns an 'ORA-01017: invalid username/password' error. This discrepancy suggests an unresolved issue within the database authentication layer and requires immediate investigation to restore service connectivity.",
+    "priority": "Critical",
+    "resolution": "The password in the DB wallet was out of sync with the Vault. Updated the wallet credential store.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "VPN connection failing with Error 809",
+    "description": "I am completely unable to connect to the VPN from home because Cisco AnyConnect keeps hitting me with Error 809. I\u2019ve already wasted my time restarting my router and fully updating my Windows 11 machine, but the tunnel still refuses to establish. This is unacceptable and I need this fixed immediately\u2014I have to access the shared drive by EOD.",
+    "priority": "High",
+    "resolution": "Modified client-side registry settings to allow UDP encapsulation for NAT-T, resolving the blocked IKEv2 traffic.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "DHCP Scope Exhaustion",
+    "description": "Heads up, we've got reports that new devices can't grab IPs in the Main Office VLAN. Looks like the 10.10.20.0/24 scope on the DHCP server is completely tapped out.",
+    "priority": "Medium",
+    "resolution": "Extended the DHCP scope mask from /24 to /23 and adjusted the lease time from 8 days to 24 hours to reclaim stale IPs.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Slow query on reporting dashboard",
+    "description": "I am writing to formally report a significant degradation in performance regarding the monthly sales report dashboard. While the system functioned within acceptable parameters yesterday, current load times have increased to approximately 30 seconds. Please investigate this latency issue, specifically checking for potential database locks or the need for additional indexing to restore optimal functionality.",
+    "priority": "Medium",
+    "resolution": "Identified a missing index on the 'transaction_date' column. Ran an EXPLAIN ANALYZE, added the index, and query time dropped to 200ms.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Tableau workbook error",
+    "description": "I\u2019m beyond fed up with this. Every time I try to refresh the extract for the quarterly financial workbook, I\u2019m getting an \"Internal Error: Data source not found\" message. We are on version 2023.1 and I\u2019ve already verified that the SQL connection is perfectly fine on my end, so the issue is clearly on your side. Fix this immediately, I don't have time to keep chasing errors.",
+    "priority": "High",
+    "resolution": "Updated the expired service account credentials in the Tableau Server data source settings.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Can't login to Jira",
+    "description": "Hey, quick heads up\u2014I\u2019m running into a 403 Forbidden error when trying to log into Jira with SSO. It was working perfectly yesterday, but no luck today. I'm on macOS Sonoma using Chrome. Any ideas?",
+    "priority": "Medium",
+    "resolution": "Synced user's Okta profile with the Atlassian cloud tenant to resolve attribute synchronization delay.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Can't access dev database",
+    "description": "I am writing to formally report an ongoing issue regarding my inability to establish a connection to the development instance via pgAdmin on my MacBook Pro. Despite confirming that my VPN is active and correctly configured, I consistently receive a \"Connection refused\" error message. Please investigate whether recent modifications to firewall policies have restricted access to this environment and provide a resolution as soon as possible.",
+    "priority": "Low",
+    "resolution": "Whitelisted user's new dynamic IP address in the security group.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Domain Controller NTP sync",
+    "description": "Everything is falling apart because our time synchronization is completely broken across the entire domain. DC01 is running five minutes ahead of the PDC emulator, and it's causing constant Kerberos authentication failures. Fix this immediately.",
+    "priority": "High",
+    "resolution": "Reconfigured the PDC to sync with an external stratum-1 NTP source and forced a w32tm /resync on all DCs.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Static IP mapping requested",
+    "description": "Hey, could I grab a static IP for the new Linux production server (PROD-SRV-04)? It needs to live in the 10.10.50.0/24 subnet. Thanks!",
+    "priority": "Low",
+    "resolution": "Assigned static IP 10.10.50.45 and updated the DNS record and DHCP exclusion range accordingly.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Office Wi-Fi password not working",
+    "description": "I am writing to formally report a persistent connectivity issue regarding my newly issued laptop and the 'Office_Secure' wireless network. Despite providing the correct credentials, the system repeatedly returns an 'Incorrect password' error, preventing me from establishing a connection. Please investigate this authentication failure and advise on the necessary steps to resolve the issue.",
+    "priority": "Low",
+    "resolution": "Removed the saved network profile on the laptop and re-authenticated using the user's domain credentials.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "NAS Volume Inaccessible",
+    "description": "Our departmental QNAP TS-873A is completely failing us again, showing a \"Volume Degraded\" status and leaving the entire team unable to map their network drives on Windows 10. I\u2019ve already wasted time restarting the service, which did absolutely nothing to fix the issue. We need this resolved immediately because we can't get any work done.",
+    "priority": "High",
+    "resolution": "Replaced faulty WD Red Pro 8TB drive in bay 4 and initiated RAID 6 rebuild.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Schema sync failure",
+    "description": "Hey, staging is currently out of sync with prod. Looks like migration script v2.4 hit a syntax error near 'MODIFY COLUMN'\u2014we're running on CentOS 7 if that helps.",
+    "priority": "Low",
+    "resolution": "Fixed invalid syntax in migration file and ran the apply script manually.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Requesting sudo access",
+    "description": "I am formally requesting the provisioning of sudo privileges on the development Linux servers running Ubuntu 22.04 LTS, as required for the execution of my current project responsibilities. Please be advised that this request has been formally reviewed and authorized by my direct manager; documentation of this approval is available via email correspondence upon request.",
+    "priority": "Low",
+    "resolution": "Denied: Internal policy requires senior approval for sudo access; escalated to Manager.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "System Access Denied",
+    "description": "I can't even get our proprietary inventory software to open on my Dell Latitude because of this constant Access Denied: 0x80070005 error. It was working perfectly fine until the latest Windows Update broke everything. I need this fixed immediately so I can actually do my job.",
+    "priority": "Medium",
+    "resolution": "Corrected file system permissions on the application installation directory.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Request for Jira project access",
+    "description": "Hey team, could you bump my permissions for the Project-X Jira board to developer access? I\u2019m currently stuck in read-only and need to update my task statuses. Thanks!",
+    "priority": "Low",
+    "resolution": "Added user to the 'Dev-Team-Alpha' role within the Jira project permission scheme.",
+    "category": "Access Management",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Unable to connect to Mongo Atlas",
+    "description": "I am writing to formally report a persistent technical issue regarding our MongoDB cluster. Despite repeated attempts to establish a connection via MongoDB Compass, I am consistently encountering a \"connection refused\" error. Please be advised that I have already verified my configuration, and my current home office IP address is correctly included in the authorized whitelist. For your reference, this issue is occurring on a device running macOS Monterey. Please investigate this matter with urgency, as it is currently impeding my ability to perform required database operations.",
+    "priority": "Low",
+    "resolution": "Found that the user's ISP had rotated their public IP address; updated the whitelist in the MongoDB Atlas dashboard.",
+    "category": "Database",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Slow upload speeds for video backups",
+    "description": "My workstation is barely limping along at 5Mbps upload when syncing to the cloud, despite being plugged into a gigabit Ethernet port. I\u2019m tired of wasting my time with these speeds\u2014is the QoS policy throttling my connection or what? Fix this.",
+    "priority": "Low",
+    "resolution": "Verified that the user\u2019s traffic was being correctly classified in the high-priority queue; adjusted the bandwidth shaper settings to allow for increased cloud storage throughput.",
+    "category": "Network",
+    "type": "paraphrase"
+  },
+  {
+    "title": "I can't reach the fileshare",
+    "description": "Hey, I'm having trouble connecting to \\\\FS-PROD-01\u2014getting a timeout error when trying to map the drive. Already tried restarting my laptop, but no luck. Anyone able to take a look?",
+    "priority": "High",
+    "resolution": "Reset the SMB service on the file server and cleared stale TCP connections from the firewall state table.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Issue with Outlook search",
+    "description": "I am writing to formally report a persistent malfunction regarding the search functionality within Outlook 365. As of Tuesday, the application has failed to index or retrieve any incoming or outgoing correspondence. Furthermore, the search feature remains unresponsive and stuck in a continuous loading state. Please investigate this technical failure and provide a resolution at your earliest convenience.",
+    "priority": "Low",
+    "resolution": "Rebuilt the Windows Search Index for Outlook data files.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Wi-Fi is super slow in the cafeteria",
+    "description": "My internet is completely unusable every single day during my lunch break. My phone drops the signal constantly, and I am sick of dealing with this\u2014it has been happening all week and it's beyond frustrating.",
+    "priority": "Low",
+    "resolution": "Increased AP power levels and optimized channel selection to mitigate signal interference from the kitchen microwave.",
+    "category": "Infrastructure",
+    "type": "paraphrase"
+  },
+  {
+    "title": "Database connection timeout",
+    "description": "Heads up, the internal BI dashboard is timing out after 30 seconds. Looks like a backend issue, just flagging it now before the users start flooding us with tickets.",
+    "priority": "High",
+    "resolution": "Increased the SQL query timeout threshold on the application server connection string.",
+    "category": "Application",
+    "type": "paraphrase"
+  },
+  {
+    "title": "User reporting missing files",
+    "description": "I am formally requesting assistance regarding the accidental deletion of an entire directory of project files from the file server. Upon investigation, I was unable to recover the data via the local Recycle Bin. Could you please verify the availability of a Shadow Copy or an equivalent backup to facilitate the restoration of these files?",
+    "priority": "High",
+    "resolution": "Restored the folder from the most recent Volume Shadow Copy (VSS) snapshot taken at 04:00 AM.",
+    "category": "Storage",
+    "type": "paraphrase"
+  },
+  {
+    "title": "User account locked out",
+    "description": "I am completely locked out of my PC again. I\u2019ve only tried logging in twice with the correct password, and now it\u2019s giving me an \"Account Locked\" error. This is incredibly frustrating and a total waste of my time. Please fix this immediately so I can actually get some work done.",
+    "priority": "Low",
+    "resolution": "Reset account lockout counter in Active Directory; identified a stuck background process on user's mobile device attempting to sync email with an old password.",
+    "category": "Security",
+    "type": "paraphrase"
+  }
+]

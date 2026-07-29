@@ -1,0 +1,954 @@
+[
+  {
+    "title": "Data center cooling anomaly in Rack 4",
+    "description": "Temperature sensors in the north-end aisle are spiking past 32\u00b0C. The fans in the row are sluggish and one chassis is reporting thermal throttling. Need an immediate site visit to check the HVAC manifold.",
+    "priority": "High",
+    "resolution": "Replaced faulty fan tray in Row B and adjusted thermostat setpoints to balance airflow load.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Subnet reachability dropping intermittently",
+    "description": "Our dev-stack subnet (10.44.x.x) is flapping. Packets are getting dropped at the core gateway every 10-15 minutes. It\u2019s killing our build pipelines.",
+    "priority": "High",
+    "resolution": "Identified a duplicate IP assignment on a misconfigured legacy printer; updated DHCP reservations to exclude the range.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Core switch uplink failing SFP diagnostic",
+    "description": "Port 49 on the main distribution switch is logging CRC errors and flapping light levels. The SFP+ transceiver looks discolored.",
+    "priority": "Medium",
+    "resolution": "Swapped out the defective SFP+ module and cleaned the fiber optic interface patch cable.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Backup job stalled on Storage Array 2",
+    "description": "The SAN array is throwing I/O timeout warnings. The daily incremental backup has been stuck at 4% for four hours.",
+    "priority": "Medium",
+    "resolution": "Increased the LUN queue depth on the host side and cleared orphaned lock files from the volume manager.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "UPS battery fault alert - Site B",
+    "description": "We received an automated SNMP trap indicating 'Battery Capacity Low' for the UPS unit in the server room. The web interface says it\u2019s at 12% health.",
+    "priority": "High",
+    "resolution": "Scheduled emergency replacement of battery strings; UPS verified operational and self-test passed.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "VLAN tagging mismatch on trunk ports",
+    "description": "Virtual machines on Host 07 are losing connectivity to the storage VLAN. It looks like the tagged packets are being dropped by the physical switch port.",
+    "priority": "Medium",
+    "resolution": "Corrected native VLAN mismatch on the physical uplink port to match the distributed switch configuration.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "SSL Certificate expiration warning",
+    "description": "The load balancer for our primary public portal is alerting that the intermediate CA certificate expires in 48 hours.",
+    "priority": "Medium",
+    "resolution": "Renewed and deployed the updated CA bundle to the load balancer virtual server pool.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Physical layer instability in the wiring closet",
+    "description": "Several users in the West Wing are complaining about connection drops. I suspect a loose patch cable or a port going bad on the edge switch.",
+    "priority": "Low",
+    "resolution": "Re-punched down the Cat6 cable on the patch panel and replaced a damaged patch cord.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Power supply unit (PSU) redundancy alert",
+    "description": "Server SVR-01 is alerting that power supply #2 has lost its AC input. I\u2019ve checked the PDU and it seems to have power.",
+    "priority": "Medium",
+    "resolution": "Replaced faulty power cable connecting the PSU to the PDU; redundancy state restored.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "DNS resolution latency spikes",
+    "description": "Internal DNS queries are taking upwards of 2000ms. It feels like our recursive forwarders are under heavy load or routing traffic incorrectly.",
+    "priority": "High",
+    "resolution": "Flushed the DNS cache and optimized the upstream forwarder list to bypass a congested secondary ISP node.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "KVM over IP module unresponsive",
+    "description": "The integrated management card on the core router has locked up. We can't reach the serial console to push a configuration change.",
+    "priority": "Low",
+    "resolution": "Performed a hard power cycle of the management card via the main chassis power supply reset.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Fiber path attenuation detected",
+    "description": "The link between the head office and the remote site is showing high dB loss. We are at the threshold of losing carrier signal.",
+    "priority": "High",
+    "resolution": "Cleaned the fiber bulkhead at the demarcation point; signal levels returned to acceptable nominal range.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Unexpected reboot of VM host",
+    "description": "Host-04 went down twice in the last 24 hours. The BMC log shows a 'Kernel Panic' triggered by a hardware driver conflict.",
+    "priority": "High",
+    "resolution": "Updated HBA firmware and rolled back the NIC driver to the stable vendor-recommended version.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "DHCP Scope exhaustion",
+    "description": "The main office range is completely full. New devices are failing to pull an IP address. We need to expand the scope.",
+    "priority": "High",
+    "resolution": "Expanded the DHCP scope range from /24 to /23 and increased lease times for guest devices.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "External storage connectivity timeout",
+    "description": "The NAS is intermittently dropping sessions. Logs show 'Target dropped connection' errors during heavy read operations.",
+    "priority": "Medium",
+    "resolution": "Configured Jumbo Frames (MTU 9000) across the storage network fabric to alleviate packet fragmentation.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Patching schedule conflict",
+    "description": "The automatic firmware update on the aggregation switches is scheduled during our core production hours. Needs to be moved to the weekend.",
+    "priority": "Low",
+    "resolution": "Rescheduled the orchestration task in the management console to 02:00 Saturday.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Spanning Tree Protocol (STP) loop alert",
+    "description": "The core switch is logging 'BPDU Guard' triggers on multiple ports. It looks like someone plugged a desktop switch into two wall jacks.",
+    "priority": "High",
+    "resolution": "Identified the rogue switch in cubicle 4B, disconnected it, and educated the end-user on network policy.",
+    "category": "Infrastructure",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "CRM Dashboard Widget Won't Load Data",
+    "description": "I'm looking at the 'Quarterly Revenue' widget on the main dashboard, but it's just spinning indefinitely. Everything else in the CRM loads fine.",
+    "priority": "Medium",
+    "resolution": "Cleared browser cache and forced a refresh of the API token, which restored the widget data feed.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Document Editor Formatting Glitch",
+    "description": "Every time I paste text from a PDF into the internal editor, it inserts a random hidden character that breaks the page layout. Super frustrating.",
+    "priority": "Low",
+    "resolution": "Advised user to use 'Paste as Plain Text' (Ctrl+Shift+V) to avoid carrying over incompatible formatting codes.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Inventory App Sync Loop",
+    "description": "My mobile inventory scanner is stuck in a 'Syncing...' loop. It's been 20 minutes and it won't let me process the new shipment incoming.",
+    "priority": "High",
+    "resolution": "Identified a hung process in the background. Force-closed the app, cleared the local cache database, and re-initiated sync.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "SSO Authentication Timeout",
+    "description": "Keep getting booted from the Analytics Portal every 5 minutes. It says 'Token Expired' even though I'm actively using the tool.",
+    "priority": "High",
+    "resolution": "System clock on the user's workstation was out of sync with the domain controller by 4 minutes, causing premature token invalidation.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Export Failure in Reporting Tool",
+    "description": "Tried to export a 2,000-row table to CSV. The app just crashes to the desktop without an error code every single time.",
+    "priority": "Medium",
+    "resolution": "Increased the virtual memory allowance for the application and updated the .NET framework runtime.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Access Denied on Project Folder",
+    "description": "I've been working in the DesignApp all morning, but suddenly I don't have 'Write' permissions on the Shared Project Library anymore.",
+    "priority": "High",
+    "resolution": "User was inadvertently moved to a different Active Directory security group; restored membership to 'Design_Contributors'.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Image Upload Error: 413 Payload Too Large",
+    "description": "Tried to upload a high-res mockup for the client, but the app keeps yelling at me about the file size. It's only 8MB!",
+    "priority": "Low",
+    "resolution": "Adjusted the application's max_upload_size configuration from 5MB to 20MB in the server settings.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Application UI Scaling Issue",
+    "description": "On my 4K monitor, the buttons in the Payroll App are tiny\u2014practically invisible. Can I zoom this in?",
+    "priority": "Low",
+    "resolution": "Enabled 'High DPI Scaling Override' in the application compatibility properties.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Database Connection Timeout",
+    "description": "The Finance app is throwing 'SQL Error 504: Gateway Timeout' when I try to run the month-end reconciliation report.",
+    "priority": "Critical",
+    "resolution": "Optimized the backend SQL stored procedure; index fragmentation was causing the query to time out.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Spellcheck Language Mismatch",
+    "description": "The editor keeps flagging every word as misspelled because it's defaulting to French. I need it back in US English.",
+    "priority": "Low",
+    "resolution": "Updated the global configuration settings to set the default dictionary to 'en-US' for the specific user profile.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Multi-Factor Prompt Not Appearing",
+    "description": "I log into the HR portal, enter my password, and it just stops. No MFA notification, no code, just a blank white screen.",
+    "priority": "Critical",
+    "resolution": "The MFA integration service was down; restarted the service and cleared cached auth sessions.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Batch Processing Stalled",
+    "description": "I queued 50 video files for compression in the MediaTool. It processed the first 3 and just stopped cold.",
+    "priority": "Medium",
+    "resolution": "The temp directory had insufficient disk space; cleared the temp files and restarted the batch queue.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Missing Menu Options",
+    "description": "My colleague has an 'Admin Tools' tab in the app, but mine is completely hidden. I need to approve his request.",
+    "priority": "Medium",
+    "resolution": "Granted the user the 'App_Manager' permission flag via the internal permissions management console.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Plugin Incompatibility Warning",
+    "description": "Every time I launch the CodeEditor, it warns me that the 'Git-Link' plugin is incompatible with the current version. It's slowing everything down.",
+    "priority": "Low",
+    "resolution": "Disabled the legacy plugin and installed the updated 'Git-Link Pro' version from the marketplace.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Keyboard Shortcut Conflict",
+    "description": "The new app update is intercepting the 'Ctrl+S' command, so I can't save my work in other windows if the app is open.",
+    "priority": "Low",
+    "resolution": "Configured the application to 'Ignore Global Hotkeys' via the advanced preferences menu.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Unexpected Logout During Save",
+    "description": "I was just about to save my progress, and the app forced a log out. Now my changes are gone.",
+    "priority": "High",
+    "resolution": "The session duration timeout was set too short for data-heavy tasks; increased the session limit to 4 hours.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Font Rendering Issue",
+    "description": "The app is displaying all text in a weird blocky font that's illegible. Looks like a corrupted font file.",
+    "priority": "Low",
+    "resolution": "Purged the local font cache and repaired the installation of the proprietary application font pack.",
+    "category": "Application",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Unrecognized MFA push notification received during off-hours",
+    "description": "I just got a notification on my Duo app asking me to approve a login attempt while I'm currently on PTO. I did not trigger this. What do I do?",
+    "priority": "Critical",
+    "resolution": "Invalidated existing session tokens, forced global password reset, and reviewed logs to confirm a geo-blocked IP attempt; blocked originating subnet.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Department file share permissions suddenly wide open",
+    "description": "It looks like the 'Executive-Confidential' folder is now visible to the entire 'Interns' AD group. This happened after the morning backup script ran.",
+    "priority": "High",
+    "resolution": "Corrected inherited NTFS permissions and audited Group Policy Objects to identify a misconfigured script; restored restricted access levels.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "USB device blocked but user insists it's mission critical",
+    "description": "System endpoint protection nuked my thumb drive again. It\u2019s a Kingston encrypted drive with legal discovery files. Can we white-list this VID/PID?",
+    "priority": "Medium",
+    "resolution": "Verified drive integrity in a sandbox environment and added the device to the exception policy for the specific user's hardware ID.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Suspected phishing link clicked in internal email",
+    "description": "I clicked a link in an email that looked like it came from IT regarding a password expiry. It took me to a login page that looked off, so I closed it immediately.",
+    "priority": "Critical",
+    "resolution": "Isolated workstation from network, scanned for malicious scripts, verified no credentials were harvested, and cleared browser cache.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "VPN connection drops every 5 minutes with 'Security Violation'",
+    "description": "Ever since the latest ZTNA client update, my connection to the server is getting killed instantly. The log says 'Endpoint posture assessment failed'.",
+    "priority": "Medium",
+    "resolution": "Discovered the update reverted firewall exceptions; re-applied policy and updated client signatures to recognize current OS build.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Lost company-issued laptop",
+    "description": "I left my machine at the airport terminal. It has the BitLocker recovery key written in a sticky note on the lid. Please advise.",
+    "priority": "Critical",
+    "resolution": "Issued remote wipe command via MDM, revoked device certificates, and triggered the emergency offboarding workflow.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Strange process 'svchost.exe' running from AppData",
+    "description": "My computer is running at 90% CPU. I looked in Task Manager and saw a svchost.exe running from my local user profile folder. This feels wrong.",
+    "priority": "High",
+    "resolution": "Identified malicious payload masquerading as system process; quarantined file, cleaned registry keys, and performed full rootkit scan.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Requesting temporary elevation for software installation",
+    "description": "Need to install a packet sniffer for a networking lab assignment. Requesting local admin rights for the next 2 hours.",
+    "priority": "Low",
+    "resolution": "Denied request for global admin; provided instructions on using the approved software portal to deploy the tool in a virtualized container.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Potential data exfiltration attempt logged",
+    "description": "DLP alert triggered for user 'jsmith'. Large volumes of encrypted zip files were moved to a personal cloud storage site at 3:00 AM.",
+    "priority": "Critical",
+    "resolution": "Account suspended pending investigation; initiated forensic imaging of the user's local drive and reviewed egress logs.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Unable to access HR portal due to certificate error",
+    "description": "Every time I go to the payroll site, Chrome screams at me about the SSL certificate being invalid. I need my paystub today.",
+    "priority": "Medium",
+    "resolution": "Discovered expired root CA on client machine; deployed updated CA bundle via SCCM to resolve the trust chain.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Email account sending spam to the whole company",
+    "description": "I'm getting reports that my account is sending out 'get rich quick' emails. I haven't sent anything since breakfast.",
+    "priority": "Critical",
+    "resolution": "Detected compromised API key used for SMTP relay; rotated all account keys and scrubbed outbound queue of malicious messages.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Physical security badge issue at lobby",
+    "description": "My badge isn't triggering the turnstiles. I can hear a weird clicking sound when I tap the reader.",
+    "priority": "Low",
+    "resolution": "Validated badge against the door controller database; replaced hardware reader at lobby entrance due to faulty antenna.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Application whitelist blocking necessary legacy app",
+    "description": "Our accounting team uses an old DOS-based app that keeps getting blocked by the new EDR agent. It's flagging it as 'untrusted code'.",
+    "priority": "Medium",
+    "resolution": "Created a hash-based exclusion for the legacy binary and moved it to a secure, restricted subnet with no external internet access.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Suspicious login attempt from international IP",
+    "description": "I got an automated email saying my account logged in from Moscow. I\u2019m sitting in my office in Chicago right now.",
+    "priority": "High",
+    "resolution": "Forced password reset, cleared all O365 active sessions, and implemented conditional access policy requiring local country login only.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Encrypted files found on shared drive",
+    "description": "I opened our project folder and all the Excel files have a .crypt extension now. What is going on?",
+    "priority": "Critical",
+    "resolution": "Confirmed ransomware infection on source workstation; disconnected compromised share, initiated restoration from immutable backups.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Request to bypass web filter for YouTube",
+    "description": "Marketing needs access to YouTube to upload promotional videos, but the current web filtering policy blocks all video streaming sites.",
+    "priority": "Low",
+    "resolution": "Created a dedicated OU with modified web filtering group policy that allows access to specific domains for the Marketing team only.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Service account password rotation failure",
+    "description": "The automated task for the SQL database failed because the service account password expired. It says 'Access Denied'.",
+    "priority": "High",
+    "resolution": "Manually synced service account credentials across cluster nodes and updated the Task Scheduler config to use a managed service account.",
+    "category": "Security",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Stale materialized view preventing morning reporting sync",
+    "description": "The 'daily_sales_rollup' view hasn't refreshed since 03:00 UTC. BI team is looking at empty dashboards.",
+    "priority": "High",
+    "resolution": "Manually triggered the pg_cron job and cleared the stale cache lockfile.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Application timeout during heavy blob retrieval",
+    "description": "Users are reporting 504 errors when trying to download PDF invoices from the history tab. Looks like the DB connection pool is hitting a ceiling.",
+    "priority": "Medium",
+    "resolution": "Increased max_connections and tuned the read-replica timeout settings to handle long-running binary streams.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Index fragmentation causing full table scans",
+    "description": "Query performance on the 'users' table has degraded by 400% over the last week. EXPLAIN ANALYZE shows massive disk I/O.",
+    "priority": "Medium",
+    "resolution": "Executed a concurrent REINDEX on the primary ID and email columns.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Stuck transaction blocking DDL operations",
+    "description": "An orphaned process ID 4829 is holding a lock on the 'inventory' table. Cannot run the schema migration to add the new 'location_id' column.",
+    "priority": "High",
+    "resolution": "Terminated the idle-in-transaction backend process and restarted the migration script.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Production backup failure: Disk pressure",
+    "description": "Automated nightly pg_dump crashed at 85% completion. Error: 'No space left on device'.",
+    "priority": "Critical",
+    "resolution": "Purged logs older than 30 days from the backup mount and expanded the EBS volume size.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Deadlock detected in checkout service",
+    "description": "Service logs show 'DeadlockFoundException' frequently during peak traffic. Transactions 0x4f2 and 0x9a1 are fighting over row locks.",
+    "priority": "High",
+    "resolution": "Refactored the application code to ensure consistent resource locking order across all transactional modules.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Character encoding mismatch on legacy data import",
+    "description": "New data ingested into the 'client_notes' field is showing garbled UTF-8 characters (e.g., ).",
+    "priority": "Low",
+    "resolution": "Converted column collation to utf8mb4_unicode_ci and scrubbed invalid byte sequences using a regex script.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "ReadOnly replica lagging significantly behind master",
+    "description": "Replica B is 45 minutes behind. This is causing inconsistent data visibility for our global support agents.",
+    "priority": "High",
+    "resolution": "Identified a heavy long-running write transaction on master; optimized query to prevent WAL playback blockage.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Forgotten credentials for dev environment root",
+    "description": "The lead dev needs access to the 'staging_sandbox' DB but the root password has been lost following the last rotation.",
+    "priority": "Medium",
+    "resolution": "Reset the database administrative password via single-user mode and updated the team vault.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Connection leaks in microservices layer",
+    "description": "DB connections are hitting the 1000 limit within minutes of restarting the gateway service. App logs show 'Pool exhausted'.",
+    "priority": "High",
+    "resolution": "Fixed missing close() blocks in the repository service logic to ensure connections are returned to the pool.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Slow query alert: sequential scan on customer_id",
+    "description": "A query filtering by customer_id is taking 12 seconds. It should be indexed, but performance monitoring suggests otherwise.",
+    "priority": "Medium",
+    "resolution": "Discovered the index was marked 'INVALID' due to a failed previous migration; re-built index concurrently.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Out of memory (OOM) killer invoked on DB process",
+    "description": "The DB node rebooted unexpectedly. Kernel logs show OOM killer terminated the postgres process.",
+    "priority": "Critical",
+    "resolution": "Adjusted work_mem and shared_buffers to match the current RAM allocation and prevented swapping.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Foreign key constraint violation on bulk upload",
+    "description": "Users are unable to bulk-upload assets. Error: 'violates foreign key constraint on parent_folder_id'.",
+    "priority": "Medium",
+    "resolution": "Cleaned up dangling orphaned folder references and corrected the import CSV file structure.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Disk latency spikes impacting write performance",
+    "description": "Cloud watch metrics show IOPS hitting the limit for the DB volume, causing high p99 latency during peak hours.",
+    "priority": "High",
+    "resolution": "Provisioned additional IOPS and migrated indices to a dedicated high-throughput volume.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Table bloat affecting storage efficiency",
+    "description": "The 'logs' table is taking up 400GB, but only 100GB of that is actual active data.",
+    "priority": "Low",
+    "resolution": "Performed a VACUUM FULL during the maintenance window to reclaim unused space.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Audit log table reaching partition limit",
+    "description": "The 'audit_2023_Q4' table partition is nearly full. We need to plan for the next quarter.",
+    "priority": "Low",
+    "resolution": "Created the 'audit_2024_Q1' partition and set up the trigger function for auto-routing new entries.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Cannot drop user due to dependent object ownership",
+    "description": "Trying to offboard a developer's access, but 'DROP USER' fails because they 'own' several application schemas.",
+    "priority": "Medium",
+    "resolution": "Reassigned schema ownership to the 'app_owner' service account and successfully dropped the user.",
+    "category": "Database",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "NFS mount points turning stale after midnight",
+    "description": "Our /data-mount directory becomes unresponsive exactly at 00:05. Running 'ls' hangs indefinitely. Looks like a cron job might be causing a kernel-level lockout.",
+    "priority": "High",
+    "resolution": "Adjusted the automount timeout settings and patched the client-side NFS kernel module to resolve race conditions during log rotation.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "SAN fabric latency spikes on Node-04",
+    "description": "Users are reporting sub-second freezes when accessing the SQL cluster. Checking the fabric switches, I see cyclic buffer-to-buffer credit depletion on port 4/12.",
+    "priority": "Critical",
+    "resolution": "Replaced a degraded SFP+ transceiver and re-routed heavy traffic to a secondary path to alleviate switch buffer congestion.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Snapshot retention policy failing on Tier-2",
+    "description": "The daily snap-shots aren't pruning as scheduled. We are currently at 98% utilization and I'm worried we'll hit read-only mode by tomorrow morning.",
+    "priority": "High",
+    "resolution": "Manually purged expired snapshots via CLI and corrected a syntax error in the metadata management script that was preventing the cleanup process from executing.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "SSD endurance warning: Drive 09 in Shelf B",
+    "description": "The alert manager just screamed about an SSD wear-leveling threshold breach. It's currently at 1% life remaining.",
+    "priority": "Medium",
+    "resolution": "Performed a proactive drive swap during the maintenance window and verified RAID reconstruction success.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "iSCSI multipath path failure",
+    "description": "We are getting 'path down' errors on our ESXi hosts. Connectivity is fluttering between the storage controller and the VMWare environment.",
+    "priority": "High",
+    "resolution": "Identified a misconfigured jumbo frame setting on the upstream switch that was dropping packets for oversized iSCSI frames.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Slow write speeds on Archive Array",
+    "description": "Writing a 50GB tarball takes three times longer than it did last month. Reads are fine, but writes are crawling.",
+    "priority": "Low",
+    "resolution": "Identified fragmented parity blocks. Executed a background defragmentation/re-striping operation to optimize write head latency.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Object storage bucket returning 403 Forbidden",
+    "description": "My dev environment can't reach the S3 bucket even though the IAM role is set to FullAccess. It worked yesterday.",
+    "priority": "Medium",
+    "resolution": "Reset the bucket policy permissions which had been corrupted by a recent Terraform misconfiguration.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "LUN masking visibility issue",
+    "description": "The new Windows server doesn't see the LUN presented to it from the SAN. It's configured correctly on the fabric, but Windows Disk Management is empty.",
+    "priority": "Medium",
+    "resolution": "Added the server's WWN to the whitelist in the storage array's zoning configuration.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Thin provisioning alarm: Pool oversubscription",
+    "description": "The virtual storage pool says it has 10TB of free space, but the physical reality is that we've run out of raw blocks. Please advise before we crash.",
+    "priority": "Critical",
+    "resolution": "Expanded the physical disk shelf and extended the LUN group to recover from the over-provisioning warning.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Encryption key rotation error",
+    "description": "Attempting to rotate the volume encryption keys failed with a 'TIMEOUT_KMS_PROVIDER' error. The data is still accessible, but I'm nervous about the security compliance.",
+    "priority": "Medium",
+    "resolution": "Renewed the SSL certificate for the KMS provider and successfully re-synced the storage array's connection to the vault.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Veeam backup target off-line",
+    "description": "The repository server isn't mounting the backup target. Trying to mount manually returns 'Incorrect function'.",
+    "priority": "High",
+    "resolution": "Refreshed the iSCSI target session and restarted the Windows Storage Management service.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Inode exhaustion on legacy filer",
+    "description": "The file system claims it has 200GB free, but I can't create new files. The error is 'No space left on device'.",
+    "priority": "High",
+    "resolution": "Deleted orphaned temporary files and increased the inode count limit on the filesystem.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Deduplication ratio plummeting",
+    "description": "Our backup dedupe ratio has dropped from 4:1 down to 1.1:1. Is there a corruption issue or did the data type change?",
+    "priority": "Low",
+    "resolution": "Analyzed the backup stream and found a misconfigured agent that was encrypting files before the backup, preventing effective deduplication.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Storage controller heat alarm",
+    "description": "Physical sensor 0x04 on Controller B is reporting 85C. The internal fans aren't spinning up.",
+    "priority": "Critical",
+    "resolution": "Replaced the failed fan module and checked the thermal paste on the controller CPU.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Cloud Tiering latency affecting app performance",
+    "description": "Our application is configured to move cold data to the cloud. When it tries to fetch it, the app hangs for minutes.",
+    "priority": "Medium",
+    "resolution": "Increased the cache hit threshold in the storage gateway software to keep frequently accessed objects on local SSDs longer.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "NFS mount locking issues",
+    "description": "Multiple clients are trying to edit the same CSV file on the mount, but the file locking isn't preventing collisions.",
+    "priority": "Medium",
+    "resolution": "Enabled 'nolock' option on client mount commands and confirmed the rpc.statd service was running on all nodes.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Unable to resize volume",
+    "description": "Getting an 'Operation not permitted' error when trying to grow a partition in the web GUI. I have admin rights.",
+    "priority": "Low",
+    "resolution": "Closed a dangling CLI session that held a lock on the LUN metadata and successfully performed the resize via the backend shell.",
+    "category": "Storage",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Latency spikes during video conferencing",
+    "description": "Voice and video calls drop packets consistently between 2 PM and 4 PM. Desktop app reports 'high jitter' regardless of which floor the user is on.",
+    "priority": "Medium",
+    "resolution": "Identified high bandwidth usage from a rogue automated backup script running on a server; scheduled backup moved to off-peak hours.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Guest Wi-Fi portal loop",
+    "description": "Visitors connecting to 'Guest_Net' are stuck in a redirect loop after entering credentials. Browser keeps timing out on the authentication handshake.",
+    "priority": "Low",
+    "resolution": "Cleared stale MAC entries from the captive portal controller\u2019s cache and increased the session timeout limit.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Departmental printer unreachable",
+    "description": "Floor 3 printer (HP-LaserJet-99) is offline for all users. Cannot ping the static IP, though it shows as connected on the switch port.",
+    "priority": "Low",
+    "resolution": "Reassigned a conflicting static IP that was inadvertently assigned to a new laptop via DHCP; reserved printer IP in the scope.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "VPN handshake failure",
+    "description": "Remote users unable to establish a secure tunnel. Logs show 'IKE Phase 1 negotiation failed' for 40% of the remote workforce.",
+    "priority": "High",
+    "resolution": "Renewed the expired SSL certificate on the VPN concentrator and force-pushed a client configuration update.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Intermittent packet loss in Server Room B",
+    "description": "Monitoring tools indicate periodic drops on uplink to switch 4-B. Physical check shows no signs of damage, but CRC errors are climbing.",
+    "priority": "High",
+    "resolution": "Replaced faulty SFP module and fiber patch cable connecting the distribution switch.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "DNS resolution timeouts",
+    "description": "Several internal apps are failing to resolve hostnames. 'nslookup' returns 'Server Failure' for our internal domain suffixes.",
+    "priority": "High",
+    "resolution": "Resolved circular dependency in DNS forwarders by resetting the primary forwarder to the internal root hint.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Switch port flapping in lobby",
+    "description": "The ethernet port for the lobby kiosk keeps resetting. Lights blink rapidly for a few seconds every 10 minutes.",
+    "priority": "Medium",
+    "resolution": "Disabled PortFast on the uplink, identified a faulty network cable causing an STP loop, and replaced the cable.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Unauthorized rogue AP detected",
+    "description": "Security scanner flagged an unknown SSID broadcasting near the HR office. Signal strength is very high.",
+    "priority": "Critical",
+    "resolution": "Located a personal Wi-Fi range extender plugged into a wall port by an employee; device removed and user warned.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Inability to map network drives",
+    "description": "Users on the accounting VLAN report 'Path not found' when trying to access the Finance share. Access to the internet works fine.",
+    "priority": "Medium",
+    "resolution": "Reapplied missing firewall rule on the perimeter appliance that was blocking SMB traffic during the last firmware update.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "VLAN tagging mismatch",
+    "description": "The new VOIP phones are not pulling an IP address. They seem to be stuck on the default VLAN instead of the Voice VLAN.",
+    "priority": "Medium",
+    "resolution": "Configured the switchport as 'trunk' with the correct voice VLAN ID to allow the phones to tag their own traffic.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "SSL decryption causing site blocks",
+    "description": "Multiple users reporting that banking websites are showing 'Untrusted Connection' errors despite having valid certs.",
+    "priority": "Medium",
+    "resolution": "Updated the root certificate on the firewall\u2019s proxy server to match the latest security standards.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Extreme Wi-Fi congestion in boardroom",
+    "description": "During meetings, connection is unusable. RSSI is fine, but throughput is near zero when more than 10 people connect.",
+    "priority": "Low",
+    "resolution": "Adjusted channel width from 80MHz to 40MHz to reduce co-channel interference and tuned min-bitrate settings.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "DHCP scope exhaustion",
+    "description": "New devices cannot join the network. They get a 169.254.x.x address. DHCP server is showing 0 available addresses.",
+    "priority": "High",
+    "resolution": "Expanded the DHCP scope subnet from /24 to /23 and cleaned up abandoned leases.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Slow file transfers to NAS",
+    "description": "Copying files to the local NAS takes 3x longer than usual. Observed speeds hovering around 10Mbps on gigabit hardware.",
+    "priority": "Medium",
+    "resolution": "Detected duplex mismatch on the NAS port; forced the port to 1000/Full rather than autonegotiate.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Firewall configuration push failed",
+    "description": "Cannot apply the latest policy to the perimeter gateway. Dashboard returns 'Syntax error in rule set'.",
+    "priority": "High",
+    "resolution": "Removed a legacy object reference from the rule set that was orphaned during the database migration.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "PoE+ power budget exceeded",
+    "description": "Security cameras connected to Switch 7 are randomly powering off. We added three new cameras today.",
+    "priority": "Medium",
+    "resolution": "Calculated total power draw; installed an external power injector for the additional cameras to stay within the switch budget.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Latency on SIP trunks",
+    "description": "Users are complaining about 'robotic' audio on outbound calls. WAN utilization is low, but QOS tags seem to be ignored.",
+    "priority": "Medium",
+    "resolution": "Re-configured DSCP mapping on the edge router to ensure voice traffic is prioritized correctly over standard data.",
+    "category": "Network",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Onboarding block: New hire cannot authenticate to SSO portal",
+    "description": "User 'j.doe' joined this morning. When attempting to log into the Okta dashboard, they receive 'Invalid User Context' error despite being provisioned in AD.",
+    "priority": "High",
+    "resolution": "User account was not assigned to the 'Global_All_Staff' security group. Added user to group and forced a sync.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Stale permissions for legacy database",
+    "description": "I moved from Marketing to Finance last month but I still have read-write access to the 'Campaign_Assets' share. Needs to be revoked for compliance.",
+    "priority": "Low",
+    "resolution": "Removed user from 'Marketing_Data_ReadWrite' AD group and cleared local network credentials cache.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "VPN MFA loop: Authenticator app sync issue",
+    "description": "Keep getting stuck in a redirect loop when trying to connect to the corp VPN. The Microsoft Authenticator app approves the push, but the browser just times out.",
+    "priority": "Medium",
+    "resolution": "Cleared 'Registered Devices' for the user in Entra ID; prompted user to re-register the device as a new MFA factor.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Jira access escalation required",
+    "description": "I'm a lead developer but currently only have 'Reporter' permissions on the SRE board. Need 'Admin' access to modify workflow transitions.",
+    "priority": "Medium",
+    "resolution": "Granted project-level administrative rights after verifying approval from the SRE Manager via ticket attachment.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Administrative lockout on workstation",
+    "description": "Tried to update the local printer driver, but the system is asking for domain admin credentials which I don't have. Can I get a temporary exception?",
+    "priority": "Medium",
+    "resolution": "Denied request for local admin. Pushed the updated driver package remotely via Intune instead.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "External contractor access expiration notice",
+    "description": "I am working with our external vendor 'TechFlow'. Their access expired yesterday, but they still have tickets in the queue. Can we extend the account for 48 hours?",
+    "priority": "High",
+    "resolution": "Extended account expiration date by 48 hours. Notified manager to formalize the extension if further time is needed.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "O365 Mailbox Sharing Permission Errors",
+    "description": "I'm trying to add the 'info@company.com' shared mailbox to my Outlook, but I get 'Cannot display the folder' error.",
+    "priority": "Low",
+    "resolution": "User had 'Read' permission but was missing 'Folder Visible' rights. Updated permissions via Exchange Admin Center.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Github organization removal request",
+    "description": "I have left the frontend team. Please remove me from the 'Frontend-Repo-Private' group to prevent me from seeing proprietary code.",
+    "priority": "Low",
+    "resolution": "Removed user from the GitHub organization team 'Frontend_Developers'.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Sudden Access Denied to NetApp storage",
+    "description": "Our team cannot mount the Z-drive. It was working at 9 AM, but now everyone on the floor gets a 'Permission Denied' prompt.",
+    "priority": "High",
+    "resolution": "The security group mapping the Z-drive was accidentally moved to an OU with block-inheritance enabled. Reverted GPO changes.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Request for Sudo access on staging server",
+    "description": "Need to run a script on 'staging-web-01' that requires elevated privileges. Can you add me to the sudoers file?",
+    "priority": "Medium",
+    "resolution": "Added user to the 'sudo' group specifically for 'staging-web-01' with password enforcement enabled.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Mismatched display name in Global Address List",
+    "description": "My legal name changed, but the GAL still shows my old name. This is causing confusion during meetings.",
+    "priority": "Low",
+    "resolution": "Updated 'DisplayName' and 'Alias' attributes in Active Directory; forced sync to O365.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Self-service password reset failure",
+    "description": "The SSPR portal keeps saying 'We could not verify your identity' even though I'm answering the security questions correctly.",
+    "priority": "Medium",
+    "resolution": "Account was in a 'Locked' status due to too many failed attempts. Unlocked the AD account and reset the password token.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Need access to Confidential HR Folders",
+    "description": "I am the new HR manager and need access to the 'Payroll_FY24' folder in SharePoint. My predecessor's access should be revoked as well.",
+    "priority": "High",
+    "resolution": "Mapped requested permissions. Removed predecessor from the 'HR_Sensitive_Access' security group.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Mobile device non-compliance lockout",
+    "description": "My phone says my account is blocked because I'm not running the latest iOS. I need access to my corporate email ASAP.",
+    "priority": "High",
+    "resolution": "Provided user with the instructions to update iOS. Issued a temporary 24-hour compliance grace period via Intune.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Read-only access requested for logs",
+    "description": "As a data analyst, I need to query the central log bucket, but I don't need write access.",
+    "priority": "Low",
+    "resolution": "Granted IAM role 'Storage Object Viewer' to the user on the specific log bucket.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "Revoking access for terminated employee",
+    "description": "Employee 'm.smith' has been terminated effective immediately. Please disable all access across AD, Slack, and Jira.",
+    "priority": "Critical",
+    "resolution": "Disabled AD account, revoked Okta session, and deactivated Slack/Jira profiles.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  },
+  {
+    "title": "App access permission request - Tableau",
+    "description": "My team is migrating to Tableau for dashboards. I need 'Viewer' access to the 'Executive_Sales' workbook.",
+    "priority": "Medium",
+    "resolution": "Added user to 'Tableau_Sales_Viewer' AD group which syncs permissions to the Tableau server.",
+    "category": "Access Management",
+    "type": "eval_holdout"
+  }
+]

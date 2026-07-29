@@ -1,0 +1,386 @@
+[
+  {
+    "title": "Minor flickering of server room lights",
+    "description": "The overhead lights in the server room have been flickering for a few minutes. Not a big deal, but thought I would mention it whenever someone has a spare moment.",
+    "priority": "Critical",
+    "resolution": "Dispatched electrical contractor to fix a faulty power phase causing voltage instability to the rack PDUs.",
+    "category": "Infrastructure",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "TOTAL SYSTEM COLLAPSE IMMINENT",
+    "description": "THE WIFI IN THE BREAKROOM IS LAGGING BY 20MS. WE ARE LOSING PRODUCTIVITY AT AN ALARMING RATE. IF THIS ISN'T FIXED IMMEDIATELY, THE ENTIRE OFFICE WILL BE PARALYZED!!!",
+    "priority": "Low",
+    "resolution": "Performed a standard access point reboot during scheduled maintenance hours.",
+    "category": "Infrastructure",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "A slight delay in network packet delivery",
+    "description": "I've noticed a minor latency issue in our backbone fiber link. It is barely noticeable, but I wanted to flag it as an urgent priority for the engineering team.",
+    "priority": "Critical",
+    "resolution": "Identified and replaced a failing SFP+ transceiver that was causing intermittent packet loss.",
+    "category": "Infrastructure",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "EMERGENCY: THE OFFICE IS ON FIRE",
+    "description": "Wait, no, it's just a coffee spill on the carpet. Can someone please put a ticket in to have the cleaning crew vacuum this spot? It's really bothering me.",
+    "priority": "Low",
+    "resolution": "Notified facilities team to clean the spill.",
+    "category": "Infrastructure",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Routine request for an extra power strip",
+    "description": "Hello, I hope you are having a wonderful Tuesday! Would it be possible to get an extra power strip for my desk? No rush at all, whenever you can get to it is fine.",
+    "priority": "Critical",
+    "resolution": "Provided power strip immediately due to workstation shutdown affecting core production logging.",
+    "category": "Infrastructure",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "THE SERVER ROOM IS CURRENTLY MELTING",
+    "description": "THE INTERNAL THERMOMETER IS SHOWING A TEMPERATURE INCREASE OF 0.5 DEGREES CELSIUS. PLEASE RESPOND TO THIS CATASTROPHE AS SOON AS YOU HAVE A CHANCE NEXT WEEK.",
+    "priority": "Low",
+    "resolution": "Verified cooling system setpoints; temperature increase was within normal operating range.",
+    "category": "Infrastructure",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Dust on the secondary cooling intake",
+    "description": "I noticed a small amount of dust buildup on the vent. Please treat this as a high-priority incident as it could eventually impact hardware lifespan.",
+    "priority": "Critical",
+    "resolution": "Cleaned intake vent to prevent potential thermal throttling of critical storage array.",
+    "category": "Infrastructure",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "MAYDAY MAYDAY EVERYTHING IS GONE",
+    "description": "I cannot find my favorite stapler on my desk. Please escalate this to the Infrastructure lead immediately, this is an infrastructure crisis regarding my workspace organization.",
+    "priority": "Low",
+    "resolution": "Located stapler in the supply closet; redirected user to office supplies procurement.",
+    "category": "Infrastructure",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "System-wide database crash",
+    "description": "It would be lovely if someone could take a look at the CRM when they have a spare moment. The entire company is currently unable to process any payments, but I know how busy you are, so no rush at all.",
+    "priority": "Critical",
+    "resolution": "Restored database connection strings and restarted the application pool to bring the CRM back online.",
+    "category": "Application",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Minor typo in email signature",
+    "description": "THE ENTIRE OFFICE IS AT A STANDSTILL! THERE IS A MISSING COMMA IN THE AUTOMATED SIGNATURE TEMPLATE AND WE ARE LOSING CLIENT TRUST BY THE SECOND. FIX THIS IMMEDIATELY OR EVERYTHING WILL FALL APART!",
+    "priority": "Low",
+    "resolution": "Corrected the punctuation in the email signature template.",
+    "category": "Application",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Production server firewall failure",
+    "description": "Hi team, just a heads up that the production environment is completely inaccessible to all remote workers. Not a huge deal, but if someone could investigate when they finish their coffee, that would be great.",
+    "priority": "Critical",
+    "resolution": "Updated firewall security rules to allow traffic from the VPN subnet.",
+    "category": "Application",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Request for updated calendar icon",
+    "description": "THIS IS AN EMERGENCY. MY CALENDAR ICON IS SLIGHTLY BLURRY ON MY MONITOR AND IT IS CAUSING ME EXTREME PSYCHOLOGICAL DISTRESS. I AM UNABLE TO WORK UNTIL THIS IS RESOLVED. PLEASE HELP!!",
+    "priority": "Low",
+    "resolution": "Cleared the icon cache and refreshed the desktop shortcut.",
+    "category": "Application",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Data breach detected",
+    "description": "Excuse me, but I believe unauthorized users are currently exporting our client financial records. Whenever you have a chance to peek at the server logs, I'd appreciate it. Thanks!",
+    "priority": "Critical",
+    "resolution": "Terminated unauthorized sessions and forced a global password reset for administrative accounts.",
+    "category": "Application",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Font size adjustment in Word",
+    "description": "PLEASE! I NEED THIS DONE YESTERDAY! THE FONT IN MY WORD DOCUMENT IS SIZE 11 AND I DESPERATELY NEED IT TO BE SIZE 12. THIS IS RUINING MY ENTIRE WEEK, PLEASE RESPOND ASAP!!!",
+    "priority": "Low",
+    "resolution": "Assisted user with changing the default font size in Microsoft Word settings.",
+    "category": "Application",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Application total lockout",
+    "description": "It\u2019s a bit inconvenient that the ERP system is throwing a 'Fatal Error 500' for every user in the building. I\u2019m sure it\u2019s just a minor glitch, but if someone could investigate, that would be wonderful.",
+    "priority": "Critical",
+    "resolution": "Deployed a patch to fix the memory leak causing the ERP service to hang.",
+    "category": "Application",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Change theme color in Excel",
+    "description": "THE WORLD IS ENDING! THE EXCEL TAB COLORS ARE BLUE AND I ABSOLUTELY REQUIRE THEM TO BE GREEN. THIS IS A TOTAL SYSTEM FAILURE. FIX IT NOW OR I CANNOT GUARANTEE I WILL REMAIN CALM!",
+    "priority": "Low",
+    "resolution": "Showed the user how to change sheet tab colors in the Excel format menu.",
+    "category": "Application",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Minor formatting issue on security dashboard",
+    "description": "The font size on the main firewall dashboard is slightly misaligned. It\u2019s not urgent, but would be nice to have fixed when someone has a moment.",
+    "priority": "Critical",
+    "resolution": "Corrected CSS stylesheet error that was causing a buffer overflow in the security monitoring tool.",
+    "category": "Security",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "EMERGENCY: MASSIVE DATA BREACH IN PROGRESS!!!",
+    "description": "I think I saw a suspicious icon on my desktop for a second? I am shaking, please help me immediately, I think the whole company is being hacked right now!!!",
+    "priority": "Low",
+    "resolution": "Verified that the 'suspicious icon' was a shortcut to the local recycle bin.",
+    "category": "Security",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Casual inquiry regarding VPN access",
+    "description": "Hi there, I noticed that our global VPN gateway has been completely bypassed by an unauthorized external script. No rush at all, but could you take a look at your convenience?",
+    "priority": "Critical",
+    "resolution": "Initiated emergency network lockdown and blocked the malicious IP range.",
+    "category": "Security",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "THE SERVER ROOM IS ON FIRE AND PEOPLE ARE SCREAMING",
+    "description": "Can someone please reset my password? It\u2019s just been a really stressful day and I can\u2019t log into my email.",
+    "priority": "Low",
+    "resolution": "Reset user password for O365 account.",
+    "category": "Security",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Small observation about account security",
+    "description": "It seems that the administrator password for the core production database has been posted on the public company Slack channel for the last 48 hours. Just wanted to let you know.",
+    "priority": "Critical",
+    "resolution": "Revoked existing credentials, rotated all database keys, and sanitized Slack message history.",
+    "category": "Security",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "I AM GOING TO LOSE MY MIND, EVERYTHING IS RUINED",
+    "description": "My browser history is showing a popup from three weeks ago. I need this cleared right now before I lose my job, this is a total security disaster!",
+    "priority": "Low",
+    "resolution": "Cleared browser cache and cookies.",
+    "category": "Security",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Routine notification",
+    "description": "The primary domain controller is currently being encrypted by ransomware. Please acknowledge this ticket so it can be routed to the appropriate team.",
+    "priority": "Critical",
+    "resolution": "Restored domain controller from offline backups and deployed updated antivirus definitions.",
+    "category": "Security",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "HELP HELP HELP MY COMPUTER IS EXPLODING",
+    "description": "My screen just went black for a second while I was checking my personal email. I think hackers have installed a keylogger! Please prioritize this above all else!",
+    "priority": "Low",
+    "resolution": "Re-seated the monitor power cable.",
+    "category": "Security",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Minor formatting adjustment requested",
+    "description": "It would be lovely if you could look into why the entire production database has been wiped. No rush at all, whenever you have a free moment today would be just fine.",
+    "priority": "Critical",
+    "resolution": "Restored database from hourly snapshot and performed integrity check.",
+    "category": "Database",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "THE WORLD IS ENDING!!!",
+    "description": "I noticed that one of the internal test environment tables has a typo in the column header. My life is ruined, please fix this immediately before I lose my mind!!!",
+    "priority": "Low",
+    "resolution": "Corrected column label 'Usrname' to 'Username' in the staging database.",
+    "category": "Database",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Slight inconvenience with query speed",
+    "description": "The main transactional database is currently deadlocked and returning 500 errors for all users. If you get a chance to peek at this, that would be grand, but don't stress about it.",
+    "priority": "Critical",
+    "resolution": "Terminated orphaned long-running transactions and optimized indexes on the orders table.",
+    "category": "Database",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "EMERGENCY: NEED HELP RIGHT NOW OR I WILL BE FIRED",
+    "description": "Hi, I was wondering if you could help me change the font color in the query result window to something a bit more aesthetic? It's just a personal preference for my daily reports.",
+    "priority": "Low",
+    "resolution": "Guided user through the IDE settings menu to change the result set UI theme.",
+    "category": "Database",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Standard maintenance inquiry",
+    "description": "The primary database server is physically on fire. I've evacuated the building. Just wanted to let you know so we can reschedule our meeting later today.",
+    "priority": "Critical",
+    "resolution": "Triggered failover to secondary datacenter and alerted emergency responders.",
+    "category": "Database",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "SERVER DOWN: EVERYTHING IS BROKEN HELP HELP HELP",
+    "description": "I accidentally deleted a comment on a post from 2018. It's not a big deal, but can you please restore the whole server from a backup? I'm totally freaking out here.",
+    "priority": "Low",
+    "resolution": "Instructed user on how to use the 'Undo' feature in the application dashboard.",
+    "category": "Database",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Just checking in on the infrastructure",
+    "description": "I'm sure it's nothing, but the database cluster has stopped replicating and data integrity is currently failing across all shards. Please let me know if you need any tea or coffee while you handle this.",
+    "priority": "Critical",
+    "resolution": "Rebuilt replication stream and verified checksums for all shards.",
+    "category": "Database",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "TOTAL SYSTEM COLLAPSE, SENDING S.O.S.",
+    "description": "Hey, could you tell me how to export a CSV file from the documentation database? Just looking to organize my own personal files a bit better. Thanks!",
+    "priority": "Low",
+    "resolution": "Sent documentation link detailing the 'Export to CSV' function.",
+    "category": "Database",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Minor latency on secondary backup drive",
+    "description": "I've noticed that file transfers are taking about 3 seconds longer than usual. It's not a big deal at all, please look at it whenever you have a free moment next week.",
+    "priority": "Critical",
+    "resolution": "Investigated storage array; identified a failing disk controller causing cache latency. Replaced controller and performed data parity check.",
+    "category": "Storage",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Total SAN failure - please advise",
+    "description": "The entire production storage cluster has gone offline and all applications are currently down. If you happen to be free, could you perhaps check why the red lights are flashing? No rush!",
+    "priority": "Critical",
+    "resolution": "Found power supply unit failure in rack 4. Replaced PSU and restored mount points for production volumes.",
+    "category": "Storage",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Server room on fire - check storage",
+    "description": "I think there is a small fire in the server rack. Could someone kindly peek at the NAS when they are finished with their lunch? It's just a tiny issue.",
+    "priority": "Critical",
+    "resolution": "Extinguished rack fire and replaced melted drive sleds. Data recovered from off-site disaster recovery backup.",
+    "category": "Storage",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "URGENT: Desktop icon moved",
+    "description": "MY DESKTOP ICON MOVED TWO INCHES TO THE LEFT! EVERYTHING IS RUINED! THE STORAGE MAPPING IS PROBABLY CORRUPT! HELP ME IMMEDIATELY BEFORE THE WHOLE COMPANY COLLAPSES!",
+    "priority": "Low",
+    "resolution": "Relocated desktop icon back to original position. Confirmed no actual storage mapping or file integrity issues existed.",
+    "category": "Storage",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "EMERGENCY: Requesting new sticker",
+    "description": "THE STORAGE CABINET IS COMPLETELY UNUSEABLE WITHOUT A LABEL! I AM LITERALLY SHAKING! PLEASE DROP EVERYTHING AND GET ME A Dymo LABEL MAKER RIGHT NOW OR WE WILL LOSE EVERYTHING!",
+    "priority": "Low",
+    "resolution": "Provided user with label maker. Cabinet status confirmed as fully operational.",
+    "category": "Storage",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Data center flood in progress",
+    "description": "It's quite pleasant here, but there appears to be a minor trickle of water reaching the server floor. If you could eventually look into this, that would be lovely.",
+    "priority": "Critical",
+    "resolution": "Stopped pipe leak and deployed industrial dehumidifiers. Moved mission-critical storage arrays to high-ground racks.",
+    "category": "Storage",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "ASAP: Update font size on shared drive",
+    "description": "THIS IS A LIFE OR DEATH SITUATION! IF THE FONT SIZE ON THE 'SHARED_DOCS' FOLDER IS NOT INCREASED BY 2 POINTS IMMEDIATELY, THE ENTIRE INFRASTRUCTURE WILL DISINTEGRATE! PANIC!",
+    "priority": "Low",
+    "resolution": "Adjusted Windows Explorer view settings to 'Large Icons' for the user.",
+    "category": "Storage",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Corrupt database - lost all records",
+    "description": "I'm having a spot of tea and noticed that our primary database volume shows 0 bytes remaining and all files are missing. Just mentioning it in case you feel like poking around later today.",
+    "priority": "Critical",
+    "resolution": "Identified rogue cleanup script that wiped the data volume. Restored database from hourly snapshot.",
+    "category": "Storage",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Minor latency on guest Wi-Fi",
+    "description": "I noticed the guest network in the lobby is running a bit slow this morning. No rush at all, but if someone could look at it when they have a free moment next week, that would be lovely.",
+    "priority": "Critical",
+    "resolution": "Reset backbone switch stack to restore full bandwidth capacity.",
+    "category": "Network",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Complete regional data center outage",
+    "description": "Hi team, I hope you are having a pleasant afternoon. It appears that all server connectivity for the entire East Coast region has dropped. Please let me know if you might have a spare moment to investigate this at your earliest convenience. Thank you!",
+    "priority": "Critical",
+    "resolution": "Replaced faulty fiber uplink module in the core router.",
+    "category": "Network",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Cannot print to office printer",
+    "description": "EMERGENCY! EVERYTHING IS BROKEN! THE ENTIRE OFFICE IS AT A STANDSTILL BECAUSE THE PRINTER ISN'T SHOWING UP! DROP EVERYTHING AND FIX THIS RIGHT NOW OR WE ARE ALL GOING TO LOSE OUR JOBS!!!",
+    "priority": "Low",
+    "resolution": "Reconnected printer to the local network via DHCP reservation.",
+    "category": "Network",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Company-wide VPN authentication failure",
+    "description": "Hey there, just wanted to mention that I'm seeing a slight hiccup with the VPN access. It seems no one in the company can log in. Whenever you get a chance today, could you peek at the firewall logs? Cheers.",
+    "priority": "Critical",
+    "resolution": "Renewed expired SSL VPN certificate on the primary firewall.",
+    "category": "Network",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Single pixel discoloration on desk phone",
+    "description": "THIS IS A DISASTER! THE DISPLAY ON MY DESK PHONE HAS A TINY DOT THAT IS THE WRONG COLOR! I CANNOT WORK UNDER THESE CONDITIONS! THIS IS AN ABSOLUTE NETWORK CATASTROPHE! HELP ME IMMEDIATELY!!!",
+    "priority": "Low",
+    "resolution": "Provided user with a new handset and recycled the old unit.",
+    "category": "Network",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "ISP trunk line severed",
+    "description": "Good morning. Just a quick heads-up that the external ISP fiber line was accidentally cut by a construction crew outside. We are currently operating at zero connectivity. It would be great if we could resolve this soon. Thanks for your help.",
+    "priority": "Critical",
+    "resolution": "Coordinated with ISP to splice the damaged fiber line.",
+    "category": "Network",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Minor icon change on desktop",
+    "description": "MAYDAY! MAYDAY! THE NETWORK ICON ON MY TASKBAR CHANGED FROM BLUE TO GREY! THE SYSTEM IS COLLAPSING! SEND AN IT ENGINEER TO MY DESK THIS SECOND OR THE WHOLE DEPARTMENT WILL COLLAPSE!",
+    "priority": "Low",
+    "resolution": "Updated network driver and confirmed stable connection.",
+    "category": "Network",
+    "type": "priority_mismatch"
+  },
+  {
+    "title": "Unauthorized server access detected",
+    "description": "Greetings. I am writing to politely inform you that I have detected an active unauthorized breach into our primary production database from an external IP. If it is not too much trouble, please take a look when you are finished with your lunch break.",
+    "priority": "Critical",
+    "resolution": "Blocked malicious IP range and initiated password reset protocol for compromised admin accounts.",
+    "category": "Network",
+    "type": "priority_mismatch"
+  }
+]

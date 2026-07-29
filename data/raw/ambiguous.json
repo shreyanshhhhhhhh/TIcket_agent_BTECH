@@ -1,0 +1,362 @@
+[
+  {
+    "title": "Application timeout during peak hours",
+    "description": "Users are reporting 504 Gateway Timeout errors when attempting to save records in the CRM during mid-morning. It is unclear if the SQL query is hanging or if the load balancer is dropping packets.",
+    "most_likely_category": "Database",
+    "priority": "High",
+    "resolution": "Optimized long-running query and verified bandwidth saturation on the application server NIC.",
+    "category": "Database",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Intermittent connectivity to remote SQL instance",
+    "description": "Clients lose connection to the production database randomly. Logs show connection reset errors, but ping remains stable.",
+    "most_likely_category": "Network",
+    "priority": "High",
+    "resolution": "Replaced faulty switch port causing packet drops during high-throughput database synchronization.",
+    "category": "Network",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Slow data retrieval for dashboard",
+    "description": "Dashboard takes 30+ seconds to load. We aren't sure if the network latency is high between the app server and DB, or if an index is missing.",
+    "most_likely_category": "Database",
+    "priority": "Medium",
+    "resolution": "Added missing non-clustered index on the primary table to reduce read time.",
+    "category": "Database",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Application 'Connection Refused' error",
+    "description": "The application cannot reach the database server. Testing shows the server is up, but the port is unreachable from the app tier.",
+    "most_likely_category": "Network",
+    "priority": "Critical",
+    "resolution": "Updated firewall rules that were inadvertently flushed during a security appliance patch.",
+    "category": "Network",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Deadlock errors increasing in frequency",
+    "description": "Users report records failing to update. Is this a network partition causing retry loops, or inefficient transaction locking in the DB?",
+    "most_likely_category": "Database",
+    "priority": "High",
+    "resolution": "Refactored application transaction logic to minimize lock duration on shared rows.",
+    "category": "Database",
+    "type": "ambiguous"
+  },
+  {
+    "title": "High latency on API endpoints",
+    "description": "API responses are lagging. Could be high network congestion or the database taking too long to write to the transaction log.",
+    "most_likely_category": "Network",
+    "priority": "Medium",
+    "resolution": "Identified broadcast storm on the subnet and implemented VLAN segmentation.",
+    "category": "Network",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Data synchronization failures",
+    "description": "Remote branch offices are failing to sync with central SQL server. Could be a VPN tunnel issue or DB lock contention.",
+    "most_likely_category": "Network",
+    "priority": "High",
+    "resolution": "Increased MTU size settings on the VPN tunnel to prevent packet fragmentation.",
+    "category": "Network",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Unexpected session termination",
+    "description": "Active database sessions are dropping without error codes. Unclear if the idle timeout setting in the DB is active or if a NAT device is dropping the stateful connection.",
+    "most_likely_category": "Network",
+    "priority": "Medium",
+    "resolution": "Adjusted firewall TCP keep-alive settings to prevent premature connection reaping.",
+    "category": "Network",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Degraded performance on bulk uploads",
+    "description": "Bulk import jobs are failing halfway through. Could be a network buffer overflow or disk I/O wait on the database.",
+    "most_likely_category": "Database",
+    "priority": "Medium",
+    "resolution": "Expanded database transaction log storage to prevent disk-full stalls during large imports.",
+    "category": "Database",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Authentication service unreachable",
+    "description": "Users cannot login. The authentication service is failing to connect to the User DB. Is the database down or is the network link to the DB cluster severed?",
+    "most_likely_category": "Network",
+    "priority": "Critical",
+    "resolution": "Restored DNS resolution for the database cluster load balancer.",
+    "category": "Network",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Account locked after failed login attempts",
+    "description": "User is unable to access the system and is receiving an 'Account Locked' message. Unknown if this is due to a password rotation policy or a potential brute-force attack.",
+    "most_likely_category": "Access Management",
+    "priority": "High",
+    "resolution": "Verify user identity, unlock account, and inspect sign-in logs for suspicious origin IPs.",
+    "category": "Access Management",
+    "type": "ambiguous"
+  },
+  {
+    "title": "User cannot access internal file share",
+    "description": "User reports 'Access Denied' when trying to reach a departmental folder. It is unclear if their permissions were revoked during the recent security audit or if the folder permissions were incorrectly migrated.",
+    "most_likely_category": "Access Management",
+    "priority": "Medium",
+    "resolution": "Audit Group Policy Object (GPO) memberships and verify folder NTFS permissions.",
+    "category": "Access Management",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Unexpected session termination",
+    "description": "User is being logged out of the ERP system intermittently. Could be a session timeout policy configuration or a security feature detecting concurrent login sessions from different devices.",
+    "most_likely_category": "Security",
+    "priority": "Medium",
+    "resolution": "Review session timeout settings and investigate logs for unauthorized concurrent login detection.",
+    "category": "Security",
+    "type": "ambiguous"
+  },
+  {
+    "title": "VPN connection failing with 'Authentication Error'",
+    "description": "User cannot connect to VPN. System displays generic error. Root cause could be an expired certificate or a blocked account status due to suspected compromise.",
+    "most_likely_category": "Security",
+    "priority": "High",
+    "resolution": "Renew security certificate and verify account status against active threats.",
+    "category": "Security",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Email account sending suspicious bounce-backs",
+    "description": "User says they are getting delivery failure notifications for emails they never sent. Could be a misconfigured automated script or an account takeover.",
+    "most_likely_category": "Security",
+    "priority": "Critical",
+    "resolution": "Reset credentials, check for unauthorized forwarding rules, and update SPF/DKIM records.",
+    "category": "Security",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Software launch blocked by system",
+    "description": "User cannot run a specific productivity tool. Could be a lack of administrative permissions to execute or an Application Whitelisting/Endpoint protection block.",
+    "most_likely_category": "Security",
+    "priority": "Medium",
+    "resolution": "Verify user rights and check endpoint protection logs for blocked execution signatures.",
+    "category": "Security",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Password reset link not working",
+    "description": "User reports the reset link leads to a 403 Forbidden page. Could be an expired link or a triggered security block on the user's IP due to repeated invalid requests.",
+    "most_likely_category": "Access Management",
+    "priority": "Medium",
+    "resolution": "Clear browser cache and verify if the user's IP is on the security blocklist.",
+    "category": "Access Management",
+    "type": "ambiguous"
+  },
+  {
+    "title": "New hire missing folder permissions",
+    "description": "User joined the company but cannot see folders they require. Could be an AD group membership delay or a security restriction preventing new accounts from accessing sensitive zones.",
+    "most_likely_category": "Access Management",
+    "priority": "Low",
+    "resolution": "Update Active Directory group memberships and apply relevant security clearance tags.",
+    "category": "Access Management",
+    "type": "ambiguous"
+  },
+  {
+    "title": "External partner account access issues",
+    "description": "Contractor cannot access the portal. Could be their account has reached the end of its life cycle (Access) or they have failed MFA validation (Security).",
+    "most_likely_category": "Access Management",
+    "priority": "Medium",
+    "resolution": "Validate account expiration date and re-sync MFA hardware token.",
+    "category": "Access Management",
+    "type": "ambiguous"
+  },
+  {
+    "title": "System slow and unresponsive after login",
+    "description": "User reports high latency immediately upon logging in. Could be an overloaded SSO authentication server or a deep-packet inspection process scanning traffic upon entry.",
+    "most_likely_category": "Security",
+    "priority": "Medium",
+    "resolution": "Analyze login logs to identify bottlenecks in the identity provider or security scanning suite.",
+    "category": "Security",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Intermittent file access timeouts",
+    "description": "Users are reporting sporadic 30-second delays when opening files from the shared network drive. The issue seems to impact different departments at random intervals.",
+    "most_likely_category": "Infrastructure",
+    "priority": "High",
+    "resolution": "Upgraded core network switches to resolve intermittent packet loss causing SMB session timeouts.",
+    "category": "Infrastructure",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Latency spikes during high-traffic periods",
+    "description": "System performance degrades significantly every Monday morning during the weekly backup sync. Operations team cannot determine if it is a bandwidth or disk throughput issue.",
+    "most_likely_category": "Storage",
+    "priority": "Medium",
+    "resolution": "Reconfigured storage array caching policies to prevent IOPS saturation during high-load backup windows.",
+    "category": "Storage",
+    "type": "ambiguous"
+  },
+  {
+    "title": "VMs entering 'Read Only' mode",
+    "description": "Several virtual machines have suddenly locked up and are reporting file system errors. Guest OS logs are inconclusive regarding the root cause.",
+    "most_likely_category": "Storage",
+    "priority": "Critical",
+    "resolution": "Identified a corrupted SAN controller firmware causing intermittent write-access drops to the VMFS datastore.",
+    "category": "Storage",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Database connection reset errors",
+    "description": "Application logs show persistent 'Connection Reset' errors. Database administrators suspect network instability, while network admins suspect disk-bound database hangs.",
+    "most_likely_category": "Infrastructure",
+    "priority": "High",
+    "resolution": "Replaced a faulty SFP module on the top-of-rack switch that was causing micro-outages for the database cluster.",
+    "category": "Infrastructure",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Unexpected 'Disk Busy' alerts",
+    "description": "Monitoring tools show 100% disk utilization across multiple servers. It is unclear if a malicious process is hitting the disks or if network congestion is causing queue backups.",
+    "most_likely_category": "Storage",
+    "priority": "Medium",
+    "resolution": "Expanded storage pool capacity and rebalanced LUN distribution to alleviate disk I/O contention.",
+    "category": "Storage",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Slow directory enumeration",
+    "description": "Browsing large file directories on the central server takes several minutes. The server CPU usage is low, but responsiveness is abysmal.",
+    "most_likely_category": "Infrastructure",
+    "priority": "Low",
+    "resolution": "Optimized DNS round-robin settings and updated NIC drivers to improve path negotiation speed.",
+    "category": "Infrastructure",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Application failure during heavy I/O tasks",
+    "description": "Custom accounting software crashes whenever large reports are generated. The error message is generic 'IO Exception'.",
+    "most_likely_category": "Storage",
+    "priority": "High",
+    "resolution": "Resolved storage array controller latency by migrating high-I/O volumes to SSD-tier storage tiers.",
+    "category": "Storage",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Mount point mounting failure",
+    "description": "Several application servers are failing to mount their remote drives after a reboot. Troubleshooting has been unable to verify if it is an authentication (Network) or target availability (Storage) issue.",
+    "most_likely_category": "Infrastructure",
+    "priority": "High",
+    "resolution": "Corrected an incorrect VLAN tagging configuration on the switch port preventing storage-to-server traffic.",
+    "category": "Infrastructure",
+    "type": "ambiguous"
+  },
+  {
+    "title": "File corruption reported on legacy share",
+    "description": "Users are reporting that some files contain gibberish when opened. Engineers are debating whether this is a network transmission error or failing storage sectors.",
+    "most_likely_category": "Storage",
+    "priority": "Critical",
+    "resolution": "Replaced failing hard disks in the RAID 6 array that were causing silent data corruption.",
+    "category": "Storage",
+    "type": "ambiguous"
+  },
+  {
+    "title": "High packet retransmission rates",
+    "description": "Network dashboard shows high retransmission on the storage VLAN. It is unclear if the storage array is overloaded or the physical cabling is compromised.",
+    "most_likely_category": "Infrastructure",
+    "priority": "Medium",
+    "resolution": "Identified and replaced a damaged Cat6a patch cable causing physical layer signal degradation.",
+    "category": "Infrastructure",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Intermittent timeouts when accessing the CRM portal",
+    "description": "Users are reporting that the CRM application frequently hangs or times out after 10-15 seconds of inactivity. It is unclear if the web server is struggling or if there is packet loss.",
+    "most_likely_category": "Network",
+    "priority": "High",
+    "resolution": "Increased keep-alive timeout on the load balancer to prevent premature session termination.",
+    "category": "Network",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Slow file save operations on shared drive",
+    "description": "Users report that saving large documents to the network drive takes a long time, often resulting in an 'Application Not Responding' error.",
+    "most_likely_category": "Network",
+    "priority": "Medium",
+    "resolution": "Identified a congested network switch port; moved the file server uplink to a dedicated gigabit port.",
+    "category": "Network",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Database connection errors during peak hours",
+    "description": "The accounting software returns 'Unable to connect to database' at random intervals, primarily between 9:00 AM and 10:00 AM.",
+    "most_likely_category": "Application",
+    "priority": "High",
+    "resolution": "Optimized database connection pooling settings to prevent exhaustion of available application handles.",
+    "category": "Application",
+    "type": "ambiguous"
+  },
+  {
+    "title": "ERP module fails to load dashboard widgets",
+    "description": "Dashboard widgets in the ERP remain stuck on the loading spinner. Users can browse other parts of the site without issue.",
+    "most_likely_category": "Application",
+    "priority": "Medium",
+    "resolution": "Cleared corrupted server-side cache files that were causing the widget API calls to fail.",
+    "category": "Application",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Users disconnected from remote desktop application",
+    "description": "Remote staff are being kicked out of the virtual desktop environment with a 'Connection Lost' error.",
+    "most_likely_category": "Network",
+    "priority": "Critical",
+    "resolution": "Adjusted firewall session timeouts that were terminating idle VDI connections prematurely.",
+    "category": "Network",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Email client freezes when synchronizing large mailboxes",
+    "description": "Outlook becomes unresponsive for several minutes periodically. Possible cause is synchronization delay or high latency to the mail server.",
+    "most_likely_category": "Application",
+    "priority": "Medium",
+    "resolution": "Reduced the local OST file size and disabled background indexing to prevent client-side hangs.",
+    "category": "Application",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Error 504 Gateway Timeout on reporting tool",
+    "description": "Running the month-end report results in a 504 error. Could be a server timeout or a network proxy intercepting the long request.",
+    "most_likely_category": "Application",
+    "priority": "High",
+    "resolution": "Increased the execution time limit in the application configuration to accommodate long-running SQL queries.",
+    "category": "Application",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Application sluggishness for remote workers",
+    "description": "The web application is fast in the office but unusable from VPN. Difficult to distinguish between poor VPN bandwidth and application design flaws.",
+    "most_likely_category": "Network",
+    "priority": "Medium",
+    "resolution": "Implemented split-tunneling on the VPN to reduce latency for the application's traffic.",
+    "category": "Network",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Frequent authentication failures on web portal",
+    "description": "Users are randomly logged out or prompted for credentials multiple times. Could be a session cookie issue or an intermittent authentication server connectivity issue.",
+    "most_likely_category": "Application",
+    "priority": "High",
+    "resolution": "Synchronized time across domain controllers to fix Kerberos token validation failures.",
+    "category": "Application",
+    "type": "ambiguous"
+  },
+  {
+    "title": "Print jobs stuck in spooler",
+    "description": "The ERP system sends print jobs that never arrive at the network printer. The spooler shows 'Error' status.",
+    "most_likely_category": "Network",
+    "priority": "Low",
+    "resolution": "Updated printer firmware and corrected a routing issue that was blocking the print server's access to the printer's IP.",
+    "category": "Network",
+    "type": "ambiguous"
+  }
+]
