@@ -1,0 +1,194 @@
+[
+  {
+    "title": "Core Switch Uplink Failure - Rack 4",
+    "description": "The primary 10Gbps uplink on Core-Switch-01 is flapping, causing intermittent packet loss across the VLAN 10 and 20 segments. Logs show 'LACP-ERR: Port-Channel member down' every 30 seconds. This is impacting all services in the main data center.",
+    "priority": "Critical",
+    "resolution": "Replaced the faulty SFP+ transceiver and patched the fiber strand; traffic has stabilized.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VPN access is busted",
+    "description": "Hey, I can't connect to the office VPN from home today. Every time I try to authenticate via Cisco AnyConnect, it just hangs and eventually says 'Connection attempt failed'. It was working fine yesterday, what changed?",
+    "priority": "High",
+    "resolution": "Reset the user's session cache on the ASA firewall and updated their security certificate.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized SNMP Trap Spikes",
+    "description": "Monitoring has alerted us to an abnormal volume of SNMP traps originating from the production server subnet. The traffic volume is exceeding 400 Mbps on the management interface. Please investigate if this is a configuration drift or a malicious actor.",
+    "priority": "High",
+    "resolution": "Identified a misconfigured monitoring agent on an ESXi host; disabled the service and cleared the trap queues.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Printer in Room 302 offline",
+    "description": "The printer is not printing. I've restarted it twice.",
+    "priority": "Low",
+    "resolution": "Assigned a static IP address to the printer to resolve a DHCP lease conflict.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "High latency on NAS-04 storage array",
+    "description": "We are observing latency spikes exceeding 500ms on the NFS mount points for the SQL cluster. This is causing timeout errors in the application layer, specifically affecting the monthly payroll batch jobs. Disk throughput graphs show saturation during peak hours.",
+    "priority": "High",
+    "resolution": "Performed load balancing across additional NICs on the storage array to alleviate congestion.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "WAP in Lobby is totally dead",
+    "description": "The Wi-Fi access point in the lobby has no lights on it. Guests are complaining they can't get internet. This looks like a dead PoE port or a failed unit. Can someone take a look ASAP?",
+    "priority": "Medium",
+    "resolution": "Detected a blown PoE port on the access switch; moved the WAP to a spare port and updated the VLAN configuration.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent packet loss on Site-to-Site Tunnel",
+    "description": "The IPsec tunnel between our headquarters and the branch office is showing 15% packet loss according to our Smokeping dashboard. This has been happening since the last firmware update on the edge firewall. We are seeing frequent Phase 2 re-keying attempts.",
+    "priority": "Medium",
+    "resolution": "Adjusted the MTU size on the tunnel interface to 1400 bytes to prevent fragmentation.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Server rack overheating alert",
+    "description": "Received an automated alert from the environmental sensor in Rack 7. Ambient temperature has hit 98 degrees Fahrenheit. I am worried about hardware degradation if the cooling isn't addressed immediately.",
+    "priority": "Critical",
+    "resolution": "Clearing the intake obstruction behind the rack and recalibrating the CRAC unit thermostat.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Need help with DNS settings",
+    "description": "Hi, I'm trying to setup a new server but it can't resolve external hostnames. My resolv.conf file is pointing to the internal DNS servers, but they don't seem to be forwarding requests properly. Could you check the forwarder config on DC01?",
+    "priority": "Medium",
+    "resolution": "Added missing public DNS forwarders (8.8.8.8) to the conditional forwarder list on the Domain Controller.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS Battery Fault",
+    "description": "The UPS in the server room is reporting 'Battery Replacement Required' with a constant audible alarm. The unit is three years old and shows a low runtime capacity. We cannot risk a power surge without battery backup.",
+    "priority": "High",
+    "resolution": "Scheduled a vendor technician to replace the battery modules and performed a successful self-test.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Can't access shared drive",
+    "description": "My computer says 'Access Denied' when I try to map the Z drive. It was working earlier. Please help because I need these files for a meeting in an hour.",
+    "priority": "Low",
+    "resolution": "Cleared the stored Windows credentials in the Credential Manager and re-mapped the network drive.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "BGP Session Reset - ISP-2",
+    "description": "We are seeing repeated BGP hold-time expirations on our secondary ISP link. The logs indicate 'BGP-5-ADJCHANGE: neighbor 192.0.2.1 Down'. This is causing route flapping and inconsistent traffic routing for our public-facing services.",
+    "priority": "High",
+    "resolution": "Contacted the ISP provider; they resolved a fiber degradation issue on their upstream provider path.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Core Switch Uplink Flapping",
+    "description": "We are seeing intermittent connectivity drops on the SW-CORE-01 device. The logs show '%LINEPROTO-5-UPDOWN: Line protocol on Interface TenGigabitEthernet0/1/1, changed state to down'. This is causing packet loss for the entire 10.0.50.0/24 subnet.",
+    "priority": "Critical",
+    "resolution": "Replaced faulty SFP+ transceiver and patched firmware to version 16.9.4.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VPN access keeps dropping",
+    "description": "Hey guys, my VPN keeps disconnecting every 20 minutes while I'm working from home on my MacBook Pro running macOS Sonoma. It's super annoying because it drops my active SSH sessions to the production servers. Can someone look into this?",
+    "priority": "Medium",
+    "resolution": "Updated the AnyConnect client to v4.10 and cleared cached local security certificates.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS Battery Fault Alarm",
+    "description": "The APC Smart-UPS 3000 in Rack 4 is beeping continuously and reporting a 'Replace Battery' error code (E-05). We are worried about power redundancy if we have a surge.",
+    "priority": "High",
+    "resolution": "Dispatched field tech to replace the lead-acid battery cartridge and performed a self-test diagnostic.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Slow internal file transfers",
+    "description": "Transferring files from the NAS to the department share is taking forever today. I'm getting speeds of about 2MB/s where I usually get 100MB/s. Is the network congested?",
+    "priority": "Low",
+    "resolution": "Identified a misconfigured VLAN tag on the access port and reset the port to trunk mode.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Server Room Temperature Alert",
+    "description": "The climate control system reported an 'Ambient Temp High' alert at 03:00 AM. Current sensor reading for RACK-A is 82\u00b0F. Please investigate before the hardware starts throttling.",
+    "priority": "Critical",
+    "resolution": "Discovered a blocked air intake vent; cleared debris and increased fan speed settings on the CRAC unit.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Printer server offline",
+    "description": "The print server (SRV-PRINT-02) is not responding to pings. Nobody on the third floor can print anything to the central office laserjet. This is stalling the finance department's end-of-month reporting.",
+    "priority": "High",
+    "resolution": "Rebooted the print spooler service and flushed corrupted print jobs from the queue.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Wi-Fi dead zone in breakroom",
+    "description": "Can you check the AP in the breakroom? My phone drops off the enterprise Wi-Fi every time I walk past the vending machines. It's annoying having to toggle my Wi-Fi to get it to reconnect.",
+    "priority": "Low",
+    "resolution": "Adjusted transmit power on AP-04-NORTH and performed a channel scan to reduce interference.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Firewall configuration error",
+    "description": "I attempted to add a new NAT rule on the FW-EDGE-01 to allow inbound traffic for the dev project. Now I am getting a 'syntax error near line 450' and the firewall refuses to push the configuration changes.",
+    "priority": "High",
+    "resolution": "Corrected a malformed object definition in the XML configuration and re-validated the policy.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Random VM reboots",
+    "description": "Three of our virtual machines (DB-01, DB-02, APP-05) have rebooted twice this morning. Host logs show a 'Hardware Exception: Machine Check Exception' on the host ESXi-09. This is affecting our customer-facing portal.",
+    "priority": "Critical",
+    "resolution": "Migrated VMs to a stable host and scheduled a motherboard replacement for ESXi-09.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Physical patch panel port damage",
+    "description": "I was trying to move my desk phone and the RJ45 port on the wall jack (Port B12) snapped. The plastic clip is stuck inside the port. I can't get a connection now.",
+    "priority": "Low",
+    "resolution": "Extracted the broken clip and re-terminated the Cat6 cable to a new wall-plate jack.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution failing for cloud apps",
+    "description": "Users are reporting that they can't reach Office 365 or AWS services. Running nslookup returns 'SERVFAIL' for most external domains. Seems like the internal DNS cache is poisoned.",
+    "priority": "High",
+    "resolution": "Cleared the DNS resolver cache and forced an upstream sync with the primary ISP nameservers.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Office lights/Network rack power",
+    "description": "The breaker tripped again. We have the network rack and three heavy space heaters plugged into the same power distribution strip. Can you help?",
+    "priority": "Medium",
+    "resolution": "Provided surge-protected power strips for the heaters and instructed staff on building electrical load limits.",
+    "category": "Infrastructure",
+    "type": "base"
+  }
+]
