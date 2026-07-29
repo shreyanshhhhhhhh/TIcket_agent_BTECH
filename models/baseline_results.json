@@ -1,0 +1,7 @@
+{
+  "model": "TF-IDF + Naive Bayes",
+  "val_accuracy": 0.6644295302013423,
+  "val_f1_macro": 0.6718885851005911,
+  "test_accuracy": 0.6533333333333333,
+  "test_f1_macro": 0.6564109854468103
+}

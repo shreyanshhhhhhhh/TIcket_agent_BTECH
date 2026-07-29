@@ -1,0 +1,7 @@
+{
+  "model": "Embeddings (MiniLM) + Logistic Regression",
+  "val_accuracy": 0.7315436241610739,
+  "val_f1_macro": 0.7342642094983641,
+  "test_accuracy": 0.7,
+  "test_f1_macro": 0.7026138917396718
+}
