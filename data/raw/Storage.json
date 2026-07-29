@@ -1,0 +1,866 @@
+[
+  {
+    "title": "NAS Volume Inaccessible",
+    "description": "Our departmental NAS (QNAP TS-873A) is showing a 'Volume Degraded' status. Users report they cannot map the network drive to their Windows 10 workstations. I've tried restarting the service, but it didn't help.",
+    "priority": "High",
+    "resolution": "Replaced faulty WD Red Pro 8TB drive in bay 4 and initiated RAID 6 rebuild.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Disk space full on File Server",
+    "description": "Hey, the E: drive on FS01 is at 98% capacity. We are getting event ID 2013 alerts constantly. Can we increase the LUN size or do I need to clear logs?",
+    "priority": "Medium",
+    "resolution": "Expanded the underlying LUN by 500GB via the SAN console and extended the volume in Disk Management.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SSD failure on dev laptop",
+    "description": "My laptop keeps crashing with a BSOD error 'CRITICAL_PROCESS_DIED'. I ran the Dell ePSA diagnostics and it failed the storage test with error code 2000-0142. I think the drive is toast.",
+    "priority": "High",
+    "resolution": "Confirmed physical SSD failure; dispatched replacement NVMe drive and performed OS re-image from standard corporate WIM.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Slow read/write speeds on SAN",
+    "description": "We are experiencing significant latency on the primary database cluster. Latency is spiking over 200ms during peak hours. Our Linux VMs are reporting I/O wait times that are killing application performance.",
+    "priority": "High",
+    "resolution": "Identified a noisy neighbor VM consuming IOPS; implemented QoS policies on the SAN fabric to throttle the offending workload.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Need more space for archives",
+    "description": "The current archival storage pool is nearly full. We need an additional 2TB of provisioned space for the upcoming project data migration by Friday. Please advise on the process.",
+    "priority": "Low",
+    "resolution": "Created a new storage pool and presented a 2TB LUN to the archival server, then mapped it as a mount point.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "File permission issues after migration",
+    "description": "I moved files from the old server to the new one, but now nobody can open the Excel sheets. It says 'Access Denied'. This is very frustrating as my team is blocked.",
+    "priority": "Medium",
+    "resolution": "Corrected NTFS permission inheritance settings and re-applied the correct security groups to the top-level folder.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "External HDD not mounting",
+    "description": "I'm trying to plug in my Seagate Backup Plus drive into my MacBook Pro (macOS Sonoma). It shows up in Disk Utility, but it won't mount as a volume. It just says 'com.apple.DiskManagement.disenter error 49153'.",
+    "priority": "Medium",
+    "resolution": "Ran First Aid in Disk Utility and repaired the corrupted file system structure on the partition.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Data corruption in SQL backups",
+    "description": "We are seeing 823/824 read errors in the SQL Server error logs during the daily backup window. This suggests potential corruption on the storage backend. Please investigate the SAN logs immediately.",
+    "priority": "Critical",
+    "resolution": "Found bad blocks on the physical backplane; migrated the SQL data files to a new SAN aggregate and performed a full checksum validation.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Cloud storage sync failure",
+    "description": "My OneDrive client is stuck at 'Processing changes'. It's been like this for three days. I've already tried clearing the cache folder, but it didn't help.",
+    "priority": "Low",
+    "resolution": "Identified a file with an invalid character in the filename; removed the offending file and restarted the sync client.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "iSCSI connection dropped",
+    "description": "One of our ESXi hosts dropped the connection to the iSCSI target. The host went into PSOD. Please check the network switch configuration for potential Jumbo Frame mismatches.",
+    "priority": "High",
+    "resolution": "Detected a misconfigured MTU setting on the new switch port; corrected to 9000 bytes to match the storage network fabric.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Need to wipe hard drive",
+    "description": "I have an old laptop here that needs to be decommissioned. Can you wipe the disk to DoD standards? I don't want any data lingering on it.",
+    "priority": "Low",
+    "resolution": "Executed a DBAN (Darik's Boot and Nuke) pass on the drive and provided the certificate of destruction.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Volume expansion failed",
+    "description": "I tried to extend the ZFS pool, but it returned 'error: pool is busy'. I am currently on Ubuntu 22.04 and I really need this extra space for the render farm.",
+    "priority": "Medium",
+    "resolution": "Stopped the competing backup process that was locking the pool and successfully performed the 'zpool online -e' command.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "NFS mount timeout on production web server",
+    "description": "Our web server (srv-prod-04, Ubuntu 22.04) is experiencing intermittent NFS timeouts when accessing the shared NAS volume. The logs show 'nfs: server 10.0.5.20 not responding, still trying' every few minutes. This is causing significant latency for our file-upload service.",
+    "priority": "High",
+    "resolution": "Increased the NFS read/write buffer sizes in /etc/fstab and verified the MTU settings on the storage controller to resolve packet fragmentation.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "External drive not mounting",
+    "description": "Hey, I plugged my 2TB Seagate external drive into my MacBook Pro (macOS Sonoma) but it just isn't showing up in Finder. I've tried different USB-C cables and ports, but nothing happens. I really need the files on here for a meeting this afternoon.",
+    "priority": "Medium",
+    "resolution": "Used Disk Utility to identify the partition map corruption and ran 'fsck_exfat' in Terminal to repair the file system structure.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SAN storage array failing",
+    "description": "Alert: SAN-ARRAY-01 reporting critical hardware failure on Disk Shelf 3. Multiple drive indicators are flashing amber, and the management console is throwing Error 0x8004210B. We are currently in a degraded RAID state and need immediate assistance.",
+    "priority": "Critical",
+    "resolution": "Coordinated with vendor hardware support to hot-swap two failed SATA drives and initiated a background rebuild of the parity stripe.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Disk space warning",
+    "description": "My laptop is complaining that the hard drive is almost full. It keeps popping up a notification saying 'Startup Disk Almost Full' every time I open Adobe Premiere. Can you help me figure out what's taking up all the room?",
+    "priority": "Low",
+    "resolution": "Ran WinDirStat/DaisyDisk analysis, identified 40GB of redundant cache files, and cleared the temporary folder and old project logs.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Permission denied on file share",
+    "description": "Every time I try to save a document to the department share (\\fileserver\finance), I get a 'Permission Denied' error. I am logged in as jdoe and I've been able to access this folder for years. Did something change with the AD groups?",
+    "priority": "Medium",
+    "resolution": "Updated the user's Active Directory security token to reflect recent changes in the Finance-ReadOnly group membership.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Slow I/O performance on SQL Cluster",
+    "description": "We are seeing significant performance degradation on our SQL Cluster nodes. Disk latency on the LUNs hosting the data files is spiking above 50ms during peak batch jobs. This is causing application timeouts.",
+    "priority": "High",
+    "resolution": "Identified a misconfigured multi-pathing policy on the host side; updated HBA settings to use round-robin path selection to balance I/O across controllers.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Accidental file deletion",
+    "description": "I accidentally deleted the entire project folder from the 'Shared-Projects' network drive. I need these files recovered immediately, please. It was the folder named 'Marketing_Campaign_2024'.",
+    "priority": "High",
+    "resolution": "Restored the folder structure from the previous night's Volume Shadow Copy (VSS) backup to a recovery partition for user verification.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "USB drive corruption",
+    "description": "My flash drive stopped working after I pulled it out while it was still saving. Now Windows 11 says 'You need to format the disk in drive E: before you can use it'. Please don't tell me I lost everything.",
+    "priority": "Medium",
+    "resolution": "Performed a low-level CHKDSK recovery on the partition table and successfully recovered 95% of the data using data recovery software.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Cloud storage sync loop",
+    "description": "The OneDrive client on my desktop is stuck in an endless sync loop. It keeps saying 'Processing changes' but never finishes, and it's killing my CPU usage. I've tried restarting the app but no luck.",
+    "priority": "Low",
+    "resolution": "Cleared the OneDrive cache folder and performed a soft reset of the synchronization engine using the /reset command.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Data migration error",
+    "description": "Attempting to migrate user profiles to the new NAS migration target, but the Robocopy job keeps failing with error 5. I'm running the command as Administrator, but it seems like it's getting stuck on locked system files.",
+    "priority": "Medium",
+    "resolution": "Added the /ZB (restartable mode with backup) flag to the Robocopy script to bypass file locks and handle permission errors gracefully.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SSD showing SMART errors",
+    "description": "My workstation (Dell Precision) just warned me during POST that the NVMe drive has SMART event 0x0B. I am worried the drive is going to fail soon. Should I be concerned?",
+    "priority": "High",
+    "resolution": "Verified drive health via vendor utility, confirmed high reallocated sector count, and initiated an emergency disk clone to a spare SSD.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Unable to map network drive",
+    "description": "I am trying to map Z: to our internal file server, but it keeps asking for credentials even though I'm on the corporate network. When I enter my password, it just says 'Multiple connections to a server or shared resource by the same user are not allowed'.",
+    "priority": "Low",
+    "resolution": "Used 'net use * /delete' to clear existing persistent connections and re-established the drive mapping using the fully qualified domain name.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "NAS volume unmounted after power flicker",
+    "description": "Our QNAP TS-453D NAS dropped the connection to the primary file share around 9:00 AM. The logs show a kernel panic error 0x80040154 when trying to remount the iSCSI target. All users are currently unable to access the \\\\NAS-PROD-01 volume.",
+    "priority": "Critical",
+    "resolution": "Performed a hard reboot of the NAS controller and refreshed the iSCSI initiator session on the host server; volume mounted successfully.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SAN latency spike on ESXi host",
+    "description": "I'm seeing severe disk latency on host ESX-04. The VM kernel logs are reporting 'Device naa.6000eb38541234567890 latency has exceeded 500ms'. This is causing all VMs on the datastore to hang intermittently.",
+    "priority": "High",
+    "resolution": "Identified a misconfigured backup snapshot task running during peak hours; throttled the I/O operations and latency returned to normal levels.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Laptop disk space warning",
+    "description": "Hey, my MacBook Pro keeps giving me the 'Your disk is almost full' notification. I can't seem to delete enough files to clear it out. Can you tell me what's taking up all the space?",
+    "priority": "Low",
+    "resolution": "Ran a storage analysis and found a corrupted 40GB temporary cache file in the Adobe Premiere workspace; deleted the file and cleared the cache directory.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Unable to extend logical volume",
+    "description": "I'm trying to extend our /data partition on RHEL 8, but the 'lvextend' command fails with 'Insufficient free space'. I added a new 500GB virtual disk to the VM but it doesn't seem to be visible to the LVM subsystem.",
+    "priority": "Medium",
+    "resolution": "Rescanned the SCSI bus using 'echo \"- - -\" > /sys/class/scsi_host/host0/scan', initialized the new physical volume, and successfully extended the volume group.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "File access denied",
+    "description": "I'm trying to open our team's shared folder, but I keep getting a permission error. The OS says 'Access Denied'. This is really holding me up on the quarterly report.",
+    "priority": "Medium",
+    "resolution": "Updated the user's AD security group membership to include 'Finance_RW'; user logged out and back in to refresh the Kerberos token.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Cloud storage sync failure",
+    "description": "My OneDrive client on Windows 11 keeps throwing error 0x8004de40. It won't sync any files from my Desktop folder to the cloud. I've restarted the app three times with no luck.",
+    "priority": "Low",
+    "resolution": "Reset the OneDrive sync engine using the command line tool; re-authenticated the account and sync status is now current.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Corrupted SQL database file",
+    "description": "We are getting I/O errors on the SQL Server 2019 instance. The error log says 'SQL Server detected a logical consistency-based I/O error: incorrect checksum'. This is affecting our production order database.",
+    "priority": "Critical",
+    "resolution": "Restored the database from the last valid transaction log backup and ran DBCC CHECKDB to confirm logical integrity; data access restored.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "External SSD not recognized",
+    "description": "My Samsung T7 SSD isn't showing up in File Explorer when I plug it into my USB-C port. I've tried multiple cables, but my computer just acts like nothing happened. This drive has all my design assets on it.",
+    "priority": "Medium",
+    "resolution": "Updated the USB host controller drivers in Device Manager; the drive was then detected and mounted successfully.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Backup server storage pool full",
+    "description": "The Veeam backup server is reporting that the local repository is at 98% capacity. We are missing our nightly backup window for the Exchange server.",
+    "priority": "High",
+    "resolution": "Purged expired restore points older than 30 days and increased the block size optimization settings to reclaim 1.2TB of space.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Slow file transfers over VPN",
+    "description": "When I'm working remotely, saving files to the file server takes forever. It feels like I'm on a dial-up connection. Is there a storage setting I can change to speed this up?",
+    "priority": "Low",
+    "resolution": "Advised user to use the DFS namespace shortcut instead of the direct IP mapped drive to improve latency; confirmed connection speed improvement.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "RAID 5 controller error",
+    "description": "One of the physical drives in our RAID 5 array on the legacy Dell PowerEdge server is showing as 'Predicted Failure'. The system alert LED is flashing amber. We need to replace this before the whole array goes down.",
+    "priority": "High",
+    "resolution": "Ordered a replacement drive of identical model; performed a hot-swap and initiated the background RAID rebuild process.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "BitLocker recovery prompt",
+    "description": "My laptop won't boot into Windows 10. It keeps asking for a BitLocker recovery key. I don't know why this happened after the recent firmware update.",
+    "priority": "Medium",
+    "resolution": "Retrieved the recovery key from the Azure AD portal; successfully bypassed the prompt and verified the drive integrity.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "NAS volume unmounted after power flicker",
+    "description": "Our QNAP TS-873A unit lost connection after a brief power outage in the server room. The web interface shows 'Volume 1: Not Mounted' and the status LED is blinking red. I've tried rebooting twice but the volume remains inaccessible.",
+    "priority": "High",
+    "resolution": "Performed a manual file system check (fsck) via SSH and re-mounted the volume; ensured the UPS battery backup was functioning correctly.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Drive failure on RAID 5 array",
+    "description": "Hey, one of the drives in our primary storage array (Slot 4) is showing a predictive failure warning. The PERC H740P controller log indicates 'Foreign configuration detected' and multiple 'Media Error' entries. Need a replacement ASAP before we lose parity.",
+    "priority": "Critical",
+    "resolution": "Ordered and replaced the failed SAS drive; triggered a RAID rebuild which completed successfully without data loss.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Slow read/write speeds on shared network drive",
+    "description": "Users are complaining that the Z: drive is sluggish. It takes forever to open small Excel files. We are running Windows Server 2019, and the latency spikes seem to correlate with the scheduled daily incremental backup task.",
+    "priority": "Medium",
+    "resolution": "Adjusted the QoS policy on the network switch and rescheduled the backup window to off-peak hours to reduce I/O contention.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Cloud storage sync error",
+    "description": "OneDrive is stuck on 'Processing changes'. I've cleared the cache and restarted the client on my MacBook Pro running macOS Sonoma, but it won't sync my Documents folder. Getting error code 0x8004de40.",
+    "priority": "Low",
+    "resolution": "Reset the OneDrive sync engine via the terminal and re-authenticated the user session; sync restored.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Insufficient space on production database volume",
+    "description": "Alert from Nagios: /dev/sdb1 is at 98% capacity. This is our SQL production volume and we are seeing timeout errors in the application logs. Please expand the LVM partition immediately.",
+    "priority": "Critical",
+    "resolution": "Expanded the underlying VMware VMDK and grew the LVM physical volume, volume group, and logical volume online without downtime.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "External USB drive not recognized",
+    "description": "My Seagate 2TB drive isn't showing up in File Explorer when I plug it into my Dell Latitude. It worked yesterday, but now it just clicks repeatedly when I connect it to the USB 3.0 port.",
+    "priority": "Medium",
+    "resolution": "Diagnosed as hardware failure of the drive head; advised user to contact a data recovery specialist as the drive was physically unresponsive.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Permission issues on DFS share",
+    "description": "Some users can't access the marketing folder on the DFS namespace. They are getting 'Access Denied' despite having 'Read' permissions assigned. Server logs show Event ID 4625.",
+    "priority": "Medium",
+    "resolution": "Corrected an inheritance issue on the parent folder security tab and updated the DFS referral targets.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SAN connectivity loss on ESXi host",
+    "description": "Host esx-04 lost connection to the LUNs on the PureStorage FlashArray. VMs on this host have crashed. Port status on the FC switch shows 'No Light'.",
+    "priority": "Critical",
+    "resolution": "Reseated the SFP module on the Fibre Channel switch; link restored and LUNs re-scanned in vCenter.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "User reporting missing files",
+    "description": "I think I accidentally deleted a whole folder of project files from the file server. I can't find them in the Recycle Bin. Can you please check if there's a Shadow Copy available?",
+    "priority": "High",
+    "resolution": "Restored the folder from the most recent Volume Shadow Copy (VSS) snapshot taken at 04:00 AM.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "High latency on iSCSI target",
+    "description": "The SAN performance has been terrible all morning. We are seeing average latency of 250ms on our database LUNs. Seems like we might have a broadcast storm or a misconfiguration on the dedicated iSCSI VLAN.",
+    "priority": "High",
+    "resolution": "Identified a misconfigured jumbo frames setting on one of the host NICs; corrected MTU to 9000 to match the storage fabric.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Change of drive letter for mapped drive",
+    "description": "Every time I restart my laptop, the mapped network drive changes from H: to K:. It's really frustrating because my shortcut icons keep breaking. Can we just make it stay as H:?",
+    "priority": "Low",
+    "resolution": "Updated the GPO (Group Policy Object) to explicitly map the drive letter 'H' and set the action to 'Replace' to ensure consistency.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SSD wear level alert",
+    "description": "Just got an email from the server monitor saying the SSDs in our cache tier are at 92% wear level. Should I be worried? Everything seems fine for now, but I want to know when we need to replace them.",
+    "priority": "Low",
+    "resolution": "Analyzed the S.M.A.R.T. data and confirmed the drives are still within operational spec; scheduled a proactive replacement for the next quarterly maintenance cycle.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "NAS drive unreachable after firmware update",
+    "description": "Our Synology DS1821+ is showing as disconnected in DSM after the latest firmware update to version 7.2.1. All status LEDs are blinking orange, and we cannot ping the static IP address from any workstation. Please investigate as this holds our department's primary backup repository.",
+    "priority": "High",
+    "resolution": "Performed a hard reset of the network interface and manually rolled back the firmware version to the previous stable release via Synology Assistant.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Need more space on the Z-drive",
+    "description": "Hi, I keep getting a 'Disk Full' error whenever I try to save reports to the Z-drive. It's really slowing me down today. Can you please increase the capacity?",
+    "priority": "Low",
+    "resolution": "Identified a massive log dump in the user's shared folder; cleared temporary files and increased the volume quota by 50GB.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SanDisk SSD failing SMART tests",
+    "description": "My workstation, WS-FIN-04, started showing 'Hard drive failure imminent' warnings during boot this morning. CrystalDiskInfo reports reallocated sector count is critical. I've backed up my desktop files, but I need a replacement drive ASAP so I can finish month-end processing.",
+    "priority": "High",
+    "resolution": "Replaced the failing 500GB SSD with a new NVMe drive and restored the user's OS image from the weekly backup.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "LUN mapping issue on ESXi host",
+    "description": "We are unable to mount our iSCSI LUN from the Nimble storage array to ESXi host host-03. Error code: 'Host connection lost' shows up in vCenter. We have checked the switch fabric and physical links seem to be up.",
+    "priority": "Critical",
+    "resolution": "Corrected an incorrect ACL entry on the storage array that was blocking the specific IQN of host-03.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Cloud storage sync loop",
+    "description": "OneDrive on my laptop is stuck in a 'Processing changes' loop and never finishes syncing my files. I've tried signing out and back in but it hasn't helped. It's been like this for three days.",
+    "priority": "Medium",
+    "resolution": "Cleared the OneDrive cache folder and repaired the local sync database via the command line tool.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "RAID 5 array degraded",
+    "description": "One of the drives in our PowerEdge R740 storage array has failed. We have a blinking amber light on slot 4. Everything seems to be running fine for now, but we are worried about data loss if another disk goes out.",
+    "priority": "High",
+    "resolution": "Replaced the faulty SATA drive in slot 4; triggered a manual array rebuild which completed successfully.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Access Denied on project folder",
+    "description": "I can't access the 'Marketing_Media' folder on the fileserver anymore. It keeps saying 'Access Denied' even though I've had access for months. Did something change with the permissions?",
+    "priority": "Medium",
+    "resolution": "Found the user had been moved to a different Active Directory security group; restored membership to the correct file access group.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "External HDD not detected",
+    "description": "My WD MyPassport drive isn't showing up in File Explorer on Windows 11. It makes a faint clicking noise when I plug it in. I really need the files on here for the presentation at 2 PM.",
+    "priority": "High",
+    "resolution": "Confirmed physical drive failure; recommended data recovery specialist as the drive is making mechanical clicking sounds.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Performance degradation on SAN volume",
+    "description": "The SQL server cluster is experiencing high latency on the data drive. IOPS monitoring shows a massive spike in read/write times during 2:00 PM - 4:00 PM. We suspect the storage fabric is saturated.",
+    "priority": "Medium",
+    "resolution": "Identified a misconfigured backup job running during business hours; adjusted the schedule to run during the maintenance window.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "USB stick formatted by accident",
+    "description": "I accidentally clicked format on my 64GB Kingston USB drive. It had all my project assets on it. Please tell me you can get them back!",
+    "priority": "Medium",
+    "resolution": "Ran data recovery software on the unallocated space of the drive and successfully recovered the file structure.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Storage quota limit reached",
+    "description": "System notification says I've reached the 10GB limit on my home directory. I'm not even sure what's taking up that much space. Can someone help me clear it out?",
+    "priority": "Low",
+    "resolution": "Located a hidden temp folder containing local browser profile bloat; cleared the data and increased the home directory quota.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Corrupt virtual disk file",
+    "description": "Our VM 'SRV-APPS-01' will not boot. It throws error 0x80070005 when trying to access the .vmdk file on the datastore. I think the file system on the VMFS volume might be corrupted.",
+    "priority": "Critical",
+    "resolution": "Ran an 'fsck' equivalent check on the datastore and repaired the corrupted metadata header on the vmdk file.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "NAS volume unmounted unexpectedly",
+    "description": "Our QNAP TS-h886 storage server suddenly dropped the iSCSI target connection around 02:00 AM. Windows Server 2022 clients are reporting 'Error 0x80070035: The network path was not found' when trying to access the mapped drive. Please investigate the logs.",
+    "priority": "High",
+    "resolution": "Re-established link aggregation settings on the switch and forced a remount of the iSCSI target.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Laptop disk space warning",
+    "description": "Hey, my MacBook Pro is yelling at me that the disk is almost full. I can't even open Chrome anymore because it says there isn't enough memory to swap files. Can you help me figure out what's hogging all the space?",
+    "priority": "Low",
+    "resolution": "Cleared 45GB of temporary cache files and purged the local Time Machine snapshots.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SAN latency spikes on production cluster",
+    "description": "We are observing intermittent I/O wait times exceeding 500ms on our Dell PowerStore array. This is impacting our SQL production database performance significantly. We see high latency alerts in the vCenter dashboard for all VMs hosted on the DataStore-01 LUN.",
+    "priority": "Critical",
+    "resolution": "Identified a misconfigured replication schedule causing excessive IOPS; adjusted the schedule to off-peak hours.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access shared drive",
+    "description": "I need help with the Q: drive. Every time I try to save a document, it gives me an access denied error. It was working fine yesterday, I swear.",
+    "priority": "Medium",
+    "resolution": "Updated group policy permissions for the user; they were accidentally removed from the departmental security group.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SSD failure on workstation",
+    "description": "My computer blue-screened with a 'CRITICAL_PROCESS_DIED' error. Upon reboot, the BIOS is not detecting the Samsung 980 Pro NVMe drive. I have critical client files on there that aren't backed up.",
+    "priority": "Critical",
+    "resolution": "SSD controller failed. Replaced drive under warranty and performed data recovery on the damaged NAND flash.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Slow file transfer speeds to file server",
+    "description": "File transfers to the central file server (FS-04) are crawling at about 2MB/s. This is across both wired and wireless connections in the marketing department. It makes working on high-res video files impossible.",
+    "priority": "Medium",
+    "resolution": "Detected a duplex mismatch on the office switch port; forced to 1Gbps full-duplex.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Dropbox sync stuck",
+    "description": "My Dropbox desktop app is stuck on 'Syncing 42 files' and won't progress. I've restarted the app and the computer, but it's still hung. I really need those files for a meeting in an hour.",
+    "priority": "Low",
+    "resolution": "Cleared the Dropbox sync metadata folder and forced a re-index of the local files.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Cloud storage bucket permissions",
+    "description": "We are receiving '403 Forbidden' errors when our application attempts to push log files to the S3 bucket 'prod-logs-storage'. We verified the IAM role has 's3:PutObject' permissions, but it's still failing.",
+    "priority": "High",
+    "resolution": "Corrected the bucket policy which was inadvertently blocking access from the VPC endpoint.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "External drive not detected",
+    "description": "I plugged in my WD My Passport drive to copy some files, but my laptop doesn't show it in File Explorer. The light on the drive is blinking, but Disk Management just shows it as 'Unknown/Not Initialized'.",
+    "priority": "Medium",
+    "resolution": "Assigned a new drive letter and updated the USB mass storage driver in Device Manager.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Replenish storage pool",
+    "description": "The Storage Spaces pool on our primary file server is reporting 92% utilization. We need to add more physical disks to the server rack to prevent a potential service outage. Please advise on procurement.",
+    "priority": "Medium",
+    "resolution": "Added two 4TB SAS drives to the storage pool and initiated the storage tier rebalancing.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Total data loss on USB flash drive",
+    "description": "I accidentally formatted my 128GB flash drive while trying to create a Windows bootable media. Everything was on there, including my photos from last summer. Can you please get them back for me?!",
+    "priority": "High",
+    "resolution": "Ran data recovery software on the formatted drive; successfully restored 95% of the files.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Duplicate file cleanup",
+    "description": "Our file server is getting cluttered with duplicate documents. Could IT run a script to identify and remove duplicates to free up space?",
+    "priority": "Low",
+    "resolution": "Ran a deduplication analysis report and scheduled a clean-up task for the weekend.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "NAS volume unmounted unexpectedly",
+    "description": "Our QNAP TS-h886 storage server suddenly dropped the iSCSI target connection around 02:00 AM. Several VMs hosted on this volume are currently in a paused state. We are seeing 'Target portal unreachable' errors in the vSphere logs.",
+    "priority": "Critical",
+    "resolution": "Re-established network bond redundancy and forced a re-scan of the iSCSI HBA adapters on the host.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Drive failure in RAID array",
+    "description": "Hey, the storage controller on server SRV-PROD-04 is beeping. The management console shows Disk 3 in the RAID 5 array has a status of 'Failed'. Please send someone to replace it ASAP.",
+    "priority": "High",
+    "resolution": "Physically swapped the faulty drive and initiated a RAID rebuild which completed successfully after 4 hours.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Low disk space on file server",
+    "description": "The D: drive on FS-01 is reporting less than 5GB free space. Windows Server 2019 is throwing constant 'Disk space critically low' notifications. Users are complaining that they cannot save new documents to the shared folder.",
+    "priority": "Medium",
+    "resolution": "Cleared temporary log files and performed a temporary storage expansion of the underlying LUN.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Permissions issue on /mnt/data",
+    "description": "I cannot access the research share anymore. When I try to browse to the folder, I get an 'Access Denied' error even though I have read/write permissions. This started after the server reboot last night.",
+    "priority": "Low",
+    "resolution": "Reset the NFS export permissions and re-synchronized the user UID/GID mapping with the LDAP server.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Extremely slow IOPS on SQL cluster",
+    "description": "Our application performance is tanking. Latency on the SAN LUNs hosting our SQL databases is peaking at 500ms. Everything worked fine until the firmware update on the storage switches.",
+    "priority": "Critical",
+    "resolution": "Identified a misconfiguration in the multi-pathing policy and reverted the firmware to the stable baseline version.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Cannot map network drive",
+    "description": "My laptop won't connect to the department drive. It keeps telling me 'The specified network name is no longer available'. Windows 11, running latest updates.",
+    "priority": "Low",
+    "resolution": "Updated the credentials stored in Windows Credential Manager and cleared the stale DNS cache.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Snapshot creation failure",
+    "description": "The daily snapshot job for the NetApp controller is failing with error 0x80042306. It seems to time out during the VSS writer initialization. Please investigate as we need these for our compliance backups.",
+    "priority": "Medium",
+    "resolution": "Increased the shadow copy storage limit on the volume to accommodate the increased churn rate of the data.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Storage array reporting overheating",
+    "description": "We received an alert from the data center monitoring system that the main SAN array is reporting a temperature warning for controller B. It is currently at 65 degrees Celsius. Please check if a fan has failed.",
+    "priority": "High",
+    "resolution": "Replaced a faulty cooling fan module and verified that the sensor readings returned to the normal operational range.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Incorrect capacity reporting",
+    "description": "The web interface says the storage pool is 90% full, but the individual volumes only total 40% usage. Is there a hidden snapshot bloat or metadata error? It's been like this for three days.",
+    "priority": "Medium",
+    "resolution": "Performed a filesystem check (fsck) to prune orphaned snapshot blocks that were not being reported in the main UI.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "USB External drive not detected",
+    "description": "I plugged my 2TB Western Digital drive into the USB 3.0 port on my workstation and nothing happens. The light on the drive blinks, but it doesn't show up in Disk Management. Frustrating because I have a deadline today.",
+    "priority": "Low",
+    "resolution": "Assigned a new drive letter in Disk Management and updated the USB host controller driver.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "LUN masking visibility issue",
+    "description": "We added a new Linux host to the fabric, but it cannot see the assigned LUNs. The Zoning is correct on the Brocade switches, but the storage array doesn't show the WWN of the HBA as logged in.",
+    "priority": "High",
+    "resolution": "Corrected the zoning configuration by adding the missing WWN alias to the specific fabric zone.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Cloud sync storage error",
+    "description": "Our local-to-S3 storage gateway is stuck in a sync loop. It keeps throwing '403 Forbidden' errors when uploading chunk files. We haven't changed our AWS IAM keys recently.",
+    "priority": "Medium",
+    "resolution": "Rotated the IAM access keys and updated the gateway configuration to restore secure connectivity to the S3 bucket.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "NAS drive showing offline status",
+    "description": "My primary file server (NAS-04) is showing a red light on Bay 3 and is currently inaccessible to the team. The RAID 5 array is reporting a degraded state in the management console. I need someone to check the hardware and replace the drive immediately.",
+    "priority": "Critical",
+    "resolution": "Replaced faulty Western Digital 8TB SATA drive; RAID rebuild initiated and completed successfully.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Out of disk space on DB server",
+    "description": "SQL-PROD-01 is throwing error 1105: Could not allocate space for object in database 'PROD_DATA' because the 'PRIMARY' filegroup is full. We are unable to process new transactions. Please expand the LUN or clear logs.",
+    "priority": "High",
+    "resolution": "Extended the virtual disk by 200GB via VMware vSphere and expanded the NTFS partition in Windows Server 2019.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Slow file access speeds",
+    "description": "Hey, is the SAN acting up? Opening simple PDF files from the shared drive takes like 30 seconds today. It's really slowing down my workflow.",
+    "priority": "Medium",
+    "resolution": "Identified a misconfigured VLAN tag on the storage switch causing latency; corrected port settings and restored normal throughput.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Access Denied on Project Folder",
+    "description": "I keep getting an 'Access Denied' error when trying to save files to the Marketing folder. I used to have access yesterday, but now it says I don't have permission. Can you fix this?",
+    "priority": "Low",
+    "resolution": "User was inadvertently moved to a different Active Directory group; restored group membership and refreshed Kerberos tickets.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "San Snapshot Failure",
+    "description": "The nightly snapshot job for the SAN-BACKUP-02 unit failed again with error code 0x8004230F. Logs indicate an Unexpected Provider Error. This is the third time this week.",
+    "priority": "High",
+    "resolution": "Updated the VSS hardware provider driver on the host; performed a successful test snapshot manually.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "iSCSI connection dropping",
+    "description": "The iSCSI target connection on our secondary backup server keeps flapping. Event ID 34 is appearing every 15 minutes in the System log. Please investigate the switch path.",
+    "priority": "High",
+    "resolution": "Identified a faulty SFP module in the fiber switch; replaced the module and verified link stability.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SSD wear level alert",
+    "description": "Our monitoring system sent an alert for server APP-SRV-09. The SSD wear indicator is at 98%. I think we need to look into migrating the data soon.",
+    "priority": "Medium",
+    "resolution": "Scheduled a maintenance window to migrate the data to a new NVMe drive and decommissioned the aging SSD.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Need more space on my local drive",
+    "description": "Hey guys, my laptop is full and I can't update Windows. Is there any way you can delete some old temp files or something for me?",
+    "priority": "Low",
+    "resolution": "Ran Disk Cleanup and removed 12GB of cache files; advised user to use cloud storage for large media files.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Corruption in archive database",
+    "description": "I'm trying to open the 2022 Archive database and it's throwing a 'Page Checksum Failure' error. It seems like the file is corrupted. Help, this is urgent!",
+    "priority": "Critical",
+    "resolution": "Restored the database from the last known good backup to a temporary instance and exported the requested data.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Unrecognized File System on External Drive",
+    "description": "My external USB drive shows up in Disk Management but it says the partition is 'RAW'. I have important client files on there. Is it possible to recover these?",
+    "priority": "Medium",
+    "resolution": "Used CHKDSK /f to repair the file system metadata; data was successfully recovered and user was advised to run a backup.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Volume mount point issue",
+    "description": "The volume mounted at D:\\Shares is not visible in File Explorer. Disk Management shows the volume as 'Offline' due to a policy conflict. Please resolve.",
+    "priority": "Medium",
+    "resolution": "Changed the SAN policy from 'Offline Shared' to 'Online' using the Diskpart utility on the host.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Latency spikes during backups",
+    "description": "Every time the midnight backup runs, our application servers experience massive disk latency. Our storage controller CPU hits 99% usage. We need a better schedule.",
+    "priority": "Low",
+    "resolution": "Adjusted backup jobs to run in staggered windows and enabled storage tiering to offload non-critical data.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "NFS mount timeout on production web server",
+    "description": "Our web-prod-04 server is failing to mount the /mnt/data storage volume. We are receiving 'RPC: Timed out' errors when attempting to mount the NFS share. This is impacting our ability to serve static assets to customers.",
+    "priority": "Critical",
+    "resolution": "Increased the NFS timeout threshold in /etc/fstab and identified a congested network switch port causing packet loss.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "External HDD not showing up",
+    "description": "Hey, I plugged in my WD My Passport drive to my laptop but it doesn't appear in File Explorer. I tried unplugging and plugging it back in, but nothing happens. Is there a driver I need?",
+    "priority": "Low",
+    "resolution": "Updated the USB Mass Storage driver via Device Manager and reassigned a drive letter in Disk Management.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SAN latency spikes on SQL cluster",
+    "description": "We are seeing significant I/O wait times on the SQL-Cluster-01 nodes during nightly backups. The SAN logs show latency exceeding 500ms on the fiber channel ports for LUN 05. Can you investigate the storage array performance?",
+    "priority": "High",
+    "resolution": "Balanced I/O load across physical controllers and rescheduled the backup window to avoid peak application traffic.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Local storage full on design workstation",
+    "description": "My drive is full again! I keep getting low disk space warnings on my MacBook Pro. I already deleted my downloads folder, but I can't finish my current project because the system won't let me save.",
+    "priority": "Medium",
+    "resolution": "Cleared system cache, identified a 40GB Adobe After Effects media cache folder, and moved older project assets to cold storage.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "VMware datastore reaching capacity",
+    "description": "Datastore 'Prod_SSD_02' is currently at 92% capacity. We need to expand this before we hit the hard limit and trigger VM snapshots failures. We have 2TB of unallocated space available on the array.",
+    "priority": "Medium",
+    "resolution": "Expanded the VMFS datastore by extending the extent on the storage array and resizing the volume within vCenter.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Permission denied on file share",
+    "description": "I cannot access the 'Marketing_Archive' folder on the corporate NAS anymore. It says 'Access Denied' whenever I try to open a sub-folder. I have a presentation due in an hour, help!",
+    "priority": "High",
+    "resolution": "Reset ACL permissions for the user group, as an inadvertent change in AD security groups had removed their read access.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "OneDrive sync error",
+    "description": "OneDrive is stuck on 'Processing changes' for three days now. It keeps giving me error code 0x8004de40. I\u2019ve restarted multiple times and checked my internet connection.",
+    "priority": "Low",
+    "resolution": "Cleared the OneDrive cached credentials and performed a reset of the OneDrive sync client app.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "SSD failure predicted on server",
+    "description": "The iDRAC console on server HOST-DL380-08 is reporting a 'Predictive Failure' on physical drive slot 4. It's a 1.92TB SAS SSD. We should replace this before it dies completely.",
+    "priority": "High",
+    "resolution": "Scheduled a hot-swap replacement of the failed drive and verified the RAID controller initiated a successful rebuild.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Slow read/write speeds on shared drive",
+    "description": "Is anyone else experiencing slow speeds on the Z: drive? Saving a 50MB Excel file takes forever. It seems to happen every afternoon around 2 PM.",
+    "priority": "Medium",
+    "resolution": "Identified a misconfigured scheduled task running a full virus scan on the file server during business hours; adjusted task timing.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Snapshot deletion failure",
+    "description": "I tried to delete an old snapshot for our development VM, but I'm getting 'An error occurred while consolidating disks'. The state is stuck in progress. Please advise.",
+    "priority": "Medium",
+    "resolution": "Manually consolidated the delta files using the ESXi command line interface after stopping the associated virtual machine.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "Can't save to USB drive",
+    "description": "Ugh, my USB drive is write-protected. I didn't flip any switch on the hardware, and I definitely didn't lock it. I need to move these files for a meeting ASAP.",
+    "priority": "Medium",
+    "resolution": "Removed the 'read-only' attribute from the disk using diskpart in the command prompt.",
+    "category": "Storage",
+    "type": "base"
+  },
+  {
+    "title": "iSCSI session flapping",
+    "description": "We are seeing intermittent connectivity losses to the iSCSI target. The switch logs show 'Link Flap' events on ports connected to the storage controller. This is causing Windows Event ID 129 errors on the host.",
+    "priority": "Critical",
+    "resolution": "Replaced faulty SFP+ module on the core switch and verified network stability for the iSCSI traffic.",
+    "category": "Storage",
+    "type": "base"
+  }
+]

@@ -1,0 +1,866 @@
+[
+  {
+    "title": "Core Switch Uplink Flapping",
+    "description": "We are seeing intermittent connectivity loss on the primary uplink port (Te1/0/1) of the distribution switch, Cisco Catalyst 9300. Logs indicate 'ERR_DISABLE' events triggered by link flapping every 15-20 minutes. This is causing latency spikes for the entire third-floor VLAN.",
+    "priority": "High",
+    "resolution": "Replaced the SFP+ transceiver and patched the fiber cable; port stability restored.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VPN gateway timeout",
+    "description": "I can't get into the office network today. Every time I try to connect via Cisco AnyConnect on my Mac, it just times out with error 404. Is the server down?",
+    "priority": "Medium",
+    "resolution": "Reset the VPN authentication service on the perimeter firewall.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS Battery Fault - Server Room B",
+    "description": "The APC Smart-UPS 3000VA unit in Rack 4 is beeping constantly and displaying a 'Replace Battery' (Error Code: F02) status on the LCD panel. We need someone to swap these units before the next scheduled maintenance window tomorrow.",
+    "priority": "High",
+    "resolution": "Technician arrived on-site and performed a hot-swap of the RBC55 battery cartridge.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Can't access printer",
+    "description": "The printer in the hallway is offline again. It says 'Network Error' on the screen. Please fix it fast.",
+    "priority": "Low",
+    "resolution": "Static IP address conflict found; assigned a new reserved IP to the printer via DHCP.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent packet loss on Site-to-Site VPN",
+    "description": "Our remote office in Austin is reporting heavy packet loss (approx 15%) when accessing internal file shares. Traceroute shows high latency specifically at the hop involving the FortiGate 100F gateway at our primary DC. Firmware is currently at v7.0.5.",
+    "priority": "High",
+    "resolution": "Identified MTU mismatch on the tunnel interface; adjusted MTU size to 1400 bytes to prevent fragmentation.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Wi-Fi is super slow in the cafeteria",
+    "description": "The internet is unusable when I'm eating lunch. My phone drops the signal constantly. It's been like this all week.",
+    "priority": "Low",
+    "resolution": "Increased AP power levels and optimized channel selection to mitigate signal interference from the kitchen microwave.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Server rack overheating alert",
+    "description": "The environmental monitor just sent an automated critical alert for Rack 2. The internal temperature has spiked to 92 degrees Fahrenheit. Please investigate the HVAC unit immediately.",
+    "priority": "Critical",
+    "resolution": "Building management cleared a debris blockage in the CRAC unit intake; temperatures normalized within an hour.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution failing for internal resources",
+    "description": "Users are reporting that internal apps like hr.company.local are failing to resolve. Primary DC (Windows Server 2019) is showing Event ID 4013, indicating the DNS server is unable to open the AD integrated zone. This is affecting all departments.",
+    "priority": "Critical",
+    "resolution": "Restarted the DNS Server service and forced a synchronization with the secondary DNS controller.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Lost connection to the SAN",
+    "description": "Hosts 01 through 04 just dropped their iSCSI connections. We are seeing 'Device Path Degraded' errors in vCenter. Everything is currently offline.",
+    "priority": "Critical",
+    "resolution": "Rebooted the secondary storage controller which had hung due to a firmware memory leak.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Office lights are flickering",
+    "description": "The lights in the west wing are flickering again. I'm worried it's going to affect the servers nearby. Can someone take a look?",
+    "priority": "Medium",
+    "resolution": "Electrical contractor tightened a loose neutral wire in the main circuit breaker panel.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Firewall Rule propagation failure",
+    "description": "I tried to push a new security policy to our edge firewalls, but the management console is reporting a 'Sync Failed' status. It seems like the HA pair is out of sync. Current version is PAN-OS 10.1.",
+    "priority": "Medium",
+    "resolution": "Cleared the candidate configuration manually and force-synced the device state from the primary firewall.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Cannot map network drive",
+    "description": "I'm trying to connect to the 'Accounting' share but I get an 'Access Denied' message. My permissions shouldn't have changed, I've been using this folder for months.",
+    "priority": "Low",
+    "resolution": "Found that the user's account was inadvertently moved out of the correct AD security group during the last sync; restored group membership.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Core Switch Uplink Failure",
+    "description": "The primary 10Gbps uplink on SW-CORE-01 dropped at 03:14 AM. Log files indicate a 'SFP+ Transceiver Signal Loss' error. Redundancy kicked in, but latency has spiked across the VLANs.",
+    "priority": "Critical",
+    "resolution": "Replaced faulty SFP+ module and patched fiber cable; confirmed link stability with zero packet loss.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VPN connectivity issues",
+    "description": "Hey, I can't seem to connect to the office network via Cisco AnyConnect on my Windows 11 machine. I keep getting 'Connection attempt failed due to server certificate validation error'. Super annoying.",
+    "priority": "Medium",
+    "resolution": "Updated the root certificate store and reinstalled the VPN client profile; connectivity restored.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS Battery Warning",
+    "description": "APC Smart-UPS 3000 in the server room is reporting 'Battery Replacement Required' on the LCD. Input voltage is stable at 120V, but the unit is beeping intermittently.",
+    "priority": "High",
+    "resolution": "Scheduled maintenance window and replaced the hot-swappable battery cartridge; unit self-test passed.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access shared drive",
+    "description": "My drive M: keeps saying 'Access Denied'. This is very frustrating as I have a deadline. I am running Windows 10 build 22H2.",
+    "priority": "Medium",
+    "resolution": "Found a stale AD group membership; removed and re-added the user to the appropriate Security Group.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent Wi-Fi drops in Building B",
+    "description": "Users in the West wing of Building B are complaining about Wi-Fi disconnecting every 20 minutes. AP logs show 'Deauthentication: Reason 4 (Disassociated due to inactivity)'.",
+    "priority": "High",
+    "resolution": "Adjusted channel width and updated firmware on AP-B-WEST-04 to address known radio interference issues.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Server disk space alert",
+    "description": "Server SRV-APP-02 is running low on disk space on volume D:. It has less than 500MB free.",
+    "priority": "Medium",
+    "resolution": "Cleared legacy log files and moved temp installation data to archive storage, freeing up 40GB.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution failure",
+    "description": "Some internal sites aren't resolving correctly today. Seeing SERVFAIL errors when performing nslookup on domain controllers. Very weird.",
+    "priority": "High",
+    "resolution": "Cleared DNS cache on primary DCs and performed a zone transfer refresh; forwarders reconfigured.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Printer queue stuck",
+    "description": "The printer in the HR office is completely unresponsive. I've restarted it twice and the spooler service on the print server says it's running but the queue just shows 'Error - Printing'.",
+    "priority": "Low",
+    "resolution": "Cleared the print spooler directory and updated the HP Universal Print Driver; queue cleared successfully.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Hyper-V host performance degradation",
+    "description": "Host HV-PROD-01 is showing 95% CPU usage across all cores. Guest VMs are lagging heavily. I suspect a background backup process is stuck.",
+    "priority": "High",
+    "resolution": "Identified a stuck VSS snapshot process, killed the process tree, and rescheduled the backup window.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Office lights are flickering",
+    "description": "I think this is an IT issue? The lights above my cubicle are blinking. Could this be related to the power surge we had earlier?",
+    "priority": "Low",
+    "resolution": "Directed ticket to Facilities department; identified as a failing ballast in the overhead fluorescent lighting.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "SSL Certificate Expiration",
+    "description": "Our load balancer LB-PROD-EXT is showing an expiration warning for the wildcard certificate. It expires in 3 days. We need to replace this immediately.",
+    "priority": "Critical",
+    "resolution": "Renewed SSL certificate via DigiCert and deployed the new PFX file to the load balancer.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "External site blocked",
+    "description": "I need access to specific documentation on an external portal but our firewall is blocking it with a 'Category: Malicious Content' message. Can you whitelist it?",
+    "priority": "Low",
+    "resolution": "Verified site reputation and added the FQDN to the firewall bypass list for the marketing department VLAN.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Core Switch Uplink Failure",
+    "description": "The primary uplink on CORE-SW-01 (Cisco Catalyst 9500) has dropped to a down/down state after a brief power fluctuation. Interface Gi1/0/48 is showing 'err-disable' with a cause of 'link-flap'. Please investigate the SFP module or the fiber run to the MDF.",
+    "priority": "Critical",
+    "resolution": "Replaced faulty SFP+ transceiver and cleared err-disable state on the interface; link status restored to up.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VPN access keeps dropping",
+    "description": "My VPN connection to the office keeps cutting out every 15 minutes. I'm using the Cisco AnyConnect client on Windows 11. It's really killing my productivity today, can someone look into this ASAP?",
+    "priority": "High",
+    "resolution": "Identified conflicting MTU settings on the user's home ISP router; adjusted client-side VPN adapter settings to accommodate packet fragmentation.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS Battery Fault Alert",
+    "description": "Received an automated SNMP trap from the server room UPS (APC Smart-UPS 3000). The unit is reporting a 'Battery Replace Required' status. No power loss yet, but we need to act before it dies.",
+    "priority": "Medium",
+    "resolution": "Scheduled a maintenance window to swap out the aging battery cartridge; system diagnostics now pass all integrity checks.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "I can't reach the fileshare",
+    "description": "Hey, the server \\\\FS-PROD-01 is totally unreachable. I'm getting a timeout error when I try to map the drive. I've restarted my laptop but it didn't help.",
+    "priority": "High",
+    "resolution": "Reset the SMB service on the file server and cleared stale TCP connections from the firewall state table.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Latency spikes in VLAN 20",
+    "description": "Users in the Finance department are reporting intermittent lag when accessing cloud-based ERP systems. Traceroutes show latency spikes originating at the Distribution Layer switch (DIST-SW-02). CPU utilization on the switch backplane is fluctuating between 85-95%.",
+    "priority": "High",
+    "resolution": "Identified a broadcast storm caused by a loop on an unmanaged switch in the Finance office; removed the rogue device and implemented port security.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Guest Wi-Fi is down",
+    "description": "Visitors can't connect to the Guest network. They see the splash page but authentication fails every time. Please fix.",
+    "priority": "Low",
+    "resolution": "Restarted the WLC authentication service which had stopped responding; guest portal is now successfully issuing tokens.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Physical Security System Offline",
+    "description": "The NVR unit managing our door access cameras is showing 'Disk Error' on RAID array 0. Server logs indicate a failure in Disk 2. We are currently not recording any footage from the main lobby.",
+    "priority": "Critical",
+    "resolution": "Hot-swapped the failed 4TB WD Purple drive; RAID array is currently rebuilding successfully.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution issues",
+    "description": "Some internal hostnames are not resolving. I tried flushing the cache, but nslookup just times out. It seems random, sometimes it works, sometimes it doesn't.",
+    "priority": "Medium",
+    "resolution": "Updated the forwarders on the primary DC; cleaned up a loop in the secondary DNS recursive lookup configuration.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Help! Server room smells like ozone",
+    "description": "I just walked into the server room and there is a faint burning smell near the rack containing the main database servers. I'm worried something is about to blow. Please send someone immediately.",
+    "priority": "Critical",
+    "resolution": "Discovered a failed cooling fan in the secondary power supply of the R740 server; replaced the PSU unit and cleared the hardware alarm.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DHCP Scope Exhaustion",
+    "description": "We are getting reports that new devices are unable to obtain IP addresses in the Main Office VLAN. Checking the DHCP server logs shows no available addresses in the scope 10.10.20.0/24.",
+    "priority": "Medium",
+    "resolution": "Extended the DHCP scope mask from /24 to /23 and adjusted the lease time from 8 days to 24 hours to reclaim stale IPs.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Firmware update stuck",
+    "description": "Tried updating the firmware on the core firewall to v9.16.2. The GUI is stuck on 'Updating - Do not turn off' for the last 4 hours. Is it safe to reboot?",
+    "priority": "High",
+    "resolution": "Manually performed a hard reset via the console port after verifying the firmware file integrity; the firewall successfully rolled back to the stable v9.16.1 image.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Printer queue stalled",
+    "description": "The big copier on floor 2 keeps printing the same document over and over. I tried clearing the print queue on the print server but it keeps popping back up. This is very annoying.",
+    "priority": "Low",
+    "resolution": "Cleared the spooler directory on the print server and updated the driver to the latest V4 PCL6 version.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Core Switch Uplink Flapping",
+    "description": "We are seeing intermittent connectivity loss on the primary stack in IDF-04. The core switch logs show 'ERR_DISABLE' status on port Gi1/0/48, which is the uplink to the distribution layer. This is causing network drops for the entire marketing floor every 15 minutes.",
+    "priority": "Critical",
+    "resolution": "Replaced faulty SFP+ transceiver and patched the fiber uplink, stability confirmed.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS Battery Warning",
+    "description": "The APC Smart-UPS in the server room is chirping and the front panel displays 'Replace Battery'. I'm worried about an unexpected shutdown during a power fluctuation. Can we get this serviced before it fails entirely?",
+    "priority": "High",
+    "resolution": "Scheduled maintenance window to replace the battery cartridge while on bypass mode.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access VCenter",
+    "description": "I keep getting a 503 Service Unavailable error when trying to access the vSphere client. I\u2019ve checked the ESXi hosts and they seem to be running fine, but I can't manage my VMs. Help.",
+    "priority": "High",
+    "resolution": "Restarted the vCenter Server Appliance (VCSA) services via SSH; identity management service was hung.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Slow VPN speeds",
+    "description": "It's super slow today. My RDP session to the file server keeps lagging out. Is the firewall saturated? I'm on Windows 11 and using the latest Cisco AnyConnect client.",
+    "priority": "Low",
+    "resolution": "Identified high bandwidth utilization from a backup job; rescheduled backup to off-peak hours.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "NTP Desync on DC01",
+    "description": "Monitoring alerts are flagging a clock skew of over 500ms on our primary Domain Controller. This is triggering Kerberos authentication failures across the forest. Please investigate the external time source connectivity.",
+    "priority": "High",
+    "resolution": "Updated W32Time configuration to point to internal stratum 1 NTP servers and forced a resync.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DHCP Scope Exhausted",
+    "description": "Users in the Guest Wi-Fi VLAN are unable to get an IP address. I checked the DHCP server and the scope for 192.168.50.x is full. Seems like the lease time is too long.",
+    "priority": "Medium",
+    "resolution": "Cleared inactive leases and reduced DHCP lease duration from 8 days to 4 hours.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Rack A-02 Power Outage",
+    "description": "Everything in Rack A-02 is dead. The PDU displays a 0A load. I suspect the breaker tripped in the facility room.",
+    "priority": "Critical",
+    "resolution": "Reset the tripped circuit breaker in the PDU and load-balanced hardware to prevent recurrence.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Printer Queue Issues",
+    "description": "The print server is hanging again. Every time someone sends a job to the HR_Printer_01, the spooler service stops. Error code 0x80040154.",
+    "priority": "Medium",
+    "resolution": "Removed corrupted print driver and performed a clean install of the manufacturer's V4 universal print driver.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Firewall Rule Request",
+    "description": "Hi team, we need port 8443 opened between the app server and the database segment for the new project. Can you handle this?",
+    "priority": "Low",
+    "resolution": "Added the requested ACL to the edge firewall and verified connectivity via telnet.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Disk Latency on SAN",
+    "description": "VMs hosted on LUN_03 are experiencing extreme latency during peak hours. The storage array dashboard indicates IOPS are hitting the ceiling. We need to move some workloads.",
+    "priority": "High",
+    "resolution": "Migrated high-IOPS database VMs to the SSD-tier storage pool to alleviate bottleneck.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution failing",
+    "description": "I can ping 8.8.8.8 but I can't reach any websites by name. I flushed the local cache, but it's still not working. Seems like our DNS servers are down.",
+    "priority": "Medium",
+    "resolution": "Resolved DNS forwarder configuration error caused by a recent ISP upstream server change.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized Device Alert",
+    "description": "The NAC system just blocked a device on port 24. MAC address is 00:1A:2B:3C:4D:5E. It's trying to access the production network.",
+    "priority": "High",
+    "resolution": "Investigated the device and confirmed it was a personal laptop; moved the port to the restricted VLAN.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Core Switch Uplink Failure",
+    "description": "The primary uplink on CORE-SW-01 (Cisco Catalyst 9300) has dropped to a state of err-disabled. We are seeing constant flapping on interface Te1/1/1 and the logs indicate high CRC errors. This has isolated the entire second-floor subnet from the server farm.",
+    "priority": "Critical",
+    "resolution": "Reset the physical transceiver module and re-seated the fiber patch cable, clearing the interface error counters.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS battery fault",
+    "description": "My UPS unit in the server room is beeping incessantly. The LCD panel is flashing an 'Error 05 - Battery Replace' code. Can someone please check this before it shuts down the rack?",
+    "priority": "High",
+    "resolution": "Replaced the depleted lead-acid battery cartridge and performed a successful self-test.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VPN gateway timeout",
+    "description": "I'm having trouble connecting to the office via Cisco AnyConnect on Windows 11. It gets stuck at 40% and eventually says 'Connection Timed Out'. My home internet is fine.",
+    "priority": "Medium",
+    "resolution": "Increased the session timeout threshold on the head-end firewall and cleared stale VPN sessions for the user ID.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Warehouse Wi-Fi dead zones",
+    "description": "The scanners in the back of the warehouse are constantly dropping off the network. I think we need more access points back there because it's impossible to track inventory right now.",
+    "priority": "Medium",
+    "resolution": "Performed an RF site survey and adjusted the transmit power on AP-WH-04 and AP-WH-05 to reduce channel overlap.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Server room cooling alarm",
+    "description": "The HVAC sensor in the server closet is reading 88 degrees Fahrenheit. I don't hear the blower running. Please fix this before my servers melt.",
+    "priority": "Critical",
+    "resolution": "Dispatched facilities team to reset the tripped breaker on the dedicated cooling unit; temperature returned to 68 degrees within 30 minutes.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DHCP Scope Exhaustion",
+    "description": "Devices on the Guest Wi-Fi are failing to pull an IP address. Logs show a 'No more addresses available' error in the DHCP server scope 10.50.20.x.",
+    "priority": "High",
+    "resolution": "Expanded the DHCP scope range and reduced the lease time from 8 days to 4 hours to reclaim stale entries.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Fiber link degradation",
+    "description": "Monitoring tools are alerting on high latency between the main office and the remote branch. The link is showing intermittent packet loss around 5%.",
+    "priority": "High",
+    "resolution": "Identified a bent fiber patch cord at the cross-connect panel and replaced it with a new OM4 LC-LC cable.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Backup server storage full",
+    "description": "The Veeam backup server is reporting that the local repository is full. We haven't had a successful incremental backup in three days.",
+    "priority": "Medium",
+    "resolution": "Purged backups older than the 30-day retention policy and resized the VMDK virtual disk to accommodate growth.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Printer connectivity issues",
+    "description": "The MFP in accounting stopped printing again. It says 'Network Error' on the screen. Help.",
+    "priority": "Low",
+    "resolution": "Assigned a static IP reservation in the DHCP server to prevent the printer from losing its address after a power cycle.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Domain Controller NTP sync",
+    "description": "We are seeing a massive drift in time synchronization across the domain. Server DC01 is 5 minutes ahead of the PDC emulator, causing Kerberos authentication failures.",
+    "priority": "High",
+    "resolution": "Reconfigured the PDC to sync with an external stratum-1 NTP source and forced a w32tm /resync on all DCs.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution latency",
+    "description": "DNS queries are taking up to 2 seconds to resolve. This is making everything feel extremely sluggish. Is our forwarder down?",
+    "priority": "Medium",
+    "resolution": "Removed a dead DNS forwarder entry and pointed the DNS servers to a more responsive public DNS resolver.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "SSL Certificate expiration",
+    "description": "Our website is showing a security warning to all clients. The certificate expired yesterday. We need to renew this immediately.",
+    "priority": "High",
+    "resolution": "Renewed the wildcard certificate via our CA and updated the binding on the IIS web server.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Core Switch-01 Port Flapping",
+    "description": "Port Gi1/0/24 on Core Switch-01 is showing intermittent link state changes. Logs indicate high CRC error rates and input drops every 15 minutes. This is causing micro-outages for the entire accounting subnet.",
+    "priority": "High",
+    "resolution": "Replaced the damaged Cat6a patch cable and cleared interface statistics; link stability verified.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VPN access is busted again",
+    "description": "Hey, I'm trying to connect to the office VPN using the Cisco AnyConnect client on Windows 11, but it keeps throwing error 442. I've restarted my laptop twice and checked my home Wi-Fi, but nothing works. Please fix this, I have a deadline.",
+    "priority": "Medium",
+    "resolution": "Updated the Cisco AnyConnect client to the latest version and re-registered the virtual miniport adapter.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS Battery Fault - Rack B",
+    "description": "The APC Smart-UPS in Rack B is emitting a continuous audible alarm. Management console displays 'Replace Battery' status with Error Code E-04. Input voltage is currently 120V, but the unit is failing to hold a load during self-tests.",
+    "priority": "Critical",
+    "resolution": "Dispatched field technician to swap the lead-acid battery cartridge; unit passed self-test.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Slow file server performance",
+    "description": "Users are reporting that accessing the Z: drive is extremely sluggish. We are seeing high disk queue lengths on the file server (FS-02) running Windows Server 2019. It seems to happen specifically when the morning backup jobs are running.",
+    "priority": "Medium",
+    "resolution": "Adjusted backup job scheduling to off-peak hours and optimized storage pool cache settings.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Guest Wi-Fi Down",
+    "description": "The Guest_Wifi SSID is not broadcasting in the lobby. I checked the WAP-Lobby-01 unit and the status LED is blinking amber. Restarting the WAP via the controller didn't resolve the issue.",
+    "priority": "Low",
+    "resolution": "Factory reset the WAP and re-provisioned via the WLAN controller; firmware updated to v8.4.2.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Esxi host disconnected from vCenter",
+    "description": "Host esxi-prod-04 has dropped from the vCenter inventory. I'm seeing 'Host not responding' errors in the dashboard. Physical power is on, but management IP is unreachable via SSH.",
+    "priority": "Critical",
+    "resolution": "Physically reseated the management NIC; restarted the management agents (services.sh) on the host.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Printer connectivity issues",
+    "description": "The printer in Marketing is offline. It says 'IP Address Conflict' on the display. Can someone take a look? Nobody can print their reports.",
+    "priority": "Low",
+    "resolution": "Updated the printer to a static IP address outside of the DHCP range and flushed the ARP cache on the local gateway.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Primary Domain Controller latency",
+    "description": "We are experiencing significant authentication delays across the domain. Syslogs show event ID 5805 on the PDC, suggesting time synchronization drift of over 300 seconds. Kerberos tickets are failing intermittently.",
+    "priority": "High",
+    "resolution": "Force-synced the DC time with the external NTP pool and increased the tolerance threshold for skew.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Can't access the server room",
+    "description": "The keycard reader for the server room is failing. I tap my badge and the light flashes red instead of green. It's been like this for an hour and I need to check the HVAC unit.",
+    "priority": "Medium",
+    "resolution": "Replaced the RFID reader module and re-synced the controller with the security database.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Storage Array LUN latency",
+    "description": "Our Nimble storage array is reporting 50ms latency on Volume_DB_01. This is causing SQL timeouts for our primary ERP application. Please investigate immediately.",
+    "priority": "Critical",
+    "resolution": "Identified a snapshot retention issue causing excessive metadata overhead; purged expired snapshots and rebalanced IOPS.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Firewall Rule propagation failure",
+    "description": "I tried to push a new policy to the Palo Alto PA-5220, but it failed with an 'Invalid Object Reference' error. Now the commit is stuck at 70%. Need to ensure production traffic isn't impacted.",
+    "priority": "High",
+    "resolution": "Cleaned up orphaned address objects and successfully completed the commit/push operation.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "New monitor setup",
+    "description": "Hi, I just moved desks and my monitor won't connect to the docking station. It's an older Dell display, and I've tried both HDMI and DisplayPort cables. Nothing is appearing on the screen.",
+    "priority": "Low",
+    "resolution": "Updated the Thunderbolt docking station drivers and configured the display settings via Intel Graphics Command Center.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Core Switch Uplink Flapping",
+    "description": "We are experiencing intermittent connectivity across the third floor. Interface Gi1/0/48 on the primary Cisco Catalyst 9300 is flapping every 10 minutes, causing massive packet loss for the accounting department. Logs show '%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet1/0/48, changed state to down'.",
+    "priority": "Critical",
+    "resolution": "Replaced faulty SFP+ module and patched cat6 cable; interface stability restored.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VPN gateway timeout",
+    "description": "Hey, whenever I try to connect to the corporate VPN using AnyConnect on Windows 11, it just hangs at 40% and eventually says 'The service provider was unreachable'. I've tried rebooting my laptop and resetting my Wi-Fi, but nothing changes. Please help.",
+    "priority": "Medium",
+    "resolution": "Reset user's profile on the RADIUS server and cleared cached certificates on the client machine.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS Battery Warning - Server Room B",
+    "description": "The APC Smart-UPS 3000 in Server Room B is throwing an 'Replace Battery' alert on the front LCD. SNMP traps are flooding the monitoring dashboard with error code 0x02. Please schedule a replacement before the next power test.",
+    "priority": "High",
+    "resolution": "Scheduled physical maintenance; replaced internal lead-acid battery cartridge.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access shared drive",
+    "description": "I can't see the \\\\FILE-SRV01\\Marketing folder anymore. It keeps saying 'Network path not found' when I try to map it. Windows 10 is updated. It worked fine yesterday.",
+    "priority": "Medium",
+    "resolution": "Mapped drive was disconnected due to a stale SMB session; flushed DNS cache and re-authenticated the user.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DHCP Scope Exhaustion",
+    "description": "Users in the Guest-WiFi VLAN are unable to pull IP addresses. Checking the Windows Server 2019 DHCP console, the address pool for 192.168.50.0/24 is completely exhausted. We need to expand this range or shorten lease times.",
+    "priority": "High",
+    "resolution": "Expanded DHCP scope to 192.168.50.0/23 and decreased lease duration to 4 hours.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "WAP in Lobby is down",
+    "description": "The Cisco Aironet access point in the main lobby stopped broadcasting the SSID. It's not showing any lights, even though it's connected to a PoE+ switch port. We need this fixed for the guests.",
+    "priority": "Medium",
+    "resolution": "Verified switch port was shut down due to a power budget conflict; reconfigured PoE priority settings.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Latency spikes in SQL cluster",
+    "description": "We are seeing significant I/O latency on the SQL-Cluster-02 nodes. The storage array reports increased 'read wait' times during the nightly backup window. This is slowing down production databases significantly.",
+    "priority": "High",
+    "resolution": "Optimized backup scheduling to off-peak hours and updated firmware on the SAN controller.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Bad request error on portal",
+    "description": "Ugh, every time I try to log into the internal portal, I get a '400 Bad Request' error page. I've cleared my Chrome cache and tried Edge, but it's the same. My project is stalled because of this.",
+    "priority": "Medium",
+    "resolution": "Identified header overflow issue; cleared user's browser cookies and updated server-side buffer settings.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VLAN tagging mismatch",
+    "description": "After the recent firmware update on the edge switches, the printers on VLAN 20 are not reachable from the workstations on VLAN 10. Looks like the inter-VLAN routing is failing. Please look into the switch trunk configuration.",
+    "priority": "High",
+    "resolution": "Corrected trunk port allowed-VLAN list to include missing VLAN 20 ID.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Printer connectivity",
+    "description": "The printer is down.",
+    "priority": "Low",
+    "resolution": "Reconnected loose Ethernet cable at the wall jack.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Hyper-V Host BSOD",
+    "description": "Hyper-V Host-04 crashed this morning with a 'SYSTEM_SERVICE_EXCEPTION'. The minidump points to a conflict with the Broadcom NetXtreme network driver. This host is currently offline.",
+    "priority": "Critical",
+    "resolution": "Rolled back NIC driver to previous stable version and restored virtual machines to secondary node.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution failure",
+    "description": "Random internal services are timing out today. It seems like the primary internal DNS server is dropping recursive lookups. Pinging the server works, but nslookup queries return 'Query Refused'.",
+    "priority": "High",
+    "resolution": "Identified circular dependency in DNS forwarders; cleaned up zone transfers and restarted DNS service.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Core Switch-02 port flapping",
+    "description": "Port Gi0/1 on Core-Switch-02 is flapping intermittently, causing dropped packets for the Accounting VLAN. Logs show 'LINEPROTO-5-UPDOWN' every 30 seconds. We need a physical inspection of the SFP module or the patch cable.",
+    "priority": "High",
+    "resolution": "Replaced faulty SFP+ transceiver and verified link stability with no further flap errors.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Can't get into the server room",
+    "description": "The HID badge reader on the primary server room door is completely dead. I've swiped three different badges and nothing happens. The light on the reader isn't even turning on.",
+    "priority": "Medium",
+    "resolution": "Reset the local access control panel (ACU-01) and re-seated the power connector.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VPN Gateway latency spikes",
+    "description": "Users are reporting severe lag when connecting via the Cisco ASA 5500-X gateway. Performance monitors indicate CPU usage is hitting 98% during peak hours. Packet loss is reaching 15%.",
+    "priority": "High",
+    "resolution": "Identified a memory leak in firmware version 9.8.1; updated to 9.8.4 to resolve the process crash.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Wi-Fi is super slow in the lobby",
+    "description": "Hey, the guest Wi-Fi in the lobby has been unusable for the last hour. My phone connects but I can't load a single webpage. Is the AP down?",
+    "priority": "Low",
+    "resolution": "Rebooted Lobby-AP-04; the device had cached old DHCP leases and was failing to assign new addresses.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS Battery Fault Alert",
+    "description": "Received an automated email alert from the APC Smart-UPS in Rack 4. It says 'Battery replacement required' and 'Temperature high'. Need someone to check this ASAP before the server shuts down.",
+    "priority": "Critical",
+    "resolution": "Replaced aging lead-acid battery cartridges and cleared the thermal alert from the management console.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent packet loss on VLAN 20",
+    "description": "I'm seeing sporadic packet loss on the production VLAN 20. Traceroute shows delays at the distribution layer hop. It's affecting all VM hosts attached to Host-Cluster-A.",
+    "priority": "High",
+    "resolution": "Identified a spanning-tree topology change loop caused by a misconfigured secondary switch; corrected STP priority settings.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Help! The printer is making a weird noise",
+    "description": "The warehouse printer is grinding loudly and printing blank pages. It's a Kyocera TASKalfa, and the screen says 'Error F248'. I need this fixed today so we can finish shipping.",
+    "priority": "Medium",
+    "resolution": "Removed a jammed plastic label from the fuser unit and performed a drum cleaning cycle.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DHCP Scope Exhaustion",
+    "description": "The Finance subnet (10.10.50.0/24) is out of available IP addresses. New devices are failing to pull an IP, receiving APIPA addresses instead. We need to expand the scope.",
+    "priority": "High",
+    "resolution": "Increased the DHCP scope range from /24 to /23 and cleared inactive leases from the server.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Firewall Rule Request",
+    "description": "Could you please open port 443 from our internal subnet 192.168.10.0/24 to the external vendor API at 203.0.113.45? This is required for the new software deployment on Friday.",
+    "priority": "Low",
+    "resolution": "Applied new firewall policy rule ID 405 on the Palo Alto firewall and verified connectivity.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VMware Host unresponsive",
+    "description": "ESXi Host-08 has stopped responding to vCenter. The local console shows a Purple Screen of Death (PSOD) with an 'LINT1/NMI (motherboard-related)' error. It needs a hard reboot.",
+    "priority": "Critical",
+    "resolution": "Power-cycled the physical host via iDRAC; triggered a firmware update for the PERC H730 RAID controller to prevent reoccurrence.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution failing for internal apps",
+    "description": "Some of our internal web apps aren't resolving. nslookup keeps timing out when hitting our internal DNS servers. It seems like the zones aren't replicating between DC1 and DC2.",
+    "priority": "Medium",
+    "resolution": "Forced a manual synchronization of the DNS zones between domain controllers and cleared the DNS cache.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Rack fan failure",
+    "description": "I noticed the cooling fan at the bottom of Server-Rack-1 is making a high-pitched whistling noise and stopped spinning. The ambient temp in the rack is rising quickly.",
+    "priority": "Medium",
+    "resolution": "Replaced the failed 120mm exhaust fan assembly with a spare unit from inventory.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Core Switch Uplink Failure - Rack 4",
+    "description": "We are experiencing intermittent packet loss on the primary uplink of the Cisco Catalyst 9500 switch in Rack 4. Port TenGigabitEthernet1/0/49 is flapping status every 15 minutes, causing latency spikes for the entire floor. Interface logs show 'ERR_DISABLE' due to excessive CRC errors.",
+    "priority": "Critical",
+    "resolution": "Replaced the SFP+ transceiver and patched a new OM4 fiber cable; error count has stabilized.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "VPN access keeps dropping",
+    "description": "Hey, my VPN keeps kicking me off every time I try to map a network drive. I'm running Windows 11 and using the latest Cisco AnyConnect client. It just says 'Connection lost - reconnecting' and then eventually fails entirely.",
+    "priority": "Medium",
+    "resolution": "Increased the idle timeout threshold on the headend ASA firewall and updated the user's client profile.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "UPS Battery Fault - Site B",
+    "description": "The APC Smart-UPS 3000 in the server closet is reporting a critical 'Replace Battery' alert on the LCD panel. SNMP traps are flooding the monitoring dashboard with 'Battery Low' events. This unit powers the primary domain controller and local file server.",
+    "priority": "High",
+    "resolution": "Dispatched field technician to replace the RBC43 battery cartridge; self-test passed successfully.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "WiFi is slow again",
+    "description": "Can someone look at the access points in the lobby? Guests are complaining that the internet is crawling. My laptop shows a strong signal but we are getting < 2Mbps throughput on the 5GHz band.",
+    "priority": "Low",
+    "resolution": "Identified high channel interference; adjusted AP power levels and moved to non-overlapping channels 36 and 149.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Hyper-V Host 'HV-PROD-02' unresponsive",
+    "description": "Host HV-PROD-02 is showing as 'Not Responding' in Failover Cluster Manager. The iDRAC is accessible, but the OS appears to be hanging on the blue screen during a kernel dump. This host manages our core SQL workloads.",
+    "priority": "Critical",
+    "resolution": "Performed a hard power cycle via iDRAC. Updated NIC drivers to address a known memory leak causing the bugcheck.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Office printer offline",
+    "description": "The big Xerox copier on the 3rd floor is offline again. It says 'Network Error' on the screen. I've tried rebooting it, but that didn't help.",
+    "priority": "Medium",
+    "resolution": "Corrected an IP address conflict; assigned a static reservation in the DHCP scope to prevent the printer from grabbing an existing address.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Storage Array Latency Spike",
+    "description": "Our Nimble storage array is showing significant read/write latency during nightly backup windows. We are seeing IOPS exceeding the controller cache limit, resulting in timeouts for the guest VMs. We suspect a contention issue with the new snapshot schedule.",
+    "priority": "High",
+    "resolution": "Rescheduled snapshot jobs to be staggered by 30-minute intervals to distribute the I/O load across the array controllers.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Need a new network jack",
+    "description": "We are moving desks and need an extra ethernet port activated for a new workstation. The wall plate is labeled DATA-102. Is this something you can help with?",
+    "priority": "Low",
+    "resolution": "Patched port 102 in the IDF switch rack to the active VLAN 10; tested connectivity and confirmed link light.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Firewall Policy Issue",
+    "description": "The application team is unable to reach the API server on port 8443. I checked the Palo Alto logs and see 'policy-deny' for the source subnet. Please whitelist the server IP 10.50.2.15.",
+    "priority": "Medium",
+    "resolution": "Updated Security Policy 'ALLOW_API_TRAFFIC' to include source subnet 10.50.2.0/24; tested and confirmed connectivity.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Absolute disaster - server room AC off",
+    "description": "The CRAC unit is down and the temperature in the server room is hitting 95 degrees Fahrenheit! We are going to start losing hardware if this isn't fixed immediately. Please send someone right now!",
+    "priority": "Critical",
+    "resolution": "Escalated to HVAC vendor; failed control board replaced. Temperature returned to standard 68 degrees within 45 minutes.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution failing",
+    "description": "Users are reporting that they can't access internal websites like our intranet. It seems like DNS queries are timing out. Running nslookup returns 'DNS request timed out' consistently.",
+    "priority": "High",
+    "resolution": "Restarted the DNS Server service on DC01 and cleared the cache; verified root hints were configured correctly.",
+    "category": "Infrastructure",
+    "type": "base"
+  },
+  {
+    "title": "Switch port request",
+    "description": "I need two ports opened on the switch for the new VoIP phones we just received. The rack is in the basement. Let me know when you can handle this.",
+    "priority": "Low",
+    "resolution": "Configured ports 12 and 13 on Switch-Base-01 for Voice VLAN 50; enabled LLDP-MED for phone auto-discovery.",
+    "category": "Infrastructure",
+    "type": "base"
+  }
+]

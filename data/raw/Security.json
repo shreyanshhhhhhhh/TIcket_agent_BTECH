@@ -1,0 +1,866 @@
+[
+  {
+    "title": "Suspicious login attempt from unknown IP",
+    "description": "I received an automated email notification regarding a successful login to my Microsoft 365 account from an IP address located in a different country. I have already changed my password, but I want to ensure my account is secure and see if any suspicious mailbox rules were created. Please investigate.",
+    "priority": "High",
+    "resolution": "Confirmed anomalous login from a proxy server. MFA reset forced, session tokens revoked, and mailbox rules audited; no malicious persistence found.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Account locked out - AD Error 0xC000006A",
+    "description": "I'm locked out of my workstation again. It keeps giving me error 0xC000006A when I try to log in with my domain credentials. This is the third time today and I have a deadline.",
+    "priority": "Medium",
+    "resolution": "Identified a stale credential stored in Windows Credential Manager for a mapped network drive. Cleared cache and forced a domain password sync.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Reported Phishing Email",
+    "description": "Hey, I just got this weird email claiming to be from the IT department asking me to 'verify my credentials' at a bit.ly link. It looks fake so I didn't click anything, but I figured I should let you guys know.",
+    "priority": "Medium",
+    "resolution": "Confirmed malicious phishing attempt. Added the sender domain and URL to the organizational blocklist and purged the email from the mail server.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "BitLocker recovery screen on boot",
+    "description": "My laptop (Dell Latitude 5420) is stuck on a blue BitLocker recovery screen immediately after the BIOS post. It\u2019s asking for a 48-digit recovery key that I don't have. I need to get back into my machine ASAP.",
+    "priority": "High",
+    "resolution": "Retrieved recovery key from Azure AD portal and successfully unlocked the drive. Performed a 'manage-bde -protectors -adbackup' to ensure future recovery keys are synced.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Endpoint Protection alerting on Trojan",
+    "description": "My computer is acting really slow and CrowdStrike just popped up a notification saying it blocked a threat called 'Trojan.Win32.Generic'. I'm not sure if it caught it or if I'm still infected. Please check my machine.",
+    "priority": "Critical",
+    "resolution": "Quarantined the malicious process originating from a browser download. Performed a full scan and cleared browser cache/temporary files.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Request for Admin Rights",
+    "description": "I need local administrator rights on my machine to install some development tools for the new project. Can you please whitelist my user account for elevation on the local workstation?",
+    "priority": "Low",
+    "resolution": "Request denied per security policy. Provided user with a temporary containerized environment to test the software requirements.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Lost Company Laptop",
+    "description": "I left my company-issued MacBook Pro in a taxi this morning. I am panicking. Please wipe it remotely as soon as possible so my data doesn't get accessed.",
+    "priority": "Critical",
+    "resolution": "Issued remote wipe command via MDM. Device marked as 'Stolen' in the asset management system and remote lock confirmed.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection failure",
+    "description": "Ever since the latest Cisco AnyConnect update to version 4.10, I can't connect to the office VPN. It just says 'Unable to establish connection to the remote gateway'. It was working fine yesterday.",
+    "priority": "Medium",
+    "resolution": "Updated the root certificate store on the local client machine and re-authenticated the user against the RADIUS server.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Unknown USB device plugged in",
+    "description": "I found a weird USB drive in the parking lot and plugged it into my workstation to see whose it was. Now my desktop icons are disappearing and the computer is very laggy. Should I be worried?",
+    "priority": "Critical",
+    "resolution": "Isolated workstation from the network immediately. Re-imaged the machine from a clean state and initiated a mandatory security awareness training for the user.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Forgotten MFA device",
+    "description": "I'm currently traveling for a conference and I left my hardware security key back at the office. I'm locked out of my corporate email and I really need to check my inbox before tomorrow's meeting.",
+    "priority": "Medium",
+    "resolution": "Verified identity via manager approval and issued a temporary bypass code valid for 4 hours.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Browser certificate error",
+    "description": "Every time I try to access our internal HR portal, Chrome shows 'Your connection is not private' with code NET::ERR_CERT_AUTHORITY_INVALID. It\u2019s making it impossible to submit my expenses.",
+    "priority": "Low",
+    "resolution": "Re-installed the internal root certificate authority in the system trust store and cleared the browser HSTS cache.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspicious PowerShell activity",
+    "description": "Our SOC alert just triggered for this device. It shows an obfuscated PowerShell script running as system privileges. Please investigate the logs.",
+    "priority": "Critical",
+    "resolution": "Identified malicious script execution initiated by a compromised third-party plugin. Disabled the plugin, updated software version, and performed a full system audit.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized login attempt from unknown IP",
+    "description": "I received an automated email notification about a successful login to my O365 account from an IP address based in a country I have never visited. The IP listed is 192.168.1.55, which does not match my office or home network. Please investigate if my credentials have been compromised.",
+    "priority": "High",
+    "resolution": "Confirmed session as a geo-location spoofing anomaly; forced password reset and enabled hardware-based MFA.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "USB drive blocked by Endpoint Protection",
+    "description": "Hey, I tried plugging in my personal thumb drive to transfer a report and your software immediately nuked it. It gave me error code 0x80070005. Can you just whitelist it for five minutes?",
+    "priority": "Low",
+    "resolution": "Denied request per corporate data leakage prevention policy; recommended use of secure OneDrive file sharing.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Workstation showing strange network activity",
+    "description": "My machine (WS-FIN-042) has been sluggish all morning. Running netstat -ano, I see an established connection to a suspicious external IP on port 4444. Task Manager shows high disk I/O from a process named 'svchost.exe' that isn't running from the System32 folder.",
+    "priority": "Critical",
+    "resolution": "Isolated machine from the VLAN, identified malware beaconing, and initiated full disk wipe and OS re-image.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Forgot my RSA token",
+    "description": "I'm working from home today and left my physical RSA key on my desk in the office. I need access to the VPN to finish the month-end close. Can you bypass the token requirement for just a few hours?",
+    "priority": "Medium",
+    "resolution": "Verified identity via manager and implemented temporary MFA bypass via mobile push notification.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Potential Phishing Email",
+    "description": "I received an email claiming to be from the IT department asking me to 'verify my credentials' at a link that looks like a misspelled version of our internal portal. I haven't clicked anything, but I wanted to make sure you were aware.",
+    "priority": "Medium",
+    "resolution": "Confirmed phishing attempt, added malicious URL to global blacklist, and purged email from all employee inboxes.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "BitLocker recovery screen loop",
+    "description": "My Latitude 5420 is stuck on the BitLocker recovery blue screen after a firmware update. I don't have the 48-digit recovery key. Please help me get back into my machine immediately as I have a presentation in 20 minutes.",
+    "priority": "High",
+    "resolution": "Retrieved recovery key from Active Directory and assisted user in bypassing the boot loop to restore access.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "User account locked out",
+    "description": "I can't log in to my PC. It keeps saying 'Account Locked' after I tried entering my password twice. I am definitely using the right password. Please fix this.",
+    "priority": "Low",
+    "resolution": "Reset account lockout counter in Active Directory; identified a stuck background process on user's mobile device attempting to sync email with an old password.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Browser security warnings on internal portal",
+    "description": "Every time I access the intranet portal (intranet.corp.local), Chrome throws a 'Your connection is not private' error with NET::ERR_CERT_AUTHORITY_INVALID. It's making it impossible to check my pay stubs.",
+    "priority": "Medium",
+    "resolution": "Renewed expired internal SSL certificate on the intranet server and pushed updated CA root to user group policy.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspicious print job",
+    "description": "I'm seeing print jobs in the queue for a printer in a different building that I didn't send. My username is attached to them. Is someone using my credentials or is the print server glitching?",
+    "priority": "Medium",
+    "resolution": "Investigated print logs and found a configuration error in the shared printer mapping; reset printer permissions.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Compliance audit: Missing Windows updates",
+    "description": "The security scanner flagged my workstation for KB5034441 and KB5025239. I've tried clicking 'Check for updates' in Settings but it just hangs at 0%. I need to be compliant by EOD to keep my access.",
+    "priority": "High",
+    "resolution": "Manually cleared Windows Update cache and restarted the BITS service to trigger successful patch installation.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Admin rights request",
+    "description": "I need local administrator rights on my laptop to install some software for my project. The software is 'Advanced Network Tools'. Please grant this ASAP.",
+    "priority": "Low",
+    "resolution": "Denied request based on security policy; offered to push the software via SCCM once vetted by the security team.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Physical security breach",
+    "description": "I witnessed someone tailgating into the secure server room area without scanning their badge. I don't know who it was, but they were wearing a vendor visitor badge.",
+    "priority": "High",
+    "resolution": "Reviewed security camera footage and confirmed the vendor was escorted by authorized personnel; noted for security awareness training.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Account locked out - multiple failed attempts",
+    "description": "My domain account is locked again. I tried logging into my workstation (WS-992) running Windows 11 but got error code 0x80090006. I haven't changed my password recently, so I have no idea why it keeps failing.",
+    "priority": "Medium",
+    "resolution": "Reset AD account lockout status and performed a credential clear on the local machine; user advised to check for saved credentials in Credential Manager.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspicious login alert",
+    "description": "I received an automated email stating a login attempt was made from an IP address in a different country. My account is MFA-enabled, but I want to ensure my session hasn't been compromised. Please review logs for user 'jsmith'.",
+    "priority": "High",
+    "resolution": "Reviewed Azure AD sign-in logs and confirmed the suspicious login was an automated API call from a known cloud service; no unauthorized access detected.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Phishing email reported",
+    "description": "Just wanted to flag a message that hit my inbox this morning. It claims to be from IT and asks me to 'validate my mailbox' via an external link. I didn't click it, but thought you should know.",
+    "priority": "Low",
+    "resolution": "Confirmed email as malicious phishing attempt; added sender domain to the O365 blocklist and purged the email from all user mailboxes.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "BitLocker recovery screen loop",
+    "description": "My laptop (Dell Latitude 5420) is stuck on the BitLocker recovery screen after a BIOS update. I don't have the recovery key handy. I need this fixed ASAP as I have a client demo in an hour.",
+    "priority": "Critical",
+    "resolution": "Retrieved BitLocker recovery key from Intune device management console and successfully bypassed the prompt to restore Windows boot environment.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection failing",
+    "description": "Cannot connect to the corporate network via GlobalProtect. It just says 'Authentication Failed' after I approve the Duo push notification. macOS Sonoma 14.2.",
+    "priority": "Medium",
+    "resolution": "Updated the GlobalProtect client certificate on the user's device and cleared the cached SAML assertion in the browser.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Potential malware infection on workstation",
+    "description": "I noticed some weird pop-ups appearing on my monitor while browsing. I'm worried I clicked something bad. Currently running a scan with Defender but nothing is showing up yet.",
+    "priority": "High",
+    "resolution": "Remotely performed a full scan via EDR; quarantined a malicious browser extension and performed a clean-up of temporary browser files.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized software request",
+    "description": "I'm seeing an app called 'Advanced System Optimizer' installed on my machine that I definitely did not authorize. It keeps telling me my registry is broken. Can you remove this?",
+    "priority": "Medium",
+    "resolution": "Uninstalled the Potentially Unwanted Program (PUP) via SCCM and performed a registry audit to ensure no persistent backdoors were created.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "USB drive blocked",
+    "description": "My manager asked me to transfer files to an external thumb drive, but the system keeps saying 'Access Denied'. This is very frustrating as we have a deadline.",
+    "priority": "Low",
+    "resolution": "Applied group policy exception for the user's specific USB device ID to allow encrypted read/write access per security department approval.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "MFA device change",
+    "description": "I got a new work phone. Need help migrating my Microsoft Authenticator app so I can keep accessing the internal portal.",
+    "priority": "Low",
+    "resolution": "Verified identity via manager and reset the user's MFA registration settings in the Microsoft 365 Admin Center.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Data Loss Prevention alert triggered",
+    "description": "System flagged me for uploading a spreadsheet to a cloud drive. It was just an internal project plan, why is the DLP policy blocking this?",
+    "priority": "Medium",
+    "resolution": "Reviewed DLP rule violation and updated the sensitivity label on the file to prevent further false-positive blocks.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Root certificate expired",
+    "description": "All our internal web applications are showing 'Your connection is not private' (NET::ERR_CERT_AUTHORITY_INVALID). It's happening on every machine in the marketing department.",
+    "priority": "Critical",
+    "resolution": "Pushed the updated Root CA certificate to the workstations via Group Policy update (gpupdate /force) and flushed local DNS caches.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Admin password reset",
+    "description": "I am working on the server stack and need a temporary elevated credential for testing the new firewall rules on SRV-DB-01. Please reset the dev-admin password.",
+    "priority": "High",
+    "resolution": "Provisioned a time-bound administrative account through the PAM (Privileged Access Management) portal with a 4-hour expiration window.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspicious login attempt from unknown location",
+    "description": "I received an email alert about a successful login to my Microsoft 365 account from an IP address in a country I have never visited. I immediately changed my password, but I am worried that my email data might have been exfiltrated. Please review the sign-in logs for account user_jdoe_88.",
+    "priority": "High",
+    "resolution": "Verified sign-in logs showed a successful MFA bypass attempt. Account locked, forced password reset, and session tokens revoked. User enrolled in hardware-based MFA.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "USB drive blocked by Endpoint Protection",
+    "description": "Hey, I'm trying to plug in my Kingston DataTraveler to transfer some project files to my workstation (WS-9922), but Carbon Black keeps killing the process. I get error code 0x80070005: Access Denied. Can you whitelist this drive for me?",
+    "priority": "Low",
+    "resolution": "USB mass storage device restricted by Group Policy for security compliance. Denied request to whitelist; provided instructions for using encrypted OneDrive share instead.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Potential Phishing Email Received",
+    "description": "I received an email claiming to be from the IT department asking me to verify my credentials at a link that looks like 'corp-portal-verify.com'. It seems fishy, so I didn't click it, but I wanted to make sure we're safe. Should I delete it or forward it to someone?",
+    "priority": "Medium",
+    "resolution": "Confirmed email as phishing attempt. Added sender domain to the O365 tenant blocklist and purged the email from all user inboxes across the organization.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "BitLocker recovery screen on boot",
+    "description": "My laptop (Dell Latitude 5420) is stuck on the blue BitLocker recovery screen after a BIOS update this morning. I've tried rebooting three times, but it keeps asking for a 48-digit recovery key. I have a client presentation in an hour and I'm panicking.",
+    "priority": "Critical",
+    "resolution": "Retrieved BitLocker recovery key from Azure AD device portal. Assisted user in manual entry of key and verified disk integrity post-reboot.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Compromised machine suspected",
+    "description": "My machine has been running extremely slow today and the CPU usage for 'svchost.exe' is constantly at 99%. I noticed a window pop up briefly mentioning a remote connection attempt. I've disconnected it from the network.",
+    "priority": "Critical",
+    "resolution": "Isolated machine from VLAN. Ran full scan with CrowdStrike Falcon; identified and quarantined a malicious trojan payload. Re-imaged device to ensure complete remediation.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Need sudo access for software installation",
+    "description": "I need to install Wireshark and some specific network drivers for my current project. My current user profile on the MacBook Pro (M2) doesn't have the required administrative permissions. Can you grant me sudo access for this session?",
+    "priority": "Low",
+    "resolution": "Denied direct sudo access per security policy. Provided elevated access via self-service portal for approved software packages only.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "MFA token loop",
+    "description": "I'm stuck in an infinite loop with the Authenticator app. Every time I approve the push notification on my phone, it kicks me back to the login screen on my desktop, displaying error AADSTS50011. I've restarted both devices, but nothing works.",
+    "priority": "Medium",
+    "resolution": "Cleared browser cache and session cookies. Synchronized time settings on the user's mobile device to resolve token timestamp mismatch.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized software detected",
+    "description": "We received an automated alert that an unauthorized application, 'Advanced IP Scanner', was installed on WS-042. This violates our company policy regarding network scanning tools. Please remove it immediately.",
+    "priority": "High",
+    "resolution": "Remotely uninstalled the blacklisted application via SCCM. Issued a formal warning to the user regarding software installation policy.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access internal VPN",
+    "description": "The VPN client (Cisco AnyConnect) refuses to connect. It says 'Posture assessment failed'. I recently updated my Windows 11 machine and I think that might be the cause.",
+    "priority": "Medium",
+    "resolution": "Identified outdated antivirus definitions post-Windows update. Triggered manual update of security signatures, allowing the VPN client to pass the posture check.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Encryption error on external drive",
+    "description": "I'm trying to backup some sensitive data to an encrypted WD My Passport drive, but the encryption software fails with Error Code 0x80040154. I've tried different ports on my workstation, but it's the same error.",
+    "priority": "Low",
+    "resolution": "Reinstalled the encryption driver and updated the device firmware. Confirmed compatibility with Windows 11 bit-locker standards.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspicious web traffic alerts",
+    "description": "Firewall logs show that user workstation WS-112 is hitting known C2 (Command and Control) server domains. The traffic pattern suggests beaconing behavior occurring every 5 minutes. Please investigate this machine.",
+    "priority": "Critical",
+    "resolution": "Deep packet inspection confirmed malicious behavior. Machine was seized for forensic analysis and user account credentials were reset as a precaution.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Forgot my passcode for encrypted laptop",
+    "description": "I'm an idiot. I just set up my encrypted drive password this morning and I've already forgotten it. I'm locked out of my files and I really need these documents for the board meeting today. Can you reset it?",
+    "priority": "High",
+    "resolution": "Verified user identity via manager. Utilized escrowed recovery password from the security vault to unlock the drive and helped user set a new, compliant password.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Account lockout on domain controller",
+    "description": "My domain account is repeatedly locking out every 15 minutes. Event Viewer on my Windows 10 workstation shows Event ID 4740, but I haven't entered any incorrect passwords. I suspect a cached credential issue on a background service.",
+    "priority": "High",
+    "resolution": "Cleared stale credentials from Windows Credential Manager and updated the password for the mapped network drive service.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Blocked website access",
+    "description": "Hey, why is the corporate firewall blocking me from accessing GitHub? I need to pull a repository for the current sprint. It keeps showing an 'Access Denied - Category: Malware/Phishing' error.",
+    "priority": "Medium",
+    "resolution": "Whitelisted the specific repository URL in the web filter policy after security review.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Possible unauthorized login",
+    "description": "I received an automated email notification about a sign-in to my Microsoft 365 account from an IP address in a country I'm not currently visiting. I\u2019ve already changed my password, but I'm concerned my local session might still be compromised.",
+    "priority": "Critical",
+    "resolution": "Revoked all active OAuth tokens and forced a global logout across all devices.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Antivirus alert on server SRV-04",
+    "description": "CrowdStrike Falcon just flagged a suspicious process on SRV-04. The process is running out of Temp folders and is attempting to execute a PowerShell script with encoded parameters. I have isolated the server from the network to prevent lateral movement.",
+    "priority": "Critical",
+    "resolution": "Identified malicious script as a false positive from a legitimate internal deployment tool and restored service.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Can't connect to VPN",
+    "description": "Every time I try to connect to the office VPN using Cisco AnyConnect on macOS Monterey, it says 'Connection attempt failed due to invalid server certificate'. It was working fine yesterday morning.",
+    "priority": "Medium",
+    "resolution": "Updated the root CA certificate on the user's machine as the previous one had expired.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "USB drive blocked",
+    "description": "I need to move some files to a thumb drive for a client meeting, but the system is blocking it. It keeps saying 'Device access restricted by organization policy'. This is really slowing me down.",
+    "priority": "Low",
+    "resolution": "Explained data loss prevention (DLP) policy; provided encrypted, IT-approved hardware for the transfer.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Phishing email reported",
+    "description": "I just received an email from 'IT Support' asking me to click a link to verify my password. The sender address looks like a spoofed domain. Deleting it now, but wanted to let you know.",
+    "priority": "Medium",
+    "resolution": "Verified email header and purged the phishing campaign from all user inboxes across the tenant.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "BitLocker recovery screen",
+    "description": "My laptop (Dell Latitude 5420) is stuck on the BitLocker recovery blue screen after a Windows update. It\u2019s asking for a 48-digit recovery key that I don't have. I have a deadline in an hour.",
+    "priority": "High",
+    "resolution": "Retrieved recovery key from Azure AD device portal and successfully unlocked the drive.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Brute force attempts observed",
+    "description": "Our external-facing web server is seeing a massive spike in SSH login attempts from various foreign IPs. Logs show thousands of failed authentication attempts in the last hour. We need to lock this down immediately.",
+    "priority": "High",
+    "resolution": "Configured Fail2Ban to block offending IP ranges and restricted SSH access to our office VPN subnet.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Forgotten MFA device",
+    "description": "I left my YubiKey at home and can't get into my laptop. Can you please reset my MFA so I can work from home today?",
+    "priority": "Medium",
+    "resolution": "Verified identity via manager and issued a temporary bypass code valid for 4 hours.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized software install",
+    "description": "Endpoint protection alerted that a user on the marketing team installed unauthorized screen recording software. It bypassed UAC. Please check if this is a security risk.",
+    "priority": "Medium",
+    "resolution": "Uninstalled the software and pushed a GPO to restrict executable installation paths.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "System slow after suspected malware",
+    "description": "My computer has been incredibly slow since I accidentally clicked a link earlier. CPU usage for 'System' is pegged at 100%. I'm worried it's a crypto-miner.",
+    "priority": "High",
+    "resolution": "Ran a full malware scan, removed a malicious browser extension, and restored system performance.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Account lockout after failed VPN attempts",
+    "description": "My account keeps locking out every time I try to connect to the GlobalProtect VPN on my Windows 11 laptop. I\u2019ve checked my credentials and they are correct, but the event viewer shows event ID 4625 for multiple failed attempts. Please reset my account status and investigate the sync error.",
+    "priority": "Medium",
+    "resolution": "Cleared cached credentials in Windows Credential Manager and performed a manual sync with the Active Directory domain controller.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspicious phishing email reporting",
+    "description": "I received an email from an external address pretending to be the HR department asking for payroll verification. It includes a suspicious link to a non-company domain. I haven't clicked anything, but wanted to report it to security.",
+    "priority": "High",
+    "resolution": "Verified the email as a phishing attempt, blocked the sender domain on the mail gateway, and purged the message from the user's inbox.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "BitLocker recovery screen on boot",
+    "description": "My Dell Latitude 5420 is stuck on a blue BitLocker recovery screen after a BIOS update this morning. I don't have the 48-digit recovery key and I have a meeting in 10 minutes. This is extremely urgent.",
+    "priority": "Critical",
+    "resolution": "Retrieved the recovery key from the Azure AD device portal and guided the user through entering it to bypass the lock.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized login alert from unknown location",
+    "description": "I got an automated email notification saying someone logged into my Microsoft 365 account from an IP address in a different country. I am currently in the office in Chicago. I am worried my account has been compromised.",
+    "priority": "Critical",
+    "resolution": "Invalidated all active session tokens and forced a password reset for the user. Verified login history shows no successful data exfiltration.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access internal server - 403 Forbidden",
+    "description": "I'm getting a 403 Forbidden error when trying to access the dev-web-01 internal server on our intranet. I was able to reach it fine yesterday. My permissions haven't changed.",
+    "priority": "Medium",
+    "resolution": "Identified that the user's AD group membership was not propagating to the server's ACL due to a replication lag; forced an update of the security token.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Device not compliant with security policy",
+    "description": "My MacBook Pro (macOS Sonoma) is being blocked from accessing company resources. The Company Portal app says I'm non-compliant, but I haven't changed any settings. I really need access to Slack.",
+    "priority": "Medium",
+    "resolution": "Sync performed on Intune; detected that OS security patch level was outdated. Triggered an update and re-enrolled the device.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Blocked website access",
+    "description": "Why am I blocked from using standard online tools? I need to look up documentation for a client project and the firewall is throwing an 'Access Denied: Category: Malicious Sites' error for a site I know is safe.",
+    "priority": "Low",
+    "resolution": "Reviewed the site's reputation, whitelisted the URL in the Zscaler policy, and cleared the user's browser cache.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "MFA prompt loop",
+    "description": "Hey, my Microsoft Authenticator app is stuck in a loop when I try to sign into Outlook. It asks for the number code, I enter it, and it just cycles back to the prompt. This is driving me crazy.",
+    "priority": "Medium",
+    "resolution": "Removed the user's MFA device from the portal and walked them through re-registering their smartphone via QR code.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspicious background process",
+    "description": "I noticed an unknown process called 'wscript.exe' running in Task Manager while idle on my workstation. It\u2019s consuming high CPU and I'm worried it might be a script-based malware infection. Should I be concerned?",
+    "priority": "High",
+    "resolution": "Ran a full EDR scan which identified a non-malicious administrative login script running. Terminated the process and optimized the script path.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "USB drive restriction request",
+    "description": "I need to transfer a large encrypted file to a vendor. However, the system policy is preventing me from mounting my encrypted USB thumb drive. Is there a way to bypass this for just this one task?",
+    "priority": "Low",
+    "resolution": "Denied request due to DLP policy. Provided instructions on using the approved, secure file-sharing portal to transfer the data.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Screen timeout policy too aggressive",
+    "description": "The security policy on my new Windows machine is way too strict. It locks the screen after only 60 seconds of inactivity, which is making it impossible to read long documents without constant re-authentication.",
+    "priority": "Low",
+    "resolution": "Adjusted the GPO for the user's specific OU to extend the inactivity lock period from 1 minute to 5 minutes as per approved policy exceptions.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Lost company laptop",
+    "description": "I am so sorry to report this, but I left my work laptop in a taxi. It is definitely gone. I need to report this immediately so that no data is accessed.",
+    "priority": "Critical",
+    "resolution": "Issued a remote wipe command to the device via MDM and revoked all certificates associated with the hardware identifier.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Account lockout after failed MFA",
+    "description": "My account has been locked for the third time today. I keep getting an 'Access Denied: Error 0x80048823' when trying to approve the push notification from the Authenticator app on my iPhone 14. Please reset my lockout status immediately.",
+    "priority": "High",
+    "resolution": "Reset AD account lockout and synchronized Azure MFA service principal.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspicious login attempt alert",
+    "description": "I received an automated email notification about a successful login to my corporate O365 account from an IP address in a country I am not visiting. I have already changed my password, but I am concerned my session tokens were compromised. Please review my account logs for unauthorized access.",
+    "priority": "Critical",
+    "resolution": "Revoked all active OAuth2 tokens and enforced a global password reset.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "USB drive blocked by endpoint policy",
+    "description": "Getting an 'Access Denied' error when trying to plug in my SanDisk USB drive to my Dell Latitude 5420. I need this to transfer some project files for the client meeting in an hour. Can you whitelist this specific hardware ID?",
+    "priority": "Medium",
+    "resolution": "Identified hardware ID via EDR logs and created a temporary device control policy exception.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Help! Locked out of my laptop",
+    "description": "My computer (LT-8892) is showing a BitLocker recovery screen after the Windows 11 update finished this morning. I've tried entering my PIN multiple times, but nothing happens. I'm stuck and can't start my work.",
+    "priority": "High",
+    "resolution": "Retrieved BitLocker recovery key from Intune and successfully performed a boot override.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Potential Phishing Email",
+    "description": "I received an email claiming to be from the IT department asking me to 'verify my credentials' by clicking a link to an external site. The sender address looks like a spoofed internal domain. I have not clicked anything yet.",
+    "priority": "High",
+    "resolution": "Verified malicious URL, blacklisted the sender domain, and triggered a purge of the phishing mail from all user inboxes.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Need VPN access",
+    "description": "Working from home today and the Cisco AnyConnect client is throwing an error: 'Security Gateway Unreachable'. My home ISP is fine, but I suspect the firewall at the office is blocking my home IP range.",
+    "priority": "Medium",
+    "resolution": "Updated the VPN gateway firewall rules to whitelist the user's updated residential IP range.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Application crashing on startup",
+    "description": "Our accounting software, Sage 50, stopped opening after the latest Symantec Endpoint Protection update. Event Viewer shows error 0xc0000005 related to a memory access violation. It seems the AV is sandboxing the executable.",
+    "priority": "Medium",
+    "resolution": "Added the application directory to the Symantec exclusion list and performed a repair installation.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Reported lost company laptop",
+    "description": "I left my company-issued MacBook Pro (Serial: C02XXXXXXX) in a taxi last night. It has full disk encryption enabled, but I am reporting it lost so we can initiate a remote wipe if necessary.",
+    "priority": "Critical",
+    "resolution": "Initiated remote wipe command via Jamf Pro and marked the device as lost in the asset management system.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Browser certificate warning",
+    "description": "Every site I visit in Chrome is giving me a 'Your connection is not private' error with code NET::ERR_CERT_AUTHORITY_INVALID. It seems the machine certificate store is missing the company root CA. How do I fix this?",
+    "priority": "Medium",
+    "resolution": "Re-pushed the Root CA certificate via Group Policy Object to the local certificate store.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Can't access shared drive",
+    "description": "I'm getting 'Permission Denied' when trying to access the Finance_Data folder on the server. I was able to access it yesterday morning, so I'm not sure what changed with my permissions.",
+    "priority": "Low",
+    "resolution": "Identified that the user was inadvertently removed from the 'Finance_Users' AD security group; restored group membership.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Strange pop-ups",
+    "description": "Hey, I've got some weird ads popping up on my desktop. I didn't click on anything, but my Chrome tabs keep redirecting to suspicious sites. Please help, this looks like a virus.",
+    "priority": "High",
+    "resolution": "Ran Malwarebytes scan, removed malicious browser extension, and cleared cached temporary internet files.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Update request: Security patch",
+    "description": "I am unable to install the mandatory monthly Windows Security Update (KB5034441) on my workstation. It returns error code 0x80070643 every time I restart. I want to make sure I am compliant with company policy.",
+    "priority": "Low",
+    "resolution": "Extended the WinRE partition size to accommodate the patch and successfully re-ran the Windows Update service.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Account lockout on domain controller",
+    "description": "I keep getting locked out of my AD account every 15 minutes. The event logs on DC01 show event ID 4740 with source machine DESKTOP-9X2L1. I have already cleared my cached credentials in Windows Credential Manager, but the issue persists.",
+    "priority": "High",
+    "resolution": "Cleared stale stored credentials on the user's laptop and forced a group policy update to synchronize account lock policies.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspected phishing link clicked",
+    "description": "I think I clicked a malicious link in an email from 'HR'. It redirected me to a suspicious URL and asked for my Office 365 login. I closed the tab immediately, but I'm worried about my account security.",
+    "priority": "Critical",
+    "resolution": "Reset user password, revoked all active O365 sessions, and verified MFA registration. Scanned device with EDR; no malicious processes found.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection failing",
+    "description": "Every time I try to connect to the GlobalProtect VPN on my MacBook Pro running macOS Sonoma, I get a 'GlobalProtect Error: 504' message. It was working fine yesterday until I installed the latest OS update. Please help.",
+    "priority": "Medium",
+    "resolution": "Updated the GlobalProtect client to version 6.2.3 to ensure compatibility with macOS Sonoma network stacks.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized USB device detection",
+    "description": "Endpoint protection triggered an alert for an unauthorized mass storage device plugged into the workstation in the accounting office. The device was removed, but we need to ensure no data exfiltration occurred.",
+    "priority": "High",
+    "resolution": "Reviewed USB logs and confirmed no files were copied. Applied GPO to block non-approved hardware IDs.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "MFA prompt not appearing",
+    "description": "I am trying to log into the ERP system, but the Duo push notification never hits my phone. I have stable internet, and my app is updated to the latest version. This is blocking my work for the day.",
+    "priority": "Medium",
+    "resolution": "Resynchronized the user's Duo token in the admin dashboard and cleared the local cache on the mobile device.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "SSL Certificate expiration",
+    "description": "The browser is showing 'Your connection is not private' when accessing our internal Wiki. It seems like the SSL certificate for wiki.internal.corp has expired as of this morning.",
+    "priority": "High",
+    "resolution": "Renewed the internal CA certificate and pushed it to the web server IIS bindings.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access shared drive",
+    "description": "Hey, I used to have access to the \\\\FILESERVER\\Finance folder, but now I get 'Access Denied'. I haven't changed anything on my end, can you check my permissions?",
+    "priority": "Low",
+    "resolution": "User was accidentally removed from the 'Finance-Read-Only' security group. Re-added user to the group and verified permission propagation.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Screen locker GPO failure",
+    "description": "I noticed that the screens on our lab machines running Windows 10 LTSC aren't locking after 15 minutes of inactivity. We need this for HIPAA compliance. Please investigate why the GPO isn't applying.",
+    "priority": "Medium",
+    "resolution": "Found a conflicting local policy setting. Overwrote local policy with domain GPO using gpupdate /force.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspicious email signature",
+    "description": "I received an email from an external sender that claims to be our CFO, but the signature looks weird and the reply-to address is a Gmail account. I haven't clicked anything, just wanted to report it.",
+    "priority": "Medium",
+    "resolution": "Flagged the sender's domain as malicious in the spam filter and blocked all incoming mail from that specific address.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "BitLocker recovery screen",
+    "description": "My laptop (Dell Latitude 5420) is stuck at the BitLocker recovery screen every time I boot up. It's asking for a 48-digit recovery key that I don't have. I have a meeting in 10 minutes, this is a disaster!",
+    "priority": "High",
+    "resolution": "Retrieved the recovery key from Azure AD device management and provided it to the user. Suggested a firmware update to prevent future boot loops.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "External drive encryption required",
+    "description": "IT policy states that I need to encrypt my external backup drive before I can use it with my workstation. Can you point me to the right tool or guide to do this on Windows 11?",
+    "priority": "Low",
+    "resolution": "Provided instructions for using BitLocker To Go and verified the drive was encrypted to company standards.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "User account compromise suspected",
+    "description": "We are seeing successful login attempts for user 'jdoe' from an IP address in a country where we have no operations. The logs show massive file access within SharePoint immediately after the login.",
+    "priority": "Critical",
+    "resolution": "Disabled user account, invalidated all OAuth tokens, and initiated an incident response forensic investigation.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Phishing simulation alert for user j.doe",
+    "description": "User j.doe clicked a link in a suspicious email titled 'Urgent: Payroll Adjustment' while using Windows 10 Pro. The email redirected to an external domain that mimicked our O365 login page. Antivirus blocked the secondary script execution, but the user may have entered credentials.",
+    "priority": "High",
+    "resolution": "Reset user password, forced MFA token re-enrollment, and ran a full EDR scan on the device. No lateral movement detected.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Account locked out after multiple failed attempts",
+    "description": "My domain account is locked again. I was working on my MacBook Pro M2, and it just stopped letting me log into the VPN. I'm pretty sure I typed the password correctly, but now it says 5 failed attempts.",
+    "priority": "Medium",
+    "resolution": "Unlocked account in Active Directory and cleared cached credentials on the local keychain. Advised user to check for hung processes in the background.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized USB device detection",
+    "description": "Our DLP system flagged an event on workstation WS-FIN-04. A user attempted to mount a mass storage device, specifically a SanDisk Ultra, which is unauthorized per our corporate security policy. The action was blocked by the endpoint agent.",
+    "priority": "Medium",
+    "resolution": "Applied device control policy block to the specific hardware ID. Contacted department manager to reinforce hardware policy.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Suspected malware on reception computer",
+    "description": "The computer at the front desk is acting really weird. It\u2019s opening random windows and Chrome keeps showing pop-ups for 'Tech Support' scams. I'm worried it's infected.",
+    "priority": "High",
+    "resolution": "Performed a remote isolation of the host. Ran Malwarebytes and Microsoft Defender offline scan, which identified a malicious browser extension and removed it.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "MFA push notification fatigue",
+    "description": "I keep getting Duo push notifications on my iPhone 14 when I'm not even trying to log in. I've received five in the last ten minutes and it's starting to freak me out. What do I do?",
+    "priority": "Critical",
+    "resolution": "Terminated all active sessions for the user and forced a global password reset. Investigation confirmed an ongoing credential stuffing attack targeting the account.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "BitLocker recovery key requested",
+    "description": "I booted up my Dell Latitude 5420 this morning and it's stuck on a blue screen asking for a BitLocker recovery key. It says 'Enter the recovery key to get going again.' I don't know where to find this.",
+    "priority": "Low",
+    "resolution": "Retrieved recovery key from Azure AD portal and provided it to the user. Verified TPM state and updated BIOS to prevent further lockout.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection failing with Error 807",
+    "description": "I can't connect to the office network from my home office. I keep getting Error 807. I've tried restarting my router and my laptop running Windows 11, but no luck.",
+    "priority": "Low",
+    "resolution": "Identified an expired security certificate on the VPN gateway. Renewed the SSL certificate and re-provisioned the tunnel configuration.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Potential insider threat - Data egress",
+    "description": "SIEM alerts triggered for user s.smith moving large volumes of sensitive project files to an unapproved cloud storage provider. Logs indicate 4GB of data uploaded via browser in a short timeframe.",
+    "priority": "Critical",
+    "resolution": "Revoked O365 access and locked user account. Escalated to HR and Legal for forensic investigation of company-issued laptop.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Update failed: Security patch KB5034441",
+    "description": "My machine refuses to install the latest Windows security patch, KB5034441. It fails with error code 0x80070643 every single time I restart. Can someone fix this?",
+    "priority": "Medium",
+    "resolution": "Manually resized the Recovery Partition (WinRE) to accommodate the package size. Successfully applied the patch and verified system integrity.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Lost company laptop",
+    "description": "I left my company laptop on the train this morning. It's an HP EliteBook. I'm panicking, please help.",
+    "priority": "Critical",
+    "resolution": "Issued a remote wipe command via Intune. Marked device as 'Lost' in the inventory system to ensure hard drive encryption remains active.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "SSL/TLS handshake failure",
+    "description": "Some of our legacy internal web apps are failing to load on modern browsers with a 'Your connection is not private' error. It seems like the server is still using TLS 1.0, which we blocked last week.",
+    "priority": "Medium",
+    "resolution": "Updated the IIS configuration on the server to support TLS 1.2 and re-bound a SHA-256 certificate to the site.",
+    "category": "Security",
+    "type": "base"
+  },
+  {
+    "title": "Request to whitelist a new software tool",
+    "description": "Hey, I need to use this new automation script tool for my project. The security software is blocking it from running on my Linux machine (Ubuntu 22.04). Can you please whitelist it?",
+    "priority": "Low",
+    "resolution": "Reviewed the binary's hash and source origin. Added an exclusion rule for the specific file path in the endpoint security console.",
+    "category": "Security",
+    "type": "base"
+  }
+]

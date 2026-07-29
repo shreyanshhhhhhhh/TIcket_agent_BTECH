@@ -1,0 +1,866 @@
+[
+  {
+    "title": "Adobe Creative Cloud installation failure",
+    "description": "I'm trying to install Photoshop on my MacBook Pro M2 running macOS Sonoma 14.2, but the installer crashes at 42% with error code 191. I have already cleared the OOBE folder cache and tried restarting the machine twice, but the issue persists. Please advise.",
+    "priority": "Medium",
+    "resolution": "Resolved by running the Adobe Creative Cloud Cleaner Tool to remove corrupted registry artifacts and reinstalling the app from the enterprise portal.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Salesforce login loop",
+    "description": "Every time I try to log into Salesforce using Chrome on Windows 11, it just keeps refreshing the login page. I've cleared my browser cache and cookies, but it's not helping. Help, I can't update my leads!",
+    "priority": "High",
+    "resolution": "Identified as a conflict with a recently pushed browser extension. Disabled the extension and forced a browser refresh.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "SAP GUI performance issues",
+    "description": "SAP GUI 7.70 is running incredibly slowly on my workstation today. Every time I hit enter after a transaction code, the hourglass spins for at least 30 seconds before loading. My colleagues are not seeing this issue. Is there a server-side lag?",
+    "priority": "Medium",
+    "resolution": "Cleared the local SAP GUI trace files and increased the memory allocation settings in the connection configuration.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Unable to export reports from PowerBI",
+    "description": "Getting an error whenever I try to export to PDF in PowerBI Desktop version 2.124. I keep seeing 'Internal Error: 0x80040154'. I am running this on a Windows 10 VM with 16GB of RAM.",
+    "priority": "Low",
+    "resolution": "Updated the WebView2 runtime on the VM as the existing version was incompatible with the current PowerBI build.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Zoom crashes upon joining meeting",
+    "description": "Hey, Zoom keeps closing immediately after I click 'Join Meeting'. I'm on a ThinkPad X1 Carbon running Windows 11. I updated the drivers and reinstalled the app, but still nothing.",
+    "priority": "High",
+    "resolution": "Updated the Intel integrated graphics driver, which was causing a rendering conflict with the hardware acceleration feature in Zoom.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "SQL Server Management Studio connection timeout",
+    "description": "I'm attempting to connect to the staging database via SSMS 19.1, but I am receiving a 'Connection Timeout Expired' error. The network team confirmed the VPN is active, and I can ping the server IP successfully. Could you check if my credentials have expired in the Active Directory group?",
+    "priority": "Critical",
+    "resolution": "Reset the user's domain password which had reached the mandatory 90-day expiration threshold.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Slack desktop notifications not appearing",
+    "description": "Slack desktop app on macOS is not showing any notifications, even though 'Do Not Disturb' is off. I checked system settings, and notifications are enabled for Slack. It's annoying because I keep missing messages from my manager.",
+    "priority": "Low",
+    "resolution": "Reset the Slack app data via the 'Help > Troubleshooting' menu and re-authorized system notification permissions.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Jira plugin incompatibility",
+    "description": "After the latest Jira update to 9.12.0, our time-tracking plugin stopped working entirely. It is throwing a '500 Internal Server Error' when we try to log hours. This is stopping our billing process for the month.",
+    "priority": "Critical",
+    "resolution": "Rolled back the plugin version to the stable release that supports the new Jira API schema.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Outlook search not returning results",
+    "description": "Search is broken in Outlook 365. When I type anything into the search bar, it returns 'No results found', even for emails that are sitting right in my inbox. I've tried rebuilding the Windows Search index, but that didn't work.",
+    "priority": "Medium",
+    "resolution": "Created a new Outlook profile and re-synced the OST file to resolve a corrupted indexing database.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Visual Studio Code terminal won't launch",
+    "description": "Integrated terminal in VS Code just shows a blank screen and crashes after a few seconds. Running on Windows 10. I suspect it's related to the recent PowerShell update. Can you take a look?",
+    "priority": "Low",
+    "resolution": "Updated the integrated terminal profile settings in VS Code to point to the correct path for PowerShell 7.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Cannot open files in AutoCAD",
+    "description": "I keep getting 'Fatal Error: Unhandled Access Violation' when opening DWG files created in AutoCAD 2024. My PC meets all the system requirements. This is extremely frustrating as I have a deadline in two hours.",
+    "priority": "High",
+    "resolution": "Installed the latest AutoCAD 2024.1.2 hotfix, which addresses memory leaks related to large file drawing handles.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "OneNote sync error 0xE0000007",
+    "description": "My notes are not syncing across my devices. My laptop is showing a sync error code 0xE0000007. I've signed out and signed back in, but it's still stuck.",
+    "priority": "Medium",
+    "resolution": "Identified a corrupted page in a section. Moved the notes to a new section, deleted the corrupted one, and forced a manual sync.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Salesforce desktop app crashes on startup",
+    "description": "The Salesforce desktop application is crashing immediately upon launch on my MacBook Pro running macOS Sonoma 14.2. I have tried reinstalling the application and clearing the cache, but it still throws a 'SIGABRT' error code in the logs. Can someone assist me with this?",
+    "priority": "Medium",
+    "resolution": "Updated the Salesforce CLI and cleared the ~/Library/Application Support/Salesforce directory to resolve the corrupted configuration files.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Adobe Acrobat Pro Licensing Issue",
+    "description": "Hey, I keep getting a 'Licensing Service Not Available' error when trying to open PDFs. I'm on Windows 11 and re-signed into Creative Cloud, but it didn't help. This is blocking my document review process.",
+    "priority": "High",
+    "resolution": "Performed a clean re-installation of the Adobe Creative Cloud desktop app and reset the local licensing token file.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Excel 365 freezing with large datasets",
+    "description": "Every time I try to run a VLOOKUP across 50k rows in Excel for Microsoft 365, the application stops responding and force-closes. I am on a Dell Latitude 5420 with 16GB of RAM. It's becoming impossible to finish my weekly reporting.",
+    "priority": "High",
+    "resolution": "Disabled hardware graphics acceleration in Excel settings and increased the virtual memory paging file size on the workstation.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Unable to access VPN client",
+    "description": "My Cisco AnyConnect client is stuck on 'Connecting' forever. I've restarted my laptop twice and checked my internet connection, but nothing changes. Please fix this as I need to access the internal server.",
+    "priority": "Critical",
+    "resolution": "Flushed the local DNS cache and updated the Cisco AnyConnect Secure Mobility Client to the latest version compatible with the current network firmware.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Slack notifications not appearing",
+    "description": "I'm not getting any push notifications on my Slack app. I've checked my system settings and the Slack internal settings, but they seem fine. Running on Windows 10.",
+    "priority": "Low",
+    "resolution": "Re-registered the Windows Notification Service (WNS) and verified that Slack is allowed to run in the background.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Jira dashboard widgets failing to load",
+    "description": "Most of the widgets on my Jira dashboard are showing a 504 Gateway Timeout error. My team relies on these for sprint tracking. Is there a server-side issue?",
+    "priority": "Medium",
+    "resolution": "Identified a stale browser cache issue; cleared cookies and cache for the Jira domain, which restored functionality.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Zoom app audio input failure",
+    "description": "My Zoom app doesn't recognize my Jabra headset even though Windows settings sees it perfectly. I've tried changing the input settings in the Zoom audio menu, but it shows 'No input device found'. Very annoying during client meetings.",
+    "priority": "Medium",
+    "resolution": "Updated the audio drivers in Device Manager and granted Zoom explicit microphone permissions within Windows Privacy Settings.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Database connection error in proprietary software",
+    "description": "Getting 'Error 0x80040E4D: Login failed for user' when opening the Inventory Management Tool. I verified my credentials, and they work on the web portal. Please investigate.",
+    "priority": "High",
+    "resolution": "Reset the user's password in Active Directory and force-synced the identity provider with the local database server.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Outlook search not returning recent emails",
+    "description": "My search bar in Outlook is not indexing emails sent after Tuesday. I've tried rebuilding the index, but it gets stuck at 4,000 items. Need help ASAP.",
+    "priority": "Medium",
+    "resolution": "Performed a manual repair of the Outlook Data File (.ost) using the SCANPST.EXE utility.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Browser extension interfering with payroll app",
+    "description": "I cannot hit the 'Submit' button on the payroll site. It seems like one of my Chrome extensions is blocking the script. Can you help me figure out which one?",
+    "priority": "Low",
+    "resolution": "Used Incognito mode to confirm extension interference, then identified the ad-blocker as the culprit and whitelisted the payroll domain.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "OneDrive sync conflict",
+    "description": "I have multiple files stuck in a sync conflict loop in OneDrive for Business. It's creating duplicate copies of my project files every time I save. My laptop is running out of space.",
+    "priority": "Medium",
+    "resolution": "Unlinked and relinked the OneDrive account to force a fresh sync of the metadata files.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Critical vulnerability patch needed",
+    "description": "The security team flagged my machine for running an outdated version of Java. I cannot update it manually as I don't have local admin rights. Please update it.",
+    "priority": "Critical",
+    "resolution": "Pushed the Java 8 update 401 via SCCM to the user's workstation.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Salesforce login loop on Chrome",
+    "description": "I'm stuck in an infinite redirect loop when trying to access Salesforce on Chrome version 122.0.6261. I have cleared my cache and cookies multiple times, but the issue persists on both my workstation and laptop. This is preventing me from updating client records for the end-of-month report.",
+    "priority": "High",
+    "resolution": "Cleared site-specific storage settings and disabled a conflicting browser extension causing the redirect loop.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Adobe Acrobat Pro crashing on launch",
+    "description": "Every time I open a PDF, Acrobat Pro 2023 crashes immediately. I get an error code 0xc0000005. Running Windows 11 Enterprise. Help.",
+    "priority": "Medium",
+    "resolution": "Performed a clean re-installation of Adobe Acrobat using the Creative Cloud Cleaner Tool to resolve corrupted registry keys.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "ERP System throwing database connection errors",
+    "description": "The SAP GUI keeps disconnecting randomly with error 'NIERRO_CONN_BROKEN'. It happens mostly when I run large report exports on my MacBook Pro M2. My network connection is stable, so I suspect it might be a timeout setting in the application.",
+    "priority": "High",
+    "resolution": "Increased the KeepAlive timeout settings in the SAP GUI configuration file to handle long-running database queries.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Slack notifications not appearing",
+    "description": "Hey, for some reason I'm not getting any desktop notifications for Slack. I checked my settings, and they are turned on. I'm on macOS Sonoma. It's annoying because I keep missing messages from my manager.",
+    "priority": "Low",
+    "resolution": "Reset Slack notification permissions in macOS System Settings and toggled the Focus mode interference.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Unable to export reports from PowerBI",
+    "description": "I am trying to export a dashboard to PDF, but the export button is greyed out. My permissions haven't changed, and I am using the desktop version. Please look into this as soon as possible.",
+    "priority": "Medium",
+    "resolution": "Updated PowerBI Desktop to the latest monthly release; the issue was caused by an expired local authentication token.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "VPN client fails to initialize",
+    "description": "Cisco AnyConnect isn't starting after the latest company image update. It just sits at 'Initializing...' and eventually times out. I've tried rebooting twice already.",
+    "priority": "Critical",
+    "resolution": "Re-registered the Cisco AnyConnect virtual adapter service via command prompt to resolve a driver conflict.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Outlook search not returning results",
+    "description": "My Outlook search is completely broken. It tells me there are no results even for emails I just received. I'm using Outlook 365 on Windows 10.",
+    "priority": "Low",
+    "resolution": "Rebuilt the Windows Search Indexing for Outlook and repaired the OST file using scanpst.exe.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Zoom audio output issue",
+    "description": "My Zoom client is not picking up my headset. It sees the device, but there is no sound output during meetings. I have checked the device settings within Zoom and Windows. This is extremely frustrating during client calls.",
+    "priority": "Medium",
+    "resolution": "Updated the audio drivers for the docking station and set the headset as the primary communication device in Windows Sound settings.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "AutoCAD license error",
+    "description": "Getting error 1.10.1 when launching AutoCAD 2024. It says the license is in use on another machine, but I have already signed out of my other device. Please help fix this.",
+    "priority": "Medium",
+    "resolution": "Reset the Autodesk local login cache files to force a fresh authentication with the license server.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Missing Excel Add-in",
+    "description": "The custom company financial add-in disappeared after the Office update this morning. I really need this to finish the quarterly budget. Can you please check if it was disabled?",
+    "priority": "Low",
+    "resolution": "Re-enabled the COM Add-in via the Excel Options menu and updated the registry keys for Trusted Locations.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Docker Desktop failing to start",
+    "description": "Docker won't start on my machine after a kernel update. It gives an error regarding WSL2 integration. My current WSL version is 2.0.1.0.",
+    "priority": "High",
+    "resolution": "Updated the WSL2 kernel component and enabled virtualization features in the BIOS as they were reset by the firmware update.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Application freezes during startup",
+    "description": "The proprietary inventory software hangs at the splash screen every time. It uses a local SQL Express database. I need this to process warehouse shipments.",
+    "priority": "Critical",
+    "resolution": "Increased the memory allocation for the SQL Express instance in the configuration.xml file.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Salesforce login loop on Chrome",
+    "description": "I keep getting stuck in a redirect loop whenever I try to log into Salesforce. I have cleared my cache and cookies on Chrome v120.0, but the error persists. It just refreshes the login page continuously.",
+    "priority": "High",
+    "resolution": "Cleared corrupted browser cache files and updated Salesforce security certificates in the user's profile.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Adobe Acrobat Pro crashing on launch",
+    "description": "My Acrobat Pro keeps crashing the second I open a PDF. I am running Windows 11 and this started after the latest Creative Cloud update. Event Viewer shows faulting module name: ntdll.dll.",
+    "priority": "Medium",
+    "resolution": "Performed a clean reinstall of Adobe Acrobat and disabled hardware acceleration settings.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "SAP GUI connectivity issue",
+    "description": "Getting error 10061 Connection Refused when launching SAP. It was working fine this morning. Please help.",
+    "priority": "High",
+    "resolution": "Flushed the local DNS cache and verified connectivity to the application server via VPN.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Slack not showing new notifications",
+    "description": "Slack on my MacBook Pro M2 is being super annoying. I'm not getting any push notifications for direct messages, even though my settings say they are on. I've restarted the app three times already.",
+    "priority": "Low",
+    "resolution": "Reset Slack notification preferences and verified that macOS Focus mode was not blocking the app.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Excel freezing with large datasets",
+    "description": "Every time I try to run a VLOOKUP on a spreadsheet with over 50,000 rows, Excel becomes unresponsive and eventually force closes. I need this data for a meeting in an hour. Please fix this ASAP.",
+    "priority": "Critical",
+    "resolution": "Converted the data range into an Excel Table and disabled 'Automatic Calculation' during the process.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Internal Portal 403 Forbidden error",
+    "description": "I cannot access the HR portal. I am getting a 403 Forbidden error every time I navigate to the benefits page. I have already tried logging out and back in.",
+    "priority": "Medium",
+    "resolution": "Updated user permissions in Active Directory to reflect the new department security group.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Zoom audio sync lag",
+    "description": "The audio is consistently desynced from the video during all-hands meetings. My network latency is fine, but the Zoom desktop client CPU usage spikes to 90% during calls.",
+    "priority": "Medium",
+    "resolution": "Updated Zoom client to the latest version and adjusted audio device buffer settings in the application.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Issue with Outlook search",
+    "description": "Search in Outlook 365 isn't finding any emails sent after Tuesday. It's just spinning forever. Can someone take a look?",
+    "priority": "Low",
+    "resolution": "Rebuilt the Windows Search Index for Outlook data files.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Jira plugin incompatibility",
+    "description": "Since the recent Jira server upgrade, our custom reporting plugin is throwing a '500 Internal Server Error'. The logs indicate a dependency conflict with the new Java runtime environment.",
+    "priority": "High",
+    "resolution": "Updated the plugin to version 2.4.1 to ensure compatibility with the updated Java environment.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Cannot open .dwg files in AutoCAD",
+    "description": "AutoCAD 2024 is failing to open files directly from the network share. It works if I copy the file to my desktop first. It's really slowing down my workflow.",
+    "priority": "Medium",
+    "resolution": "Adjusted the trusted locations list in AutoCAD settings to include the network drive path.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Teams camera not detected",
+    "description": "My webcam works in every app except Microsoft Teams. It shows a black screen with a 'Camera not detected' error code 0x80070005. I've checked my privacy settings and the camera is enabled for Teams.",
+    "priority": "Medium",
+    "resolution": "Updated webcam drivers via Device Manager and cleared the Teams cache directory.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Application Deployment failure",
+    "description": "Tried to install the new proprietary accounting software, but it hangs at 84% during the configuration stage. Error code: 1603. I have administrative rights on my laptop.",
+    "priority": "High",
+    "resolution": "Removed leftover registry keys from a failed previous installation and ran the installer with full elevated privileges.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Adobe Creative Cloud login loop",
+    "description": "Every time I try to launch Photoshop on my Windows 11 workstation, it prompts me to sign in, accepts my credentials, and then immediately boots me back to the sign-in screen. I have already cleared the OOBE and SLStore folders as suggested on the forums, but the issue persists. My machine ID is LPT-8842.",
+    "priority": "Medium",
+    "resolution": "Resolved by clearing cached credential tokens in Windows Credential Manager and reinstalling the Creative Cloud Desktop app.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Salesforce page unresponsive",
+    "description": "Salesforce is freezing whenever I try to generate a quarterly report. The browser console shows a 'Script timeout' error at line 442. This is happening on Chrome 122.0 on macOS Sonoma.",
+    "priority": "High",
+    "resolution": "Identified a malformed custom report filter; updated the filter logic and cleared browser cache.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Jira keeps giving me 503 errors",
+    "description": "Hey, Jira is down again. I keep getting a 503 Service Unavailable error when I try to update my sprint tickets. It's really slowing down our daily standup.",
+    "priority": "High",
+    "resolution": "Performed a rolling restart of the Jira application nodes; service restored.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Slack notification sounds missing",
+    "description": "My Slack notifications have stopped making sounds entirely. I've checked my system settings on macOS and the Slack preferences, but everything looks correct. Any ideas?",
+    "priority": "Low",
+    "resolution": "Updated Slack to the latest version and reset the notification sound scheme in settings.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "ERP System crashing on boot",
+    "description": "The SAP GUI crashes immediately upon launch with error code 0x80040154. This is a critical issue as we cannot process invoices for the month-end closing. Please help ASAP.",
+    "priority": "Critical",
+    "resolution": "Re-registered the missing DLL files (saplogon.dll) and performed a repair installation of the SAP GUI client.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Outlook search not returning results",
+    "description": "Search in Outlook is completely broken. It says 'No results found' for emails I can clearly see in my inbox. Running Windows 10, version 22H2.",
+    "priority": "Medium",
+    "resolution": "Rebuilt the Windows Search Index for Outlook data files.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Missing plugin in AutoCAD",
+    "description": "My civil engineering plugin is missing from the toolbar after the latest update to AutoCAD 2024. I have a major deadline in two hours and I can't export my files without it. Frustrated that these updates always break my setup.",
+    "priority": "High",
+    "resolution": "Re-registered the plugin DLL in the AutoCAD registry and verified file paths in the AppData directory.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Zoom audio failure",
+    "description": "Zoom isn't picking up my headset mic. The device is selected in the Zoom audio settings, but the input level bar doesn't move when I speak. Working on a Dell Latitude 5420.",
+    "priority": "Medium",
+    "resolution": "Updated the Realtek audio driver and granted microphone permissions in Windows Privacy settings.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Excel Add-in failing to load",
+    "description": "The custom company data feed add-in in Excel is failing with a runtime error 1004. This started happening after I installed the most recent Office 365 security patch.",
+    "priority": "Low",
+    "resolution": "Trusted the add-in file location in the Excel Trust Center settings.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Notion desktop app black screen",
+    "description": "My Notion app just shows a black screen whenever I open it. I've tried reinstalling it twice, but nothing works. I need access to my notes for the meeting in 20 minutes.",
+    "priority": "Medium",
+    "resolution": "Cleared the Notion cache directory located in %AppData% and performed a clean re-installation.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Teams file upload error",
+    "description": "Unable to upload any files to the team channel. Getting an error code 403 Forbidden. Using Microsoft Teams version 24004.1309.",
+    "priority": "Medium",
+    "resolution": "Cleared the Teams cache files and re-authenticated the user's session.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Database connection timeout",
+    "description": "The internal BI dashboard is throwing a 'Connection Timeout' error after 30 seconds of loading. It seems like a backend issue, but I wanted to report it before I get a ticket from the users.",
+    "priority": "High",
+    "resolution": "Increased the SQL query timeout threshold on the application server connection string.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Salesforce page load timeout",
+    "description": "When attempting to load the 'Leads' dashboard on Salesforce, the page hangs indefinitely and eventually displays a 504 Gateway Timeout error. This is occurring on Chrome version 124.0.6367.60 across multiple workstations in the marketing department. I have cleared the browser cache, but the issue persists.",
+    "priority": "High",
+    "resolution": "Increased session timeout threshold on the proxy server and whitelisted specific Salesforce IP ranges in the corporate firewall.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Adobe Acrobat crashes on startup",
+    "description": "Adobe Acrobat Pro DC crashes immediately upon opening a PDF file. The Event Viewer shows a Faulting module name: Acrobat.dll, version: 23.8.20470.0. I am running Windows 11 Pro 22H2 and have already tried a full reinstallation of the Creative Cloud suite.",
+    "priority": "Medium",
+    "resolution": "Performed a clean registry scrub using the Adobe Removal Tool and reinstalled the application using the enterprise MSI installer.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Can't login to SAP",
+    "description": "Hey, I keep getting a 'License limit exceeded' error when I try to log into SAP. It was working fine yesterday, but now it just boots me out immediately. Help?",
+    "priority": "Medium",
+    "resolution": "Identified a hung session for the user on the SAP application server and performed a forced disconnect of the user ID.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Jira issue linking not working",
+    "description": "Whenever I try to link a ticket to a parent epic, the 'Link' button remains greyed out after selecting the ticket number. I'm using Safari on macOS Sonoma. This is blocking our sprint planning.",
+    "priority": "Medium",
+    "resolution": "Updated user permissions within the Jira project scheme to allow 'Link Issues' transition capability.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Outlook search returning zero results",
+    "description": "My search bar in Outlook 365 isn't finding any emails sent after Monday. I've tried rebuilding the index in Windows Search Options, but it's still stuck at 'Indexing pending'. My machine is a Dell Latitude 5440.",
+    "priority": "Low",
+    "resolution": "Manually reset the Indexing Service via Command Prompt and performed an online repair of the Microsoft 365 Office suite.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Application failure: Heavy slow performance",
+    "description": "The custom ERP software is lagging significantly today. Every time I click a button, the cursor turns into a spinning wheel for at least 30 seconds. This is making it impossible to process customer orders on time.",
+    "priority": "High",
+    "resolution": "Diagnosed a memory leak on the application server; performed a rolling restart of the IIS services and cleared the application pool cache.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Tableau workbook error",
+    "description": "I'm receiving an 'Internal Error: Data source not found' when trying to refresh the extract for the quarterly financial workbook. Version is 2023.1. I checked the SQL connection and it seems fine.",
+    "priority": "High",
+    "resolution": "Updated the expired service account credentials in the Tableau Server data source settings.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Slack desktop notifications not appearing",
+    "description": "I'm not getting any notifications for direct messages or mentions on the Slack desktop app. My system settings in Windows 10 allow notifications for Slack, but the app itself seems to be ignoring them.",
+    "priority": "Low",
+    "resolution": "Disabled 'Do Not Disturb' mode within the Slack app settings and reset the notification preferences cache.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Unable to export report in Chrome",
+    "description": "The export to Excel button in our web portal just stopped working. Nothing happens when I click it. Please fix it ASAP.",
+    "priority": "Medium",
+    "resolution": "Resolved a conflict caused by a recent browser extension update; advised user to disable the specific 'PDF Converter' extension.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Zoom audio driver error",
+    "description": "My Zoom call keeps failing with error 10006. It says it can't detect a speaker output. I'm using a Jabra headset connected to my MacBook Pro M2.",
+    "priority": "Medium",
+    "resolution": "Updated the audio drivers in macOS system settings and re-selected the correct output device within the Zoom application settings.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Critical: Database connection error in Production",
+    "description": "The web application is throwing 'ORA-12516: TNS:listener could not find available handler with matching protocol stack' errors for all users. This is impacting all regional offices. Please investigate immediately.",
+    "priority": "Critical",
+    "resolution": "Detected maxed-out connections on the Oracle DB instance; increased the PROCESSES parameter and killed idle zombie sessions.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "VS Code debugger failing",
+    "description": "Trying to run the debugger in VS Code version 1.85.1 but it instantly terminates with 'exit code 3221225477'. I've checked my launch.json file and everything looks correct.",
+    "priority": "Low",
+    "resolution": "Found a corrupted node_modules folder; deleted the folder and re-ran 'npm install' to resolve missing dependency errors.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Application crash on startup",
+    "description": "Every time I try to launch the Adobe Creative Cloud suite, it crashes immediately after the splash screen. I'm running Windows 11 on a Dell Precision workstation. The Event Viewer shows an error code 0xc0000005 in ntdll.dll.",
+    "priority": "High",
+    "resolution": "Performed a clean reinstallation of the Creative Cloud desktop app and updated the GPU drivers to the latest WHQL release.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Cannot export reports in SAP",
+    "description": "Hey, I'm trying to export the Q3 financial report to Excel from SAP GUI 7.70, but it just hangs indefinitely. I've tried restarting the app and my MacBook Pro, but no luck. It's really urgent.",
+    "priority": "Medium",
+    "resolution": "Cleared the SAP GUI local cache and increased the memory allocation limits in the configuration settings.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Salesforce login loop",
+    "description": "My Salesforce instance keeps redirecting me back to the login page after I enter my MFA code. I've tried clearing my Chrome cache and cookies, but the issue persists. Using macOS Sonoma 14.2.",
+    "priority": "Medium",
+    "resolution": "Detected an expired session token in the user's browser profile; cleared site data specifically for the Salesforce domain.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Slack desktop notifications not appearing",
+    "description": "Slack desktop app on my ThinkPad E15 stopped showing notifications. I checked system settings, and 'Do Not Disturb' is off. It's annoying because I keep missing client messages.",
+    "priority": "Low",
+    "resolution": "Reset the Slack application data via the Help menu and re-granted notification permissions in Windows Settings.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Critical Error in AutoCAD",
+    "description": "Fatal error during dwg file save operation: Unhandled Access Violation Reading 0x0000 Exception at 7ff81230h. This is happening on my primary workstation and I cannot lose this drawing. Please help immediately.",
+    "priority": "Critical",
+    "resolution": "Recovered the file from the .bak backup folder and ran a RECOVER command on the corrupted .dwg file to repair the database.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Jira dashboard widgets blank",
+    "description": "The widgets on my Jira dashboard aren't loading, just showing grey boxes. I am using the latest version of Firefox. Everyone else on the team seems fine.",
+    "priority": "Low",
+    "resolution": "Identified a browser extension (AdBlocker) that was interfering with the dashboard script loading; added Jira domain to the whitelist.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Outlook search functionality broken",
+    "description": "Searching for emails in Outlook 365 yields zero results even for messages I can see in my inbox. Running Windows 10. The search bar just spins and returns 'No results found'.",
+    "priority": "Medium",
+    "resolution": "Rebuilt the Windows Search Index for Outlook and repaired the Office 365 installation.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Python script failing to import pandas",
+    "description": "I'm getting an 'ImportError: DLL load failed' when trying to run my data analysis script in VS Code. My environment is Python 3.10. I tried pip installing it again but it didn't help.",
+    "priority": "Medium",
+    "resolution": "Identified a conflict between the system path and the virtual environment; updated the path variable to point correctly to the local site-packages.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Zoom audio echo",
+    "description": "Hi, people on my team calls keep complaining that they hear themselves echoing when I speak. I'm using a Jabra headset on my iMac M2. How do I fix this?",
+    "priority": "Low",
+    "resolution": "Adjusted the audio input sensitivity in the Zoom desktop client and updated the Jabra Direct firmware.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Database connection error in custom app",
+    "description": "The internal Inventory Management System is throwing a 500 error whenever we try to update stock. The log says 'Connection pool exhausted'. Please investigate, we have shipments going out today.",
+    "priority": "Critical",
+    "resolution": "Increased the maximum connection pool size in the application's configuration file and killed zombie processes on the SQL server.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Teams camera frozen",
+    "description": "My camera freezes every time I join a meeting on Teams. It works fine in the Windows Camera app, so I know the webcam isn't broken. Frustrating as I have a presentation in 20 minutes.",
+    "priority": "High",
+    "resolution": "Disabled 'GPU Hardware Acceleration' within the Teams settings to resolve compatibility issues with the integrated graphics driver.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Adobe Acrobat PDF printing issue",
+    "description": "When I print PDFs from Acrobat DC, the images come out completely black. I have to print them as images to get them to look right, but that takes forever. Windows 11 system.",
+    "priority": "Low",
+    "resolution": "Updated the printer driver to the latest PCL6 version and disabled the 'Print as Image' setting by default.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Salesforce login loop on Chrome",
+    "description": "I'm stuck in a login loop whenever I try to access Salesforce via Chrome 124.0 on Windows 11. It asks for my 2FA, redirects to the dashboard, and then immediately kicks me back to the login page. I've cleared my browser cache and cookies, but the issue persists.",
+    "priority": "High",
+    "resolution": "Resolved by clearing site-specific data for Salesforce and resetting the user's Chrome sync profile to remove corrupted session tokens.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Adobe Acrobat Pro crashing on startup",
+    "description": "Every time I open a PDF, Acrobat crashes instantly with error code 0xc0000005. I'm running the latest version on macOS Sonoma. This is holding up my contract reviews.",
+    "priority": "Medium",
+    "resolution": "Performed a clean re-installation of Adobe Acrobat using the Adobe Cleaner Tool to remove residual registry entries.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Cannot export reports in SAP",
+    "description": "Exporting to Excel from SAP GUI 7.70 keeps failing with a 'File Access Denied' error. I have full permissions on the target directory. Please assist ASAP.",
+    "priority": "Medium",
+    "resolution": "Modified the SAP GUI security settings to allow the 'SAP GUI Scripting' interface to interact with the local file system.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Slack desktop app stuck on loading screen",
+    "description": "Slack just shows the spinning icon indefinitely. I've tried restarting my MacBook Pro, but it doesn't help. I need this to communicate with my team.",
+    "priority": "Medium",
+    "resolution": "Deleted the Slack application support folder located in ~/Library/Application Support/ to force a configuration refresh.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Critical latency in SQL Management Studio",
+    "description": "SSMS is taking over 30 seconds just to expand a database node. My memory usage is fine, but the application is effectively unusable. This is impacting my deployment timeline.",
+    "priority": "High",
+    "resolution": "Cleared the SSMS environment settings and disabled the 'Auto-check for updates' feature which was causing network hangs.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Outlook search not returning recent emails",
+    "description": "Outlook for Windows is not indexing emails sent after yesterday. I've tried rebuilding the index, but it says 'Indexing complete' with 0 items. Help.",
+    "priority": "Low",
+    "resolution": "Repaired the Office 365 installation and forced a re-index of the OST file via the Indexing Options control panel.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "ERP System throwing 500 internal server error",
+    "description": "Our ERP web portal is throwing a 500 error for all users when trying to access the 'Inventory' module. We cannot fulfill orders. This is a total blocker.",
+    "priority": "Critical",
+    "resolution": "Identified a memory leak on the application server and restarted the IIS worker process for the ERP site.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Microsoft Teams background blur failing",
+    "description": "Hey, whenever I turn on background blur, my camera just goes black. I'm on a Dell Latitude 5420. Can someone fix this?",
+    "priority": "Low",
+    "resolution": "Updated the integrated camera drivers and ensured the latest Teams desktop client was installed.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Java application runtime error",
+    "description": "The accounting software is throwing a 'java.lang.OutOfMemoryError: Java heap space' error during month-end processing. I have 16GB of RAM assigned to the VM. Please advise.",
+    "priority": "High",
+    "resolution": "Adjusted the Xmx heap size parameters in the application configuration file to allow for larger data processing loads.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Can't save settings in proprietary app",
+    "description": "I try to change my user preferences in the InternalPortal, but the 'Save' button is grayed out. I've refreshed the browser multiple times. Ugh.",
+    "priority": "Low",
+    "resolution": "Provided the user with the correct permission role in the Active Directory group that grants write access to application preferences.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Visual Studio 2022 project build failure",
+    "description": "I am getting a 'Metadata file could not be found' error when building my solution. It works fine for my colleague, but fails on my machine every single time.",
+    "priority": "Medium",
+    "resolution": "Removed the hidden .vs folder in the solution directory and performed a clean build.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Browser extension interfering with payroll site",
+    "description": "The payroll portal won't load the final submit button. It seems like something is blocking the script. Can you check this?",
+    "priority": "Medium",
+    "resolution": "Identified that an ad-blocking browser extension was flagging the payroll portal's submission script as malicious; added site to whitelist.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Salesforce page load timeout",
+    "description": "When I try to pull the quarterly report on Salesforce, the page hangs for about 30 seconds and then gives me an 'Error 504: Gateway Timeout'. I have tried clearing my cache on Chrome version 124.0.6367.60, but the issue persists. Can someone look into this? It is blocking my weekly submission.",
+    "priority": "High",
+    "resolution": "Increased session timeout limits on the server-side configuration and cleared stale cached metadata for the user profile.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Adobe Acrobat crashing on startup",
+    "description": "Every time I open Adobe Acrobat Pro, it crashes immediately. I'm running Windows 11 and keep getting an APPCRASH error in the Event Viewer pointing to a fault in acrord32.dll. It's super frustrating because I have three contracts to sign today.",
+    "priority": "High",
+    "resolution": "Performed a clean uninstall using the Adobe Creative Cloud Cleaner Tool and reinstalled the latest version of Acrobat Pro.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Slack desktop app stuck on loading screen",
+    "description": "Slack won't open. Just stays on the loading icon forever.",
+    "priority": "Low",
+    "resolution": "Cleared the Slack application cache folder located in %AppData%\\Slack and performed a forced restart.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Excel 365 freezing with large datasets",
+    "description": "Whenever I import CSV files larger than 50MB into Excel 365 on my MacBook Pro M2, the application freezes entirely and stops responding. Activity Monitor shows 'Not Responding' status under Microsoft Excel. I'm on macOS Sonoma 14.4. Please advise.",
+    "priority": "Medium",
+    "resolution": "Disabled hardware graphics acceleration in Excel settings and increased the memory allocation buffer for large file handling.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "ERP login failing",
+    "description": "I can't log into the ERP. It says 'Invalid credentials' but I haven't changed my password. Help.",
+    "priority": "Medium",
+    "resolution": "Synchronized user Active Directory account with the ERP database and forced a password reset.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Zoom audio loop issues",
+    "description": "I am experiencing an audio feedback loop whenever I join a meeting on Zoom version 5.17. I am using a Jabra Evolve2 headset on a Dell Latitude 7440. It makes it impossible to conduct client calls.",
+    "priority": "Medium",
+    "resolution": "Updated the Jabra firmware and adjusted the audio input/output settings in Zoom to specifically select the headset rather than the system default.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Outlook missing search results",
+    "description": "Outlook search is acting up again. It is not showing any emails received after last Tuesday. I have tried rebuilding the index via Windows Search Options, but that didn't help. Is there a fix for this?",
+    "priority": "Medium",
+    "resolution": "Repaired the Outlook data file (.ost) using the SCANPST.EXE utility and restarted the Windows Search service.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Cannot export reports in PowerBI",
+    "description": "I keep getting a 'Generic OLEDB error' when trying to export a report to PDF. I'm using the latest PowerBI desktop version. I need this fixed ASAP as the board meeting is in an hour.",
+    "priority": "Critical",
+    "resolution": "Updated the OLEDB drivers and verified permissions on the target network drive destination.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection drops in Cisco AnyConnect",
+    "description": "My VPN keeps dropping every 15 minutes while I'm using the proprietary internal web app. The console log shows 'DTLS tunnel disconnected'. Can you fix this? It's really affecting my workflow.",
+    "priority": "High",
+    "resolution": "Disabled the 'Block connections to untrusted servers' setting in the Cisco AnyConnect profile and updated the client to the latest stable release.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "VS Code plugin error",
+    "description": "The Python extension for VS Code is throwing an error: 'Command 'python.setInterpreter' not found'. This happened right after the recent VS Code update to version 1.88. Any ideas?",
+    "priority": "Low",
+    "resolution": "Uninstalled and reinstalled the Python extension, then re-indexed the virtual environment path.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "Chrome plugin broken",
+    "description": "The internal password manager extension is greyed out. It won't let me click the icon to sign in. It was working yesterday just fine.",
+    "priority": "Low",
+    "resolution": "Updated Chrome to the latest version, which resolved an incompatibility issue with the current extension manifest v3.",
+    "category": "Application",
+    "type": "base"
+  },
+  {
+    "title": "AutoCAD license error",
+    "description": "Autocad is giving me a license error code 1.1.0 every time I launch it. It says it cannot connect to the license server on the network. I've checked my connection and I am definitely connected to the office LAN.",
+    "priority": "High",
+    "resolution": "Refreshed the license lease via the Autodesk Desktop Licensing Service and cleared the local login cache.",
+    "category": "Application",
+    "type": "base"
+  }
+]

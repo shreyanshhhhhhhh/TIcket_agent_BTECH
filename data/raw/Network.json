@@ -1,0 +1,866 @@
+[
+  {
+    "title": "Intermittent connectivity on VLAN 20",
+    "description": "I am experiencing intermittent network drops on the accounting subnet (VLAN 20). Users report losing connection to the file server every 15-20 minutes, which then reconnects automatically after 30 seconds. I've already checked the uplink port on the core switch and see no CRC errors.",
+    "priority": "High",
+    "resolution": "Replaced faulty SFP+ module on the distribution switch stack.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection failing with error 806",
+    "description": "My VPN keeps crashing. I'm trying to connect from home and I keep getting error 806. I've restarted my laptop twice and verified my credentials are correct.",
+    "priority": "Medium",
+    "resolution": "Updated firewall policy to allow GRE protocol traffic for the remote user's IP.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "New printer not getting IP from DHCP",
+    "description": "We are trying to commission a new HP LaserJet Pro in the marketing wing. The device is connected to Port 14 on switch SW-MK-02, but it fails to acquire an IP address from the DHCP server. Can you check if the scope is exhausted?",
+    "priority": "Low",
+    "resolution": "Mapped the static MAC address to the correct scope and increased DHCP lease pool size.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Office Wi-Fi is super slow today",
+    "description": "The Wi-Fi in the main lobby is unusable. I'm trying to run a Zoom meeting and the video keeps freezing. It's been like this all morning.",
+    "priority": "Medium",
+    "resolution": "Identified rogue access point causing co-channel interference and disabled it.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "High latency on database cluster link",
+    "description": "We are observing packet loss between DB-NODE-01 and DB-NODE-02. Latency spiked to 400ms during the last backup window. Logs indicate potential buffer overflows on the aggregation layer.",
+    "priority": "Critical",
+    "resolution": "Applied QoS traffic shaping policies to prioritize database sync traffic over management traffic.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Cannot map network drive Z:",
+    "description": "I just logged in to my Windows 11 machine and my Z: drive is missing with a red X. It says the network path was not found. Please fix this quickly, I have a deadline.",
+    "priority": "Medium",
+    "resolution": "Cleared stale SMB sessions on the file server and re-mapped the drive via Group Policy.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Packet loss on guest network",
+    "description": "Multiple visitors have reported that they cannot load basic webpages while connected to the Guest_WiFi network. Signal strength is excellent, but DNS resolution seems to be failing intermittently.",
+    "priority": "Low",
+    "resolution": "Updated DNS forwarders on the guest gateway to use reliable public resolvers.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Site-to-site VPN tunnel down",
+    "description": "The site-to-site tunnel between the NY and London offices dropped at 03:00 UTC. Phase 1 IKE negotiation is failing with an authentication timeout. No configuration changes were made on our side.",
+    "priority": "Critical",
+    "resolution": "Renewed expired SSL/TLS certificates on the London branch firewall.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access internal intranet",
+    "description": "I am working remotely and I can't get to the company intranet portal. Every time I click the link, it just sits there and times out. My internet works fine otherwise.",
+    "priority": "Medium",
+    "resolution": "Resolved DNS split-brain configuration issue on the internal VPN DNS server.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Switch port flapping in Server Room B",
+    "description": "Port 22 on switch CISCO-9300-01 is flapping constantly. It is causing the ESXi host connected to it to migrate VMs repeatedly. Please look into this ASAP.",
+    "priority": "High",
+    "resolution": "Replaced damaged Cat6a patch cable between server rack and switch.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Why is the internet so bad?",
+    "description": "Everything is running slow. Everything. My email, the browser, everything. Is the server down again?",
+    "priority": "Medium",
+    "resolution": "Identified high bandwidth usage from a user running a P2P application and blocked the port.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Update on firewall rules",
+    "description": "We need to whitelist the IP address 192.168.50.12 for our new API integration. It needs access to port 443. Could you please update the edge firewall rules?",
+    "priority": "Low",
+    "resolution": "Created new inbound NAT and firewall rule for the specified API server.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent Wi-Fi drops in Building 4",
+    "description": "Users in the east wing of Building 4 are experiencing frequent Wi-Fi disconnects throughout the day. It seems to happen specifically when moving between APs near the breakroom. We are using Aruba 505 access points running firmware 8.10.0.0.",
+    "priority": "Medium",
+    "resolution": "Updated AP firmware to 8.10.0.4 and adjusted the transmit power settings to prevent client stickiness.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection failing with Error 809",
+    "description": "My Cisco AnyConnect client keeps throwing Error 809 when I try to connect from home. I've restarted my router and updated my Windows 11 machine, but it still won't establish the tunnel. I need this to access the shared drive by EOD.",
+    "priority": "High",
+    "resolution": "Modified client-side registry settings to allow UDP encapsulation for NAT-T, resolving the blocked IKEv2 traffic.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Unable to ping default gateway",
+    "description": "I cannot reach the default gateway from my workstation. IPCONFIG shows I have a 169.254.x.x address, indicating a DHCP failure. The ethernet cable is plugged into a Cisco Catalyst 2960 switch.",
+    "priority": "High",
+    "resolution": "Identified a misconfigured VLAN on the switch port; reassigned port to the correct Data VLAN and refreshed the DHCP lease.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Network slow, help?",
+    "description": "Internet is super slow today. Can't load files from the server. Is something broken?",
+    "priority": "Low",
+    "resolution": "Investigated bandwidth utilization and discovered a large unauthorized backup process running on a workstation; throttled the process and optimized local QoS settings.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution issues on Linux server",
+    "description": "Our dev server (Ubuntu 22.04) is failing to resolve internal domain names. Dig command returns SERVFAIL consistently. This is blocking our deployment pipeline.",
+    "priority": "Critical",
+    "resolution": "Updated the resolv.conf file to point to the correct internal DNS forwarders and cleared the local systemd-resolved cache.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Guest Wi-Fi portal not loading",
+    "description": "The captive portal for the guest network isn't popping up on mobile devices. Users are stuck at the 'Connected, No Internet' state. We need this fixed for the conference tomorrow.",
+    "priority": "Medium",
+    "resolution": "Restarted the WLC controller service and flushed the DNS entries for the portal redirect URL.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Printer offline despite wired connection",
+    "description": "The Xerox WorkCentre in the HR department shows as offline on all PCs. Static IP 192.168.1.50 is assigned, but it's not responding to pings from the server. Please check the network patch panel.",
+    "priority": "Low",
+    "resolution": "Replaced a faulty Cat6 patch cable and verified the link light on the wall jack was stable.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Latency spikes in VoIP calls",
+    "description": "Our support team is reporting severe jitter and robotic audio during calls using Zoom and RingCentral. It has been happening since Monday morning. We suspect it is related to the firewall traffic shaping policies.",
+    "priority": "High",
+    "resolution": "Adjusted firewall prioritization rules to ensure VoIP traffic is tagged with DSCP EF (Expedited Forwarding).",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN login timeout",
+    "description": "Trying to log in and it just hangs at 40%.",
+    "priority": "Medium",
+    "resolution": "Cleared stale sessions on the VPN concentrator and advised the user to re-import the profile config file.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized MAC address alert",
+    "description": "The IDS flagged an unknown device connected to the production switch port Gi0/14. I am currently away from the office, but please investigate immediately. This looks like a potential security breach.",
+    "priority": "Critical",
+    "resolution": "Physically traced the cable to an unmanaged hub installed by a user under their desk; removed the hub and disabled the port via switch management.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Cannot map network drive Z:",
+    "description": "I keep getting a 'Network Path Not Found' error when trying to map the Z drive on my MacBook Pro running macOS Sonoma. I'm connected to the office VPN, but the SMB share isn't resolving by name.",
+    "priority": "Low",
+    "resolution": "Added the file server's FQDN to the local hosts file as a temporary workaround and verified VPN routing table entries.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Partial data center outage",
+    "description": "We are experiencing packet loss affecting the racks in row B. It seems isolated to the secondary leaf switch. Multiple servers are reporting interface flaps in the system logs.",
+    "priority": "Critical",
+    "resolution": "Replaced the SFP+ module on the uplink port which was reporting CRC errors and failing to maintain 10Gbps link integrity.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection drops after 5 minutes",
+    "description": "I'm working remotely on Windows 11 and my Cisco AnyConnect VPN keeps disconnecting. It usually happens right when I try to mount a network drive. The error code is 0x4000000A. Please help, I can't finish my report.",
+    "priority": "High",
+    "resolution": "Updated the AnyConnect client to version 4.10 and cleared the local DNS cache using ipconfig /flushdns.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "WiFi intermittent on MacBook Pro",
+    "description": "My WiFi keeps dropping in the conference room. It's really frustrating because I'm in back-to-back meetings. macOS Monterey, hardware ID 88:E9:FE.",
+    "priority": "Medium",
+    "resolution": "Reset the network interface configuration and updated the wireless driver firmware.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Switch port 12 down",
+    "description": "Port 12 on the stack in IDF-02 is showing status err-disabled. The uplink to the AP in the lobby is down. Please investigate.",
+    "priority": "High",
+    "resolution": "Identified a flapping issue caused by a faulty patch cable; replaced the Cat6 cable and re-enabled the interface.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Can't access internal portal",
+    "description": "I am trying to log into the HR portal but I get a 403 Forbidden error. This happens on both Chrome and Edge. Is there a network restriction?",
+    "priority": "Medium",
+    "resolution": "Added user's IP range to the whitelist on the internal firewall and verified session cookie permissions.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Internet is super slow today",
+    "description": "Everything is just loading really slowly today. Websites take forever to open. I'm connected via Ethernet in the accounting wing.",
+    "priority": "Low",
+    "resolution": "Identified a massive background update sync from the server room; throttled traffic to prioritize user browsing.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Static IP mapping requested",
+    "description": "I need a static IP for the new Linux production server. The hostname is PROD-SRV-04 and it needs to reside in the 10.10.50.0/24 subnet.",
+    "priority": "Low",
+    "resolution": "Assigned static IP 10.10.50.45 and updated the DNS record and DHCP exclusion range accordingly.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Unable to connect to shared printer",
+    "description": "The accounting printer (HP LaserJet M507) is offline for everyone. I've tried rebooting it, but it's not pulling an IP address from the server. Windows 10 machines.",
+    "priority": "High",
+    "resolution": "Discovered the printer was set to a manual IP conflict; reset network settings and configured for DHCP reservation.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Network latency spike",
+    "description": "We are experiencing significant packet loss on the VoIP phones. Users are reporting audio clipping. Investigating logs now.",
+    "priority": "Critical",
+    "resolution": "Reconfigured QoS tags on the core switch to prioritize VoIP traffic over general web browsing.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Guest WiFi login page not appearing",
+    "description": "The redirect page for the guest WiFi isn't popping up on mobile devices. Users just get a 'connection not private' error. Please look into it.",
+    "priority": "Medium",
+    "resolution": "Updated the SSL certificate on the captive portal gateway which had expired.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VLAN tagging issue",
+    "description": "New machines in the dev lab are not picking up the correct VLAN 20. They are defaulting to the native VLAN 1. Please check the switch config.",
+    "priority": "High",
+    "resolution": "Reconfigured the trunk port to correctly tag packets for VLAN 20 and performed a port bounce.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Browser shows 'DNS_PROBE_FINISHED_NXDOMAIN'",
+    "description": "I cannot reach our main domain. It worked fine yesterday but today I just get this error. It's happening on my work laptop.",
+    "priority": "Medium",
+    "resolution": "Changed the primary DNS server settings on the local adapter to use the internal company DNS instead of ISP defaults.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Total site outage",
+    "description": "The entire building has lost connectivity. We have no internet or internal access. Users are panicking.",
+    "priority": "Critical",
+    "resolution": "Found an upstream service provider outage; engaged ISP support and transitioned traffic to the redundant backup line.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent Wi-Fi drops in Building 4",
+    "description": "Users in the east wing of Building 4 are reporting frequent Wi-Fi disconnects on both Windows 10 and macOS Monterey devices. Signal strength fluctuates between full bars and zero every 15-20 minutes. We suspect a potential channel overlap with the neighboring office's APs.",
+    "priority": "Medium",
+    "resolution": "Performed a site survey and adjusted the 5GHz channel settings on AP-B4-03 to mitigate interference.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection failing - Error 807",
+    "description": "My VPN keeps crashing when I try to log in from home. I keep getting Error 807 saying the network connection was interrupted. I'm using the Cisco AnyConnect client on my company laptop. It was working fine yesterday, but now it won't even connect to the gateway.",
+    "priority": "High",
+    "resolution": "Cleared the local cached credentials and updated the AnyConnect client to version 4.10, which resolved the handshake timeout.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Printer on 2nd floor is unreachable",
+    "description": "The LaserJet Pro M402n on the 2nd floor has disappeared from the network. Employees are receiving 'Host Unreachable' errors when trying to print documents. I have verified that the Ethernet cable is securely plugged in, but the printer's status light is solid amber.",
+    "priority": "Low",
+    "resolution": "Reset the static IP configuration on the printer interface and assigned it a new reserved address via DHCP.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Ethernet port dead at desk 42",
+    "description": "My computer says 'Network cable unplugged' even though it's connected. I tried swapping the patch cable with a known working one and still get the same error. Please send someone to check the wall jack.",
+    "priority": "Medium",
+    "resolution": "Found a faulty patch panel port in the server room closet; repatched the user's connection to a different port on the switch.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Slow file server access",
+    "description": "Accessing the Q: drive is painfully slow today. Opening a 5MB Word document takes over 30 seconds. This is happening across the entire marketing department on all workstations.",
+    "priority": "Medium",
+    "resolution": "Identified a heavy backup job running during business hours and rescheduled the process to start at 10:00 PM.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Unable to reach external website",
+    "description": "I cannot access our vendor portal at portal.vendor-site.com. I'm getting a DNS_PROBE_FINISHED_NXDOMAIN error in Chrome. Everything else on the internet works fine for me.",
+    "priority": "Low",
+    "resolution": "Flushed DNS cache on the local machine and updated the primary DNS server settings to resolve the unreachable subdomain.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Guest Wi-Fi showing 'Connected, no internet'",
+    "description": "Visitors are complaining that they can connect to the Guest network but never get the splash page. They are stuck on 'Connected, no internet'. Please look into this as soon as possible, it makes us look unprofessional.",
+    "priority": "High",
+    "resolution": "The Captive Portal service had stalled on the firewall appliance; restarted the service and cleared the active session table.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Switch port 12 flapping",
+    "description": "Monitor alerts show Switch-Core-01, port 12, is flapping every few seconds. This is causing significant latency for the accounting team connected to the stack. Please investigate.",
+    "priority": "Critical",
+    "resolution": "Replaced a faulty SFP module and fiber patch cable connecting the distribution switch to the core switch.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Can't connect to video conference",
+    "description": "I'm in a meeting right now and my Zoom call keeps freezing. My ping is spiking over 500ms. I'm connected via Wi-Fi in the conference room. This is urgent.",
+    "priority": "High",
+    "resolution": "Advised user to move closer to the access point and disconnected personal mobile devices from the Wi-Fi to reduce bandwidth congestion.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Static IP conflict",
+    "description": "We are getting alerts on the network management system regarding an IP conflict for 192.168.1.50. Two devices appear to be fighting over the same address. Please help identify them.",
+    "priority": "Medium",
+    "resolution": "Identified a rogue wireless router plugged into a wall jack by a user; disabled the port and confiscated the device.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Switch configuration lost after power outage",
+    "description": "After the storm last night, the edge switch in the warehouse failed to reload its configuration. It reverted to factory defaults. We have no connectivity in that wing.",
+    "priority": "Critical",
+    "resolution": "Restored the latest configuration backup via TFTP and saved the running-config to startup-config to ensure persistence.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "MAC address filtering issue",
+    "description": "I just received a new Dell Latitude laptop and it won't connect to the secure office network. It shows an authentication error on the 802.1x login prompt.",
+    "priority": "Low",
+    "resolution": "Added the new laptop's MAC address to the RADIUS whitelist and pushed a policy update to the endpoint.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection drops after 5 minutes",
+    "description": "My AnyConnect VPN keeps disconnecting exactly five minutes after I log in. I'm running macOS Sonoma and I've already tried reinstalling the client, but the session just hangs and then throws an 'Error 403: Security Policy Violation'. This is preventing me from accessing our internal dev environment.",
+    "priority": "High",
+    "resolution": "Updated the Cisco ASA firmware and adjusted the session timeout settings on the perimeter firewall.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Printer offline",
+    "description": "The department printer in Building B is showing offline again. Can someone come reset the static IP? It happens every time we have a power flicker.",
+    "priority": "Low",
+    "resolution": "Assigned a DHCP reservation for the printer's MAC address to prevent future IP conflicts.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "No WiFi in Conference Room 3B",
+    "description": "Literally nobody can connect to the guest WiFi in the east wing. My phone shows 'No Internet Connection' even with a full signal. This is a huge issue since we have clients visiting today.",
+    "priority": "Critical",
+    "resolution": "Identified a faulty PoE injector on the hallway access point and replaced the Cat6 patch cable.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Latency issues on internal file server",
+    "description": "I'm experiencing significant packet loss when trying to pull CAD files from the central server (IP 10.0.4.22). Ping tests show spikes up to 400ms. Is there a bandwidth throttling policy applied to the Engineering VLAN?",
+    "priority": "Medium",
+    "resolution": "Found a loop in the secondary distribution switch caused by an unauthorized desktop switch plugged into a wall port.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Unable to access portal",
+    "description": "I can't get to the HR portal. It says 'DNS_PROBE_FINISHED_NXDOMAIN'. I am on Windows 11. Help.",
+    "priority": "Medium",
+    "resolution": "Flushed the local DNS cache and corrected the static DNS server entries on the user's network adapter.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent connectivity on VLAN 20",
+    "description": "We are seeing intermittent drops across the accounting floor. Syslog shows spanning-tree topology changes occurring every 30 seconds. Could you investigate the stack switches in the server room?",
+    "priority": "High",
+    "resolution": "Replaced a faulty SFP module in the core switch that was causing flap events on the trunk link.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Cannot reach external website",
+    "description": "My browser is returning a connection timeout when I try to visit our external cloud accounting software. I can reach Google fine, so I know the internet is up. It\u2019s just this specific URL.",
+    "priority": "Low",
+    "resolution": "White-listed the cloud provider's new IP range on the edge firewall.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Office network totally down",
+    "description": "Everything is down. No internet, no server access, nothing. We have a deadline in two hours. Please fix this now!",
+    "priority": "Critical",
+    "resolution": "Replaced the failed redundant power supply on the primary core router and rebooted the gateway.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN MFA failing to trigger",
+    "description": "When I connect to the VPN using Windows 10, the Duo push notification never reaches my phone. I get an 'Authentication Timeout' error after a minute. I've restarted my laptop twice.",
+    "priority": "Medium",
+    "resolution": "Synchronized the time offset between the authentication server and the domain controller.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Slow upload speeds",
+    "description": "I'm trying to upload a 2GB video file to the marketing folder, but it's crawling at 50kbps. Usually, it\u2019s much faster. Is there a maintenance task running on the network?",
+    "priority": "Low",
+    "resolution": "Cleared the queue on the local traffic shaper that was prioritizing VOIP traffic over file transfers.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Duplicate IP address error",
+    "description": "My workstation just popped up a message saying 'Duplicate IP address detected on the network'. Now my network icon has a yellow exclamation mark. What do I do?",
+    "priority": "Medium",
+    "resolution": "Traced the conflicting MAC address to an improperly configured IoT device and updated its network settings.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Switch port flapping",
+    "description": "Port 24 on Switch-Floor-3 is flapping constantly. The logs show '%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/24, changed state to down'. It's impacting several users in the front office.",
+    "priority": "High",
+    "resolution": "Replaced the damaged Cat6 cabling run between the wall jack and the desk.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection dropping repeatedly",
+    "description": "My Cisco AnyConnect client keeps disconnecting every 10-15 minutes while I'm working from home. I am running Windows 11 and getting the error message 'The VPN connection has been interrupted'. It's making it impossible to finish my reports on time.",
+    "priority": "High",
+    "resolution": "Updated the AnyConnect client to version 4.10 and cleared the local DNS cache to resolve intermittent tunnel timeouts.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access shared network drive",
+    "description": "Hey, I can't get to the Z: drive anymore. It just says 'Network path not found' when I try to open it. I rebooted my machine but no luck.",
+    "priority": "Medium",
+    "resolution": "Mapped the drive manually using the server IP address instead of the hostname to bypass a DNS resolution issue on the local subnet.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "High latency on guest Wi-Fi",
+    "description": "The guest network in the lobby is extremely slow today. Guests are complaining that they can't even load basic web pages. Please investigate the APs in that area.",
+    "priority": "Medium",
+    "resolution": "Identified a rogue wireless access point causing channel interference and adjusted the channel width on the primary APs to reduce congestion.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Ethernet port dead on workstation 402",
+    "description": "My workstation doesn't show any lights on the NIC port. I have swapped the Cat6 cable with a known good one and tried a different wall jack, but I still have no link status on my HP EliteDesk.",
+    "priority": "High",
+    "resolution": "Traced the wall jack to a faulty port on the Cisco Catalyst switch; moved the patch cable to a different, active switch port.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent packet loss on VLAN 20",
+    "description": "Users in the Finance department are reporting jittery VoIP calls and slow application performance. Running a continuous ping to the gateway shows about 15% packet loss. This has been going on since 9:00 AM.",
+    "priority": "Critical",
+    "resolution": "Discovered a failing SFP+ transceiver on the distribution switch causing CRC errors; replaced the module and verified fiber link stability.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Need static IP for printer",
+    "description": "I need a static IP address for the new LaserJet 5000 we just installed in Marketing. Can you assign one and update the DNS?",
+    "priority": "Low",
+    "resolution": "Assigned 192.168.1.55 to the printer MAC address and created a static DHCP reservation with a corresponding DNS A record.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Website blocked by firewall",
+    "description": "I'm trying to access a research portal for my project, but the firewall is blocking it with a 'Category: Malware/Phishing' alert. This site is definitely safe and required for my work.",
+    "priority": "Medium",
+    "resolution": "Whitelisted the specific URL in the web filter policy after verifying the site's reputation and security certificate.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Office Wi-Fi password not working",
+    "description": "I just got a new laptop and I'm trying to connect to the 'Office_Secure' network. It keeps saying 'Incorrect password' even though I know I'm typing it right. What's going on?",
+    "priority": "Low",
+    "resolution": "Removed the saved network profile on the laptop and re-authenticated using the user's domain credentials.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Entire floor lost internet",
+    "description": "The internet is down for everyone in the West Wing. It looks like the network closet might be having an issue, as the main switch has amber status lights.",
+    "priority": "Critical",
+    "resolution": "Power cycled the core switch stack and updated the firmware to address a known memory leak issue that caused the service interruption.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Slow file transfers to NAS",
+    "description": "Transferring large video files to the shared NAS is taking hours. It used to be much faster. I'm connected via 1Gbps ethernet, but I'm only seeing 10MB/s speeds.",
+    "priority": "Medium",
+    "resolution": "Identified a negotiated speed mismatch on the switch port; forced the port to 1000Mbps Full Duplex.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Authentication failure on WPA2 Enterprise",
+    "description": "Every time I try to join the corporate wireless, it prompts for credentials, but then immediately fails. I am using my standard AD login.",
+    "priority": "High",
+    "resolution": "Synchronized the time on the client machine with the domain controller to fix an expired Kerberos ticket issue.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Guest network access",
+    "description": "We have a client visiting tomorrow. How do we get them temporary Wi-Fi access?",
+    "priority": "Low",
+    "resolution": "Generated a temporary 24-hour guest access code via the portal and provided instructions for the lobby reception desk.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection drops every 15 minutes",
+    "description": "I'm working remotely on Windows 11 and my GlobalProtect VPN keeps disconnecting. It usually happens right when I'm in a Teams call, which is incredibly frustrating. Error code 0x1404 is appearing in the logs. Can someone look at this ASAP?",
+    "priority": "High",
+    "resolution": "Updated the GlobalProtect client to version 6.0.4 and cleared the local cache to resolve certificate timeout issues.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Office printer offline",
+    "description": "The printer in the North Wing is showing as offline on all machines. We have a meeting in 10 minutes and need to print the quarterly reports. Please check the network switch port.",
+    "priority": "Medium",
+    "resolution": "Reset the static IP configuration on the printer and power-cycled the local PoE switch.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Slow internet speeds in Building B",
+    "description": "I've noticed that browsing internal sites is extremely slow today. Speed tests show barely 5Mbps while connected via Ethernet. Is there maintenance happening in this sector?",
+    "priority": "Medium",
+    "resolution": "Identified a faulty SFP module on the distribution switch causing CRC errors; replaced the module.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access shared drive",
+    "description": "Getting an error message when trying to access the \\\\FileServer01\\Marketing drive. It says 'Network path not found' (Error 0x80070035). Running Windows 10 Pro.",
+    "priority": "High",
+    "resolution": "Flushed DNS cache and re-mapped the network drive using the server's static IP address instead of the hostname.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Guest Wi-Fi portal not loading",
+    "description": "Users are reporting that they can connect to the 'Guest_WiFi' SSID but the splash page never appears. Devices just say 'No Internet' and time out.",
+    "priority": "Low",
+    "resolution": "Restarted the WLC (Wireless LAN Controller) service and cleared stale sessions from the guest VLAN.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent packet loss on VOIP phone",
+    "description": "My desk phone, model Polycom VVX 410, has been crackling and dropping calls all morning. My coworker in the next cubicle is having the same issue. It\u2019s making it impossible to take client calls.",
+    "priority": "Critical",
+    "resolution": "Identified a duplex mismatch on the phone's patch port; switched to a new CAT6 cable and verified 1Gbps link speed.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "SSH timeout to dev server",
+    "description": "I keep getting a 'Connection timed out' when trying to SSH into the staging server (10.0.50.22) from my local terminal on macOS Monterey. It worked fine yesterday. Any firewall changes?",
+    "priority": "Medium",
+    "resolution": "Added the user's current dynamic IP range to the whitelist on the perimeter firewall.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Ethernet port dead",
+    "description": "My laptop doesn't detect a network cable when plugged into the wall jack in room 204. I've tried a different cable and a different laptop, still nothing. Help.",
+    "priority": "Low",
+    "resolution": "Traced the wall jack to a disconnected patch cable in the server room; re-patched and tested for signal.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution failing for internal domains",
+    "description": "I can ping external sites like 8.8.8.8, but I cannot resolve our internal intranet URL. Browser shows DNS_PROBE_FINISHED_NXDOMAIN. This is blocking my work.",
+    "priority": "High",
+    "resolution": "Corrected the primary DNS server settings on the local DHCP scope.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Wireless card driver issue",
+    "description": "My laptop is losing Wi-Fi connection constantly. The device manager says 'Intel Wi-Fi 6 AX200' has a code 10 error. I've restarted twice already.",
+    "priority": "Medium",
+    "resolution": "Performed a clean uninstall of the wireless driver and installed the latest manufacturer version.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Critical latency on main uplink",
+    "description": "We are seeing huge latency spikes across the entire office network. Ping times to the gateway are jumping from 2ms to 400ms sporadically. This is affecting everyone.",
+    "priority": "Critical",
+    "resolution": "Identified a broadcast storm caused by a loop on an unmanaged switch; physically disconnected the loop.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "MAC address authentication fail",
+    "description": "I am trying to connect a new IoT device to the network but it keeps getting rejected by the RADIUS server. Device MAC is 00:1A:2B:3C:4D:5E.",
+    "priority": "Low",
+    "resolution": "Added the device MAC address to the authorized list in the Cisco ISE policy manager.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection dropping repeatedly",
+    "description": "I'm having trouble staying connected to the corporate VPN while working from home. I am using GlobalProtect 5.2 on Windows 11, and it disconnects every 15-20 minutes with a 'Gateway timeout' error. This is making it impossible to access our internal SQL servers.",
+    "priority": "High",
+    "resolution": "Updated GlobalProtect client to version 6.0 and cleared cached configuration files, which resolved the handshake timeout issue.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Guest Wi-Fi signal is dead in the lobby",
+    "description": "The 'Guest_Network' SSID is not appearing at all in the lobby area. I've checked the APs, and they seem to have power, but none of the visitors can connect. Please look into this ASAP.",
+    "priority": "Medium",
+    "resolution": "Reset the local PoE switch; APs broadcasted successfully after a power cycle.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Network printer offline",
+    "description": "Our HP LaserJet Pro in the marketing department is showing as offline on all workstations. The printer LCD shows it has an IP address, but we can't ping it from the server. Can you help?",
+    "priority": "Low",
+    "resolution": "Reassigned a static IP address to the printer via DHCP reservation, as the previous IP was conflicting with a new VOIP phone.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent packet loss on VLAN 20",
+    "description": "We are experiencing significant packet loss across the engineering department on VLAN 20. Pings to the default gateway show a 15% drop rate, and we are seeing CRC errors on the uplink port of the access switch.",
+    "priority": "Critical",
+    "resolution": "Replaced a faulty SFP module and fiber patch cable on the distribution switch uplink.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Can't access mapped network drives",
+    "description": "Hey, I'm getting an error message when I try to open the 'Z:' drive. It says 'The network path was not found.' I've tried restarting my laptop, but no luck.",
+    "priority": "Medium",
+    "resolution": "Mapped the network drive using the server FQDN instead of the IP address to resolve DNS lookup issues.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Slow internet speeds",
+    "description": "The internet is incredibly slow today for the entire accounting team. Pages take forever to load, and our cloud-based accounting software keeps timing out. Is there a bandwidth cap active?",
+    "priority": "High",
+    "resolution": "Identified a massive background OS update consuming 90% of the circuit bandwidth; implemented QoS policy to throttle Windows Update traffic.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Unauthorized device detected on secure port",
+    "description": "The IDS flagged an unauthorized MAC address connected to port 48 in the server room. The device is currently showing as 'unknown' and is attempting to probe internal subnets.",
+    "priority": "Critical",
+    "resolution": "Identified device as an unmanaged switch brought in by a contractor; port was shut down and contractor notified.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "DNS resolution failing for internal portal",
+    "description": "Every time I try to access the company portal (portal.internal.corp), I get a 'DNS_PROBE_FINISHED_NXDOMAIN' error in Chrome. It works fine if I use the VPN, but not on the local office network.",
+    "priority": "Medium",
+    "resolution": "Corrected the internal DNS record which had been incorrectly pointed to the external IP during the last server migration.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Ethernet port not working at desk",
+    "description": "I moved my desk today and the wall jack doesn't seem to be active. I've tried three different CAT6 cables, but my workstation still shows 'Unidentified Network'.",
+    "priority": "Low",
+    "resolution": "Patched the wall jack into the correct VLAN in the MDF closet.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Unable to reach external website",
+    "description": "We need access to the vendor portal at www.vendor-secure.com, but our firewall is blocking it. The error page shows 'Access Denied: Category Restricted'.",
+    "priority": "Low",
+    "resolution": "Added the vendor domain to the corporate firewall whitelist as an exception for the relevant department.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "WLAN auth failures",
+    "description": "Multiple users on macOS Monterey are unable to authenticate to the 802.1X WPA2-Enterprise network. They keep getting prompted for credentials but the auth server rejects the certificate.",
+    "priority": "High",
+    "resolution": "Updated the RADIUS server root certificate on all managed devices via MDM profile push.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VOIP phones showing 'No Service'",
+    "description": "All 12 phones in the call center just lost connection at the same time. They are all cycling through 'Configuring...' and then showing 'No Service'. This is a disaster for our call volume.",
+    "priority": "Critical",
+    "resolution": "Restarted the voice VLAN voice-gateway service which had hung after a firmware update.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection drops after Windows 11 update",
+    "description": "My Cisco AnyConnect client keeps disconnecting every 10 minutes since the 23H2 update. I've tried flushing the DNS and rebooting the adapter, but the connection remains unstable. It\u2019s making it impossible to work on the shared drive.",
+    "priority": "High",
+    "resolution": "Updated the Cisco AnyConnect Secure Mobility Client to the latest version and re-installed the virtual miniport adapter driver.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Cannot reach printer on VLAN 20",
+    "description": "The accounting team can't print to the Xerox VersaLink B7030. I suspect an ACL change might be blocking traffic across the subnets. Can you check if the routes are still propagated correctly?",
+    "priority": "Medium",
+    "resolution": "Corrected an incorrect ACL entry on the core switch that was inadvertently restricting port 9100 traffic between VLAN 10 and VLAN 20.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Wi-Fi is super slow today",
+    "description": "Internet in the breakroom is crawling. I'm connected to the Guest_WiFi SSID but I can barely load a webpage. Please fix it.",
+    "priority": "Low",
+    "resolution": "Identified a rogue access point causing co-channel interference on channel 6. Power-cycled the AP and set it to a static non-overlapping frequency.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Intermittent packet loss on main server uplink",
+    "description": "We are seeing 15% packet loss on the SFP+ uplink between the server rack and the distribution switch. It started after the fiber patch cable was moved during the site audit. Latency spikes are causing SQL timeouts.",
+    "priority": "Critical",
+    "resolution": "Replaced the damaged OM4 fiber patch cable which showed high insertion loss during testing.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Static IP conflict on workstation WS-042",
+    "description": "I keep getting the Windows error 'An IP address conflict has occurred' on my machine. I need a static IP for the lab equipment software, but it seems like someone else is using it.",
+    "priority": "Medium",
+    "resolution": "Identified a rogue device using the static IP. Assigned a new reserved IP in the DHCP range for the workstation and updated the lab software configuration.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Unable to connect to the office network via Ethernet",
+    "description": "I just plugged my laptop into the wall jack in conference room B, but the network icon just shows a red 'X'. I've tried two different Cat6 cables. Is the port even live?",
+    "priority": "Medium",
+    "resolution": "Enabled the switch port on the edge switch, which had been set to 'shutdown' following an unauthorized port discovery attempt.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Total network outage in Building 3",
+    "description": "No one in the entire wing can access local files or the internet. All phones are showing 'No Network'. Please help immediately, this is an emergency.",
+    "priority": "Critical",
+    "resolution": "Resolved an upstream failure caused by a firmware bug in the building\u2019s distribution switch. Rolled back the firmware and performed a cold boot of the stack.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Slow upload speeds for video backups",
+    "description": "My workstation is only getting 5Mbps upload speed when syncing to the cloud. I'm connected via gigabit Ethernet. Could the QoS policy be throttling my traffic?",
+    "priority": "Low",
+    "resolution": "Verified that the user\u2019s traffic was being correctly classified in the high-priority queue; adjusted the bandwidth shaper settings to allow for increased cloud storage throughput.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access internal SharePoint portal",
+    "description": "When I try to navigate to portal.internal, I get a 404 error, but my colleagues have no problem. I've cleared my Chrome cache and flushed DNS, but it persists. Is my AD account locked out of the network?",
+    "priority": "Medium",
+    "resolution": "Updated the local hosts file which had stale entries pointing to the old decommissioned load balancer IP address.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Guest Wi-Fi portal not loading",
+    "description": "The login page for the guest network just sits there spinning when customers try to connect. It says 'Redirecting...' and never goes anywhere.",
+    "priority": "Medium",
+    "resolution": "Rebooted the wireless controller and cleared the captive portal cache, which was preventing new authentication sessions.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "Latency in VOIP calls",
+    "description": "Ever since the new update to our phone system, there is a two-second delay on every call. It\u2019s extremely frustrating for our clients. We are using Polycom VVX 450 handsets.",
+    "priority": "High",
+    "resolution": "Implemented DSCP tagging (EF) for voice traffic across the VLANs to ensure voice packets receive priority queuing over data traffic.",
+    "category": "Network",
+    "type": "base"
+  },
+  {
+    "title": "DHCP server scope exhausted",
+    "description": "Users are reporting that they can't get an IP address when they join the network today. It seems like the DHCP server is out of addresses in the current subnet range.",
+    "priority": "High",
+    "resolution": "Expanded the DHCP address scope on the server from /24 to /23 to accommodate the increased number of BYOD devices connected to the network.",
+    "category": "Network",
+    "type": "base"
+  }
+]

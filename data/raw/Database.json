@@ -1,0 +1,866 @@
+[
+  {
+    "title": "SQL Server deadlock on nightly ETL process",
+    "description": "We are seeing frequent 1205 deadlock errors during the nightly data warehouse refresh on our Windows Server 2022 instance. It seems to be hitting the 'Sales_Transactions' table while the reporting services are querying it. This is causing our morning reports to be incomplete.",
+    "priority": "High",
+    "resolution": "Implemented 'READ_COMMITTED_SNAPSHOT' on the database to reduce locking contention and updated the ETL job schedule to avoid overlap with report generation.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database connection timeout in production",
+    "description": "App is throwing connection timeouts since the patch yesterday. Error code 0x80004005. Please check.",
+    "priority": "Critical",
+    "resolution": "Identified a misconfiguration in the connection string following the patch deployment; updated the application settings to point to the correct failover cluster node.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Unable to connect to MySQL instance after password reset",
+    "description": "Hi, I recently updated my database credentials for the dev environment and now I can't connect via MySQL Workbench 8.0 on my macOS Monterey machine. I keep getting an 'Access denied for user' error even though the credentials work in the CLI. Could you please double-check my permissions?",
+    "priority": "Medium",
+    "resolution": "Verified the user account was locked due to multiple failed attempts; cleared the lockout and confirmed the user had the correct host-based access privileges.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "High CPU usage on Oracle DB",
+    "description": "Our monitoring tool alerted us that the Oracle 19c instance on Linux RHEL 8 is sitting at 95% CPU usage for the last two hours. We haven't deployed any new code recently. The active session history shows a massive spike in recursive calls linked to a specific temporary table.",
+    "priority": "High",
+    "resolution": "Identified an unoptimized SQL query running in a background job; added the missing index on the temporary table and truncated the table to clear out stale session data.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "PostgreSQL service failing to start",
+    "description": "Postgres won't start after the server rebooted last night. The logs show 'FATAL: could not create shared memory segment'. It seems like a kernel configuration issue with shmmax.",
+    "priority": "Critical",
+    "resolution": "Adjusted the kernel.shmmax and kernel.shmall settings in /etc/sysctl.conf to provide sufficient shared memory for the increased database buffer cache size.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Need a backup restored for testing",
+    "description": "Hey guys, could you please restore the 'Staging_V2' database from last night's backup? I accidentally dropped a critical schema while testing a new migration script and I need to revert those changes ASAP. Thanks!",
+    "priority": "Medium",
+    "resolution": "Restored the 'Staging_V2' database from the 02:00 AM full backup to a temporary instance and verified data integrity before notifying the requester.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Slow query performance on Reporting DB",
+    "description": "The 'GetMonthlyRevenue' stored procedure is taking over 45 seconds to execute. It used to run in under 2 seconds. The server environment is SQL Server 2019, and we haven't changed the query recently. This is very frustrating as it blocks our dashboard updates.",
+    "priority": "High",
+    "resolution": "Performed index fragmentation analysis and found the primary clustered index was 98% fragmented. Rebuilt the index, reducing query execution time to 1.2 seconds.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database disk space alert",
+    "description": "The mount point /var/lib/mysql is at 98% capacity. We need to clear some logs or extend the volume. Please advise.",
+    "priority": "High",
+    "resolution": "Purged binary logs older than 7 days and extended the LVM volume by 100GB to provide sufficient headroom for future growth.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Slow login/latency on internal app",
+    "description": "Users are complaining that the internal tool is very sluggish when loading the user profiles list. Database logs show high wait times for 'PAGEIOLATCH_SH'. It seems like disk latency is spiking during peak hours on the SAN.",
+    "priority": "Medium",
+    "resolution": "Identified a heavy query performing full table scans; introduced a covering index to reduce disk I/O and improved performance by 80%.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Schema sync issue between environments",
+    "description": "I'm trying to deploy our latest feature, but the database schema migrations are failing. Specifically, the 'Alter Table' command on 'Users' is failing with 'Column already exists'. I am using Flyway on Java 17.",
+    "priority": "Low",
+    "resolution": "Manually corrected the schema_version table in the database to align with the current state of the database and re-ran the migration tool successfully.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "MongoDB primary node flapping",
+    "description": "The primary node in our MongoDB 5.0 replica set is restarting intermittently. Error logs indicate a heartbeat timeout. This is causing significant application errors every few minutes.",
+    "priority": "Critical",
+    "resolution": "Investigated network stability between nodes; found a faulty NIC on the secondary node that was causing intermittent network drops. Replaced the NIC and performed a node failover to stabilize the cluster.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Exporting data for compliance request",
+    "description": "Hi, I need a CSV export of all login logs for the user 'john.doe' from the last 6 months for a security audit. Please let me know when this is available and where I can download it.",
+    "priority": "Low",
+    "resolution": "Ran the query to extract the audit logs, exported the data to a secure S3 bucket, and provided the requester with a time-limited download link.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "SQL Server connection timeout on App-Prod-01",
+    "description": "We are experiencing intermittent connection timeouts when the web application attempts to query the primary SQL Server 2019 instance on App-Prod-01. The logs show error code 0x80004005, and it seems to happen primarily during peak traffic hours between 2 PM and 4 PM. We need an investigation into the connection pool settings.",
+    "priority": "High",
+    "resolution": "Increased the Max Pool Size in the application connection string and optimized three long-running stored procedures that were causing lock contention.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database restore failed",
+    "description": "Tried to restore a .bak file to the UAT environment, but it keeps erroring out with 'Operating system error 32 (The process cannot access the file because it is being used by another process)'. Running Windows Server 2022. Please assist as this is blocking our QA cycle.",
+    "priority": "Medium",
+    "resolution": "Identified that an automated backup script was locking the target directory; killed the background process and successfully performed the restore.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Slow queries in DB-Cluster-A",
+    "description": "Everything is super laggy today. The dashboard is taking 30 seconds to load data. Can you guys look at the cluster?",
+    "priority": "Medium",
+    "resolution": "Identified an unindexed column in the main 'Transactions' table causing a full table scan; added the missing non-clustered index.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Deadlock detected on Production DB",
+    "description": "We are seeing frequent deadlock errors (Error 1205) in our production MySQL 8.0 instance on Ubuntu 22.04. It appears two specific update scripts are conflicting on the 'Inventory' table. We need this resolved immediately to prevent inventory synchronization errors.",
+    "priority": "Critical",
+    "resolution": "Modified transaction isolation levels for the conflicting scripts and implemented a retry logic wrapper in the application code.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Unable to login to Oracle DB",
+    "description": "Hi, I'm trying to connect to the dev oracle instance but I keep getting ORA-01017: invalid username/password. I'm using the credentials provided in the onboarding wiki. Could you check if my account is locked?",
+    "priority": "Low",
+    "resolution": "Account was locked due to too many failed attempts from an old cached password in SQL Developer; reset the account and cleared local credentials.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Disk space alert for DB-Replica-02",
+    "description": "Nagios triggered a critical alert for disk space usage on DB-Replica-02. The data drive is currently at 98%. This server handles our read-only reporting traffic.",
+    "priority": "High",
+    "resolution": "Purged legacy transaction log files and moved older historical logs to an S3 cold storage bucket to free up 200GB.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Stuck process in PostgreSQL",
+    "description": "I have a 'VACUUM ANALYZE' process that has been running for 6 hours. Usually, this finishes in 20 minutes. It's on a PostgreSQL 14 instance running on RHEL 8.",
+    "priority": "Medium",
+    "resolution": "Terminated a hung backend process that was holding an AccessExclusiveLock on the target table, allowing the vacuum to proceed.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Data inconsistency in customer table",
+    "description": "It looks like the user profile table has some corrupted entries where the 'email_verified' flag is NULL instead of false. This is causing our API to crash on production. Please fix ASAP.",
+    "priority": "High",
+    "resolution": "Ran an UPDATE script to set all NULL values to false and applied a NOT NULL constraint on the column to prevent future occurrences.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Need access to production",
+    "description": "Hey, I need read-only access to the production Postgres database for some audit reports. My username is j.doe. Thanks!",
+    "priority": "Low",
+    "resolution": "Granted the 'reporting_role' to user j.doe and confirmed they can access the required views.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Can't connect to Mongo cluster",
+    "description": "Getting 'ServerSelectionTimeoutError' when trying to hit the MongoDB Atlas cluster from my laptop. I'm on the office VPN. Is the IP whitelisted?",
+    "priority": "Medium",
+    "resolution": "Added the current office subnet CIDR range to the MongoDB Atlas IP Access List.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Performance degradation after migration",
+    "description": "Ever since we migrated from SQL Server 2016 to 2022, the report generation service is incredibly slow. We are getting timeouts on the report_gen_sp procedure. Everything worked fine yesterday before the upgrade.",
+    "priority": "High",
+    "resolution": "Updated statistics on the affected tables and forced a plan recompile for the stored procedure to utilize the new Cardinality Estimator.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Query failing with syntax error",
+    "description": "I am trying to run a simple join but getting a 'Syntax error near )' message. I'm using SQL Server Management Studio. Here is the query: SELECT * FROM Users INNER JOIN Roles ON Users.id = Roles.user_id)",
+    "priority": "Low",
+    "resolution": "Removed the trailing parenthesis causing the syntax error and provided the user with a formatted version of the query.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "SQL Server deadlock on nightly ETL process",
+    "description": "We are seeing frequent deadlock errors (Error 1205) during our nightly ETL load on our Production SQL Server 2019 instance running on Windows Server 2019. It seems to be impacting the 'Sales_Fact' table when the index rebuild job overlaps with the data import. Can you please review the locking behavior and suggest a change to the transaction isolation levels?",
+    "priority": "High",
+    "resolution": "Modified ETL script to implement snapshot isolation and adjusted the index maintenance schedule to avoid overlapping with ingestion.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Cannot connect to dev database",
+    "description": "Getting a 'Connection Refused' error when trying to hit the dev DB. It was working fine yesterday. Using psql v14.",
+    "priority": "Medium",
+    "resolution": "Identified that the PostgreSQL service had crashed due to an out-of-memory error; restarted service and increased allocated RAM.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database performance extremely slow after patch",
+    "description": "Ever since the OS patches were applied to the Oracle 19c database server on RHEL 8 last night, the application latency has spiked by 400%. The IO wait times are through the roof. This is affecting all users in the EMEA region and we need this looked at immediately.",
+    "priority": "Critical",
+    "resolution": "Identified a misconfiguration in the transparent huge pages settings post-patch; reverted to optimal kernel parameters.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Query timeout in Reporting DB",
+    "description": "My queries are timing out again. I'm trying to pull the Q3 sales report but the server just hangs for 30 seconds and then gives me a 'Query Execution Timeout' error. Using DBeaver on MacOS to connect.",
+    "priority": "Low",
+    "resolution": "Added missing indexes to the 'Transactions' table and updated database statistics to improve query plan optimization.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "MongoDB authentication failure",
+    "description": "I'm getting 'Authentication failed' when trying to connect to the staging cluster. I verified my credentials, and they are correct. The logs show 'SCRAM-SHA-256' authentication failures.",
+    "priority": "Medium",
+    "resolution": "Reset the user's password in the MongoDB shell and verified their RBAC permissions were correctly applied to the specific database.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Production DB storage reaching capacity",
+    "description": "Alert: The storage volume on the primary database server is at 92%. We need to expand the EBS volume on this AWS instance before we hit a hard stop and cause a system outage.",
+    "priority": "High",
+    "resolution": "Expanded the EBS volume from 500GB to 1TB and performed online file system expansion.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Table corruption reported in logs",
+    "description": "Help! The system logs are showing 'Database block corruption' on index pages for the 'Users' table. We are running MySQL 8.0 on Ubuntu 20.04. How do we recover without losing the last two hours of data?",
+    "priority": "Critical",
+    "resolution": "Ran 'innodb_force_recovery' to dump the data, recreated the table, and imported the dump to clear the corruption.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Need access to production db for audit",
+    "description": "Hi, I am working with the internal audit team and we need read-only access to the production 'Finance' schema. Please let me know what the process is for requesting this level of access.",
+    "priority": "Low",
+    "resolution": "Provided temporary read-only credentials with a 24-hour expiration after manager approval.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Redis connection leak",
+    "description": "Our application is hitting the connection limit on the Redis cluster. It looks like the connections aren't being closed properly after the API calls finish. This is causing random 500 errors across our microservices.",
+    "priority": "High",
+    "resolution": "Updated the application's connection pool settings and fixed a bug in the middleware where the Redis client was not properly disposed.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Stuck in a migration loop",
+    "description": "I tried to run the latest migration script (v2023_10_01) on the local development environment, but it hangs at 50%. The terminal just shows a blinking cursor. I'm on a Windows 11 machine using WSL2.",
+    "priority": "Medium",
+    "resolution": "Found a circular dependency in the migration script and corrected the execution order of the foreign key constraints.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database backup failed",
+    "description": "The nightly backup job for the 'Clients' database failed with 'Error: Permission Denied on /backups/data_dump.sql'. This is the third time this week it has happened.",
+    "priority": "High",
+    "resolution": "Corrected the ownership and group permissions on the backup directory to ensure the DB service account has write access.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Need a staging data refresh",
+    "description": "Hey, could you please refresh the staging database with a sanitized dump from production? The current data is outdated and it's making testing very difficult.",
+    "priority": "Low",
+    "resolution": "Executed a partial data dump from production, ran a masking script to obfuscate PII, and restored to the staging environment.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Production DB Connection Timeouts",
+    "description": "Our application nodes (App-01 through App-05) are consistently failing to connect to the primary RDS instance (db-prod-01) with 'SQLState 08001: Unable to connect'. This started occurring at 03:15 AM EST after the scheduled maintenance window. We are seeing a spike in active connections reaching the max_connections limit.",
+    "priority": "Critical",
+    "resolution": "Increased max_connections parameter in the DB parameter group and cleared orphaned sessions blocking the connection pool.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Slow query performance on reporting dashboard",
+    "description": "Hey, the dashboard is dragging. Specifically, the sales report takes like 30 seconds to load now. Can you take a look?",
+    "priority": "Medium",
+    "resolution": "Added a missing composite index on the 'transaction_date' and 'merchant_id' columns, reducing query execution time from 28s to 450ms.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "ORA-00600 internal error during nightly batch",
+    "description": "While running our nightly ETL process on Oracle 19c (RHEL 8.4), the background job died with an ORA-00600: internal error code. Trace files indicate a corruption in the UNDO tablespace during a heavy update operation. This has delayed our morning data refresh significantly.",
+    "priority": "High",
+    "resolution": "Performed a block media recovery and rebuilt the corrupted UNDO tablespace segments.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Can't access dev database",
+    "description": "I'm trying to connect to the dev instance via pgAdmin on my MacBook Pro but it keeps saying 'Connection refused'. I verified the VPN is active. Is there a firewall change?",
+    "priority": "Low",
+    "resolution": "Whitelisted user's new dynamic IP address in the security group.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Deadlock detected in checkout service",
+    "description": "We are getting frequent deadlock errors in the checkout microservice using SQL Server 2019. The error message is 'Transaction (Process ID 82) was deadlocked on lock resources with another process'. It seems like the inventory update and payment status update are clashing.",
+    "priority": "High",
+    "resolution": "Updated transaction isolation levels and reordered the sequence of DML operations in the stored procedure to prevent cyclic dependencies.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Help! Table dropped by accident",
+    "description": "I was working on the staging environment and accidentally ran a DROP TABLE command instead of TRUNCATE. I need the 'customer_audit_logs' table restored immediately. This is a disaster.",
+    "priority": "Critical",
+    "resolution": "Restored the table from the latest Point-in-Time Recovery (PITR) snapshot taken at 02:00 AM.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Disk space alert on DB-Cluster-02",
+    "description": "The monitoring system alerted that the /var/lib/mysql partition on DB-Cluster-02 is at 94% capacity. We need to clear some logs or expand the volume before the service crashes.",
+    "priority": "High",
+    "resolution": "Purged binary logs older than 7 days and expanded the EBS volume by 100GB.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Unable to export data to CSV",
+    "description": "Every time I try to run the export tool on the web interface, it just spins for a minute and then returns a 500 error. The logs say 'Memory limit exceeded'.",
+    "priority": "Medium",
+    "resolution": "Optimized the SQL export query to use a cursor-based fetch instead of loading the full result set into memory.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Credential rotation needed",
+    "description": "Security audit requested that we rotate the service account credentials for the 'app_svc_reader' user on all production MongoDB clusters. Please provide a timeline for when we can execute this without downtime.",
+    "priority": "Medium",
+    "resolution": "Coordinated a rolling credential update across the replica set to ensure zero-downtime transition.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Charset mismatch on new entries",
+    "description": "We are seeing weird characters in our database for non-English names. It looks like the database is using Latin1 but we are inserting UTF-8 data. We need to fix this character encoding issue ASAP.",
+    "priority": "Medium",
+    "resolution": "Altered the database character set and collation to utf8mb4 and performed an encoding conversion on the existing table data.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Replication lag on read-replica",
+    "description": "Our read-only replica (replica-01) is lagging by over 45 minutes behind the primary. This is causing inconsistent data display for users in the EMEA region. Please investigate why the binlog apply is stalling.",
+    "priority": "High",
+    "resolution": "Identified a long-running transaction on the primary that blocked replication; optimized the transaction to finish quickly, allowing the replica to catch up.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Routine DB user request",
+    "description": "Could you please create a new database user 'dev_tester' with read-only permissions on the 'sandbox' schema? Thanks.",
+    "priority": "Low",
+    "resolution": "Created the user with restricted SELECT-only permissions on the sandbox schema.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "SQL Server connection timeout on App-Prod-01",
+    "description": "We are seeing intermittent 0x80004005 errors when the web front-end attempts to connect to the SQL Server 2019 instance. This started after the maintenance window last night. The app server is running Windows Server 2022.",
+    "priority": "High",
+    "resolution": "Increased the connection pool size in the web.config and restarted the IIS application pool.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Need access to Reporting DB",
+    "description": "Hi, could you please grant me read-only access to the Reporting_Prod database? I need to run some audits for the Q3 financial review. Thanks!",
+    "priority": "Low",
+    "resolution": "Granted db_datareader role to the user's Active Directory account.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "PostgreSQL replication lag",
+    "description": "The replication lag on our read replica (DB-Slave-04) has exceeded 5000ms. I've checked the pg_stat_replication view and it seems like a heavy write load on the primary is causing IO saturation. This is impacting our analytics dashboard.",
+    "priority": "Medium",
+    "resolution": "Optimized a long-running vacuum process on the primary node and scaled up the disk IOPS.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "URGENT: Production DB down",
+    "description": "The entire database is unresponsive! Users are getting login failures and the dashboard is blank. It was working fine ten minutes ago. Fix this now!",
+    "priority": "Critical",
+    "resolution": "Identified a memory leak in a stored procedure that caused the SQL process to hit the max server memory limit; restarted the SQL Server service and purged the procedure cache.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "ORA-01653 error on tablespace",
+    "description": "Oracle 19c is throwing ORA-01653: unable to extend table USERS.DATA_TABLE by 128 in tablespace DATA_TS. We are unable to insert any new records into the customer portal.",
+    "priority": "High",
+    "resolution": "Extended the data file size for DATA_TS on the storage volume.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database login credentials",
+    "description": "Hey, I forgot the password for the dev database. Could you reset it for me? It's the one we use for local testing.",
+    "priority": "Low",
+    "resolution": "Generated a new password and sent it via the secure password manager portal.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Slow query performance",
+    "description": "The 'GetOrders' stored procedure is taking over 30 seconds to execute on our staging environment. It used to take less than a second. We haven't changed any code recently.",
+    "priority": "Medium",
+    "resolution": "Updated the outdated statistics on the Orders table which caused the query optimizer to choose a suboptimal execution plan.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Failed DB backup",
+    "description": "The nightly backup job on DB-Backup-Node failed with exit code 32001. The disk space looks fine, but the logs mention a checksum failure on block 5432.",
+    "priority": "High",
+    "resolution": "Ran a DBCC CHECKDB command which identified corruption; restored the database from the last known good backup to a new file path.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Requesting export of user data",
+    "description": "I need a CSV export of all users registered between Jan 1st and Feb 28th. Please exclude inactive accounts. I'll need this by EOD for the marketing team.",
+    "priority": "Medium",
+    "resolution": "Executed a T-SQL script to extract the data and uploaded it to the secure SFTP site.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "MongoDB auth error",
+    "description": "I'm getting 'Authentication failed' when connecting from my laptop (MacOS Monterey). I'm using the exact credentials provided in the team wiki, but the Mongo shell refuses the connection.",
+    "priority": "Low",
+    "resolution": "The user was using an outdated certificate; provided the updated CA certificate and refreshed the local trust store.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Deadlock detected",
+    "description": "The application logs on Linux-App-02 show frequent deadlock errors during the batch import process. It's happening every time the inventory sync runs. This is causing data inconsistencies.",
+    "priority": "High",
+    "resolution": "Modified the application code to implement row-level locking instead of table-level locking for the batch import process.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Collation mismatch",
+    "description": "When trying to join two tables, I get an error about a collation conflict: 'SQL_Latin1_General_CP1_CI_AS' vs 'Latin1_General_CI_AS'. How can I resolve this for my report?",
+    "priority": "Low",
+    "resolution": "Provided the user with a query snippet using the COLLATE clause to temporarily force a common collation for the join operation.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "SQL Server connection timeout on App-Prod-01",
+    "description": "We are seeing intermittent timeout errors when the frontend tries to connect to our primary SQL Server 2019 instance on Windows Server 2019. The error log reports 'Login timeout expired' occurring every 15 minutes. This is affecting user ability to save changes in the portal.",
+    "priority": "High",
+    "resolution": "Adjusted the connection pool settings in the web.config and increased the server-side query timeout threshold to resolve locking conflicts.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database login failed",
+    "description": "I can't get into the database. It just says login failed. Please fix.",
+    "priority": "Medium",
+    "resolution": "Reset the user's AD password and re-synced the permissions in the SQL management console.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Production DB slow queries",
+    "description": "The site is running super slow today. Our DBAs checked the MariaDB 10.5 instance on Ubuntu 20.04 and found several 'Table scan' warnings in the slow query logs. It seems like a recent deployment missing some indexes.",
+    "priority": "High",
+    "resolution": "Identified two missing non-clustered indexes on the Transactions table and deployed a migration script to add them.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "PostgreSQL replication lag",
+    "description": "The read-replica in the AWS us-east-1 region is lagging by over 5 minutes behind the primary node. We are running Postgres 13. System load is normal, but replication slots are showing large WAL accumulation. This is causing data inconsistency for our reporting dashboard.",
+    "priority": "High",
+    "resolution": "Cleared the orphaned replication slot and restarted the WAL sender process to sync the replica.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Restore request for user 'jsmith'",
+    "description": "Hi, I accidentally deleted the 'config_settings' table in the staging database on 'Dev-DB-02'. Could you please restore this from last night's backup? I am currently unable to test the new features.",
+    "priority": "Medium",
+    "resolution": "Restored the 'config_settings' table from the 02:00 AM full backup to a temporary schema for the user to export their data.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "ORA-00060 deadlock detected",
+    "description": "Our application is throwing ORA-00060 errors on Oracle 19c. It seems to happen specifically when multiple service accounts attempt to update the 'Inventory_Master' table simultaneously. This is unacceptable as it crashes our warehouse sync every day at noon.",
+    "priority": "Critical",
+    "resolution": "Optimized the transaction isolation levels and modified the application code to implement a retry logic with exponential backoff.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Disk space alert on DB-Cluster-04",
+    "description": "The /var/lib/mysql partition is at 98% capacity on node DB-Cluster-04. The monitoring system is firing alerts every 5 minutes. If this fills up, the entire cluster will go down.",
+    "priority": "Critical",
+    "resolution": "Purged archived transaction logs older than 30 days and extended the LVM volume on the host server.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Unable to connect to Mongo Atlas",
+    "description": "I keep getting 'connection refused' errors when trying to connect to our MongoDB cluster via Compass. I've double-checked my IP whitelist and it includes my home office IP. Running on macOS Monterey.",
+    "priority": "Low",
+    "resolution": "Found that the user's ISP had rotated their public IP address; updated the whitelist in the MongoDB Atlas dashboard.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database audit failure",
+    "description": "The audit logs show a series of failed login attempts from an unknown internal IP address on the finance production database. The error code is 18456. We need to investigate if this is a potential security breach or a misconfigured service account.",
+    "priority": "High",
+    "resolution": "Traced the IP to a legacy server in the HVAC department that was incorrectly mapped to the finance DB server; reconfigured the legacy app settings.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Update DB collation",
+    "description": "We need to update our collation from SQL_Latin1_General_CP1_CI_AS to Latin1_General_100_CI_AS_SC to support new emoji characters in user comments. Please advise on the downtime required for this migration.",
+    "priority": "Low",
+    "resolution": "Provided a maintenance window plan and a script to perform the column-level collation change during off-peak hours.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Redis Cache Eviction issues",
+    "description": "Our Redis cache (v6.2) is evicting keys way too aggressively despite having memory set to 16GB. We are seeing frequent cache misses that are putting unnecessary load back onto the primary SQL database. Please check the 'maxmemory-policy' setting.",
+    "priority": "Medium",
+    "resolution": "Changed the eviction policy from 'allkeys-lru' to 'volatile-lru' to preserve important persistent data.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Reporting Query Failing",
+    "description": "Every time I run the 'Monthly Sales Report' in PowerBI, it fails with a generic 'Internal Error' message. I am connected via the standard ODC driver. This worked fine last month, so I don't know what changed.",
+    "priority": "Medium",
+    "resolution": "Increased the session memory limit for the reporting user profile, as the query volume had grown beyond the default buffer size.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "SQL Server connection timeout on App-Prod-01",
+    "description": "We are experiencing intermittent connection timeouts when the application attempts to query the primary SQL Server instance. The application logs show 'System.Data.SqlClient.SqlException: Execution Timeout Expired' occurring frequently during peak hours. Server is running Windows Server 2019.",
+    "priority": "High",
+    "resolution": "Increased the command timeout threshold in the connection string and optimized the indexing on the Orders table to reduce query latency.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Stuck in a loop, need help!",
+    "description": "Hey, I was trying to run a simple update script on my local dev database but now it's just hanging forever. It\u2019s a MySQL 8.0 instance on Ubuntu 22.04. Every time I try to run a SELECT query now, it just spins and doesn't return anything.",
+    "priority": "Medium",
+    "resolution": "Identified a deadlocked transaction caused by an uncommitted update. Killed the process ID and advised the user to implement explicit transaction handling.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Unable to connect to production PostgreSQL cluster",
+    "description": "Users are reporting 'FATAL: remaining connection slots are reserved for non-replication superuser connections'. We seem to have hit the max_connections limit on the primary node. We are running Postgres 14 on RHEL 8.",
+    "priority": "Critical",
+    "resolution": "Increased the max_connections parameter in postgresql.conf and implemented a connection pooler via PgBouncer to manage client requests more efficiently.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Data inconsistency in UserReports table",
+    "description": "I noticed that the UserReports table is showing duplicate entries for user IDs generated between 09:00 and 10:00 UTC today. It seems like the primary key constraint failed to trigger for some reason. This is impacting our executive dashboards.",
+    "priority": "High",
+    "resolution": "Found that the constraint was accidentally set to 'NOT VALID' during a previous schema migration. Ran a full data cleanup and re-validated the primary key.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Need a dump of the staging DB",
+    "description": "Can someone provide a full SQL dump of the staging database, specifically the 'Customers' and 'Transactions' schemas? I need it for local testing on my MacBook Pro running macOS Monterey.",
+    "priority": "Low",
+    "resolution": "Provided a secure link to the latest sanitized backup file from the nightly automated export.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Performance degradation on Oracle 19c",
+    "description": "Queries that normally take milliseconds are taking over 30 seconds since the patch applied last night. We are seeing high wait events for 'db file sequential read'. Please investigate ASAP.",
+    "priority": "High",
+    "resolution": "Recompiled invalid objects and gathered fresh statistics on the affected tables, which restored normal query execution times.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Permission error on DB access",
+    "description": "Why can't I write to the marketing database anymore? I keep getting 'Access denied for user 'data_analyst' at host '10.0.4.15''. It was working perfectly yesterday.",
+    "priority": "Medium",
+    "resolution": "Re-granted the missing UPDATE and INSERT privileges to the user role after a security audit mistakenly revoked them.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "MongoDB replica set sync lag",
+    "description": "Our secondary nodes are falling significantly behind the primary, showing an optime lag of over 5 minutes. This is causing eventual consistency issues in our microservices environment. We are running Mongo 5.0 on a 3-node cluster.",
+    "priority": "High",
+    "resolution": "Identified high disk I/O contention on the secondary nodes. Resized the EBS volumes and optimized the background indexing processes.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database login failing for new hire",
+    "description": "My new dev, Sarah, can't access the development SQL database. She has the same credentials as the rest of the team, but gets an 'Authentication failed' error. We are using Active Directory for authentication.",
+    "priority": "Low",
+    "resolution": "Added the user to the appropriate AD security group that grants login access to the database server.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "URGENT: Database corruption error",
+    "description": "System just threw a 'Database page corruption detected' error on the CRM instance! We cannot access any records. Please help, the sales team is panicking!",
+    "priority": "Critical",
+    "resolution": "Restored the database from the last successful hourly snapshot and performed a checksum validation to ensure data integrity.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Query optimization request",
+    "description": "I have a complex JOIN query running against our data warehouse that is timing out on the dashboard. It joins 6 tables and scans over 10 million rows. Any way to speed this up?",
+    "priority": "Medium",
+    "resolution": "Advised creating a materialized view to pre-compute the joins, significantly improving the dashboard load time.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Firewall block?",
+    "description": "Our app server (192.168.1.50) cannot ping the database server (172.16.5.10) on port 5432. It was working fine until the network update earlier today.",
+    "priority": "Medium",
+    "resolution": "Updated the security group ingress rules to allow traffic from the app server's new subnet range.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "SQL Server connection timeout on App-Prod-01",
+    "description": "We are experiencing intermittent connection timeouts when the web frontend tries to query the primary SQL instance. Error code 0x80131904 appears in the logs during high traffic spikes. Server OS is Windows Server 2022. Please investigate if there is a connection pool exhaustion issue.",
+    "priority": "High",
+    "resolution": "Increased max connection pool size in web.config and optimized long-running execution plans.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Query performance issues",
+    "description": "My reports are taking forever to run today. Usually takes 30 seconds, now it's timing out after 10 minutes. Please help.",
+    "priority": "Medium",
+    "resolution": "Added missing index on the 'Orders' table to support the filtered index scan.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "PostgreSQL replication lag",
+    "description": "Streaming replication lag between db-master and db-replica-01 has exceeded 5GB of WAL files. The pg_stat_replication view shows state 'streaming' but high byte latency. We need to stabilize this before the midnight batch job starts.",
+    "priority": "High",
+    "resolution": "Identified a network throughput bottleneck; routed replication traffic through the dedicated secondary NIC.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Can't access the database",
+    "description": "I'm getting an 'Access Denied' error when trying to run my migration script. I definitely have the right password. My workstation is running Ubuntu 22.04.",
+    "priority": "Medium",
+    "resolution": "Corrected LDAP group permissions mapping for the user's active directory account.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database corruption on legacy MySQL instance",
+    "description": "The service failed to start after an unexpected power loss on our local dev machine running MySQL 5.7. Logs show 'InnoDB: Attempted to read 16384 bytes at offset...'. We have tried restarting but it immediately enters a crash-recovery loop.",
+    "priority": "Critical",
+    "resolution": "Performed a hard recovery using innodb_force_recovery = 4 and exported data to a clean instance.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Disk space alert on production cluster",
+    "description": "Partition /var/lib/mysql is at 98% capacity. Automated backups are failing to trigger due to lack of space. Please clear temp files or expand the volume immediately.",
+    "priority": "Critical",
+    "resolution": "Purged binary logs older than 7 days and expanded the LVM partition by 50GB.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Slow import",
+    "description": "I am trying to upload a CSV with 500k rows but it just hangs indefinitely. Database is hosted on AWS RDS. Is there a size limit I don't know about?",
+    "priority": "Low",
+    "resolution": "Advised user to use the 'LOAD DATA INFILE' command rather than the GUI import wizard for large datasets.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Deadlock detected during transaction",
+    "description": "Transaction ID 0x4A21 encountered a deadlock while updating the inventory table. Error code 1213. This is happening multiple times an hour during our peak morning window.",
+    "priority": "Medium",
+    "resolution": "Updated application logic to ensure consistent row-locking order across all concurrent transactions.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Schema sync failure",
+    "description": "The staging environment isn't matching production. Schema migration script v2.4 failed with a syntax error near 'MODIFY COLUMN'. OS is CentOS 7.",
+    "priority": "Low",
+    "resolution": "Fixed invalid syntax in migration file and ran the apply script manually.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Connection refused in Java app",
+    "description": "Our Java application on node-04 is throwing 'Connection Refused' (java.net.ConnectException). We verified the firewall ports are open on the DB server, but netstat shows nothing listening on 3306.",
+    "priority": "High",
+    "resolution": "Restarted the database service which had hung after a kernel update.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Restore request",
+    "description": "Accidentally dropped the 'marketing_leads' table in the test database. Can you restore it from last night's dump? Really sorry for the trouble.",
+    "priority": "Medium",
+    "resolution": "Restored the specific table from the daily snapshot taken at 03:00 UTC.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database user locked",
+    "description": "I keep getting an account locked notification every time I try to log in. I've tried resetting it twice through the portal but no luck. Frustrating.",
+    "priority": "Low",
+    "resolution": "Identified a stale service account job that was continuously attempting to authenticate with an expired credential.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Production DB Connection Timeouts",
+    "description": "Our main web application is throwing 'java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available' errors intermittently. We are running PostgreSQL 14 on Ubuntu 22.04 LTS. The load balancer shows CPU usage is low, but the database connection pool is maxed out.",
+    "priority": "Critical",
+    "resolution": "Increased the max_connections setting in postgresql.conf and tuned the connection pool timeout parameters.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Slow query on reporting dashboard",
+    "description": "Hey, the dashboard is taking like 30 seconds to load the monthly sales report. It was fine yesterday, but now it's super laggy. Could you check if something is locked or if we need a new index?",
+    "priority": "Medium",
+    "resolution": "Identified a missing index on the 'transaction_date' column. Ran an EXPLAIN ANALYZE, added the index, and query time dropped to 200ms.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Oracle ORA-00257 error",
+    "description": "The database server is rejecting all incoming transactions. The alert logs show ORA-00257: Archiver error. Connect as INTERNAL until freed. This happened on our legacy Oracle 11g server running on RHEL 6.",
+    "priority": "Critical",
+    "resolution": "Cleared the archived redo log directory which had reached 100% capacity and triggered a manual backup.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Help with SQL syntax",
+    "description": "I'm trying to join two tables and it's not working. I keep getting a syntax error near the 'ON' keyword. I'm using MySQL Workbench on Windows 11.",
+    "priority": "Low",
+    "resolution": "Corrected the join condition syntax and added aliases to clarify the columns being pulled from each table.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Restoration request for dev-db",
+    "description": "Accidentally dropped a table in the development environment. Can you restore it from last night's backup? It's the 'user_prefs' table.",
+    "priority": "Medium",
+    "resolution": "Restored the 'user_prefs' table from the 02:00 UTC snapshot to a temporary schema and instructed the developer to perform the data migration.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "High I/O Wait on SQL Server",
+    "description": "Our SQL Server 2019 instance on Windows Server 2022 is experiencing massive I/O latency. Disk queues are consistently above 50. The application team is complaining about widespread timeouts across all modules.",
+    "priority": "High",
+    "resolution": "Moved the tempdb files to a dedicated high-performance SSD drive and updated outdated statistics on the largest tables.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Permission issue",
+    "description": "I need read access to the marketing database. My manager approved it, but I can't connect using my current credentials. Getting an 'Access denied for user' error.",
+    "priority": "Low",
+    "resolution": "Granted SELECT permissions on the 'marketing_prod' schema to the user's AD group.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Database replication lag",
+    "description": "The read replica is lagging by over 45 minutes. We are running MySQL 8.0 on AWS RDS. This is causing significant issues for our data analysts who need real-time data.",
+    "priority": "High",
+    "resolution": "Identified a long-running transaction on the master node that was blocking the relay log application. Terminated the session and cleared the lag.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Unable to connect to MongoDB",
+    "description": "The app server keeps failing to handshake with the MongoDB cluster. The logs say 'Connection refused'. We checked the firewall and the port 27017 is definitely open on the app server side.",
+    "priority": "High",
+    "resolution": "Discovered that the MongoDB bindIp setting in mongod.conf was restricted to localhost only, updated it to accept connections from the app server IP range.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Duplicate records in production",
+    "description": "We are noticing thousands of duplicate entries in our 'audit_logs' table. It seems like the batch job is running twice. Can we clean this up?",
+    "priority": "Medium",
+    "resolution": "Used a Common Table Expression (CTE) to identify and delete duplicate rows while retaining the earliest record.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Login failed",
+    "description": "I can't log in to the database. It says my account is locked. This is very frustrating as I have a deadline in an hour.",
+    "priority": "Medium",
+    "resolution": "Unlocked the user account and verified the password expiration policy settings.",
+    "category": "Database",
+    "type": "base"
+  },
+  {
+    "title": "Upgrade request for dev instance",
+    "description": "We need to upgrade the PostgreSQL version on our staging environment from 12 to 15. Please let us know when this can be scheduled.",
+    "priority": "Low",
+    "resolution": "Scheduled the upgrade for the maintenance window this coming Saturday. Notified the stakeholders.",
+    "category": "Database",
+    "type": "base"
+  }
+]

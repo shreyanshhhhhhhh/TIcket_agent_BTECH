@@ -1,0 +1,866 @@
+[
+  {
+    "title": "VPN Authentication Failure - Error 691",
+    "description": "I'm trying to connect to the corporate VPN from my Windows 11 laptop, but I keep receiving Error 691. I've verified my AD password is correct and I am not locked out of my email. This started immediately after the latest OS patch this morning.",
+    "priority": "High",
+    "resolution": "Reset the user's VPN profile in the gateway and cleared local cached credentials on the client machine.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Need access to the Marketing shared drive",
+    "description": "Hey, could you please add me to the 'Marketing_Assets' folder? My team lead approved the request. Thanks!",
+    "priority": "Low",
+    "resolution": "Added user to the AD security group 'GRP_Marketing_Read_Access' as requested.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Account lockout loop",
+    "description": "My domain account is getting locked out every 15 minutes. I've restarted my desktop and cleared saved credentials in Windows Credential Manager, but it keeps happening. I can't get any work done.",
+    "priority": "Critical",
+    "resolution": "Identified a stale service account credential on a disconnected peripheral device attempting to authenticate with an expired password.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Can't login to Jira",
+    "description": "I'm getting a 403 Forbidden error when I try to log into the Jira instance using my SSO credentials. It was working fine yesterday. I'm using Chrome on macOS Sonoma.",
+    "priority": "Medium",
+    "resolution": "Synced user's Okta profile with the Atlassian cloud tenant to resolve attribute synchronization delay.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "New Hire Access Setup",
+    "description": "We have a new hire joining on Monday. Please create their AD account, assign them to the Sales department group, and ensure they have access to the Salesforce platform.",
+    "priority": "Medium",
+    "resolution": "Created AD account and provisioned Salesforce license via O365 group provisioning.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Unable to access AWS Management Console",
+    "description": "I am receiving an 'AccessDenied' error when attempting to reach the production S3 buckets via the AWS CLI. My IAM user has the appropriate policy attached, but it seems to be failing on MFA validation. This is a blocker for our deployment.",
+    "priority": "High",
+    "resolution": "Reset the IAM user's MFA device session to force re-synchronization with the hardware token.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Revoke access for offboarded employee",
+    "description": "Effective immediately, please revoke all access for John Doe. We need his email disabled and his VPN credentials terminated. He is no longer with the company.",
+    "priority": "Critical",
+    "resolution": "Disabled AD account, revoked O365 license, and wiped remote access permissions across all systems.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Password reset keeps failing",
+    "description": "I'm trying to reset my password using the self-service portal, but the security questions are not appearing. I've tried clearing my browser cache and using an InPrivate window. Help!",
+    "priority": "Medium",
+    "resolution": "Manually triggered a password reset link and updated the user's secondary recovery email in the system.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Error accessing SQL Server",
+    "description": "My application is throwing a 'Login failed for user' exception when connecting to SQL Server 2019. I verified my permissions in SSMS and I definitely have db_datareader rights. Could you check the server-level mapping?",
+    "priority": "Medium",
+    "resolution": "Identified that the user's Windows login was not mapped to the specific database schema; mapping added and access granted.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Lost my YubiKey",
+    "description": "I managed to lose my hardware security key. How do I get a new one and remove the lost one from my account? I need to log in to get my work done.",
+    "priority": "High",
+    "resolution": "Deactivated the lost hardware key in Okta and provided the user with a temporary bypass code until a replacement arrives.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Need permissions for Excel Add-in",
+    "description": "Every time I try to run the Finance Add-in in Excel, I get a message saying I need admin privileges to authorize the script. Can you help me fix this so I don't have to call IT every time?",
+    "priority": "Low",
+    "resolution": "Whitelisted the specific Add-in manifest file in the organization's Microsoft 365 Admin Center.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Strange sign-in activity",
+    "description": "I received an alert that my account was signed into from a location in a different country. I am currently in the office in Chicago. I have already changed my password, but please check my recent session logs.",
+    "priority": "Critical",
+    "resolution": "Terminated all active sessions globally and reviewed sign-in logs, confirming it was a false positive triggered by a VPN exit node change.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "VPN Authentication Failure - Error 691",
+    "description": "I am unable to connect to the corporate VPN using Cisco AnyConnect 4.10 on my MacBook Pro running macOS Monterey. It keeps throwing 'Error 691: The remote connection was denied because the user name and password combination you provided is not recognized'. I have already verified my credentials via the web portal and they work fine.",
+    "priority": "High",
+    "resolution": "Reset the user's LDAP password and forced a re-sync with the RADIUS server.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Need access to the Marketing Share Drive",
+    "description": "Hi, I just moved over from the Sales department. Can you please add me to the M:\\Marketing folder? I can currently see the drive but get an 'Access Denied' error when trying to open it.",
+    "priority": "Low",
+    "resolution": "Added user to the 'Marketing-Read-Write' Active Directory security group and requested a log-off/log-on.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Locked out of AWS console",
+    "description": "My IAM credentials for the production environment are locked. I entered the wrong MFA token three times in a row. My username is j.doe_admin.",
+    "priority": "Critical",
+    "resolution": "Verified identity via manager approval and reset the MFA device for the user account.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Can't access Jira board",
+    "description": "I'm trying to view the sprint board for the 'Project X' team but Jira says I don't have the necessary permissions. It's really slowing down my workflow this morning. Can you fix this ASAP?",
+    "priority": "Medium",
+    "resolution": "User was not added to the project-specific permission scheme. Granted 'Developer' role access.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "SAML SSO error on Chrome",
+    "description": "Getting an 'Error 403: app_not_configured_for_user' when trying to launch Salesforce via Okta. I'm using Chrome v118 on Windows 11. Everyone else on my team can get in fine.",
+    "priority": "High",
+    "resolution": "Assigned the user to the Salesforce application integration in Okta Admin Console.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Requesting sudo access",
+    "description": "Hey, I need sudo privileges on server-app-04. I need to install some dependencies for the new patch release, and the current user account doesn't have elevated rights.",
+    "priority": "Medium",
+    "resolution": "Denied. Directed user to submit a formal change request via the security policy portal.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Account Disabled",
+    "description": "My account is disabled! I can't log into my laptop or email. I have a meeting in 10 minutes, please help!",
+    "priority": "Critical",
+    "resolution": "Account was disabled by mistake during a bulk cleanup script. Re-enabled and restored group memberships.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Unable to access internal Wiki",
+    "description": "I keep getting a 401 Unauthorized error when visiting the Confluence internal site. I\u2019ve cleared my browser cache and cookies, but the issue persists.",
+    "priority": "Low",
+    "resolution": "User account was present in the system but had an expired session token. Cleared the active session in the database.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "New hire onboarding access",
+    "description": "Please provision a standard user account for Sarah Smith in the Finance department. She will need access to Excel Online, Sage, and the shared Finance folder.",
+    "priority": "Medium",
+    "resolution": "Created AD user object and provisioned licenses for Office 365 and Finance ERP.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "SSH key rejection on dev-box",
+    "description": "I am getting 'Permission denied (publickey)' when trying to SSH into the dev box. My key is definitely in my ~/.ssh/authorized_keys file. I checked the permissions on the folder, they are set to 700.",
+    "priority": "High",
+    "resolution": "Discovered the user's public key was corrupted. Generated a new key pair and uploaded the public key.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Password reset keeps failing",
+    "description": "I tried the self-service reset portal for my domain account three times. Each time it says 'Error updating password: Policy violation'. I'm just trying to make it my name and a number.",
+    "priority": "Low",
+    "resolution": "Educated user on password complexity requirements; reset password manually as a one-time courtesy.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Database connection denied",
+    "description": "The service account 'svc_app_db' is getting 'ORA-01017: invalid username/password' when trying to connect to the Oracle 19c database. We verified the vault password and it matches, but the DB seems to reject it.",
+    "priority": "Critical",
+    "resolution": "The password in the DB wallet was out of sync with the Vault. Updated the wallet credential store.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "VPN Authentication Failure - Error 691",
+    "description": "I'm trying to connect to the corporate VPN from my home network using Cisco AnyConnect v4.10, but I keep getting Error 691: The remote connection was denied because the user name and password combination you provided is not recognized. I have already verified my credentials via the web portal and they work fine there. Please check if my account is locked in the RADIUS server.",
+    "priority": "High",
+    "resolution": "Reset user's Active Directory account password and cleared stuck VPN session on the ASA firewall.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Need access to Shared Drive S:",
+    "description": "Hi, I just moved to the Marketing team and I can't see the S: drive on my Windows 11 laptop. My manager said I should have access to the 'Campaigns' folder. Can you please add me to the correct AD security group?",
+    "priority": "Low",
+    "resolution": "Added user to the 'SEC_Marketing_Shared_Drive' security group and instructed user to sign out and back in to refresh group policy.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Account locked out again!",
+    "description": "This is the third time today! My domain account keeps locking up every time I try to log into my workstation (WS-IT-042). I'm not doing anything different than usual. Fix this immediately, I have a client demo in 20 minutes.",
+    "priority": "Critical",
+    "resolution": "Identified a stale credential in Windows Credential Manager related to a mapped drive; cleared stored credentials and reset AD account.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Provisioning request for new hire",
+    "description": "Please provision a new domain account for John Doe starting next Monday. He will need access to Email, Jira, and the internal Wiki. Please ensure he is added to the 'Engineering_All' distribution list.",
+    "priority": "Medium",
+    "resolution": "Created user object in AD, assigned O365 E3 license, and configured group memberships.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "MFA prompt loop on mobile device",
+    "description": "Every time I try to sign into O365 on my iPhone, the Microsoft Authenticator app just spins and eventually says 'Request timed out'. I\u2019ve tried reinstalling the app and updating iOS to 17.4. It's really frustrating, please help.",
+    "priority": "High",
+    "resolution": "Removed user's old MFA device registration from Azure AD and prompted user to re-register their device.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Access Request: AWS Production",
+    "description": "I need read-only access to the Production AWS environment for audit purposes. My supervisor, Sarah Jenkins, has already approved this in the ticketing system. My IAM username is jsmith_ops.",
+    "priority": "Medium",
+    "resolution": "Attached the 'ReadOnlyAccess' IAM policy to the user's role after verifying manager approval via Jira ticket.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access root directory on Linux server",
+    "description": "Running Ubuntu 22.04 LTS. I'm getting a 'Permission Denied' error when trying to sudo to /var/www/html/app. I'm sure I have the right group permissions set on the folder.",
+    "priority": "Medium",
+    "resolution": "Corrected the user's group membership to 'www-data' and applied proper chown/chmod permissions to the directory.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Forgotten Password",
+    "description": "I forgot my password. Can you help me reset it?",
+    "priority": "High",
+    "resolution": "Verified identity via manager and performed an AD password reset.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Access to Jira board denied",
+    "description": "I'm trying to view the 'Q3 Infrastructure Project' board in Jira, but I'm getting an 'Insufficient Permissions' message. My teammates can see it just fine. Can you check my profile settings?",
+    "priority": "Low",
+    "resolution": "Added user to the 'Jira_Infrastructure_Project' permission scheme.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Adobe Creative Cloud License missing",
+    "description": "I updated my Creative Cloud app on my Mac and now it says my trial has expired. I have a paid company subscription. Help?",
+    "priority": "Medium",
+    "resolution": "Re-assigned Adobe CC license in the Admin Console and forced a sign-out/sign-in refresh on the local client.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Security group cleanup",
+    "description": "We have several users who have left the department and still have access to the 'Sensitive_HR_Data' share. Please remove their access immediately for compliance reasons.",
+    "priority": "Critical",
+    "resolution": "Removed all listed users from the 'SEC_Sensitive_HR_Data' group and audited remaining members.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Unable to run PowerShell scripts as admin",
+    "description": "My machine (WS-DESK-99) won't let me execute scripts due to execution policy restrictions. I tried running 'Set-ExecutionPolicy RemoteSigned' but it says access is denied. I need this to finish my testing.",
+    "priority": "Low",
+    "resolution": "Granted temporary local administrator rights to user to update the execution policy for their development environment.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access shared HR drive",
+    "description": "I am trying to open the Z: drive but I keep getting an 'Access Denied' error. My manager said I should have permissions for the 'HR_Restricted' folder. I am running Windows 11 Pro.",
+    "priority": "Medium",
+    "resolution": "Reset the user's Active Directory group membership and refreshed the group policy on the local machine.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "VPN login looping",
+    "description": "Every time I try to connect to the Cisco AnyConnect VPN, it authenticates via DUO but then immediately disconnects. It says 'Login failed: Certificate validation error'. This is extremely frustrating as I need to finish a deployment before the morning.",
+    "priority": "High",
+    "resolution": "Cleared the expired machine certificate in the certificate manager and re-provisioned the device profile.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Request for Jira project access",
+    "description": "Hi team, could you please grant me developer-level access to the 'Project-X' board in Jira? My current login only allows read-only access and I need to update my task statuses.",
+    "priority": "Low",
+    "resolution": "Added user to the 'Dev-Team-Alpha' role within the Jira project permission scheme.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "MFA prompt not appearing",
+    "description": "I'm trying to log into O365 on my new MacBook Pro M3, but the Microsoft Authenticator prompt never pushes to my phone. I've reinstalled the app and checked my cellular connection.",
+    "priority": "High",
+    "resolution": "Removed the user's secondary device from the Entra ID portal and re-registered the MFA token.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Lost password",
+    "description": "I forgot my network password. Can you reset it?",
+    "priority": "Medium",
+    "resolution": "Verified identity via manager and performed a forced password reset on the domain controller.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Service account locked",
+    "description": "Our automated deployment script is failing with error 403: Forbidden. It looks like the service account 'svc_deploy_prod' is locked out due to too many failed attempts on our staging server.",
+    "priority": "Critical",
+    "resolution": "Unlocked the account in Active Directory and identified a stale credential on the staging build agent.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "New hire onboarding access",
+    "description": "We have a new engineer starting on Monday. Please provision access for AD, GitHub Enterprise, and the internal Wiki for the user j.doe.",
+    "priority": "Medium",
+    "resolution": "Created user account, added to relevant security groups, and sent provisioning email.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Unable to run sudo commands",
+    "description": "I'm on my Linux workstation (Ubuntu 22.04) and suddenly getting 'User is not in the sudoers file'. I was able to run these commands yesterday, but now nothing works.",
+    "priority": "High",
+    "resolution": "Added the user back to the 'sudo' group and verified the integrity of the /etc/sudoers file.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Adobe CC license error",
+    "description": "I keep getting a pop-up saying 'License expired' when I launch Photoshop. I am logged into my company account, but it doesn't seem to sync the license from the Creative Cloud portal.",
+    "priority": "Low",
+    "resolution": "Logged the user out of the Adobe desktop application, cleared the OOBE cache folder, and logged back in to refresh the license.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "SSO login failure",
+    "description": "When I try to access the company dashboard via Okta, I receive a '400 Bad Request' error. I have cleared my browser cache and tried using Incognito mode, but the issue persists on Chrome 124.",
+    "priority": "High",
+    "resolution": "Found a mismatch in the SAML assertion attributes and updated the application integration settings in Okta.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Permission issue with SQL DB",
+    "description": "I am trying to connect to the production SQL Server 2022 instance, but I am receiving an error stating that I do not have sufficient permissions to view the sys.databases view. I am using SSMS 19.3.",
+    "priority": "Medium",
+    "resolution": "Granted 'VIEW ANY DATABASE' permission to the user's AD domain group on the SQL instance.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Account disabled prematurely",
+    "description": "My account was disabled this morning, but I am not leaving the company! Can you please check why? This is impacting my work.",
+    "priority": "Critical",
+    "resolution": "Discovered an accidental trigger in the HR-to-AD synchronization tool and restored the account status.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access VPN - GlobalProtect",
+    "description": "I'm trying to connect to the corporate VPN using GlobalProtect 6.0.4 on my MacBook Pro running macOS Sonoma, but I keep getting 'Authentication Failed: Invalid Credentials' even though my password works for Outlook. I've restarted my machine twice and cleared the cache, but the error persists. Please assist.",
+    "priority": "High",
+    "resolution": "Reset the user's Okta MFA token and synchronized the AD account attributes.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Need access to Finance-Shared-Drive",
+    "description": "Hi, I just started on the accounting team and need read/write access to the Finance-Shared-Drive. My manager is CC'd on this ticket. Thanks!",
+    "priority": "Low",
+    "resolution": "Added user to the AD group 'SEC-FINANCE-RW' and verified permissions.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Account locked out again",
+    "description": "My account keeps locking me out every 30 minutes! I am using Windows 11 Enterprise. It says 'Account locked due to too many failed attempts' but I haven't typed my password in. This is extremely frustrating.",
+    "priority": "Critical",
+    "resolution": "Identified a stale cached credential on the user's mobile device triggering background authentication failures; cleared credentials and forced a re-auth.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Access Request for Jira",
+    "description": "I need access to the engineering Jira board to view the current sprint tasks. My username is jdoe123.",
+    "priority": "Medium",
+    "resolution": "Granted access to the 'Eng-Dev-Standard' Jira project role.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Error 403 on Production Database",
+    "description": "I am receiving a 403 Forbidden error when attempting to query the production SQL database via SSMS. I checked my permissions yesterday and they were fine, but now I can't even list the tables. I am working on the Q3 report and this is blocking my progress.",
+    "priority": "High",
+    "resolution": "Re-applied missing permissions after a security group migration error.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "New hire onboarding access",
+    "description": "Please provision the following for our new hire, Sarah Smith: Active Directory, email, Slack, and Salesforce. She starts on Monday.",
+    "priority": "Medium",
+    "resolution": "Provisioned all requested accounts and sent welcome instructions to the manager.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "MFA Loop",
+    "description": "I'm stuck in an endless MFA loop on my iPhone 14 when trying to access the Azure portal. It keeps asking for the authenticator code, and after I enter it, it redirects me right back to the sign-in page. Very annoying.",
+    "priority": "High",
+    "resolution": "Unregistered and re-registered the user's device in the Azure MFA portal.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Remove access for terminated employee",
+    "description": "Please terminate access for John Doe immediately. He is no longer with the company. Please ensure all shared drives and email access are disabled.",
+    "priority": "Critical",
+    "resolution": "Disabled user account, wiped mobile device, and revoked O365 tokens.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Requesting sudo access",
+    "description": "I need sudo privileges on the development Linux servers (Ubuntu 22.04 LTS) for my current project. My manager approved this via email.",
+    "priority": "Low",
+    "resolution": "Denied: Internal policy requires senior approval for sudo access; escalated to Manager.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Unable to log into Salesforce",
+    "description": "The login page is just showing a white screen after I hit 'Sign In'. I've tried Chrome and Edge. It worked perfectly yesterday on my desktop. I have an important client demo in an hour.",
+    "priority": "High",
+    "resolution": "Cleared site-specific cookies and browser cache; updated Salesforce SSO metadata.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Access to HR files",
+    "description": "Could I please get access to the HR folder for the annual review documents? Thanks, Dave.",
+    "priority": "Medium",
+    "resolution": "Provided temporary read-only access to the requested folder.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "System Access Denied",
+    "description": "I'm getting an 'Access Denied: 0x80070005' when trying to run the proprietary inventory software on my Dell Latitude laptop. This has been happening since the last Windows Update.",
+    "priority": "Medium",
+    "resolution": "Corrected file system permissions on the application installation directory.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "VPN Authentication Failure - Error 691",
+    "description": "I keep getting Error 691 when trying to connect to the corporate VPN from my home network. I've double-checked my domain credentials and even performed a password reset via the self-service portal, but the issue persists. My machine is running Windows 11 Pro build 22621.",
+    "priority": "Medium",
+    "resolution": "Reset the user's Active Directory account lockout status and cleared cached credentials in the Cisco AnyConnect client.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Locked out of SAP",
+    "description": "Hey, I tried logging into SAP this morning and got locked out after three failed attempts. Could you please reset my access? I'm currently working on the Q3 financial reports and need this resolved ASAP.",
+    "priority": "High",
+    "resolution": "Verified user identity and unlocked the SAP user account via transaction SU01.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Jira Permission Denied",
+    "description": "Unable to view tickets in the 'Engineering' project. I keep receiving a '403 Forbidden' error message when navigating to the board. My colleague has the same access level and can see them just fine.",
+    "priority": "Low",
+    "resolution": "Updated the global permission scheme in Jira to include the user's specific AD security group.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Urgent: Lost Badge/Building Access",
+    "description": "I have misplaced my security badge and cannot enter the building this morning. I'm currently waiting in the lobby. Please disable the lost card and issue me a temporary access credential.",
+    "priority": "Critical",
+    "resolution": "Deactivated the lost badge ID 99284 in the LenelS2 system and issued a temporary visitor pass.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Cannot map network drive S:",
+    "description": "Ever since the OS update to macOS Sonoma 14.2, I can no longer mount the S: drive using SMB. I get an 'Operation not permitted' error when attempting to connect to the server share. Please help.",
+    "priority": "Medium",
+    "resolution": "Updated the SMB mount string to use the newer DFS namespace path and refreshed the Kerberos ticket.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Onboarding Request - New Hire",
+    "description": "We have a new developer joining the team on Monday. Please create their AD account, assign them to the 'Dev-Read-Only' group, and grant them access to the internal Git repository and Confluence wiki.",
+    "priority": "Low",
+    "resolution": "Created AD account and added the user to the requested security groups and application repositories.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "GitHub SSO Loop",
+    "description": "When I try to sign into GitHub via Okta, I get stuck in a redirect loop. The browser console shows 'ERR_TOO_MANY_REDIRECTS' on the SAML assertion URL. I've cleared my Chrome cache and cookies already.",
+    "priority": "High",
+    "resolution": "Cleared the user's session data in the IdP and re-synced the user's email address attribute in the SAML assertion.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Need root access on dev box",
+    "description": "I need sudo privileges on server 'LINUX-WEB-04' to install some dependencies. Can you elevate my account? My username is j.doe.",
+    "priority": "Medium",
+    "resolution": "Denied request per security policy. Instructed user to submit a ticket for the specific package installation via the DevOps team.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "My MFA isn't sending codes",
+    "description": "I've been trying to log into the portal for twenty minutes but the Duo push notifications aren't hitting my phone. I'm late for a client meeting, please fix this!",
+    "priority": "High",
+    "resolution": "Synced the user's hardware token as a temporary workaround and re-registered their mobile device in the Duo admin console.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Expired Password Reset Request",
+    "description": "My domain password expired while I was on leave. I tried to reset it on the login screen, but it tells me the old password is invalid even though I'm using the one I had before I left.",
+    "priority": "Low",
+    "resolution": "Performed a manual password reset in AD and set the 'User must change password at next logon' flag.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Access to Shared Mailbox",
+    "description": "I need full access permissions to the 'Support-Tier-1' shared mailbox. I am not seeing it pop up in my Outlook 365 client despite being added to the distribution list last week.",
+    "priority": "Low",
+    "resolution": "Added the user to the 'Full Access' list in the Exchange Admin Center and confirmed automapping is enabled.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "DB Access Issue",
+    "description": "Receiving an 'ORA-01017: invalid username/password' error when connecting to the production Oracle database via SQL Developer. I am using my standard company credentials.",
+    "priority": "Medium",
+    "resolution": "Verified the user was missing from the DBA_USERS whitelist. Added user to the correct Oracle database role.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Cannot access VPN (GlobalProtect) - Error 401",
+    "description": "I'm trying to connect to the corporate VPN from my home network on Windows 11. Every time I hit connect, it prompts for credentials and then immediately throws 'Error 401: Authentication Failed' despite using the correct MFA-verified password. I\u2019ve already tried clearing the cache in the GlobalProtect settings.",
+    "priority": "High",
+    "resolution": "Reset the user's AD account lock status and synchronized the MFA token on the Duo server.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "New hire onboarding: Missing JIRA permissions",
+    "description": "Hi team, I am a new developer starting today. I have access to the main dashboard but I cannot open any tickets in the Engineering project. It says 'Insufficient permissions' whenever I try to move a task to 'In Progress'.",
+    "priority": "Medium",
+    "resolution": "Added user to the 'Dev-Project-Contributors' AD group and refreshed JIRA project permissions.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Account locked again!",
+    "description": "This is the third time this week! My account keeps getting locked for no reason while I'm in the middle of a client meeting. Please fix this permanently because it's killing my productivity.",
+    "priority": "Critical",
+    "resolution": "Identified an old iPad still trying to sync email with an expired password; removed the device from the ActiveSync list.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Request for S3 Bucket Access",
+    "description": "Hello, I need read-only access to the 'prod-logs-backup' S3 bucket in the AWS environment. My IAM user is 'jsmith_dev'. Please grant the necessary permissions as soon as possible for the audit review.",
+    "priority": "Low",
+    "resolution": "Attached the 'ReadOnlyAccess' policy to the user's IAM role after manager approval.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Unable to log into Salesforce",
+    "description": "My Salesforce login is failing on macOS Sonoma. It redirects me to the SSO login page, but then gives me a blank white screen instead of the dashboard. I've tried Safari and Chrome with the same results.",
+    "priority": "Medium",
+    "resolution": "Cleared site-specific cookies and cache for the Salesforce domain; user successfully logged in.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Lost password for local admin",
+    "description": "Hey, I forgot the local admin password for my Dell Latitude laptop. I need to install some drivers for my project, but I'm locked out of the elevated prompt.",
+    "priority": "Low",
+    "resolution": "Used the LAPS (Local Administrator Password Solution) portal to retrieve the current recovery password for the machine.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "SharePoint folder access denied",
+    "description": "I cannot access the 'Q3 Financials' folder on the team SharePoint site. I have the link, but it tells me 'Access Denied: You do not have permission to view this directory.' My teammates can see it just fine.",
+    "priority": "Medium",
+    "resolution": "Granted the user 'Viewer' access to the specific SharePoint sub-folder and forced a permission propagation sync.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Database connection error (Access Denied)",
+    "description": "We are getting 'Access Denied for user 'app_service'@'10.x.x.x'' when trying to connect to the MySQL staging database. This started happening right after the maintenance window last night. Please check the DB security groups.",
+    "priority": "Critical",
+    "resolution": "Updated the RDS security group inbound rules to include the updated VPC IP range for the application server.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Forgotten MFA device",
+    "description": "I left my company-issued Yubikey at home. I'm at the office now and cannot get past the Okta prompt. Can we bypass this for today?",
+    "priority": "High",
+    "resolution": "Verified identity via manager and issued a one-time bypass code valid for 4 hours.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Revoke access for terminated employee",
+    "description": "Please terminate all system access for John Doe (jdoe@company.com) immediately. This is an urgent request due to his resignation effective today. Ensure all email and VPN tokens are deactivated.",
+    "priority": "Critical",
+    "resolution": "Disabled AD account, revoked O365 license, and wiped mobile device enrollment via Intune.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Can't login to Adobe CC",
+    "description": "I'm signed in, but the apps (Photoshop and Illustrator) say I don't have a valid subscription on this machine. It worked yesterday on my Windows 10 desktop, but now it's acting up.",
+    "priority": "Low",
+    "resolution": "Logged the user out of all Adobe sessions and performed a fresh login to re-validate the license token.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "SSH access request to dev-srv-04",
+    "description": "I need SSH access to dev-srv-04 for the upcoming performance testing. My public key is attached. Could you add me to the authorized_keys file?",
+    "priority": "Low",
+    "resolution": "Added the user's public key to the server's /home/user/.ssh/authorized_keys file and verified connection.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "VPN connection failure - Error 807",
+    "description": "I am unable to connect to the corporate VPN from my home network. Every time I attempt to initiate the connection on my Windows 11 laptop, it hangs at 'Verifying credentials' and then throws Error 807. I have already restarted the Cisco AnyConnect client and rebooted my machine with no success.",
+    "priority": "High",
+    "resolution": "Reset the user's VPN profile on the gateway and updated the local certificate store to resolve the handshake timeout.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Need access to Shared Drive HR_Dept",
+    "description": "Hi, I just started in the HR department today and I need access to the HR_Dept shared drive on the file server. My manager is Sarah Jenkins, if you need to verify this request. Thanks!",
+    "priority": "Low",
+    "resolution": "Verified approval from manager and granted read/write NTFS permissions to the user account.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Locked out of AD account",
+    "description": "I'm locked out again. I've tried my password three times and now it says 'Account is locked due to multiple failed attempts'. This is the third time this week, please help.",
+    "priority": "Medium",
+    "resolution": "Unlocked the AD account and cleared cached credentials on the user's workstation that were causing repeated lockout triggers.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "SaaS Application Login Loop",
+    "description": "I am experiencing an infinite redirect loop when trying to access our Salesforce instance via Okta SSO. It happens on both Chrome (v124) and Edge. It seems like my session token isn't being parsed correctly by the IDP.",
+    "priority": "High",
+    "resolution": "Cleared the browser cookies and cache, then performed a forced sync between Okta and the Salesforce integration app.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Elevated privileges required for software install",
+    "description": "I need to install Python 3.12 for a dev project, but my standard user account is restricted. Please grant temporary admin rights to my machine (Asset ID: LAP-9982) so I can finish this by EOD.",
+    "priority": "Medium",
+    "resolution": "Denied request for permanent admin rights; instead, deployed Python 3.12 via Intune to the user's machine.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Unable to access production database",
+    "description": "Getting a 'Permission Denied (publickey)' error when trying to SSH into the PROD-DB-01 server. My key was rotated yesterday, and I suspect it wasn't pushed to the authorized_keys file on the target server.",
+    "priority": "Critical",
+    "resolution": "Manually added the new public key to the authorized_keys file on the production database server and restarted the SSH daemon.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Password reset for legacy system",
+    "description": "Hey, can someone reset the password for the old inventory system? It\u2019s not connected to our main SSO. Thanks a bunch.",
+    "priority": "Low",
+    "resolution": "Reset the password in the legacy SQL database and provided the temporary credentials to the user via encrypted email.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Azure AD Join failing on new laptop",
+    "description": "I'm setting up a new MacBook Pro for a new hire and the Azure AD join keeps failing with error code 80180014. The device is properly enrolled in our MDM, but it won't pull the enterprise policies.",
+    "priority": "High",
+    "resolution": "Fixed the Conditional Access policy blocking macOS device registration and re-enrolled the device in the MDM console.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Can't open files in Sharepoint",
+    "description": "When I click a file in our team SharePoint site, it says I don't have permission to view this item. I'm part of the 'Engineering' group, which should have full access. Please fix this ASAP.",
+    "priority": "Medium",
+    "resolution": "Updated the SharePoint site collection permissions by re-adding the 'Engineering' group to the 'Members' role.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "User account termination",
+    "description": "Please terminate access for John Doe immediately. Effective as of 5:00 PM today.",
+    "priority": "Critical",
+    "resolution": "Disabled the user's AD account, revoked all O365 session tokens, and disabled their VPN access.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "GitLab access issues",
+    "description": "I'm getting 403 Forbidden when trying to push code to our repo. My SSH key is set up correctly in the dashboard, but I think my user group membership was stripped during the migration to the new instance.",
+    "priority": "Medium",
+    "resolution": "Added the user to the 'Dev-Ops' GitLab group and ran a permissions sync to update the upstream repositories.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "MFA device lost",
+    "description": "I lost my phone that had the Microsoft Authenticator app on it. Now I can't log into my email. How do I get back in?",
+    "priority": "High",
+    "resolution": "Verified user identity via manager, reset the MFA requirement for the account, and assisted the user in setting up a new device.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "VPN Authentication Failure - Error 691",
+    "description": "I am unable to connect to the corporate VPN using my MacBook Pro running macOS Sonoma. Every time I initiate the connection, I receive 'Error 691: The remote connection was denied because the username and password combination you provided is not recognized'. I have confirmed my AD credentials are correct as they work on the Outlook web portal.",
+    "priority": "High",
+    "resolution": "Reset the user's AD password sync in the Identity Provider portal and cleared the cached VPN credentials in the Keychain Access utility.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Need access to Q4 Sales Folder",
+    "description": "Hi team, could you please grant me read/write access to the 'Q4_Sales_Project' folder on the fileserver? My current permissions only allow read access, which is preventing me from updating the tracking spreadsheet. My user ID is jsmith77.",
+    "priority": "Low",
+    "resolution": "Updated group policy permissions for the 'Sales_Team_RW' security group to include the user.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Account locked out again",
+    "description": "My account keeps getting locked out every hour. I'm using a Dell Latitude 5420 on Windows 11. I haven't changed my password, and I'm not running any scheduled tasks that I know of. This is very frustrating as I have a deadline.",
+    "priority": "High",
+    "resolution": "Identified a stale credential in Windows Credential Manager linked to a disconnected network drive mapped to an old server.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Access to Jira board for new hire",
+    "description": "Please add user 'abrown' to the DevOps Jira project with admin rights. They joined the team today and need to configure the sprint boards.",
+    "priority": "Medium",
+    "resolution": "Added user to the Jira 'DevOps_Admins' project role.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "SSO Login Loop - Chrome",
+    "description": "I'm stuck in a login loop when trying to access Salesforce. I enter my credentials, MFA approves, but it just redirects back to the login page. I've tried clearing cookies and cache on Chrome v122.",
+    "priority": "Medium",
+    "resolution": "Cleared the browser's persistent storage and updated the SAML assertion settings for the user's profile.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Unable to access production database",
+    "description": "I am getting a 'Permission Denied (publickey)' error when attempting to SSH into the production Linux server (IP: 10.0.4.15). My public key was rotated this morning. Please verify if the new key was added to authorized_keys.",
+    "priority": "Critical",
+    "resolution": "Found that the public key was uploaded to the staging environment by mistake; corrected the deployment script to target production.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Can't access printer",
+    "description": "The printer in the North wing is saying 'Access Denied' when I try to print from my office PC. It was working fine yesterday.",
+    "priority": "Low",
+    "resolution": "Re-added the user to the printer's authorized security group on the Print Server.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Urgent: Salesforce access for client demo",
+    "description": "I have a client demo in 20 minutes and my Salesforce access is completely gone. It says 'User account inactive'. I really need this fixed immediately, please!",
+    "priority": "Critical",
+    "resolution": "Reactivated the user account which had been flagged by an automated cleanup script for 90 days of inactivity.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Issue with MFA prompt",
+    "description": "My Authenticator app on my iPhone 15 isn't showing the push notification for Microsoft 365 logins. I've restarted the phone and reinstalled the app, but no luck.",
+    "priority": "Medium",
+    "resolution": "Removed the device from the user's MFA settings in Azure AD and prompted for a re-enrollment flow.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "GitLab access request",
+    "description": "Requesting access to the 'mobile-app-frontend' repository for our new intern. They need read-only access to view the codebase.",
+    "priority": "Low",
+    "resolution": "Added the user to the 'interns-read-only' GitLab access group.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Adobe CC License failure",
+    "description": "Whenever I launch Photoshop, it tells me I don't have a valid subscription. I'm signed in with my work email, but it keeps redirecting me to the 'Start Trial' page. Is there an issue with the license pool?",
+    "priority": "Medium",
+    "resolution": "Assigned an available seat from the Adobe Admin Console to the user's email address.",
+    "category": "Access Management",
+    "type": "base"
+  },
+  {
+    "title": "Access denied to HR shared drive",
+    "description": "I transferred from the Marketing department to HR last week, but I still cannot access the 'HR_Records' network drive. My manager said my permissions should have been updated by now.",
+    "priority": "Medium",
+    "resolution": "Updated the user's Primary Group in Active Directory from 'Marketing_Users' to 'HR_Department_Full'.",
+    "category": "Access Management",
+    "type": "base"
+  }
+]

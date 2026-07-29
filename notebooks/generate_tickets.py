@@ -44,23 +44,28 @@ Vary tone (formal, casual, frustrated, calm) and length (short and long) across 
 def main():
     os.makedirs("data/raw", exist_ok=True)
     all_tickets = []
-    test_categories = CATEGORIES[:1]
 
-    print("=== TEST RUN: Generating base tickets (1 category only) ===")
-    for cat in test_categories:
-        print(f"Category: {cat}")
+    print("=== FULL RUN: Generating base tickets (all 7 categories) ===")
+    for cat in CATEGORIES:
+        print(f"\nCategory: {cat}")
         cat_tickets = []
-        for batch in range(2):
+        for batch in range(9):   # 9 batches x 12 = ~108 tickets per category
             batch_tickets = generate_base(cat, n=12)
             cat_tickets.extend(batch_tickets)
             print(f"  Batch {batch+1}: {len(batch_tickets)} tickets")
-            time.sleep(6)
-        all_tickets.extend(cat_tickets)
+            time.sleep(6)   # respects 15 RPM limit
 
-    with open("data/raw/test_tickets_raw.json", "w", encoding="utf-8") as f:
+        # Save per-category file immediately (safety net in case of crash)
+        with open(f"data/raw/{cat.replace(' ', '_')}.json", "w", encoding="utf-8") as f:
+            json.dump(cat_tickets, f, indent=2)
+
+        all_tickets.extend(cat_tickets)
+        print(f"  Category total: {len(cat_tickets)} tickets")
+
+    with open("data/raw/all_tickets_base.json", "w", encoding="utf-8") as f:
         json.dump(all_tickets, f, indent=2)
 
-    print(f"\n=== TEST DONE. Total tickets generated: {len(all_tickets)} ===")
+    print(f"\n=== DONE. Total base tickets generated: {len(all_tickets)} ===")
 
 if __name__ == "__main__":
     main()
