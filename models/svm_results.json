@@ -1,0 +1,7 @@
+{
+  "model": "Embeddings (MiniLM) + SVM",
+  "val_accuracy": 0.7315436241610739,
+  "val_f1_macro": 0.7335935036772824,
+  "test_accuracy": 0.7,
+  "test_f1_macro": 0.6997042850404919
+}

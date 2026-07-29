@@ -1,0 +1,4 @@
+Model,Val Accuracy,Val F1 (macro),Test Accuracy,Test F1 (macro)
+Baseline (TF-IDF + NB),0.6644,0.6719,0.6533,0.6564
+Main (Embeddings + LogReg),0.7315,0.7343,0.7,0.7026
+SVM (Embeddings + SVM),0.7315,0.7336,0.7,0.6997
