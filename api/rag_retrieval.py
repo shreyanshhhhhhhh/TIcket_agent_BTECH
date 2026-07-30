@@ -1,7 +1,9 @@
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-CHROMA_PATH = "models/chroma_db"
+CHROMA_PATH = os.path.join(BASE_DIR, "models", "chroma_db")
 COLLECTION_NAME = "ticket_resolutions"
 
 def load_knowledge_base():

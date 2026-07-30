@@ -12,12 +12,16 @@ from langgraph.graph import StateGraph, END
 
 from routing import route_ticket
 from rag_retrieval import retrieve_similar_tickets
+import os
+
+# Get the project root directory regardless of where this script is run from
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # ---------------------------------------------------------
 # Load models once (at module load time, not per-request)
 # ---------------------------------------------------------
 print("Loading classifier and embedder...")
-CLASSIFIER = joblib.load("models/logreg_classifier.joblib")
+CLASSIFIER = joblib.load(os.path.join(BASE_DIR, "models", "logreg_classifier.joblib"))
 EMBEDDER = SentenceTransformer("all-MiniLM-L6-v2")
 
 # Thresholds (tunable — these decide escalation behavior)
@@ -121,8 +125,10 @@ def build_agent_graph():
 # ---------------------------------------------------------
 # Public function to process a new ticket end-to-end
 # ---------------------------------------------------------
+# Build the graph ONCE at module load time, not per-request
+_COMPILED_AGENT = build_agent_graph()
+
 def process_ticket(ticket_text: str) -> Dict:
-    agent = build_agent_graph()
     initial_state: TicketState = {
         "ticket_text": ticket_text,
         "category": None,
@@ -134,9 +140,8 @@ def process_ticket(ticket_text: str) -> Dict:
         "suggested_resolution": None,
         "reason": None,
     }
-    final_state = agent.invoke(initial_state)
+    final_state = _COMPILED_AGENT.invoke(initial_state)
     return final_state
-
 
 if __name__ == "__main__":
     test_tickets = [
