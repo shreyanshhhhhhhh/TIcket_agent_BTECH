@@ -38,7 +38,10 @@ Auto-Resolve (high confidence) Escalate (low confidence)
 Resolution shown to employee Routed to human agent
 ↓ ↓
 Feedback loop → knowledge base updated
+
+
 <img width="407" height="586" alt="image" src="https://github.com/user-attachments/assets/e831844d-ccf6-45bd-a6e4-01fe824907d0" />
+
 
 
 ## 🗂️ Ticket Categories
