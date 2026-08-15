@@ -6,19 +6,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHROMA_PATH = os.path.join(BASE_DIR, "models", "chroma_db")
 COLLECTION_NAME = "ticket_resolutions"
 
-_VECTORSTORE = None
-
 def load_knowledge_base():
-    """Loads and caches the existing persisted Chroma vector store."""
-    global _VECTORSTORE
-    if _VECTORSTORE is None:
-        embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-        _VECTORSTORE = Chroma(
-            collection_name=COLLECTION_NAME,
-            embedding_function=embeddings,
-            persist_directory=CHROMA_PATH,
-        )
-    return _VECTORSTORE
+    """Loads the existing persisted Chroma vector store."""
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    vectorstore = Chroma(
+        collection_name=COLLECTION_NAME,
+        embedding_function=embeddings,
+        persist_directory=CHROMA_PATH,
+    )
+    return vectorstore
 
 def retrieve_similar_tickets(query_text: str, k: int = 5):
     """
@@ -28,14 +24,12 @@ def retrieve_similar_tickets(query_text: str, k: int = 5):
     vectorstore = load_knowledge_base()
 
     # similarity_search_with_score returns (Document, distance_score) pairs
-    # Chroma returns L2 / Cosine distance. We convert to normalized similarity (0.0 to 1.0).
+    # lower distance = more similar (Chroma uses L2/cosine distance by default)
     results = vectorstore.similarity_search_with_score(query_text, k=k)
 
     retrieved = []
     for doc, score in results:
-        # Convert Chroma L2/cosine distance to a 0.0-1.0 similarity score scale
-        # Typical distance ranges from 0.0 (identical) to ~1.4 (dissimilar)
-        similarity = max(0.0, 1.0 - (score / 1.5))
+        similarity = 1 - score  # convert distance to a rough similarity indicator
         retrieved.append({
             "title": doc.metadata.get("title"),
             "category": doc.metadata.get("category"),

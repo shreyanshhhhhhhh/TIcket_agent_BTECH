@@ -24,10 +24,9 @@ print("Loading classifier and embedder...")
 CLASSIFIER = joblib.load(os.path.join(BASE_DIR, "models", "logreg_classifier.joblib"))
 EMBEDDER = SentenceTransformer("all-MiniLM-L6-v2")
 
-# Thresholds (calibrated based on Phase 2 empirical study)
-# Note: Calibration study proved model is underconfident (81% accurate at 0.50-0.60 conf)
-CLASSIFIER_CONFIDENCE_THRESHOLD = 0.35
-RETRIEVAL_SIMILARITY_THRESHOLD = 0.40
+# Thresholds (tunable — these decide escalation behavior)
+CLASSIFIER_CONFIDENCE_THRESHOLD = 0.50   # was 0.55
+RETRIEVAL_SIMILARITY_THRESHOLD = 0.40    # was 0.45, slightly relaxed# below this, treat retrieval as weak evidence
 
 
 # ---------------------------------------------------------
@@ -85,21 +84,19 @@ def retrieve_node(state: TicketState) -> TicketState:
 def decide_node(state: TicketState) -> TicketState:
     conf = state["classifier_confidence"]
     sim = state["best_similarity"]
-    top_resolution = state["retrieved"][0]["resolution"] if state.get("retrieved") and len(state["retrieved"]) > 0 else None
-
-    # Always preserve the top match resolution as reference
-    state["suggested_resolution"] = top_resolution
 
     if conf >= CLASSIFIER_CONFIDENCE_THRESHOLD and sim >= RETRIEVAL_SIMILARITY_THRESHOLD:
         state["decision"] = "auto_resolve"
+        state["suggested_resolution"] = state["retrieved"][0]["resolution"]
         state["reason"] = (
             f"High classifier confidence ({conf:.2f}) and strong retrieval match "
             f"(similarity {sim:.2f}) — auto-suggesting resolution."
         )
     else:
         state["decision"] = "escalate"
+        state["suggested_resolution"] = None
         state["reason"] = (
-            f"Moderate/Low confidence (classifier: {conf:.2f}, retrieval similarity: {sim:.2f}) — "
+            f"Low confidence (classifier: {conf:.2f}, retrieval similarity: {sim:.2f}) — "
             f"escalating to {state['department']} for human review."
         )
     return state
