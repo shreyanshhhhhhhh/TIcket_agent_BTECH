@@ -1,122 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Employee Portal</title>
-<link rel="stylesheet" href="/static/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Portal</title>
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
+
 <body>
-<div class="navbar">
-  <h2>🎫 IT Ticket System</h2>
-  <div class="user-info">
-    <span id="userDisplay"></span> |
-    <a href="/app" style="color:#6ea8fe;">Sign Out</a>
-  </div>
-</div>
-
-<div class="container">
-  <div class="card">
-    <h1>📝 Submit a Support Ticket</h1>
-    <p class="subtitle">Describe your issue and we'll try to help right away.</p>
-
-    <form id="ticketForm">
-      <label>Title</label>
-      <input type="text" id="title" placeholder="e.g. VPN not connecting" required>
-
-      <label>Description</label>
-      <textarea id="description" placeholder="Describe the problem in detail..." required></textarea>
-
-      <button type="submit">Submit Ticket</button>
-    </form>
-  </div>
-
-  <div id="resultCard" class="card hidden">
-    <h2>Ticket Analysis</h2>
-    <div class="metric-grid">
-      <div class="metric-box">
-        <div class="value" id="categoryVal">-</div>
-        <div class="label">Predicted Category</div>
-      </div>
-      <div class="metric-box">
-        <div class="value" id="deptVal" style="font-size:16px;">-</div>
-        <div class="label">Assigned Department</div>
-      </div>
+  <div class="navbar">
+    <h2>🎫 IT Ticket System</h2>
+    <div class="user-info">
+      <span id="userDisplay"></span>
+      <a href="#" id="signOutLink">Sign Out</a>
     </div>
-    <p id="reasonText" style="color:#9aa0ac; margin-bottom:16px;"></p>
-    <div id="decisionArea"></div>
   </div>
-</div>
 
-<script>
-const API_BASE = window.location.origin;
-document.getElementById('userDisplay').textContent = localStorage.getItem('userName') + ' (Employee)';
+  <div class="container">
+    <div class="card">
+      <h1>📝 Submit a Support Ticket</h1>
+      <p class="subtitle">Describe your issue and we'll try to help right away.</p>
 
-let currentTicketId = null;
+      <form id="ticketForm">
+        <label>Title</label>
+        <input type="text" id="title" placeholder="e.g. VPN not connecting" required>
 
-document.getElementById('ticketForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const title = document.getElementById('title').value;
-  const description = document.getElementById('description').value;
-  const employeeId = parseInt(localStorage.getItem('userId'));
+        <label>Description</label>
+        <textarea id="description" placeholder="Describe the problem in detail..." required></textarea>
 
-  const res = await fetch(`${API_BASE}/submit-ticket`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ employee_id: employeeId, title, description })
-  });
-  const data = await res.json();
+        <button type="submit" id="submitBtn">Submit Ticket</button>
+      </form>
+    </div>
 
-  currentTicketId = data.ticket_id;
-  document.getElementById('categoryVal').textContent = data.category;
-  document.getElementById('deptVal').textContent = data.department;
-  document.getElementById('reasonText').textContent = data.reason;
-
-  const decisionArea = document.getElementById('decisionArea');
-  if (data.decision === 'auto_resolve') {
-    decisionArea.innerHTML = `
-      <div class="alert-success">✅ We found a likely solution:</div>
-      <div class="alert-info">${data.suggested_resolution}</div>
-      <p style="margin:16px 0 8px;">Did this resolve your issue?</p>
-      <div class="btn-row">
-        <button onclick="sendFeedback('yes')">✅ Yes, resolved</button>
-        <button class="warn" onclick="showPartialNotes()">⚠️ Partially resolved</button>
-        <button class="danger" onclick="sendFeedback('no')">❌ No, didn't help</button>
+    <div id="resultCard" class="card hidden">
+      <h2>Ticket Analysis</h2>
+      <div class="metric-grid">
+        <div class="metric-box">
+          <div class="value" id="categoryVal">-</div>
+          <div class="label">Predicted Category</div>
+        </div>
+        <div class="metric-box">
+          <div class="value" id="deptVal" style="font-size:16px;">-</div>
+          <div class="label">Assigned Department</div>
+        </div>
       </div>
-      <div id="partialNotesArea" class="hidden" style="margin-top:16px;">
-        <label>What improved, and what's still wrong?</label>
-        <textarea id="partialNotes"></textarea>
-        <button onclick="submitPartial()">Submit follow-up</button>
-      </div>
-    `;
-  } else {
-    decisionArea.innerHTML = `<div class="alert-warning">🔺 Escalated to <strong>${data.department}</strong> for human review.</div>`;
-  }
+      <p id="reasonText" style="color:#9aa3bd; margin-bottom:16px;"></p>
+      <div id="decisionArea"></div>
+    </div>
+  </div>
 
-  document.getElementById('resultCard').classList.remove('hidden');
-});
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="/static/js/transitions.js"></script>
+  <script>
+    const API_BASE = window.location.origin;
+    document.getElementById('userDisplay').textContent = localStorage.getItem('userName') + ' (Employee)';
 
-async function sendFeedback(feedback) {
-  await fetch(`${API_BASE}/ticket-feedback/${currentTicketId}`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ feedback })
-  });
-  document.getElementById('decisionArea').innerHTML += `<div class="alert-success" style="margin-top:12px;">Feedback recorded. Thank you!</div>`;
-}
+    document.getElementById('signOutLink').addEventListener('click', function (e) {
+      e.preventDefault();
+      localStorage.clear();
+      navigateWithTransition('/app');
+    });
 
-function showPartialNotes() {
-  document.getElementById('partialNotesArea').classList.remove('hidden');
-}
+    let currentTicketId = null;
 
-async function submitPartial() {
-  const notes = document.getElementById('partialNotes').value;
-  await fetch(`${API_BASE}/ticket-feedback/${currentTicketId}`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ feedback: 'partially_yes', followup_notes: notes })
-  });
-  document.getElementById('decisionArea').innerHTML += `<div class="alert-warning" style="margin-top:12px;">Escalated with your notes. Thank you!</div>`;
-}
-</script>
+    document.getElementById('ticketForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const description = document.getElementById('description').value;
+      const employeeId = parseInt(localStorage.getItem('userId'));
+      const submitBtn = document.getElementById('submitBtn');
+
+      bounceClick(submitBtn);
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Analyzing...';
+      submitBtn.disabled = true;
+      gsap.to(submitBtn, { opacity: 0.6, duration: 0.2 });
+
+      try {
+        const res = await fetch(`${API_BASE}/submit-ticket`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ employee_id: employeeId, title, description })
+        });
+        const data = await res.json();
+
+        currentTicketId = data.ticket_id;
+        document.getElementById('categoryVal').textContent = data.category;
+        document.getElementById('deptVal').textContent = data.department;
+        document.getElementById('reasonText').textContent = data.reason;
+
+        const decisionArea = document.getElementById('decisionArea');
+        if (data.decision === 'auto_resolve') {
+          decisionArea.innerHTML = `
+        <div class="alert-success">✅ We found a likely solution:</div>
+        <div class="alert-info">${data.suggested_resolution}</div>
+        <p style="margin:16px 0 8px;">Did this resolve your issue?</p>
+        <div class="btn-row">
+          <button onclick="sendFeedback('yes', this)">✅ Yes, resolved</button>
+          <button class="warn" onclick="showPartialNotes(this)">⚠️ Partially resolved</button>
+          <button class="danger" onclick="sendFeedback('no', this)">❌ No, didn't help</button>
+        </div>
+        <div id="partialNotesArea" class="hidden" style="margin-top:16px;">
+          <label>What improved, and what's still wrong?</label>
+          <textarea id="partialNotes"></textarea>
+          <button onclick="submitPartial(this)">Submit follow-up</button>
+        </div>
+      `;
+        } else {
+          decisionArea.innerHTML = `<div class="alert-warning">🔺 Escalated to <strong>${data.department}</strong> for human review.</div>`;
+        }
+
+        const resultCard = document.getElementById('resultCard');
+        resultCard.classList.remove('hidden');
+        revealResult(resultCard);
+        resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        gsap.to(submitBtn, { opacity: 1, duration: 0.2 });
+      }
+    });
+
+    async function sendFeedback(feedback, btn) {
+      bounceClick(btn);
+      await fetch(`${API_BASE}/ticket-feedback/${currentTicketId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ feedback })
+      });
+      const note = document.createElement('div');
+      note.className = 'alert-success';
+      note.style.marginTop = '12px';
+      note.textContent = 'Feedback recorded. Thank you!';
+      document.getElementById('decisionArea').appendChild(note);
+      revealResult(note);
+    }
+
+    function showPartialNotes(btn) {
+      bounceClick(btn);
+      const area = document.getElementById('partialNotesArea');
+      area.classList.remove('hidden');
+      revealResult(area);
+    }
+
+    async function submitPartial(btn) {
+      bounceClick(btn);
+      const notes = document.getElementById('partialNotes').value;
+      await fetch(`${API_BASE}/ticket-feedback/${currentTicketId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ feedback: 'partially_yes', followup_notes: notes })
+      });
+      const note = document.createElement('div');
+      note.className = 'alert-warning';
+      note.style.marginTop = '12px';
+      note.textContent = 'Escalated with your notes. Thank you!';
+      document.getElementById('decisionArea').appendChild(note);
+      revealResult(note);
+    }
+  </script>
 </body>
+
 </html>

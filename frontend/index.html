@@ -1,70 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>IT Ticket System</title>
-<link rel="stylesheet" href="/static/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Ticket System</title>
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
+
 <body>
-<div class="container">
-  <div class="card">
-    <h1>🎫 AI-Powered IT Ticket Routing & Resolution System</h1>
-    <p class="subtitle">Sign in to continue</p>
+  <div class="container">
+    <div class="card">
+      <h1>🎫 AI-Powered IT Ticket Routing & Resolution System</h1>
+      <p class="subtitle">Sign in to continue</p>
 
-    <form id="loginForm">
-      <label>Your Name</label>
-      <input type="text" id="name" required>
+      <form id="loginForm">
+        <label>Your Name</label>
+        <input type="text" id="name" required>
 
-      <label>Your User ID</label>
-      <input type="number" id="userId" value="1" min="1" required>
+        <label>Your User ID</label>
+        <input type="number" id="userId" value="1" min="1" required>
 
-      <label>Login as</label>
-      <select id="role">
-        <option value="Employee">Employee</option>
-        <option value="Agent">Agent</option>
-      </select>
-
-      <div id="deptField" class="hidden">
-        <label>Department</label>
-        <select id="department">
-          <option>Infrastructure & Systems Team</option>
-          <option>Application Support Team</option>
-          <option>Security Operations (SecOps)</option>
-          <option>Database Administration (DBA) Team</option>
-          <option>Storage & Backup Team</option>
-          <option>Network Operations Team</option>
-          <option>Identity & Access Management (IAM) Team</option>
+        <label>Login as</label>
+        <select id="role">
+          <option value="Employee">Employee</option>
+          <option value="Agent">Agent</option>
         </select>
-      </div>
 
-      <button type="submit">Sign In</button>
-    </form>
+        <div id="deptField" class="hidden">
+          <label>Department</label>
+          <select id="department">
+            <option>Infrastructure & Systems Team</option>
+            <option>Application Support Team</option>
+            <option>Security Operations (SecOps)</option>
+            <option>Database Administration (DBA) Team</option>
+            <option>Storage & Backup Team</option>
+            <option>Network Operations Team</option>
+            <option>Identity & Access Management (IAM) Team</option>
+          </select>
+        </div>
+
+        <button type="submit" id="signInBtn">Sign In</button>
+      </form>
+    </div>
   </div>
-</div>
 
-<script>
-document.getElementById('role').addEventListener('change', function() {
-  document.getElementById('deptField').classList.toggle('hidden', this.value !== 'Agent');
-});
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="/static/js/transitions.js"></script>
+  <script>
+    document.getElementById('role').addEventListener('change', function () {
+      document.getElementById('deptField').classList.toggle('hidden', this.value !== 'Agent');
+    });
 
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const name = document.getElementById('name').value;
-  const userId = document.getElementById('userId').value;
-  const role = document.getElementById('role').value;
-  const department = document.getElementById('department').value;
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const userId = document.getElementById('userId').value;
+      const role = document.getElementById('role').value;
+      const department = document.getElementById('department').value;
 
-  localStorage.setItem('userName', name);
-  localStorage.setItem('userId', userId);
-  localStorage.setItem('userRole', role);
-  localStorage.setItem('userDept', department);
+      if (!name) return;
 
-  if (role === 'Employee') {
-    window.location.href = '/app/employee';
-  } else {
-    window.location.href = '/app/agent';
-  }
-});
-</script>
+      bounceClick(document.getElementById('signInBtn'));
+
+      localStorage.setItem('userName', name);
+      localStorage.setItem('userId', userId);
+      localStorage.setItem('userRole', role);
+      localStorage.setItem('userDept', department);
+
+      const destination = role === 'Employee' ? '/app/employee' : '/app/agent';
+      navigateWithTransition(destination);
+    });
+  </script>
 </body>
+
 </html>
