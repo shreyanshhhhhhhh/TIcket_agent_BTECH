@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Agent Dashboard</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="navbar">
+  <h2>🛠️ Agent Dashboard</h2>
+  <div class="user-info">
+    <span id="userDisplay"></span> |
+    <a href="/app" style="color:#6ea8fe;">Sign Out</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h1 id="deptTitle">Queue</h1>
+    <button onclick="loadTickets()">🔄 Refresh Queue</button>
+  </div>
+  <div id="ticketsList"></div>
+</div>
+
+<script>
+const API_BASE = window.location.origin;
+const department = localStorage.getItem('userDept');
+document.getElementById('userDisplay').textContent = localStorage.getItem('userName') + ' (Agent)';
+document.getElementById('deptTitle').textContent = `🎫 ${department}`;
+
+const priorityClass = { Critical: 'critical', High: 'high', Medium: 'medium', Low: 'low' };
+
+async function loadTickets() {
+  const res = await fetch(`${API_BASE}/tickets/assigned/${encodeURIComponent(department)}`);
+  const tickets = await res.json();
+  const listDiv = document.getElementById('ticketsList');
+
+  if (tickets.length === 0) {
+    listDiv.innerHTML = '<div class="card"><p>No escalated tickets in your queue right now.</p></div>';
+    return;
+  }
+
+  listDiv.innerHTML = tickets.map(t => `
+    <div class="ticket-item">
+      <div class="ticket-header" onclick="toggleTicket(${t.id})">
+        <span>🎫 #${t.id} — ${t.title}</span>
+        <span class="badge ${priorityClass[t.priority] || 'medium'}">${t.priority}</span>
+      </div>
+      <div class="ticket-body" id="body-${t.id}">
+        <p><strong>Description:</strong> ${t.description}</p>
+        <p><strong>Status:</strong> ${t.status}</p>
+        ${t.rag_suggested_resolution ? `<div class="alert-info">💡 System's original suggestion: ${t.rag_suggested_resolution}</div>` : ''}
+        ${t.employee_followup_notes ? `<div class="alert-warning">Employee note: ${t.employee_followup_notes}</div>` : ''}
+        <div id="repeat-${t.id}"></div>
+        <div id="similar-${t.id}"></div>
+
+        <label>Root cause</label>
+        <textarea id="cause-${t.id}"></textarea>
+        <label>Fix steps taken</label>
+        <textarea id="fix-${t.id}"></textarea>
+        <button onclick="submitResolution(${t.id})">Submit Resolution</button>
+      </div>
+    </div>
+  `).join('');
+
+  tickets.forEach(t => {
+    fetch(`${API_BASE}/tickets/${t.id}/repeated-check`).then(r => r.json()).then(data => {
+      if (data.similar_count_last_7_days > 0) {
+        document.getElementById(`repeat-${t.id}`).innerHTML =
+          `<div class="alert-warning">⚠️ ${data.similar_count_last_7_days} similar ticket(s) in the last 7 days — consider a permanent fix.</div>`;
+      }
+    });
+  });
+}
+
+function toggleTicket(id) {
+  document.getElementById(`body-${id}`).classList.toggle('open');
+}
+
+async function submitResolution(ticketId) {
+  const root_cause = document.getElementById(`cause-${ticketId}`).value;
+  const fix_steps = document.getElementById(`fix-${ticketId}`).value;
+  if (!root_cause || !fix_steps) { alert('Please fill in both fields.'); return; }
+
+  const res = await fetch(`${API_BASE}/resolve-ticket/${ticketId}`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      resolved_by: parseInt(localStorage.getItem('userId')),
+      root_cause, fix_steps
+    })
+  });
+  if (res.ok) {
+    alert('Resolution submitted! Ticket closed.');
+    loadTickets();
+  }
+}
+
+loadTickets();
+</script>
+</body>
+</html>

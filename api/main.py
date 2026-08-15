@@ -6,9 +6,45 @@ from typing import Optional
 from database import get_db, init_db, User, Ticket, Resolution
 from agent import process_ticket
 
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 app = FastAPI(title="AI Ticket Routing & Resolution System")
 
 init_db()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
+app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+
+@app.get("/app", include_in_schema=False)
+def serve_home():
+    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+
+@app.get("/app/employee", include_in_schema=False)
+def serve_employee():
+    return FileResponse(os.path.join(FRONTEND_DIR, "employee.html"))
+
+@app.get("/app/agent", include_in_schema=False)
+def serve_agent():
+    return FileResponse(os.path.join(FRONTEND_DIR, "agent.html"))
+
+@app.get("/app/admin", include_in_schema=False)
+def serve_admin():
+    return FileResponse(os.path.join(FRONTEND_DIR, "admin.html"))
+
+
 
 
 class TicketCreate(BaseModel):
@@ -30,7 +66,8 @@ class ResolutionInput(BaseModel):
 
 @app.post("/submit-ticket")
 def submit_ticket(payload: TicketCreate, db: Session = Depends(get_db)):
-    result = process_ticket(payload.description)
+    full_text = f"{payload.title}. {payload.description}" if payload.title else payload.description
+    result = process_ticket(full_text)
 
     status = "auto_resolved" if result["decision"] == "auto_resolve" else "escalated_full"
 
