@@ -1,143 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agent Dashboard</title>
+  <title>Agent Dashboard — AI IT Ticket Resolution</title>
+  <meta name="description" content="Support engineer console for triaged IT support tickets with AI reference recommendations.">
   <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    .queue-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-tab:hover {
+      background: var(--surface-3);
+      color: #fff;
+    }
+    .filter-tab.active {
+      background: var(--accent-bg);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 12px -2px rgba(0, 242, 254, 0.3);
+    }
+
+    .search-input-wrap {
+      position: relative;
+      min-width: 240px;
+    }
+    .search-input-wrap input {
+      padding: 8px 14px 8px 34px;
+      font-size: 13px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      margin: 0;
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      color: var(--text-faint);
+      pointer-events: none;
+    }
+
+    /* Ticket Item Stripes */
+    .ticket-item {
+      border-left: 4px solid var(--border);
+    }
+    .ticket-item.priority-Critical { border-left-color: var(--danger); }
+    .ticket-item.priority-High     { border-left-color: var(--warn); }
+    .ticket-item.priority-Medium   { border-left-color: var(--info); }
+    .ticket-item.priority-Low      { border-left-color: var(--success); }
+
+    .quick-template-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0 14px;
+    }
+    .quick-template-chip {
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xs);
+      padding: 4px 9px;
+      font-size: 11.5px;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .quick-template-chip:hover {
+      background: var(--surface-4);
+      border-color: var(--accent-dim);
+      color: var(--accent);
+    }
+  </style>
 </head>
-
 <body>
-  <div class="navbar">
-    <h2>🛠️ Agent Dashboard</h2>
-    <div class="user-info">
-      <span id="userDisplay"></span>
-      <a href="#" id="signOutLink">Sign Out</a>
-    </div>
-  </div>
 
-  <div class="container">
-    <div class="card">
-      <h1 id="deptTitle">Queue</h1>
-      <button id="refreshBtn">🔄 Refresh Queue</button>
+  <!-- ── Navbar ── -->
+  <header class="navbar">
+    <a href="/app" class="navbar-brand">
+      <div class="navbar-logo">🛠️</div>
+      <div>
+        <h2>Agent Operations Desk</h2>
+      </div>
+      <span class="navbar-badge">AIOps Agent Console</span>
+    </a>
+
+    <div class="navbar-right">
+      <!-- Quick department switcher -->
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="text-xs text-dim text-mono">Queue:</span>
+        <select id="deptSelect" style="padding:5px 30px 5px 10px;font-size:12px;margin:0;width:auto;border-radius:999px;background-color:var(--surface-2);">
+          <option>Infrastructure &amp; Systems Team</option>
+          <option>Application Support Team</option>
+          <option>Security Operations (SecOps)</option>
+          <option>Database Administration (DBA) Team</option>
+          <option>Storage &amp; Backup Team</option>
+          <option>Network Operations Team</option>
+          <option>Identity &amp; Access Management (IAM) Team</option>
+        </select>
+      </div>
+
+      <div class="user-chip">
+        <div class="user-chip-avatar" id="userAvatar">A</div>
+        <span id="userDisplay">Support Agent</span>
+      </div>
+
+      <a href="/app/employee" class="nav-link-btn" title="Submit ticket">📝 Employee Portal</a>
+      <a href="#" id="signOutLink" class="nav-link-btn">Sign Out</a>
     </div>
+  </header>
+
+  <!-- ── Main Workspace ── -->
+  <main class="container">
+
+    <!-- Header info -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h1 id="deptHeading">Network Operations Queue</h1>
+        <p class="subtitle" style="margin:0;">Escalated tickets prioritized for human investigation and root cause analysis.</p>
+      </div>
+      <button id="refreshBtn" class="secondary" style="padding:9px 18px;font-size:13px;">
+        <span>🔄 Refresh Queue</span>
+      </button>
+    </div>
+
+    <!-- Live Queue Stats -->
+    <div class="queue-stats-grid">
+      <div class="metric-box">
+        <div class="value text-accent" id="statTotal">—</div>
+        <div class="label">Escalated Tickets</div>
+      </div>
+      <div class="metric-box">
+        <div class="value text-warn" id="statUrgent">—</div>
+        <div class="label">Critical / High Priority</div>
+      </div>
+      <div class="metric-box">
+        <div class="value text-success" id="statAvgConf">—</div>
+        <div class="label">Avg AI Confidence</div>
+      </div>
+      <div class="metric-box">
+        <div class="value" id="statPartialNotes">—</div>
+        <div class="label">With User Notes</div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Bar -->
+    <div class="filter-bar">
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="setFilter('All', this)">All</button>
+        <button class="filter-tab" onclick="setFilter('Critical', this)">🔴 Critical</button>
+        <button class="filter-tab" onclick="setFilter('High', this)">🟡 High</button>
+        <button class="filter-tab" onclick="setFilter('Medium', this)">🔵 Medium</button>
+        <button class="filter-tab" onclick="setFilter('Low', this)">🟢 Low</button>
+      </div>
+
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Filter by keyword or #ID..." oninput="handleSearch()">
+      </div>
+    </div>
+
+    <!-- Ticket List Container -->
     <div id="ticketsList"></div>
-  </div>
+
+  </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="/static/js/transitions.js"></script>
   <script>
-    const API_BASE = window.location.origin;
-    const department = localStorage.getItem('userDept');
-    document.getElementById('userDisplay').textContent = localStorage.getItem('userName') + ' (Agent)';
-    document.getElementById('deptTitle').textContent = `🎫 ${department}`;
+    const API_BASE   = window.location.origin;
+    let currentDept  = localStorage.getItem('userDept') || 'Network Operations Team';
+    const userName   = localStorage.getItem('userName') || 'Support Agent';
+    const userId     = parseInt(localStorage.getItem('userId')) || 2;
 
-    document.getElementById('signOutLink').addEventListener('click', function (e) {
-      e.preventDefault();
-      localStorage.clear();
-      navigateWithTransition('/app');
-    });
+    document.getElementById('userDisplay').textContent = userName;
+    document.getElementById('userAvatar').textContent  = userName.charAt(0).toUpperCase();
+    document.getElementById('deptSelect').value        = currentDept;
+    document.getElementById('deptHeading').textContent = `🎫 ${currentDept}`;
 
-    document.getElementById('refreshBtn').addEventListener('click', function () {
-      bounceClick(this);
+    document.getElementById('deptSelect').addEventListener('change', function() {
+      currentDept = this.value;
+      localStorage.setItem('userDept', currentDept);
+      document.getElementById('deptHeading').textContent = `🎫 ${currentDept}`;
+      showToast(`Switched queue to ${currentDept}`, 'info');
       loadTickets();
     });
+
+    document.getElementById('signOutLink').addEventListener('click', e => {
+      e.preventDefault();
+      localStorage.clear();
+      showToast('Signing out...', 'info');
+      setTimeout(() => navigateWithTransition('/app'), 250);
+    });
+
+    document.getElementById('refreshBtn').addEventListener('click', function() {
+      bounceClick(this);
+      showToast('Refreshing queue...', 'info');
+      loadTickets();
+    });
+
+    // ── Ticket Data & Filtering ──
+    let rawTickets = [];
+    let currentFilter = 'All';
+    let searchQuery = '';
 
     const priorityClass = { Critical: 'critical', High: 'high', Medium: 'medium', Low: 'low' };
 
     async function loadTickets() {
-      const res = await fetch(`${API_BASE}/tickets/assigned/${encodeURIComponent(department)}`);
-      const tickets = await res.json();
+      const listDiv = document.getElementById('ticketsList');
+      listDiv.innerHTML = `
+        <div class="card" style="text-align:center;padding:40px;">
+          <div style="font-size:32px;margin-bottom:12px;">⏳</div>
+          <div style="font-weight:600;">Loading escalated tickets for ${currentDept}...</div>
+        </div>
+      `;
+
+      try {
+        const res = await fetch(`${API_BASE}/tickets/assigned/${encodeURIComponent(currentDept)}`);
+        rawTickets = await res.json();
+      } catch (err) {
+        listDiv.innerHTML = `
+          <div class="card">
+            <div class="alert-danger">⚠️ Failed to connect to API server at ${API_BASE}.</div>
+          </div>
+        `;
+        return;
+      }
+
+      updateStats();
+      renderTickets();
+    }
+
+    function updateStats() {
+      document.getElementById('statTotal').textContent = rawTickets.length;
+
+      const urgentCount = rawTickets.filter(t => t.priority === 'Critical' || t.priority === 'High').length;
+      document.getElementById('statUrgent').textContent = urgentCount;
+
+      const confs = rawTickets.map(t => t.classifier_confidence).filter(c => c != null);
+      if (confs.length) {
+        const avg = Math.round((confs.reduce((a, b) => a + b, 0) / confs.length) * 100);
+        document.getElementById('statAvgConf').textContent = `${avg}%`;
+      } else {
+        document.getElementById('statAvgConf').textContent = '—';
+      }
+
+      const notesCount = rawTickets.filter(t => t.employee_followup_notes).length;
+      document.getElementById('statPartialNotes').textContent = notesCount;
+    }
+
+    function setFilter(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      renderTickets();
+    }
+
+    function handleSearch() {
+      searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+      renderTickets();
+    }
+
+    function renderTickets() {
       const listDiv = document.getElementById('ticketsList');
 
-      if (tickets.length === 0) {
-        listDiv.innerHTML = '<div class="card"><p>No escalated tickets in your queue right now.</p></div>';
+      const filtered = rawTickets.filter(t => {
+        const matchFilter = (currentFilter === 'All' || t.priority === currentFilter);
+        const matchSearch = !searchQuery ||
+          t.title.toLowerCase().includes(searchQuery) ||
+          t.description.toLowerCase().includes(searchQuery) ||
+          String(t.id).includes(searchQuery);
+        return matchFilter && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        listDiv.innerHTML = `
+          <div class="card" style="text-align:center;padding:50px 20px;">
+            <div style="font-size:36px;margin-bottom:12px;">🎉</div>
+            <h2>Queue is all clear!</h2>
+            <p class="subtitle" style="margin:0;">No matching escalated tickets for ${currentDept}.</p>
+          </div>
+        `;
         revealResult(listDiv);
         return;
       }
 
-      listDiv.innerHTML = tickets.map(t => `
-    <div class="ticket-item">
-      <div class="ticket-header" onclick="toggleTicket(${t.id})">
-        <span>🎫 #${t.id} — ${t.title}</span>
-        <span class="badge ${priorityClass[t.priority] || 'medium'}">${t.priority}</span>
-      </div>
-      <div class="ticket-body" id="body-${t.id}">
-        <p><strong>Description:</strong> ${t.description}</p>
-        <p><strong>Status:</strong> ${t.status}</p>
-        ${t.rag_suggested_resolution ? `<div class="alert-info">💡 System's original suggestion: ${t.rag_suggested_resolution}</div>` : ''}
-        ${t.employee_followup_notes ? `<div class="alert-warning">Employee note: ${t.employee_followup_notes}</div>` : ''}
-        <div id="repeat-${t.id}"></div>
+      listDiv.innerHTML = filtered.map(t => {
+        const confPct = t.classifier_confidence != null ? Math.round(t.classifier_confidence * 100) : null;
+        const simPct  = t.best_similarity_score  != null ? Math.round(t.best_similarity_score * 100) : null;
 
-        <label>Root cause</label>
-        <textarea id="cause-${t.id}"></textarea>
-        <label>Fix steps taken</label>
-        <textarea id="fix-${t.id}"></textarea>
-        <button onclick="submitResolution(${t.id}, this)">Submit Resolution</button>
-      </div>
-    </div>
-  `).join('');
+        return `
+          <div class="ticket-item priority-${t.priority}" id="ti-${t.id}">
+            <div class="ticket-header" onclick="toggleTicket(${t.id})">
+              <div style="display:flex;align-items:center;gap:10px;flex:1;overflow:hidden;">
+                <span class="badge ${priorityClass[t.priority] || 'medium'}">#${t.id} · ${t.priority}</span>
+                <span style="font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                  ${escapeHtml(t.title)}
+                </span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;">
+                ${confPct != null ? `<span class="text-xs text-mono text-dim">AI Match: <strong class="text-accent">${confPct}%</strong></span>` : ''}
+                <span class="badge ${t.status === 'escalated_partial' ? 'high' : 'medium'}" style="font-size:10px;">${t.status}</span>
+                <span style="font-size:16px;color:var(--text-faint);transition:transform 0.2s;" id="chevron-${t.id}">▼</span>
+              </div>
+            </div>
+
+            <div class="ticket-body" id="body-${t.id}">
+              <div style="background:var(--surface-2);padding:14px 16px;border-radius:var(--radius-sm);margin-bottom:14px;">
+                <label style="margin-bottom:4px;color:var(--accent);">Issue Description</label>
+                <div style="color:#e2e8f0;font-size:14px;line-height:1.6;">${escapeHtml(t.description)}</div>
+              </div>
+
+              ${t.employee_followup_notes ? `
+                <div class="alert-warning" style="margin-bottom:14px;">
+                  <span>📝</span>
+                  <div>
+                    <strong>Employee Follow-up Note:</strong>
+                    <div style="margin-top:2px;">${escapeHtml(t.employee_followup_notes)}</div>
+                  </div>
+                </div>
+              ` : ''}
+
+              ${t.rag_suggested_resolution ? `
+                <div class="solution-box" style="margin-top:0;">
+                  <div class="solution-box-header">
+                    <span class="solution-tag">💡 AI Retrieved Knowledge Fix (${simPct ? simPct + '% match' : 'Reference'})</span>
+                    <button class="secondary" style="padding:3px 8px;font-size:11px;" onclick="applyAiSuggestion(${t.id}, '${escapeJs(t.rag_suggested_resolution)}')">Use as Basis</button>
+                  </div>
+                  <div class="solution-content">${escapeHtml(t.rag_suggested_resolution)}</div>
+                </div>
+              ` : ''}
+
+              <!-- One-click resolution templates -->
+              <div style="margin-top:14px;">
+                <label>Quick Resolution Templates</label>
+                <div class="quick-template-chips">
+                  <span class="quick-template-chip" onclick="applyTemplate(${t.id}, 'SSL Certificate Expiry / Gateway Glitch', 'Renewed SSL certificate on gateway, re-provisioned IPsec tunnel, verified traffic handshake.')">
+                    🔐 VPN SSL Renew
+                  </span>
+                  <span class="quick-template-chip" onclick="applyTemplate(${t.id}, 'Active Directory Bad Password Lockout', 'Unlocked domain user account in Active Directory, verified Kerberos token and synced Azure AD.')">
+                    🔑 Unlock AD Account
+                  </span>
+                  <span class="quick-template-chip" onclick="applyTemplate(${t.id}, 'Database Lock Wait Timeout & Zombie Process', 'Killed blocking long-running transaction query (PID verified), rebuilt damaged index on table.')">
+                    💾 Clear DB Locks
+                  </span>
+                  <span class="quick-template-chip" onclick="applyTemplate(${t.id}, 'Corrupt Local App Cache & Credential Manager', 'Cleared stale Windows Credential Manager tokens, wiped temporary AppData cache, restarted daemon.')">
+                    📧 Fix Auth Cache
+                  </span>
+                </div>
+              </div>
+
+              <!-- Resolution form -->
+              <div style="margin-top:16px;">
+                <div class="field-group">
+                  <label for="cause-${t.id}">Root Cause Determination</label>
+                  <input type="text" id="cause-${t.id}" placeholder="e.g. Expired SSL certificate on primary VPN gateway cluster">
+                </div>
+
+                <div class="field-group">
+                  <label for="fix-${t.id}">Fix Steps Applied</label>
+                  <textarea id="fix-${t.id}" placeholder="Detailed steps taken to fix the root cause and verify restoration of service..."></textarea>
+                </div>
+
+                <div style="display:flex;justify-content:flex-end;">
+                  <button onclick="submitResolution(${t.id}, this)">
+                    <span>✅ Submit Resolution &amp; Update Knowledge Base</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
 
       const items = listDiv.querySelectorAll('.ticket-item');
-      gsap.from(items, { y: 14, opacity: 0, duration: 0.4, stagger: 0.06, ease: "power2.out" });
-
-      tickets.forEach(t => {
-        fetch(`${API_BASE}/tickets/${t.id}/repeated-check`).then(r => r.json()).then(data => {
-          if (data.similar_count_last_7_days > 0) {
-            const el = document.getElementById(`repeat-${t.id}`);
-            el.innerHTML = `<div class="alert-warning">⚠️ ${data.similar_count_last_7_days} similar ticket(s) in the last 7 days — consider a permanent fix.</div>`;
-          }
-        });
-      });
+      gsap.from(items, { y: 14, opacity: 0, duration: 0.35, stagger: 0.05, ease: 'power2.out' });
     }
 
     function toggleTicket(id) {
       const body = document.getElementById(`body-${id}`);
+      const chev = document.getElementById(`chevron-${id}`);
       const isOpen = body.classList.contains('open');
 
       if (!isOpen) {
         body.classList.add('open');
-        gsap.fromTo(body, { height: 0, opacity: 0 }, { height: "auto", opacity: 1, duration: 0.35, ease: "power2.out" });
+        chev.style.transform = 'rotate(180deg)';
       } else {
-        gsap.to(body, {
-          height: 0,
-          opacity: 0,
-          duration: 0.25,
-          ease: "power1.in",
-          onComplete: () => body.classList.remove('open'),
-        });
+        body.classList.remove('open');
+        chev.style.transform = 'rotate(0deg)';
       }
     }
 
+    function applyTemplate(ticketId, cause, fix) {
+      document.getElementById(`cause-${ticketId}`).value = cause;
+      document.getElementById(`fix-${ticketId}`).value   = fix;
+      showToast('Template applied to form!', 'info');
+    }
+
+    function applyAiSuggestion(ticketId, suggestion) {
+      document.getElementById(`cause-${ticketId}`).value = 'Issue matched standard historical knowledge pattern';
+      document.getElementById(`fix-${ticketId}`).value   = suggestion;
+      showToast('AI suggestion copied into resolution fields!', 'info');
+    }
+
     async function submitResolution(ticketId, btn) {
-      const root_cause = document.getElementById(`cause-${ticketId}`).value;
-      const fix_steps = document.getElementById(`fix-${ticketId}`).value;
-      if (!root_cause || !fix_steps) { alert('Please fill in both fields.'); return; }
+      const cause = document.getElementById(`cause-${ticketId}`).value.trim();
+      const fix   = document.getElementById(`fix-${ticketId}`).value.trim();
+
+      if (!cause || !fix) {
+        showToast('Please fill in both Root Cause and Fix Steps.', 'warning');
+        return;
+      }
 
       bounceClick(btn);
-      const res = await fetch(`${API_BASE}/resolve-ticket/${ticketId}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          resolved_by: parseInt(localStorage.getItem('userId')),
-          root_cause, fix_steps
-        })
-      });
-      if (res.ok) {
-        const item = btn.closest('.ticket-item');
-        gsap.to(item, {
-          opacity: 0,
-          x: 30,
-          duration: 0.3,
-          ease: "power1.in",
-          onComplete: () => loadTickets(),
+      btn.disabled = true;
+      btn.innerHTML = '<span>Saving resolution...</span>';
+
+      try {
+        const res = await fetch(`${API_BASE}/resolve-ticket/${ticketId}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            resolved_by: userId,
+            root_cause: cause,
+            fix_steps: fix
+          })
         });
+
+        if (res.ok) {
+          triggerConfetti();
+          showToast(`Ticket #${ticketId} marked as resolved!`, 'success');
+
+          const card = document.getElementById(`ti-${ticketId}`);
+          gsap.to(card, {
+            opacity: 0,
+            x: 40,
+            duration: 0.35,
+            ease: 'power2.in',
+            onComplete: () => {
+              rawTickets = rawTickets.filter(t => t.id !== ticketId);
+              updateStats();
+              renderTickets();
+            }
+          });
+        } else {
+          showToast('Server returned an error resolving ticket.', 'error');
+          btn.disabled = false;
+          btn.innerHTML = '<span>✅ Submit Resolution</span>';
+        }
+      } catch (err) {
+        showToast('Network error submitting resolution.', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '<span>✅ Submit Resolution</span>';
       }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function escapeJs(str) {
+      if (!str) return '';
+      return str.replace(/'/g, "\\'").replace(/\n/g, ' ');
     }
 
     loadTickets();
   </script>
 </body>
-
 </html>

@@ -1,77 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IT Ticket System</title>
+  <title>AI Ticket System — Sign In</title>
+  <meta name="description" content="AI-powered IT ticket routing, semantic search and confidence-aware resolution agent.">
   <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    /* Ambient glowing orbs */
+    .glow-orb-1, .glow-orb-2 {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(100px);
+    }
+    .glow-orb-1 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.12), transparent 70%);
+      top: -140px; left: -120px;
+      animation: floatOrb 14s ease-in-out infinite alternate;
+    }
+    .glow-orb-2 {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.11), transparent 70%);
+      bottom: -100px; right: -100px;
+      animation: floatOrb 11s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes floatOrb {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(35px, 25px); }
+    }
+  </style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="card">
-      <h1>🎫 AI-Powered IT Ticket Routing & Resolution System</h1>
-      <p class="subtitle">Sign in to continue</p>
+  <div class="glow-orb-1"></div>
+  <div class="glow-orb-2"></div>
 
-      <form id="loginForm">
-        <label>Your Name</label>
-        <input type="text" id="name" required>
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-logo">🎫</div>
+      <div class="login-title">IT Routing &amp; Resolution AI</div>
+      <p class="login-subtitle">Intelligent NLP Triaging · ChromaDB Semantic Search · Automated Escalation</p>
 
-        <label>Your User ID</label>
-        <input type="number" id="userId" value="1" min="1" required>
+      <!-- ── Quick Demo Personas ── -->
+      <div class="persona-picker">
+        <div class="persona-picker-title">⚡ Instant Demo Personas (1-Click)</div>
+        <div class="persona-grid">
+          <div class="persona-btn" onclick="quickFill('Alex Chen', 1, 'Employee')">
+            <span class="persona-icon">👤</span>
+            <span style="font-weight:700;color:#fff;">Alex Chen</span>
+            <span style="font-size:10px;">Employee</span>
+          </div>
+          <div class="persona-btn" onclick="quickFill('Sarah Jenkins', 2, 'Agent', 'Network Operations Team')">
+            <span class="persona-icon">🌐</span>
+            <span style="font-weight:700;color:#fff;">Sarah J.</span>
+            <span style="font-size:10px;">NetOps Agent</span>
+          </div>
+          <div class="persona-btn" onclick="quickFill('Marcus Vance', 3, 'Agent', 'Security Operations (SecOps)')">
+            <span class="persona-icon">🛡️</span>
+            <span style="font-weight:700;color:#fff;">Marcus V.</span>
+            <span style="font-size:10px;">SecOps Agent</span>
+          </div>
+        </div>
+      </div>
 
-        <label>Login as</label>
-        <select id="role">
-          <option value="Employee">Employee</option>
-          <option value="Agent">Agent</option>
-        </select>
+      <div class="divider" style="margin: 18px 0;"></div>
 
-        <div id="deptField" class="hidden">
-          <label>Department</label>
+      <form id="loginForm" autocomplete="off">
+        <div class="field-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="e.g. Shreyansh Pandey" required>
+        </div>
+
+        <div class="field-group">
+          <label for="userId">User ID</label>
+          <input type="number" id="userId" value="1" min="1" required>
+        </div>
+
+        <label style="margin-bottom:8px;">Sign in role</label>
+        <div class="role-selector" role="radiogroup">
+          <div class="role-option">
+            <input type="radio" name="role" id="roleEmployee" value="Employee" checked>
+            <label for="roleEmployee">
+              <span style="font-size:22px;">👤</span>
+              Employee
+            </label>
+          </div>
+          <div class="role-option">
+            <input type="radio" name="role" id="roleAgent" value="Agent">
+            <label for="roleAgent">
+              <span style="font-size:22px;">🛠️</span>
+              Support Agent
+            </label>
+          </div>
+        </div>
+
+        <div id="deptField" class="field-group hidden">
+          <label for="department">Assigned Support Department</label>
           <select id="department">
-            <option>Infrastructure & Systems Team</option>
+            <option>Infrastructure &amp; Systems Team</option>
             <option>Application Support Team</option>
             <option>Security Operations (SecOps)</option>
             <option>Database Administration (DBA) Team</option>
-            <option>Storage & Backup Team</option>
+            <option>Storage &amp; Backup Team</option>
             <option>Network Operations Team</option>
-            <option>Identity & Access Management (IAM) Team</option>
+            <option>Identity &amp; Access Management (IAM) Team</option>
           </select>
         </div>
 
-        <button type="submit" id="signInBtn">Sign In</button>
+        <button type="submit" id="signInBtn" class="full-width" style="margin-top:6px;">
+          <span>Continue to Portal</span>
+          <span style="font-size:16px;">→</span>
+        </button>
       </form>
+
+      <div class="divider" style="margin: 24px 0 16px;"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-faint);">
+        <span>BTech AIML Final Project</span>
+        <a href="/app/admin" style="font-family:var(--font-mono);font-size:11.5px;color:var(--accent);">View Admin Stats ↗</a>
+      </div>
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="/static/js/transitions.js"></script>
   <script>
-    document.getElementById('role').addEventListener('change', function () {
-      document.getElementById('deptField').classList.toggle('hidden', this.value !== 'Agent');
+    // Role switcher
+    document.querySelectorAll('input[name="role"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        document.getElementById('deptField').classList.toggle('hidden', radio.value !== 'Agent');
+      });
     });
+
+    // 1-Click quick fill & login
+    function quickFill(name, id, role, dept = 'Infrastructure & Systems Team') {
+      document.getElementById('name').value = name;
+      document.getElementById('userId').value = id;
+      if (role === 'Employee') {
+        document.getElementById('roleEmployee').checked = true;
+        document.getElementById('deptField').classList.add('hidden');
+      } else {
+        document.getElementById('roleAgent').checked = true;
+        document.getElementById('department').value = dept;
+        document.getElementById('deptField').classList.remove('hidden');
+      }
+      showToast(`Switched persona to ${name} (${role})`, 'info');
+      setTimeout(() => {
+        document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+      }, 350);
+    }
 
     document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      const name = document.getElementById('name').value;
+      const name   = document.getElementById('name').value.trim();
       const userId = document.getElementById('userId').value;
-      const role = document.getElementById('role').value;
-      const department = document.getElementById('department').value;
-
+      const role   = document.querySelector('input[name="role"]:checked').value;
+      const dept   = document.getElementById('department').value;
       if (!name) return;
 
       bounceClick(document.getElementById('signInBtn'));
-
       localStorage.setItem('userName', name);
       localStorage.setItem('userId', userId);
       localStorage.setItem('userRole', role);
-      localStorage.setItem('userDept', department);
+      localStorage.setItem('userDept', dept);
 
-      const destination = role === 'Employee' ? '/app/employee' : '/app/agent';
-      navigateWithTransition(destination);
+      showToast(`Welcome, ${name}! Entering portal...`, 'success');
+      setTimeout(() => {
+        navigateWithTransition(role === 'Employee' ? '/app/employee' : '/app/agent');
+      }, 300);
     });
   </script>
 </body>
-
 </html>

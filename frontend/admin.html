@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIOps Analytics — AI Ticket Resolution System</title>
+  <meta name="description" content="Executive analytics dashboard showing auto-resolve rates, triaging volume, and department resolution performance.">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    .analytics-hero {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 800px) {
+      .analytics-hero { grid-template-columns: 1fr; }
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+    }
+
+    .chart-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .rate-donut {
+      position: relative;
+      width: 170px;
+      height: 170px;
+    }
+    .rate-donut svg {
+      width: 170px;
+      height: 170px;
+      transform: rotate(-90deg);
+    }
+    .rate-donut-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .breakdown-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-soft);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <header class="navbar">
+    <a href="/app" class="navbar-brand">
+      <div class="navbar-logo">📊</div>
+      <div>
+        <h2>AIOps Executive Dashboard</h2>
+      </div>
+      <span class="navbar-badge">Analytics Center</span>
+    </a>
+
+    <div class="navbar-right">
+      <a href="/app/employee" class="nav-link-btn">📝 Employee View</a>
+      <a href="/app/agent" class="nav-link-btn">🛠️ Agent Queue</a>
+      <a href="/docs" target="_blank" class="nav-link-btn">📖 Swagger API</a>
+    </div>
+  </header>
+
+  <!-- ── Main Workspace ── -->
+  <main class="container">
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h1>System Performance &amp; Analytics</h1>
+        <p class="subtitle" style="margin:0;">Live metrics tracking AI ticket triaging, automated resolution rates, and human escalations.</p>
+      </div>
+      <button id="refreshBtn" class="secondary" onclick="loadAnalytics()">
+        <span>🔄 Refresh Analytics</span>
+      </button>
+    </div>
+
+    <!-- Hero Analytics -->
+    <div class="analytics-hero">
+
+      <!-- Left stats grid -->
+      <div class="card" style="margin:0;">
+        <div class="card-title">Volume &amp; Triaging Metrics</div>
+        <div class="metric-grid" style="margin-bottom:0;margin-top:14px;">
+          <div class="metric-box">
+            <div class="value text-accent" id="totalTickets">—</div>
+            <div class="label">Total Processed</div>
+          </div>
+          <div class="metric-box">
+            <div class="value text-success" id="autoResolved">—</div>
+            <div class="label">Auto-Resolved by AI</div>
+          </div>
+          <div class="metric-box">
+            <div class="value text-warn" id="escalatedCount">—</div>
+            <div class="label">Human Escalations</div>
+          </div>
+          <div class="metric-box">
+            <div class="value text-info" id="resolvedCount">—</div>
+            <div class="label">Total Closed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Donut Card -->
+      <div class="kpi-card" style="align-items:center;text-align:center;">
+        <div class="sidebar-card-title" style="width:100%;">Auto-Resolution Efficiency</div>
+        <div class="chart-container">
+          <div class="rate-donut">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring-track" cx="60" cy="60" r="50"/>
+              <circle class="ring-fill" id="autoResolveFill" cx="60" cy="60" r="50" style="stroke: var(--success);"/>
+            </svg>
+            <div class="rate-donut-center">
+              <div class="confidence-ring-pct text-success" id="autoResolvePct" style="font-size:32px;">0%</div>
+              <div class="confidence-ring-label">AI Resolved</div>
+            </div>
+          </div>
+        </div>
+        <div class="text-xs text-dim">
+          Target Goal: <strong>&ge; 60%</strong> MTTR Reduction
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Department Distribution & System Health -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+      <div class="card">
+        <div class="card-title">Supported IT Domains</div>
+        <div style="margin-top:14px;">
+          <div class="breakdown-row">
+            <span>🌐 Network Operations</span>
+            <span class="badge medium">Active</span>
+          </div>
+          <div class="breakdown-row">
+            <span>🛡️ Security Operations (SecOps)</span>
+            <span class="badge medium">Active</span>
+          </div>
+          <div class="breakdown-row">
+            <span>💾 Database Administration (DBA)</span>
+            <span class="badge medium">Active</span>
+          </div>
+          <div class="breakdown-row">
+            <span>⚙️ Infrastructure &amp; Systems</span>
+            <span class="badge medium">Active</span>
+          </div>
+          <div class="breakdown-row">
+            <span>🔑 Identity &amp; Access Management (IAM)</span>
+            <span class="badge medium">Active</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Architectural Stack Health</div>
+        <div style="margin-top:14px;">
+          <div class="breakdown-row">
+            <div>
+              <div style="font-weight:700;">NLP Embedding Engine</div>
+              <div class="text-xs text-dim">all-MiniLM-L6-v2 (Sentence-Transformers)</div>
+            </div>
+            <span class="badge low">Operational</span>
+          </div>
+          <div class="breakdown-row">
+            <div>
+              <div style="font-weight:700;">Vector Knowledge Store</div>
+              <div class="text-xs text-dim">ChromaDB Persisted Vector Index</div>
+            </div>
+            <span class="badge low">Operational</span>
+          </div>
+          <div class="breakdown-row">
+            <div>
+              <div style="font-weight:700;">Decision Orchestrator</div>
+              <div class="text-xs text-dim">LangGraph Agent State Machine</div>
+            </div>
+            <span class="badge low">Operational</span>
+          </div>
+          <div class="breakdown-row">
+            <div>
+              <div style="font-weight:700;">Relational Persistence</div>
+              <div class="text-xs text-dim">SQLite via SQLAlchemy ORM</div>
+            </div>
+            <span class="badge low">Operational</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="/static/js/transitions.js"></script>
+  <script>
+    const API_BASE = window.location.origin;
+
+    async function loadAnalytics() {
+      try {
+        const res = await fetch(`${API_BASE}/analytics/summary`);
+        const data = await res.json();
+
+        document.getElementById('totalTickets').textContent = data.total_tickets || 0;
+        document.getElementById('autoResolved').textContent = data.auto_resolved || 0;
+        document.getElementById('escalatedCount').textContent = data.escalated || 0;
+        document.getElementById('resolvedCount').textContent = data.resolved || 0;
+
+        const rate = Math.round((data.auto_resolve_rate || 0) * 100);
+        document.getElementById('autoResolvePct').textContent = `${rate}%`;
+
+        // Animate donut
+        const circumference = 314;
+        const offset = circumference - (rate / 100) * circumference;
+        gsap.to('#autoResolveFill', {
+          strokeDashoffset: offset,
+          duration: 1.4,
+          ease: 'power3.out'
+        });
+
+        showToast('Analytics refreshed.', 'info');
+      } catch (err) {
+        showToast('Failed to fetch analytics from API.', 'error');
+      }
+    }
+
+    loadAnalytics();
+  </script>
+</body>
+</html>

@@ -1,3 +1,9 @@
+import sys
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, "api"))
+
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -9,9 +15,7 @@ from agent import process_ticket
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 app = FastAPI(title="AI Ticket Routing & Resolution System")
 
@@ -92,6 +96,8 @@ def submit_ticket(payload: TicketCreate, db: Session = Depends(get_db)):
         "decision": result["decision"],
         "suggested_resolution": ticket.rag_suggested_resolution,
         "reason": result["reason"],
+        "classifier_confidence": ticket.classifier_confidence,
+        "best_similarity": ticket.best_similarity_score,
     }
 
 
@@ -135,6 +141,8 @@ def get_assigned_tickets(department: str, db: Session = Depends(get_db)):
             "status": t.status,
             "rag_suggested_resolution": t.rag_suggested_resolution,
             "employee_followup_notes": t.employee_followup_notes,
+            "classifier_confidence": t.classifier_confidence,
+            "best_similarity_score": t.best_similarity_score,
         }
         for t in tickets_sorted
     ]

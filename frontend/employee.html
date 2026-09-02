@@ -1,166 +1,633 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employee Portal</title>
+  <title>Employee Portal — AI Support Assistant</title>
+  <meta name="description" content="Submit and resolve IT support tickets instantly with AI classification and semantic resolution suggestions.">
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
-
 <body>
-  <div class="navbar">
-    <h2>🎫 IT Ticket System</h2>
-    <div class="user-info">
-      <span id="userDisplay"></span>
-      <a href="#" id="signOutLink">Sign Out</a>
-    </div>
-  </div>
 
-  <div class="container">
-    <div class="card">
-      <h1>📝 Submit a Support Ticket</h1>
-      <p class="subtitle">Describe your issue and we'll try to help right away.</p>
-
-      <form id="ticketForm">
-        <label>Title</label>
-        <input type="text" id="title" placeholder="e.g. VPN not connecting" required>
-
-        <label>Description</label>
-        <textarea id="description" placeholder="Describe the problem in detail..." required></textarea>
-
-        <button type="submit" id="submitBtn">Submit Ticket</button>
-      </form>
-    </div>
-
-    <div id="resultCard" class="card hidden">
-      <h2>Ticket Analysis</h2>
-      <div class="metric-grid">
-        <div class="metric-box">
-          <div class="value" id="categoryVal">-</div>
-          <div class="label">Predicted Category</div>
-        </div>
-        <div class="metric-box">
-          <div class="value" id="deptVal" style="font-size:16px;">-</div>
-          <div class="label">Assigned Department</div>
-        </div>
+  <!-- ── Top Navbar ── -->
+  <header class="navbar">
+    <a href="/app" class="navbar-brand">
+      <div class="navbar-logo">🎫</div>
+      <div>
+        <h2>IT Ticket Agent</h2>
       </div>
-      <p id="reasonText" style="color:#9aa3bd; margin-bottom:16px;"></p>
-      <div id="decisionArea"></div>
+      <span class="navbar-badge">AIOps v1.0</span>
+    </a>
+
+    <div class="navbar-right">
+      <div class="system-status-indicator">
+        <span class="status-pulse-dot"></span>
+        <span>AI Classifier &amp; RAG Online</span>
+      </div>
+
+      <div class="user-chip">
+        <div class="user-chip-avatar" id="userAvatar">U</div>
+        <span id="userDisplay">Employee</span>
+      </div>
+
+      <a href="/app/agent" class="nav-link-btn" title="Switch to Agent Queue">🛠️ Agent Queue</a>
+      <a href="#" id="signOutLink" class="nav-link-btn">Sign Out</a>
     </div>
-  </div>
+  </header>
+
+  <!-- ── Main Workspace ── -->
+  <main class="container">
+
+    <!-- Header info -->
+    <div style="margin-bottom: 24px;">
+      <h1>Intelligent Support Assistant</h1>
+      <p class="subtitle">Submit your IT issue below. Our AI agent will classify the problem, route it to the right department, and find verified resolutions from past solved tickets in seconds.</p>
+    </div>
+
+    <!-- Two-column layout -->
+    <div class="page-layout">
+
+      <!-- ════ LEFT COLUMN: Input & Results ════ -->
+      <section class="page-main">
+
+        <!-- 1-Click Problem Presets -->
+        <div class="presets-section">
+          <div class="presets-title">
+            <span>⚡ Try Sample Scenarios (1-Click Fill)</span>
+          </div>
+          <div class="presets-grid">
+            <div class="preset-chip" onclick="fillPreset('VPN failing with error 807 on Windows 11', 'My company VPN drops every 5 minutes when connecting from home Wi-Fi on Windows 11. The client gives error 807: network connection was interrupted.')">
+              <span>🌐</span> VPN Error 807
+            </div>
+            <div class="preset-chip" onclick="fillPreset('Outlook repeatedly prompting for password', 'Microsoft Outlook keeps popping up a login credential prompt every 10 minutes even though my password has not expired.')">
+              <span>📧</span> Outlook Auth Loop
+            </div>
+            <div class="preset-chip" onclick="fillPreset('MySQL connection pool timeout error 1205', 'Production billing service getting MySQL Lock wait timeout exceeded error 1205 on the orders table during checkout queries.')">
+              <span>💾</span> DB Lock Timeout
+            </div>
+            <div class="preset-chip" onclick="fillPreset('Suspicious spear-phishing email received', 'Received an email claiming to be from payroll asking to verify direct deposit credentials via an external form link.')">
+              <span>🛡️</span> Phishing Alert
+            </div>
+            <div class="preset-chip" onclick="fillPreset('Account locked after bad password attempts', 'User account locked out in Active Directory after 3 wrong password attempts on the Citrix portal.')">
+              <span>🔑</span> Account Locked
+            </div>
+          </div>
+        </div>
+
+        <!-- Ticket Form Card -->
+        <div class="card" id="formCard">
+          <div class="card-title-bar">
+            <div class="card-title">New Support Request</div>
+            <span class="text-xs text-mono text-dim" id="charCount">0 chars</span>
+          </div>
+
+          <form id="ticketForm" autocomplete="off">
+            <div class="field-group">
+              <label for="title">Issue Summary / Title</label>
+              <input type="text" id="title" placeholder="Briefly state the issue (e.g., VPN connection failing with error 807)" required>
+            </div>
+
+            <div class="field-group">
+              <label for="description">Detailed Description</label>
+              <textarea id="description" placeholder="Include error codes, symptoms, affected software or devices, and what troubleshooting steps you've already tried..." required></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn" class="full-width">
+              <span>⚡ Analyse &amp; Submit with AI</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Analysis & Resolution Result Card -->
+        <div id="resultCard" class="card hidden">
+          <div class="card-title-bar">
+            <div class="card-title">AI Triaging &amp; Solution</div>
+            <span class="badge" id="resultStatusBadge">Processing</span>
+          </div>
+
+          <!-- Category & Routed Department Metrics -->
+          <div class="metric-grid">
+            <div class="metric-box">
+              <div class="value" id="categoryVal" style="font-size:18px;min-height:40px;display:flex;align-items:center;justify-content:center;">—</div>
+              <div class="label">Predicted Category</div>
+            </div>
+            <div class="metric-box">
+              <div class="value" id="deptVal" style="font-size:13px;min-height:40px;display:flex;align-items:center;justify-content:center;">—</div>
+              <div class="label">Assigned Department</div>
+            </div>
+            <div class="metric-box">
+              <div class="value text-accent" id="confidenceVal" style="font-size:20px;min-height:40px;display:flex;align-items:center;justify-content:center;">—</div>
+              <div class="label">Confidence Score</div>
+            </div>
+          </div>
+
+          <!-- AI Triaging Justification -->
+          <div class="alert-info" style="margin-bottom: 18px;">
+            <div style="font-size: 18px; line-height: 1;">🧠</div>
+            <div>
+              <strong>Triaging Justification:</strong>
+              <div id="reasonText" style="margin-top: 4px; color: #cbd5e1;"></div>
+            </div>
+          </div>
+
+          <!-- Suggested Resolution / Escalation Area -->
+          <div id="decisionArea"></div>
+        </div>
+
+      </section>
+
+      <!-- ════ RIGHT COLUMN: AI Confidence & Analytics Sidebar ════ -->
+      <aside class="page-sidebar">
+
+        <!-- 1. Radial Confidence Gauge Card -->
+        <div class="sidebar-card" id="confSidebarCard">
+          <div class="sidebar-card-title">
+            <span>AI Confidence Score</span>
+            <span class="text-xs text-mono" id="confStatusText">Ready</span>
+          </div>
+
+          <div class="confidence-ring-wrap">
+            <div class="confidence-ring">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="ring-track" cx="60" cy="60" r="50"/>
+                <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="50"/>
+              </svg>
+              <div class="confidence-ring-center">
+                <div class="confidence-ring-pct" id="confPct">—</div>
+                <div class="confidence-ring-label">Accuracy Est.</div>
+              </div>
+            </div>
+            <div class="confidence-level-badge idle" id="confLevelBadge">Waiting Input</div>
+          </div>
+
+          <!-- Dual Sub-score meters -->
+          <div style="margin-top: 20px;">
+            <div class="score-row">
+              <div class="score-label-row">
+                <span>🧠 NLP Classifier Match</span>
+                <span class="score-val" id="classConfVal">—</span>
+              </div>
+              <div class="score-bar-track">
+                <div class="score-bar-fill" id="classConfBar" style="background: linear-gradient(90deg, var(--accent), var(--accent-2));"></div>
+              </div>
+            </div>
+
+            <div class="score-row" style="margin-top: 14px;">
+              <div class="score-label-row">
+                <span>🔍 Vector RAG Similarity</span>
+                <span class="score-val" id="simVal">—</span>
+              </div>
+              <div class="score-bar-track">
+                <div class="score-bar-fill" id="simBar" style="background: linear-gradient(90deg, var(--purple), #c084fc);"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Threshold explanation -->
+          <div class="text-xs text-dim" style="margin-top: 16px; padding: 10px 12px; background: var(--surface-2); border-radius: var(--radius-xs); line-height: 1.5;">
+            💡 <strong>Auto-Resolve Criteria:</strong> Classifier &ge; 50% AND Vector Match &ge; 40%. Otherwise, automatically escalated to human agents for safety.
+          </div>
+        </div>
+
+        <!-- 2. AI Decision Engine Card -->
+        <div class="sidebar-card hidden" id="decisionSidebarCard">
+          <div class="sidebar-card-title">
+            <span>Agent Decision</span>
+            <span class="badge low" id="ticketIdBadge">#—</span>
+          </div>
+          <div id="decisionBadgeSidebar"></div>
+
+          <div style="margin-top: 14px;">
+            <div class="info-row">
+              <span class="info-row-key">Category</span>
+              <span class="info-row-val" id="metaCategory">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-key">Assigned Team</span>
+              <span class="info-row-val" id="metaDept" style="font-size:11.5px;">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-key">Priority Tier</span>
+              <span class="info-row-val text-accent">Medium</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Real-Time Processing Stepper -->
+        <div class="sidebar-card hidden" id="pipelineSidebarCard">
+          <div class="sidebar-card-title">
+            <span>Agentic Pipeline</span>
+            <span class="text-xs text-mono text-accent">LangGraph</span>
+          </div>
+          <div class="pipeline-steps" id="pipelineSteps"></div>
+        </div>
+
+        <!-- 4. Session Submissions Card -->
+        <div class="sidebar-card" id="historySidebarCard">
+          <div class="sidebar-card-title">
+            <span>Session History</span>
+            <span class="text-xs text-mono" id="sessionCount">0 tickets</span>
+          </div>
+          <div id="sessionTicketList" class="text-xs text-dim" style="max-height: 180px; overflow-y: auto;">
+            <p style="text-align:center; padding: 14px 0; color: var(--text-faint);">No tickets submitted in this session yet.</p>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="/static/js/transitions.js"></script>
   <script>
     const API_BASE = window.location.origin;
-    document.getElementById('userDisplay').textContent = localStorage.getItem('userName') + ' (Employee)';
 
-    document.getElementById('signOutLink').addEventListener('click', function (e) {
+    // ── Auth initialization ──
+    const userName = localStorage.getItem('userName') || 'Employee';
+    const userId   = parseInt(localStorage.getItem('userId')) || 1;
+
+    document.getElementById('userDisplay').textContent = userName;
+    document.getElementById('userAvatar').textContent  = userName.charAt(0).toUpperCase();
+
+    document.getElementById('signOutLink').addEventListener('click', e => {
       e.preventDefault();
       localStorage.clear();
-      navigateWithTransition('/app');
+      showToast('Signing out...', 'info');
+      setTimeout(() => navigateWithTransition('/app'), 250);
     });
 
+    // ── Live character count ──
+    const descInput = document.getElementById('description');
+    const titleInput = document.getElementById('title');
+    const charCounter = document.getElementById('charCount');
+
+    function updateCount() {
+      const len = (titleInput.value.length + descInput.value.length);
+      charCounter.textContent = `${len} chars`;
+    }
+    descInput.addEventListener('input', updateCount);
+    titleInput.addEventListener('input', updateCount);
+
+    // ── Quick-fill Presets ──
+    function fillPreset(title, desc) {
+      titleInput.value = title;
+      descInput.value  = desc;
+      updateCount();
+      bounceClick(titleInput);
+      showToast('Sample issue loaded. Ready to submit!', 'info');
+    }
+
+    // ── Pipeline Definition ──
+    const PIPELINE_DEF = [
+      { key: 'preprocess', label: 'NLP Preprocessing', icon: '⚙️' },
+      { key: 'classify',   label: 'Category Classifier', icon: '🧠' },
+      { key: 'route',      label: 'Department Router',   icon: '🔀' },
+      { key: 'rag',        label: 'ChromaDB Similarity',  icon: '🔍' },
+      { key: 'decide',     label: 'Confidence Arbiter',  icon: '⚖️' },
+    ];
+
+    function initPipelineUI() {
+      const el = document.getElementById('pipelineSteps');
+      el.innerHTML = PIPELINE_DEF.map(s => `
+        <div class="pipeline-step" id="ps-${s.key}">
+          <div class="pipeline-dot idle" id="pdot-${s.key}">◦</div>
+          <div class="pipeline-step-info">
+            <div class="pipeline-step-name" id="pname-${s.key}">${s.icon} ${s.label}</div>
+            <div class="pipeline-step-detail" id="pdetail-${s.key}">Waiting...</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updatePipelineStep(key, state, detail = '') {
+      const dot  = document.getElementById(`pdot-${key}`);
+      const name = document.getElementById(`pname-${key}`);
+      const det  = document.getElementById(`pdetail-${key}`);
+      const step = document.getElementById(`ps-${key}`);
+      if (!dot) return;
+
+      dot.className   = `pipeline-dot ${state}`;
+      dot.textContent = state === 'done' ? '✓' : state === 'active' ? '●' : '◦';
+      name.className  = `pipeline-step-name ${state}`;
+      det.textContent = detail;
+      if (step) step.className = `pipeline-step ${state}`;
+    }
+
+    async function runPipelineFlow(data) {
+      const classPct = ((data.classifier_confidence || 0) * 100).toFixed(1);
+      const simPct   = ((data.best_similarity || 0) * 100).toFixed(1);
+
+      updatePipelineStep('preprocess', 'done', 'Embeddings generated (MiniLM)');
+      await new Promise(r => setTimeout(r, 200));
+
+      updatePipelineStep('classify', 'done', `${data.category} (${classPct}%)`);
+      await new Promise(r => setTimeout(r, 200));
+
+      updatePipelineStep('route', 'done', data.department);
+      await new Promise(r => setTimeout(r, 200));
+
+      updatePipelineStep('rag', 'done', `Best Cosine Match: ${simPct}%`);
+      await new Promise(r => setTimeout(r, 200));
+
+      updatePipelineStep('decide', 'done', data.decision === 'auto_resolve' ? 'Auto-Resolved' : 'Escalated to Agent');
+    }
+
+    // ── Radial Gauge Animation ──
+    function updateConfidenceGauge(pct) {
+      const circumference = 314;
+      const offset = circumference - (pct / 100) * circumference;
+
+      let color = 'var(--accent)';
+      let badgeClass = 'confidence-level-badge med';
+      let badgeText  = '🟡 Moderate';
+
+      if (pct >= 65) {
+        color = 'var(--success)';
+        badgeClass = 'confidence-level-badge high';
+        badgeText = '🟢 High Confidence';
+      } else if (pct < 45) {
+        color = 'var(--danger)';
+        badgeClass = 'confidence-level-badge low';
+        badgeText = '🔴 Low Confidence';
+      }
+
+      const fill = document.getElementById('ringFill');
+      const pctEl = document.getElementById('confPct');
+      fill.style.stroke = color;
+      pctEl.style.color = color;
+
+      gsap.to(fill, {
+        strokeDashoffset: offset,
+        duration: 1.4,
+        ease: 'power3.out'
+      });
+
+      // Number ticker animation
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: pct,
+        duration: 1.4,
+        ease: 'power3.out',
+        onUpdate: () => {
+          pctEl.textContent = Math.round(obj.val) + '%';
+        }
+      });
+
+      const badge = document.getElementById('confLevelBadge');
+      badge.className = badgeClass;
+      badge.textContent = badgeText;
+      document.getElementById('confStatusText').textContent = 'Scored';
+    }
+
+    // ── Animate Score Bar ──
+    function setScoreBar(barId, valId, fraction) {
+      const pct = Math.round(fraction * 100);
+      const bar = document.getElementById(barId);
+      const val = document.getElementById(valId);
+      gsap.to(bar, { width: `${pct}%`, duration: 1.2, ease: 'power3.out' });
+      val.textContent = `${pct}%`;
+    }
+
+    // ── Session History Tracker ──
+    const sessionTickets = [];
+    function addSessionTicket(ticket) {
+      sessionTickets.unshift(ticket);
+      document.getElementById('sessionCount').textContent = `${sessionTickets.length} ticket${sessionTickets.length > 1 ? 's' : ''}`;
+
+      const list = document.getElementById('sessionTicketList');
+      list.innerHTML = sessionTickets.map(t => `
+        <div style="padding: 8px 10px; margin-bottom: 6px; background: var(--surface-2); border-radius: var(--radius-xs); border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 170px;">
+            <span style="font-weight:700; color:#fff;">#${t.id}</span>
+            <span style="color:var(--text-dim);margin-left:4px;">${t.title}</span>
+          </div>
+          <span class="badge ${t.decision === 'auto_resolve' ? 'low' : 'high'}" style="font-size:9.5px;padding:2px 7px;">
+            ${t.decision === 'auto_resolve' ? 'Auto' : 'Escalated'}
+          </span>
+        </div>
+      `).join('');
+    }
+
+    // ── Form Submit Handler ──
     let currentTicketId = null;
 
     document.getElementById('ticketForm').addEventListener('submit', async function (e) {
       e.preventDefault();
-      const title = document.getElementById('title').value;
-      const description = document.getElementById('description').value;
-      const employeeId = parseInt(localStorage.getItem('userId'));
-      const submitBtn = document.getElementById('submitBtn');
+      const title       = titleInput.value.trim();
+      const description = descInput.value.trim();
+      const submitBtn   = document.getElementById('submitBtn');
+
+      if (!title || !description) return;
 
       bounceClick(submitBtn);
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Analyzing...';
       submitBtn.disabled = true;
-      gsap.to(submitBtn, { opacity: 0.6, duration: 0.2 });
+      submitBtn.innerHTML = '<span>⏳ Running NLP Triaging &amp; Vector RAG...</span>';
+      gsap.to(submitBtn, { opacity: 0.7, duration: 0.2 });
+
+      // Awaken sidebar cards
+      document.getElementById('decisionSidebarCard').classList.remove('hidden');
+      document.getElementById('pipelineSidebarCard').classList.remove('hidden');
+      initPipelineUI();
+      updatePipelineStep('preprocess', 'active', 'Analyzing input tokens...');
 
       try {
         const res = await fetch(`${API_BASE}/submit-ticket`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ employee_id: employeeId, title, description })
+          body: JSON.stringify({ employee_id: userId, title, description })
         });
         const data = await res.json();
 
         currentTicketId = data.ticket_id;
+
+        // Populate Main Results Card
         document.getElementById('categoryVal').textContent = data.category;
-        document.getElementById('deptVal').textContent = data.department;
-        document.getElementById('reasonText').textContent = data.reason;
+        document.getElementById('deptVal').textContent     = data.department;
+        document.getElementById('confidenceVal').textContent = `${Math.round((data.classifier_confidence || 0) * 100)}%`;
+        document.getElementById('reasonText').textContent  = data.reason;
+
+        const isAuto = data.decision === 'auto_resolve';
+        const statusBadge = document.getElementById('resultStatusBadge');
+        statusBadge.className = isAuto ? 'badge low' : 'badge high';
+        statusBadge.textContent = isAuto ? 'Auto-Resolved' : 'Escalated to Agent';
 
         const decisionArea = document.getElementById('decisionArea');
-        if (data.decision === 'auto_resolve') {
+        if (isAuto) {
           decisionArea.innerHTML = `
-        <div class="alert-success">✅ We found a likely solution:</div>
-        <div class="alert-info">${data.suggested_resolution}</div>
-        <p style="margin:16px 0 8px;">Did this resolve your issue?</p>
-        <div class="btn-row">
-          <button onclick="sendFeedback('yes', this)">✅ Yes, resolved</button>
-          <button class="warn" onclick="showPartialNotes(this)">⚠️ Partially resolved</button>
-          <button class="danger" onclick="sendFeedback('no', this)">❌ No, didn't help</button>
-        </div>
-        <div id="partialNotesArea" class="hidden" style="margin-top:16px;">
-          <label>What improved, and what's still wrong?</label>
-          <textarea id="partialNotes"></textarea>
-          <button onclick="submitPartial(this)">Submit follow-up</button>
-        </div>
-      `;
+            <div class="alert-success">
+              <span style="font-size: 20px; line-height: 1;">✅</span>
+              <div>
+                <strong>AI Suggested Resolution:</strong>
+                <div>A highly similar past ticket fix was identified with high confidence.</div>
+              </div>
+            </div>
+
+            <div class="solution-box">
+              <div class="solution-box-header">
+                <span class="solution-tag">💡 Verified Resolution Steps</span>
+                <button class="secondary" style="padding: 4px 10px; font-size: 11px;" onclick="copySolution()">📋 Copy</button>
+              </div>
+              <div class="solution-content" id="solutionContent">${escapeHtml(data.suggested_resolution || 'No details provided.')}</div>
+            </div>
+
+            <p style="margin: 16px 0 8px;" class="text-sm text-dim">Did this resolve your issue?</p>
+            <div class="btn-row">
+              <button onclick="sendFeedback('yes', this)">✅ Yes, Fixed My Issue</button>
+              <button class="warn" onclick="togglePartialNotes(this)">⚠️ Partially Resolved</button>
+              <button class="danger" onclick="sendFeedback('no', this)">❌ Need Human Agent</button>
+            </div>
+
+            <div id="partialNotesArea" class="hidden" style="margin-top: 16px;">
+              <div class="field-group">
+                <label>Describe what worked and what is still unresolved</label>
+                <textarea id="partialNotes" placeholder="What part of the fix failed or what error remains?"></textarea>
+              </div>
+              <button onclick="submitPartialNotes(this)">Submit Follow-up Notes</button>
+            </div>
+          `;
         } else {
-          decisionArea.innerHTML = `<div class="alert-warning">🔺 Escalated to <strong>${data.department}</strong> for human review.</div>`;
+          decisionArea.innerHTML = `
+            <div class="alert-warning">
+              <span style="font-size: 20px; line-height: 1;">🛡️</span>
+              <div>
+                <strong>Safely Escalated to Support Agent:</strong>
+                <div>Confidence was below the auto-resolve threshold. This ticket has been prioritized and routed to <strong>${escapeHtml(data.department)}</strong>. A support engineer has been notified.</div>
+              </div>
+            </div>
+            ${data.suggested_resolution ? `
+              <div class="solution-box" style="border-color: rgba(251, 191, 36, 0.3);">
+                <div class="solution-box-header">
+                  <span class="solution-tag" style="color: var(--warn);">💡 Reference Fix for Human Agent</span>
+                </div>
+                <div class="solution-content">${escapeHtml(data.suggested_resolution)}</div>
+              </div>
+            ` : ''}
+          `;
         }
 
+        // Reveal Result Card
         const resultCard = document.getElementById('resultCard');
         resultCard.classList.remove('hidden');
         revealResult(resultCard);
-        resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
 
+        // Sidebar updates
+        const confPct = Math.round((data.classifier_confidence || 0) * 100);
+        updateConfidenceGauge(confPct);
+        setScoreBar('classConfBar', 'classConfVal', data.classifier_confidence || 0);
+        setScoreBar('simBar', 'simVal', data.best_similarity || 0);
+
+        // Sidebar Decision Card
+        document.getElementById('ticketIdBadge').textContent = `#${data.ticket_id}`;
+        document.getElementById('metaCategory').textContent  = data.category;
+        document.getElementById('metaDept').textContent      = data.department;
+
+        document.getElementById('decisionBadgeSidebar').innerHTML = `
+          <div class="decision-badge ${isAuto ? 'auto-resolve' : 'escalated'}">
+            <div class="decision-badge-icon">${isAuto ? '⚡' : '🛡️'}</div>
+            <div>
+              <div style="font-weight:700;">${isAuto ? 'Auto-Resolve Confirmed' : 'Human Escalation'}</div>
+              <div style="font-size:11px;opacity:0.8;margin-top:2px;">
+                ${isAuto ? 'Resolution served to user' : `Queued for ${data.department}`}
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Run pipeline steps animation
+        runPipelineFlow(data);
+
+        // Record in session history
+        addSessionTicket({ id: data.ticket_id, title, decision: data.decision });
+
+        showToast(isAuto ? 'Ticket auto-resolved by AI!' : 'Ticket routed to human agent queue.', isAuto ? 'success' : 'warning');
+
+      } catch (err) {
+        showToast('Network error while processing ticket.', 'error');
+        console.error(err);
       } finally {
-        submitBtn.textContent = originalText;
         submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>⚡ Analyse &amp; Submit with AI</span>';
         gsap.to(submitBtn, { opacity: 1, duration: 0.2 });
       }
     });
 
+    // ── Feedback Actions ──
     async function sendFeedback(feedback, btn) {
       bounceClick(btn);
-      await fetch(`${API_BASE}/ticket-feedback/${currentTicketId}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ feedback })
-      });
-      const note = document.createElement('div');
-      note.className = 'alert-success';
-      note.style.marginTop = '12px';
-      note.textContent = 'Feedback recorded. Thank you!';
-      document.getElementById('decisionArea').appendChild(note);
-      revealResult(note);
+      btn.disabled = true;
+
+      try {
+        await fetch(`${API_BASE}/ticket-feedback/${currentTicketId}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ feedback })
+        });
+
+        if (feedback === 'yes') {
+          triggerConfetti();
+          showToast('Feedback recorded. Issue closed successfully!', 'success');
+          const note = document.createElement('div');
+          note.className = 'alert-success mt-16';
+          note.innerHTML = '<div>🎉 <strong>Issue Resolved!</strong> Knowledge base success weight has been boosted.</div>';
+          document.getElementById('decisionArea').appendChild(note);
+          revealResult(note);
+        } else {
+          showToast('Escalated to human support queue.', 'warning');
+          const note = document.createElement('div');
+          note.className = 'alert-warning mt-16';
+          note.innerHTML = '<div>📨 <strong>Escalated to Support Queue:</strong> A human engineer will take ownership of this ticket.</div>';
+          document.getElementById('decisionArea').appendChild(note);
+          revealResult(note);
+        }
+      } catch (e) {
+        showToast('Failed to record feedback.', 'error');
+      }
     }
 
-    function showPartialNotes(btn) {
+    function togglePartialNotes(btn) {
       bounceClick(btn);
       const area = document.getElementById('partialNotesArea');
-      area.classList.remove('hidden');
-      revealResult(area);
+      area.classList.toggle('hidden');
+      if (!area.classList.contains('hidden')) {
+        revealResult(area);
+      }
     }
 
-    async function submitPartial(btn) {
+    async function submitPartialNotes(btn) {
       bounceClick(btn);
-      const notes = document.getElementById('partialNotes').value;
+      const notes = document.getElementById('partialNotes').value.trim();
+      if (!notes) {
+        showToast('Please enter some notes before submitting.', 'warning');
+        return;
+      }
+
       await fetch(`${API_BASE}/ticket-feedback/${currentTicketId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ feedback: 'partially_yes', followup_notes: notes })
       });
+
+      showToast('Follow-up notes appended. Escalated to department.', 'info');
       const note = document.createElement('div');
-      note.className = 'alert-warning';
-      note.style.marginTop = '12px';
-      note.textContent = 'Escalated with your notes. Thank you!';
+      note.className = 'alert-warning mt-16';
+      note.innerHTML = '<div>📝 <strong>Escalated with notes:</strong> Agent will see your details upon review.</div>';
       document.getElementById('decisionArea').appendChild(note);
       revealResult(note);
     }
+
+    function copySolution() {
+      const content = document.getElementById('solutionContent');
+      if (content) {
+        navigator.clipboard.writeText(content.textContent);
+        showToast('Solution copied to clipboard!', 'success');
+      }
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
   </script>
 </body>
-
 </html>
