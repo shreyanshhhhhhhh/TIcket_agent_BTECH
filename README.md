@@ -130,6 +130,23 @@ TICKET_BTECH/
 
 ---
 
+## 🔧 Setup & RAG Knowledge Base
+
+The Chroma vector store is built from **`data/processed/train.csv` only** (695 tickets). Test, validation, and holdout data are never indexed — this prevents RAG from memorizing evaluation tickets.
+
+```powershell
+# Rebuild knowledge base (train split only)
+python api/rag_engine.py
+
+# Verify no test-data leakage
+python verify_rag_no_leakage.py
+
+# Restart API after rebuild
+python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
+```
+
+---
+
 ## 🚀 How It Works — Example :
 Input: "My VPN keeps disconnecting every few minutes on Windows 11, error 807"
 

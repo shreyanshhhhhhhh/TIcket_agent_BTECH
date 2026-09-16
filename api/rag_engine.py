@@ -1,38 +1,48 @@
-import json
+import os
+import pandas as pd
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.documents import Document
 
-CHROMA_PATH = "models/chroma_db"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CHROMA_PATH = os.path.join(BASE_DIR, "models", "chroma_db")
+TRAIN_CSV = os.path.join(BASE_DIR, "data", "processed", "train.csv")
 COLLECTION_NAME = "ticket_resolutions"
 
-def build_knowledge_base():
+FORBIDDEN_SOURCES = ("test.csv", "val.csv", "eval_holdout.json", "all_tickets_full.json")
+
+
+def build_knowledge_base(source_path: str = TRAIN_CSV):
     """
-    Loads all tickets, embeds their descriptions, and stores them
-    as LangChain Documents in a persistent Chroma vector store.
+    Build Chroma index from the train split only.
+    Test, val, and holdout data must never be indexed to prevent data leakage.
     """
-    print("Loading tickets...")
-    with open("data/raw/all_tickets_full.json", "r", encoding="utf-8") as f:
-        tickets = json.load(f)
-    print(f"Loaded {len(tickets)} tickets.")
+    if os.path.basename(source_path) != "train.csv":
+        raise ValueError(f"Refusing to index non-train data: {source_path}")
+    if any(name in source_path for name in FORBIDDEN_SOURCES if name != "train.csv"):
+        raise ValueError(f"Refusing to index forbidden source: {source_path}")
+
+    print("Loading train split only (no test/val leakage)...")
+    df = pd.read_csv(source_path)
+    print(f"Loaded {len(df)} train tickets.")
 
     print("Loading embedding model...")
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
     print("Converting tickets into LangChain Documents...")
     documents = []
-    for i, t in enumerate(tickets):
-        text = f"{t['title']}. {t['description']}"
+    for i, row in df.iterrows():
+        text = f"{row['title']}. {row['description']}"
         doc = Document(
             page_content=text,
             metadata={
-                "title": t["title"],
-                "category": t["category"],
-                "priority": t["priority"],
-                "resolution": t["resolution"],
-                "type": t.get("type", "base"),
+                "title": row["title"],
+                "category": row["category"],
+                "priority": row["priority"],
+                "resolution": row["resolution"],
+                "source": "train",
             },
-            id=f"ticket_{i}",
+            id=f"train_{i}",
         )
         documents.append(doc)
 
@@ -44,7 +54,7 @@ def build_knowledge_base():
         persist_directory=CHROMA_PATH,
     )
 
-    print(f"\nKnowledge base built successfully with {len(documents)} tickets.")
+    print(f"\nKnowledge base built successfully with {len(documents)} train-only tickets.")
     return vectorstore
 
 
