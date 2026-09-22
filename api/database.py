@@ -38,6 +38,7 @@ class Ticket(Base):
     status = Column(String, default="open")
     rag_suggested_resolution = Column(Text, nullable=True)
     best_similarity_score = Column(Float, nullable=True)
+    classifier_model = Column(String, nullable=True)  # "logreg" | "setfit"
     employee_feedback = Column(String, nullable=True)  # "yes" | "partially_yes" | "no"
     employee_followup_notes = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -67,7 +68,20 @@ class Resolution(Base):
 
 def init_db():
     Base.metadata.create_all(bind=engine)
+    _migrate_ticket_columns()
     print("Database tables created successfully.")
+
+
+def _migrate_ticket_columns():
+    """Add new columns to existing SQLite DB without dropping data."""
+    from sqlalchemy import inspect, text
+    insp = inspect(engine)
+    if "tickets" not in insp.get_table_names():
+        return
+    cols = {c["name"] for c in insp.get_columns("tickets")}
+    if "classifier_model" not in cols:
+        with engine.begin() as conn:
+            conn.execute(text("ALTER TABLE tickets ADD COLUMN classifier_model VARCHAR"))
 
 
 def get_db():

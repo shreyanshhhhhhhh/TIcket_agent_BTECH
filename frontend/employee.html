@@ -50,6 +50,29 @@
       <!-- ════ LEFT COLUMN: Input & Results ════ -->
       <section class="page-main">
 
+        <!-- Classifier Model Picker -->
+        <div class="card" id="modelPickerCard" style="margin-bottom: 20px;">
+          <div class="card-title-bar">
+            <div class="card-title">Choose AI Classifier Model</div>
+            <span class="badge low" id="selectedModelBadge">LogReg</span>
+          </div>
+          <p class="text-xs text-dim" style="margin: 0 0 14px; line-height: 1.5;">
+            Select which trained model routes your ticket. Both use the same RAG and escalation logic — only the category classifier changes.
+          </p>
+          <div class="persona-grid" id="modelPickerGrid" style="grid-template-columns: 1fr 1fr;">
+            <div class="persona-btn model-option selected" data-model="logreg" onclick="selectClassifierModel('logreg', this)">
+              <span class="persona-icon">📊</span>
+              <span style="font-weight:700;color:#fff;">Logistic Regression</span>
+              <span style="font-size:10px;">Baseline · ~70% test</span>
+            </div>
+            <div class="persona-btn model-option" data-model="setfit" onclick="selectClassifierModel('setfit', this)">
+              <span class="persona-icon">🎯</span>
+              <span style="font-weight:700;color:#fff;">SetFit</span>
+              <span style="font-size:10px;">Fine-tuned · ~71% test</span>
+            </div>
+          </div>
+        </div>
+
         <!-- 1-Click Problem Presets -->
         <div class="presets-section">
           <div class="presets-title">
@@ -207,6 +230,10 @@
               <span class="info-row-val" id="metaDept" style="font-size:11.5px;">—</span>
             </div>
             <div class="info-row">
+              <span class="info-row-key">Classifier Model</span>
+              <span class="info-row-val" id="metaModel" style="font-size:11.5px;">—</span>
+            </div>
+            <div class="info-row">
               <span class="info-row-key">Priority Tier</span>
               <span class="info-row-val text-accent">Medium</span>
             </div>
@@ -246,6 +273,48 @@
     // ── Auth initialization ──
     const userName = localStorage.getItem('userName') || 'Employee';
     const userId   = parseInt(localStorage.getItem('userId')) || 1;
+    let selectedClassifierModel = localStorage.getItem('classifierModel') || 'logreg';
+
+    const MODEL_LABELS = {
+      logreg: 'Logistic Regression',
+      setfit: 'SetFit',
+    };
+
+    function selectClassifierModel(modelId, el) {
+      selectedClassifierModel = modelId;
+      localStorage.setItem('classifierModel', modelId);
+      document.querySelectorAll('.model-option').forEach(btn => btn.classList.remove('selected'));
+      if (el) el.classList.add('selected');
+      const badge = document.getElementById('selectedModelBadge');
+      if (badge) badge.textContent = MODEL_LABELS[modelId] || modelId;
+      showToast(`Classifier set to ${MODEL_LABELS[modelId] || modelId}`, 'info');
+    }
+
+    async function initModelPicker() {
+      try {
+        const res = await fetch(`${API_BASE}/classifiers`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const available = new Set((data.models || []).map(m => m.id));
+        document.querySelectorAll('.model-option').forEach(btn => {
+          const id = btn.dataset.model;
+          if (!available.has(id)) {
+            btn.style.opacity = '0.45';
+            btn.style.pointerEvents = 'none';
+            btn.title = 'Model not available on server';
+          }
+        });
+        if (!available.has(selectedClassifierModel)) {
+          selectedClassifierModel = 'logreg';
+          localStorage.setItem('classifierModel', 'logreg');
+        }
+      } catch (_) {
+        /* offline — keep local default */
+      }
+      const active = document.querySelector(`.model-option[data-model="${selectedClassifierModel}"]`);
+      if (active) selectClassifierModel(selectedClassifierModel, active);
+    }
+    initModelPicker();
 
     document.getElementById('userDisplay').textContent = userName;
     document.getElementById('userAvatar').textContent  = userName.charAt(0).toUpperCase();
@@ -321,7 +390,8 @@
       updatePipelineStep('preprocess', 'done', 'Embeddings generated (MiniLM)');
       await new Promise(r => setTimeout(r, 200));
 
-      updatePipelineStep('classify', 'done', `${data.category} (${classPct}%)`);
+      const modelLabel = MODEL_LABELS[data.classifier_model] || data.classifier_model || 'Classifier';
+      updatePipelineStep('classify', 'done', `${data.category} (${classPct}%) · ${modelLabel}`);
       await new Promise(r => setTimeout(r, 200));
 
       updatePipelineStep('route', 'done', data.department);
@@ -435,8 +505,17 @@
         const res = await fetch(`${API_BASE}/submit-ticket`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ employee_id: userId, title, description })
+          body: JSON.stringify({
+            employee_id: userId,
+            title,
+            description,
+            classifier_model: selectedClassifierModel,
+          })
         });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(errText || `Server error (${res.status})`);
+        }
         const data = await res.json();
 
         currentTicketId = data.ticket_id;
@@ -522,6 +601,8 @@
         document.getElementById('ticketIdBadge').textContent = `#${data.ticket_id}`;
         document.getElementById('metaCategory').textContent  = data.category;
         document.getElementById('metaDept').textContent      = data.department;
+        document.getElementById('metaModel').textContent     =
+          MODEL_LABELS[data.classifier_model] || data.classifier_model || '—';
 
         document.getElementById('decisionBadgeSidebar').innerHTML = `
           <div class="decision-badge ${isAuto ? 'auto-resolve' : 'escalated'}">
@@ -544,7 +625,10 @@
         showToast(isAuto ? 'Ticket auto-resolved by AI!' : 'Ticket routed to human agent queue.', isAuto ? 'success' : 'warning');
 
       } catch (err) {
-        showToast('Network error while processing ticket.', 'error');
+        const msg = err.message?.includes('Failed to fetch')
+          ? 'Cannot reach API server. Make sure it is running on this port.'
+          : `Server error while processing ticket: ${err.message || 'unknown error'}`;
+        showToast(msg, 'error');
         console.error(err);
       } finally {
         submitBtn.disabled = false;

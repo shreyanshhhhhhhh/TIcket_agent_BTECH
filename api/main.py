@@ -10,7 +10,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 from database import get_db, init_db, User, Ticket, Resolution
-from agent import process_ticket
+from agent import process_ticket, available_classifiers
 
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -53,6 +53,7 @@ class TicketCreate(BaseModel):
     employee_id: int
     title: str
     description: str
+    classifier_model: Optional[str] = "logreg"
 
 
 class FeedbackInput(BaseModel):
@@ -66,10 +67,23 @@ class ResolutionInput(BaseModel):
     fix_steps: str
 
 
+@app.get("/classifiers")
+def list_classifiers():
+    return {"models": available_classifiers()}
+
+
 @app.post("/submit-ticket")
 def submit_ticket(payload: TicketCreate, db: Session = Depends(get_db)):
+    model_id = payload.classifier_model or "logreg"
+    valid_ids = {m["id"] for m in available_classifiers()}
+    if model_id not in valid_ids:
+        raise HTTPException(status_code=400, detail=f"Invalid classifier_model. Choose from: {sorted(valid_ids)}")
+
     full_text = f"{payload.title}. {payload.description}" if payload.title else payload.description
-    result = process_ticket(full_text)
+    try:
+        result = process_ticket(full_text, classifier_model=model_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
 
     status = "auto_resolved" if result["decision"] == "auto_resolve" else "escalated_full"
 
@@ -84,6 +98,7 @@ def submit_ticket(payload: TicketCreate, db: Session = Depends(get_db)):
         status=status,
         rag_suggested_resolution=result["suggested_resolution"],
         best_similarity_score=result["best_similarity"],
+        classifier_model=model_id,
     )
     db.add(ticket)
     db.commit()
@@ -98,6 +113,7 @@ def submit_ticket(payload: TicketCreate, db: Session = Depends(get_db)):
         "reason": result["reason"],
         "classifier_confidence": ticket.classifier_confidence,
         "best_similarity": ticket.best_similarity_score,
+        "classifier_model": ticket.classifier_model,
     }
 
 

@@ -1048,6 +1048,12 @@ button.full-width { width: 100%; }
 }
 .persona-btn .persona-icon { font-size: 18px; }
 
+.persona-btn.model-option.selected {
+  border-color: var(--accent);
+  background: rgba(0, 242, 254, 0.08);
+  box-shadow: 0 0 0 1px rgba(0, 242, 254, 0.25);
+}
+
 .role-selector {
   display: grid;
   grid-template-columns: 1fr 1fr;
