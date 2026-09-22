@@ -1,0 +1,12 @@
+{
+  "labels": [
+    "Access Management",
+    "Application",
+    "Database",
+    "Infrastructure",
+    "Network",
+    "Security",
+    "Storage"
+  ],
+  "normalize_embeddings": false
+}

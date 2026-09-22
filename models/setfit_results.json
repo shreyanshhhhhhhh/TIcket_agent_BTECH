@@ -1,0 +1,9 @@
+{
+  "model": "SetFit (sentence-transformers/all-MiniLM-L6-v2)",
+  "train_size": 695,
+  "num_iterations": 20,
+  "val_accuracy": 0.7986577181208053,
+  "val_f1_macro": 0.8009902628115352,
+  "test_accuracy": 0.7066666666666667,
+  "test_f1_macro": 0.7062750718692598
+}
