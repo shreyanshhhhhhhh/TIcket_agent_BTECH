@@ -130,20 +130,64 @@ TICKET_BTECH/
 
 ---
 
-## 🔧 Setup & RAG Knowledge Base
-
-The Chroma vector store is built from **`data/processed/train.csv` only** (695 tickets). Test, validation, and holdout data are never indexed — this prevents RAG from memorizing evaluation tickets.
+## 🔧 Setup & Run
 
 ```powershell
-# Rebuild knowledge base (train split only)
-python api/rag_engine.py
-
-# Verify no test-data leakage
-python verify_rag_no_leakage.py
-
-# Restart API after rebuild
+cd D:\TICKET_BTECH
+.\venv\Scripts\Activate.ps1
+pip install setfit datasets
 python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
 ```
+
+Open **http://127.0.0.1:8000/app** — employees can choose **LogReg** or **SetFit** before submitting tickets.
+
+---
+
+## 🔧 RAG Knowledge Base
+
+The Chroma vector store is built from **`data/processed/train.csv` only**. Test, validation, and holdout data are never indexed.
+
+```powershell
+python api/rag_engine.py
+python verify_rag_no_leakage.py
+```
+
+---
+
+## 🤖 Train & Compare Classifiers
+
+```powershell
+# Baselines
+python notebooks/train_baseline_model.py
+python notebooks/train_embeddings_model.py
+python notebooks/train_svm_model.py
+
+# SetFit (contrastive fine-tuning — ~60–75 min on CPU)
+python notebooks/train_setfit_model.py
+
+# Compare all models
+python notebooks/compare_models.py
+
+# Held-out generalization
+python notebooks/evaluate_holdout.py
+python notebooks/evaluate_setfit_holdout.py
+
+# Single ticket smoke test (both models)
+python test_single_ticket.py
+python test_single_ticket.py --model setfit
+```
+
+**Current test accuracy (~695 train samples):** LogReg ~70% | SetFit ~71%
+
+---
+
+## 📦 Scale Dataset to 4k–5k (optional)
+
+1. Save LLM batches as pipe-delimited files in `data/raw/llm_batches/`
+2. Merge: `python notebooks/Data_Processing/merge_llm_batches.py`
+3. Validate: `python notebooks/Data_Processing/validate_v2_pool.py`
+4. Split: `python notebooks/Data_Processing/split_data.py --input data/raw/all_tickets_full_v2.json`
+5. Rebuild Chroma + retrain SetFit
 
 ---
 
@@ -170,9 +214,11 @@ configuration."
 | 3 | Routing logic | ✅ Complete |
 | 4 | RAG resolution layer | ✅ Complete |
 | 5 | Agentic decision layer (LangGraph) | ✅ Complete |
-| 6 | Backend API (FastAPI) | 🔲 In Progress |
-| 7 | Frontend UI | 🔲 Planned |
-| 8 | Deployment | 🔲 Planned |
+| 6 | Backend API (FastAPI) | ✅ Complete |
+| 7 | Frontend UI | ✅ Complete |
+| 8 | Dual classifier (LogReg + SetFit) | ✅ Complete |
+| 9 | Dataset scale-up (4k–5k) | 🔲 In Progress |
+| 10 | Deployment | 🔲 Planned |
 
 ---
 

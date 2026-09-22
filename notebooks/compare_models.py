@@ -1,15 +1,23 @@
 import json
+import os
 import pandas as pd
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 files = {
     "Baseline (TF-IDF + NB)": "models/baseline_results.json",
     "Main (Embeddings + LogReg)": "models/logreg_results.json",
     "SVM (Embeddings + SVM)": "models/svm_results.json",
+    "SetFit (Fine-tuned MiniLM)": "models/setfit_results.json",
 }
 
 rows = []
 for name, path in files.items():
-    with open(path) as f:
+    full_path = os.path.join(BASE_DIR, path)
+    if not os.path.isfile(full_path):
+        print(f"Skipping missing results: {path}")
+        continue
+    with open(full_path, encoding="utf-8") as f:
         r = json.load(f)
     rows.append({
         "Model": name,
@@ -21,5 +29,6 @@ for name, path in files.items():
 
 df = pd.DataFrame(rows)
 print(df.to_string(index=False))
-df.to_csv("docs/model_comparison_table.csv", index=False)
-print("\nSaved to docs/model_comparison_table.csv")
+out = os.path.join(BASE_DIR, "docs", "model_comparison_table.csv")
+df.to_csv(out, index=False)
+print(f"\nSaved to {out}")

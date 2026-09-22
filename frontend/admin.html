@@ -131,6 +131,10 @@
             <div class="label">Total Closed</div>
           </div>
         </div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
+          <div class="text-xs text-dim" style="margin-bottom:8px;">Tickets by classifier model</div>
+          <div id="modelBreakdown" class="text-sm text-dim">—</div>
+        </div>
       </div>
 
       <!-- Right Donut Card -->
@@ -248,6 +252,14 @@
           duration: 1.4,
           ease: 'power3.out'
         });
+
+        const breakdown = data.by_classifier_model || {};
+        const labels = { logreg: 'Logistic Regression', setfit: 'SetFit', unknown: 'Unknown' };
+        const lines = Object.entries(breakdown).map(
+          ([k, v]) => `<div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span>${labels[k] || k}</span><strong>${v}</strong></div>`
+        );
+        document.getElementById('modelBreakdown').innerHTML =
+          lines.length ? lines.join('') : '<span>No tickets yet.</span>';
 
         showToast('Analytics refreshed.', 'info');
       } catch (err) {

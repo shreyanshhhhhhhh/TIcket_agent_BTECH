@@ -1,0 +1,41 @@
+Section,Aspect,Logistic Regression (LogReg),SetFit,Better / Notes
+Architecture,Full name,Embeddings (MiniLM) + Logistic Regression,SetFit contrastive fine-tuned MiniLM,
+Architecture,Embedding backbone,all-MiniLM-L6-v2,all-MiniLM-L6-v2,Same backbone
+Architecture,Fine-tunes transformer?,No,Yes,SetFit adapts embeddings
+Architecture,Classifier head,sklearn LogisticRegression,SetFit classification head,
+Architecture,Training method,Fixed embeddings + linear fit,Contrastive fine-tuning (20 iter / 1 epoch),
+Architecture,Class balancing,class_weight=balanced,SetFit Trainer,
+Architecture,Model artifact,logreg_classifier.joblib (~0.01 MB),setfit_classifier/ folder (~87 MB),LogReg for deployment size
+Performance (Val),Validation Accuracy,73.15%,79.87%,SetFit (+6.7 pts)
+Performance (Val),Validation F1 (macro),73.43%,80.10%,SetFit (+6.7 pts)
+Performance (Test),Test Accuracy,70.00%,70.67%,SetFit (+0.7 pts)
+Performance (Test),Test F1 (macro),70.26%,70.63%,SetFit (+0.4 pts)
+Performance (Test),Test Precision (macro),71.19%,71.66%,SetFit
+Performance (Test),Test Recall (macro),70.43%,70.69%,SetFit
+Performance (Test),Misclassified count (of 150),45,44,SetFit (1 fewer)
+Performance (Test),Val to Test accuracy drop,3.15 pts,9.20 pts,LogReg more stable
+Performance (Holdout),Holdout Accuracy (119 tickets),67.23%,62.18%,LogReg (+5.0 pts)
+Performance (Holdout),Holdout F1 (macro),66.99%,62.35%,LogReg (+4.6 pts)
+Per-Category F1 (Test),Access Management,63.4%,70.0%,SetFit
+Per-Category F1 (Test),Application,75.7%,72.3%,LogReg
+Per-Category F1 (Test),Database,92.7%,82.9%,LogReg
+Per-Category F1 (Test),Infrastructure,48.8%,57.8%,SetFit
+Per-Category F1 (Test),Network,62.7%,68.1%,SetFit
+Per-Category F1 (Test),Security,72.3%,76.6%,SetFit
+Per-Category F1 (Test),Storage,76.2%,66.7%,LogReg
+Confidence (Test),Average confidence,0.528,0.861,LogReg underconfident; SetFit overconfident
+Confidence (Test),Avg confidence when correct,0.560,0.904,
+Confidence (Test),Avg confidence when wrong,0.454,0.759,SetFit still high when wrong
+Confidence (Test),Calibration,Underconfident (safer for escalation),Overconfident (passes threshold more often),
+Operational,Model size on disk,~0.01 MB,~87.36 MB,LogReg
+Operational,Inference latency per ticket,~12.6 ms,~12.5 ms,Similar
+Operational,Training time (CPU),~2-5 minutes,~60-75 minutes,LogReg
+Operational,Startup / RAM,Lower (shared embedder),Higher (full model loaded),
+Operational,Git / deploy friendly,Yes,Large file warning on GitHub,LogReg
+Operational,Retrain complexity,Low,High,LogReg
+Operational,API endpoint,classifier_model=logreg,classifier_model=setfit,Both supported
+Stability,5-fold CV accuracy,73.44% ± 0.96%,Not evaluated,LogReg only
+Stability,Prediction agreement on test set,—,73.3% match with LogReg,
+Stability,Holdout vs test drop,-2.8 pts,-8.5 pts,LogReg generalizes better
+Recommendation,Best for current 695-sample dataset,Recommended default,Research / ablation only,
+Recommendation,Best after 4k-5k scale-up,Re-evaluate,Expected to improve,Planned ablation

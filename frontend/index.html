@@ -96,6 +96,22 @@
           </div>
         </div>
 
+        <div id="modelField" class="field-group">
+          <label>Default classifier model (employees)</label>
+          <div class="persona-grid" style="grid-template-columns: 1fr 1fr; margin-top: 8px;">
+            <div class="persona-btn model-option selected" data-model="logreg" onclick="selectLoginModel('logreg', this)">
+              <span class="persona-icon">📊</span>
+              <span style="font-weight:700;color:#fff;">LogReg</span>
+              <span style="font-size:10px;">Baseline</span>
+            </div>
+            <div class="persona-btn model-option" data-model="setfit" onclick="selectLoginModel('setfit', this)">
+              <span class="persona-icon">🎯</span>
+              <span style="font-weight:700;color:#fff;">SetFit</span>
+              <span style="font-size:10px;">Fine-tuned</span>
+            </div>
+          </div>
+        </div>
+
         <div id="deptField" class="field-group hidden">
           <label for="department">Assigned Support Department</label>
           <select id="department">
@@ -126,12 +142,31 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="/static/js/transitions.js"></script>
   <script>
+    let loginClassifierModel = localStorage.getItem('classifierModel') || 'logreg';
+
+    function selectLoginModel(modelId, el) {
+      loginClassifierModel = modelId;
+      localStorage.setItem('classifierModel', modelId);
+      document.querySelectorAll('#modelField .model-option').forEach(btn => btn.classList.remove('selected'));
+      if (el) el.classList.add('selected');
+    }
+
+    // Restore model selection on load
+    const savedModelBtn = document.querySelector(`#modelField .model-option[data-model="${loginClassifierModel}"]`);
+    if (savedModelBtn) selectLoginModel(loginClassifierModel, savedModelBtn);
+
     // Role switcher
     document.querySelectorAll('input[name="role"]').forEach(radio => {
       radio.addEventListener('change', () => {
-        document.getElementById('deptField').classList.toggle('hidden', radio.value !== 'Agent');
+        const isAgent = radio.value === 'Agent';
+        document.getElementById('deptField').classList.toggle('hidden', !isAgent);
+        document.getElementById('modelField').classList.toggle('hidden', isAgent);
       });
     });
+    document.getElementById('modelField').classList.toggle(
+      'hidden',
+      document.querySelector('input[name="role"]:checked').value === 'Agent'
+    );
 
     // 1-Click quick fill & login
     function quickFill(name, id, role, dept = 'Infrastructure & Systems Team') {
@@ -164,6 +199,9 @@
       localStorage.setItem('userId', userId);
       localStorage.setItem('userRole', role);
       localStorage.setItem('userDept', dept);
+      if (role === 'Employee') {
+        localStorage.setItem('classifierModel', loginClassifierModel);
+      }
 
       showToast(`Welcome, ${name}! Entering portal...`, 'success');
       setTimeout(() => {

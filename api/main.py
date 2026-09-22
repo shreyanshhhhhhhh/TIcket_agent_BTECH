@@ -6,6 +6,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, "api"))
 
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from pydantic import BaseModel
 from typing import Optional
 
@@ -192,12 +193,22 @@ def analytics_summary(db: Session = Depends(get_db)):
     escalated = db.query(Ticket).filter(Ticket.status.in_(["escalated_full", "escalated_partial"])).count()
     resolved = db.query(Ticket).filter(Ticket.status == "resolved").count()
 
+    by_model_rows = (
+        db.query(Ticket.classifier_model, func.count(Ticket.id))
+        .group_by(Ticket.classifier_model)
+        .all()
+    )
+    by_model = {
+        (model or "unknown"): count for model, count in by_model_rows
+    }
+
     return {
         "total_tickets": total,
         "auto_resolved": auto_resolved,
         "escalated": escalated,
         "resolved": resolved,
         "auto_resolve_rate": round(auto_resolved / total, 2) if total else 0,
+        "by_classifier_model": by_model,
     }
 
 
