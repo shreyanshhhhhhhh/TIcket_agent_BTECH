@@ -1,0 +1,82 @@
+{
+  "model": "Two-stage: MiniLM logistic regression, then BGE logistic regression when confusing",
+  "bge_encoder": "BAAI/bge-base-en-v1.5",
+  "stage1_encoder": "all-MiniLM-L6-v2",
+  "text_format": "title + '. ' + description",
+  "query_prefix": null,
+  "confusion_margin_max": 0.15,
+  "confusion_confidence_max": 0.0,
+  "stage1_val": {
+    "accuracy": 0.7315436241610739,
+    "f1_macro": 0.7342642094983641
+  },
+  "stage1_test": {
+    "accuracy": 0.7,
+    "f1_macro": 0.7026138917396718
+  },
+  "bge_only_val": {
+    "accuracy": 0.7651006711409396,
+    "f1_macro": 0.7681669043992249
+  },
+  "bge_only_test": {
+    "accuracy": 0.68,
+    "f1_macro": 0.678235850399159
+  },
+  "two_stage_val": {
+    "accuracy": 0.7516778523489933,
+    "f1_macro": 0.7543161050575781,
+    "bge_rate": 0.18791946308724833
+  },
+  "two_stage_test": {
+    "accuracy": 0.6933333333333334,
+    "f1_macro": 0.6919931017491994,
+    "bge_rate": 0.29333333333333333
+  },
+  "val_gate_search_top5": [
+    {
+      "margin_max": 0.15,
+      "conf_max": 0.0,
+      "val_accuracy": 0.7516778523489933,
+      "val_f1_macro": 0.7543161050575781,
+      "bge_rate": 0.18791946308724833
+    },
+    {
+      "margin_max": 0.12,
+      "conf_max": 0.0,
+      "val_accuracy": 0.7449664429530202,
+      "val_f1_macro": 0.7479080511934649,
+      "bge_rate": 0.1610738255033557
+    },
+    {
+      "margin_max": 0.1,
+      "conf_max": 0.0,
+      "val_accuracy": 0.738255033557047,
+      "val_f1_macro": 0.7413071585460607,
+      "bge_rate": 0.1342281879194631
+    },
+    {
+      "margin_max": 0.08,
+      "conf_max": 0.0,
+      "val_accuracy": 0.738255033557047,
+      "val_f1_macro": 0.7402053017117396,
+      "bge_rate": 0.10067114093959731
+    },
+    {
+      "margin_max": 0.05,
+      "conf_max": 0.0,
+      "val_accuracy": 0.7315436241610739,
+      "val_f1_macro": 0.7341282042060708,
+      "bge_rate": 0.06040268456375839
+    }
+  ],
+  "n_features": 768,
+  "classes": [
+    "Access Management",
+    "Application",
+    "Database",
+    "Infrastructure",
+    "Network",
+    "Security",
+    "Storage"
+  ]
+}
