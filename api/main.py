@@ -98,6 +98,10 @@ def submit_ticket(payload: TicketCreate, db: Session = Depends(get_db)):
         "reason": result["reason"],
         "classifier_confidence": ticket.classifier_confidence,
         "best_similarity": ticket.best_similarity_score,
+        "classifier_stage": result.get("classifier_stage"),
+        "stage1_category": result.get("stage1_category"),
+        "stage1_confidence": result.get("stage1_confidence"),
+        "stage1_margin": result.get("stage1_margin"),
     }
 
 
